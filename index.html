@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+
+    <!-- Load Firebase Config First -->
+    <script type="module" src="/Pawradise2025/assets/js/auth/config.js"></script>
+
+    <!-- Load Auth Scripts -->
+    <script type="module" src="./assets/js/auth/signout.js"></script>
+  </head>
+  <body>
+    <h2>Authentication State</h2>
+    <p id="userStatus">Checking auth status...</p>
+    <button id="signoutBtn" style="display: none">Sign Out</button>
+  </body>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</html>
