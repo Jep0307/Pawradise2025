@@ -13,8 +13,6 @@ signupForm.addEventListener("submit", async (event) => {
       emailRedirectTo: "http://127.0.0.1:5500/Pawradise2025/pages/auth/signin.html"
     } });
 
-    
-
     if (error) {
       console.error("Sign-up error:", error.message);
       alert(error.message); // Display error to user
