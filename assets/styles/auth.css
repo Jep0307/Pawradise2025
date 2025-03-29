@@ -1,10 +1,82 @@
-:root {
-    
-}
+:root {}
 
 .form {
-    max-width: 600px;
+    width: 100%;
+    padding: 24px 32px;
+    border-radius: 32px;
+}
+
+.signin-form {
+    max-width: 396px;
+}
+
+.signup-form {
+    max-width: 608px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
+}
+
+.auth-header-and-text {
+    /* add clamp later */
+    font-size: 31px;
+
+    /* add clamp later */
+    line-height: 43px;
+}
+
+.auth-input-group {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+}
+
+.auth-input-group input {
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid #EAEAEA;
+    padding: 8px 20px;
+    height: 48px;
+}
+
+.password-and-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.password-icon {
+    position: absolute;
+    right: 20px;
+}
+
+.auth-button-group {
+    margin-bottom: 16px;
+    text-align: center;
     width: 100%;
 }
 
+.auth-button-group .auth-button {
+    width: 100%;
+    background-color: #4480CD;
+    color: #E8EFF9;
+    padding: 8px 20px;
+    height: 48px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    border: none;
 
+    /* add clamp later */
+    font-size: 20px;
+
+    /* add clamp later */
+    line-height: 28px;
+}
+
+.auth-forgot-pass {
+    margin-left: auto;
+}

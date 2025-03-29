@@ -1,7 +1,6 @@
 import { supabase } from "./config.js";
 
 const signinForm = document.getElementById("signinForm");
-
 signinForm.addEventListener("submit", async (event) => {
   event.preventDefault(); // Prevent page reload
 
@@ -26,3 +25,20 @@ signinForm.addEventListener("submit", async (event) => {
     console.error("Unexpected error:", err);
   }
 });
+
+const passwordInput = document.getElementById("password");
+const passwordIcon = document.getElementById("passwordIcon");
+
+passwordIcon.addEventListener("click", () => {
+  console.log("Password icon clicked"); // Debugging line
+
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    passwordIcon.src = "/Pawradise2025/assets/imgs/eye-closed-icon.svg"; // Change to the "close" icon
+    passwordIcon.alt = "Hide Password";
+  } else {
+    passwordInput.type = "password";
+    passwordIcon.src = "/Pawradise2025/assets/imgs/eye-icon.svg"; // Change back to the "open" icon
+    passwordIcon.alt = "Show Password";
+  }
+})

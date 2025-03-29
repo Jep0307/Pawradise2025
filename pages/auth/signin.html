@@ -1,52 +1,57 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign in</title>
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="../../assets/styles/global.css" />
-    <link rel="stylesheet" href="../../assets/styles/auth.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign in</title>
 
-    <!-- Modules -->
-    <script type="module" src="../../assets/js/auth/signin.js"></script>
-  </head>
-  <body>
-    <div class="wrapper">
-      <main class="main">
-        <section class="sections">
-          <div class="containers">
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../assets/styles/global.css" />
+  <link rel="stylesheet" href="../../assets/styles/auth.css" />
 
-            <form class="form" id="signinForm">
-              <div class="form-container">
-                <h3 class="authform-title">SIGN IN TEST!</h3>
+  <!-- Modules -->
+  <script type="module" src="../../assets/js/auth/signin.js"></script>
+</head>
 
-                <div class="authform-input-group">
-                  <input type="email" id="email" required />
-                  <div class="password-and-icon">
-                    <input type="password" id="password" required />
-                  </div>
-                </div>
+<body>
+  <div class="wrapper">
+    <main class="main">
+      <section class="sections">
+        <div class="containers">
 
-                <div class="authform-button-group">
-                  <div class="button-and-link">
-                    <button class="authform-button" id="signinBtn" type="submit">Sign in</button>
-                    <br>
-                    <a href="./forgotpassword.html">Forgot password?</a>
-                  </div>
-
-                  <span class="authform-link">
-                    Already have an account?
-                    <a href="./signup.html">Sign up</a>
-                  </span>
-                </div>
+          <form class="form signin-form" id="signinForm">
+            <div class="form-container">
+              <div class="auth-header-and-text">
+                <h3 class="auth-title">Signup</h3>
+                <!-- <p class="auth-text"></p> -->
               </div>
-            </form>
-            
-          </div>
-        </section>
-      </main>
-    </div>
-  </body>
+
+              <div class="auth-input-group">
+                <input type="email" id="email" required />
+                <div class="password-and-icon">
+                  <input type="password" id="password" required />
+                  <img src="/Pawradise2025/assets/imgs/eye-icon.svg" alt="Show Password" class="password-icon" id="passwordIcon">
+                </div>
+                <a class="auth-forgot-pass" href="./forgotpassword.html">Forgot password?</a>
+              </div>
+
+              <div class="auth-button-group">
+
+                <button class="auth-button" id="signinBtn" type="submit">Sign in</button>
+                <br>
+                <span>
+                  Already have an account?
+                  <a class="auth-link" href="./signup.html">Sign up</a>
+                </span>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+
 </html>
