@@ -26,12 +26,16 @@
   background-color: #d5ab62;
   border-radius: 16px;
   border: none;
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 28px;
   margin-top: 20px;
   margin-inline: auto;
   display: block;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  text-decoration: none;
+  color: #292929;
+  text-align: center;
+  width: max-content;
 }
 
 .hero-button:hover {

@@ -119,6 +119,7 @@ nav .logo-and-title p {
 .nav-list li {
   list-style: none;
   border-radius: 16px;
+  cursor: pointer;
 }
 
 .nav-list li a {
@@ -134,6 +135,17 @@ nav .logo-and-title p {
 
 .nav-list li:hover {
   text-decoration: underline;
+}
+
+.logout-btn {
+  background-color: #D56262;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 16px;
+  margin-left: auto;
+  display: block;
+  color: #F9E8E8;
+  cursor: pointer;
 }
 
 .nav-humburger {

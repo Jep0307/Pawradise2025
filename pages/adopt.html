@@ -6,12 +6,16 @@
     <title>Adopt</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/Pawradise2025/assets/styles/global.css" />
-    <link rel="stylesheet" href="/Pawradise2025/assets/styles/adopt.css" />
+    <link rel="stylesheet" href="../assets/styles/global.css" />
+    <link rel="stylesheet" href="../assets/styles/adopt.css" />
 
     <!-- Modules -->
-    <script type="module" src="/Pawradise2025/assets/js/home.js"></script>
-    <script src="/Pawradise2025/assets/js/adopt.js"></script>
+    <script type="module" src="../assets/js/home.js"></script>
+    <script type="module" src="../assets/js/auth/config.js"></script>
+    <script type="module" src="../assets/js/auth/signout.js"></script>
+
+    <!-- Scripts -->
+    <script defer src="../assets/js/adopt.js"></script>
   </head>
   <body>
     <header>
@@ -19,7 +23,7 @@
         <div class="nav-container">
           <div class="nav-content">
             <div class="logo-and-title">
-                <img loading="lazy" src="/Pawradise2025/assets/imgs/Logo.svg" alt="Logo"/>
+                <img loading="lazy" src="../assets/imgs/Logo.svg" alt="Logo"/>
                 <p>Pawradise</p>
             </div>
             <div class="nav-menu">
@@ -28,16 +32,15 @@
                   <li><a href="./adopt.html">Adopt</a></li>
                   <li><a href="./map.html">Map</a></li>
                   <li><a href="./status.html">Status</a></li>
-                  <li><a href="./profile.html">Profile</a></li>
+                  <li><a href="#username"id="userStatus">Status</a></li>
+                  <li class="logout-btn" id="signoutBtn">Logout</li>
                 </ul>
             </div>
-
+        
             <div class="nav-humburger">
-               <img loading="lazy" id="menuToggle" src="/Pawradise2025/assets/imgs/Menu-icon.svg" alt="Open Menu" />
+                <img loading="lazy" id="menuToggle" src="../assets/imgs/Menu-icon.svg" alt="Open Menu" />
             </div>
-          </div>
-          <div class="profile">
-            <div class="circle"></div>
+
           </div>
         </div>
       </nav>
@@ -50,7 +53,7 @@
               <div class="content">
                 <div class="search-container">
                     <input type="search" placeholder="Search for a pet..." id="searchInput" />
-                    <img loading="lazy" src="/Pawradise2025/assets/imgs/Search-icon.svg" alt="">
+                    <img loading="lazy" src="../assets/imgs/Search-icon.svg" alt="">
                 </div>
                 <div class="categories">
                     <button class="active" id="allBtn" onclick="filterCards('all')">All</button>
@@ -62,7 +65,7 @@
                 <div id="previewModal" class="modal" style="display: none;">
                     <div class="modal-content">
                         <span class="close" onclick="closePreview()">
-                            <img loading="lazy" src="/Pawradise2025/assets/imgs/X-icon.svg" alt="" srcset="">
+                            <img loading="lazy" src="../assets/imgs/X-icon.svg" alt="" srcset="">
                         </span>
                         <div class="modal-body">
                             <div class="modal-image">
@@ -84,7 +87,7 @@
                 <!-- Pets catalogs -->
                 <div class="cards-container">
                     <div class="cards" data-category="cat" onclick="showPreview(this)">
-                        <img loading="lazy" src="/Pawradise2025/assets/imgs/Animal1.png" alt="cat">
+                        <img loading="lazy" src="../assets/imgs/Animal1.png" alt="cat">
                         <div class="header-and-text">
                           <p>Name</p>
                           <p>Type</p>
@@ -93,7 +96,7 @@
                       </div>
                       
                       <div class="cards" data-category="dog" onclick="showPreview(this)">
-                        <img loading="lazy" src="/Pawradise2025/assets/imgs/Animal2.png" alt="dog">
+                        <img loading="lazy" src="../assets/imgs/Animal2.png" alt="dog">
                         <div class="header-and-text">
                           <p>Name</p>
                           <p>Type</p>
@@ -102,7 +105,7 @@
                       </div>
                       
                       <div class="cards" data-category="cat" onclick="showPreview(this)">
-                        <img loading="lazy" src="/Pawradise2025/assets/imgs/Animal3.png" alt="cat">
+                        <img loading="lazy" src="../assets/imgs/Animal3.png" alt="cat">
                         <div class="header-and-text">
                           <p>Name</p>
                           <p>Type</p>
@@ -110,7 +113,7 @@
                         </div>
                       </div>
                       <div class="cards" data-category="dog" onclick="showPreview(this)">
-                        <img loading="lazy" src="/Pawradise2025/assets/imgs/animal4.png" alt="dog">
+                        <img loading="lazy" src="../assets/imgs/Animal4.png" alt="dog">
                         <div class="header-and-text">
                           <p>Name</p>
                           <p>Type</p>
@@ -119,7 +122,7 @@
                       </div>
                       
                       <div class="cards" data-category="dog" onclick="showPreview(this)">
-                        <img loading="lazy" src="/Pawradise2025/assets/imgs/Animal5.png" alt="dog">
+                        <img loading="lazy" src="../assets/imgs/Animal5.png" alt="dog">
                         <div class="header-and-text">
                           <p>Name</p>
                           <p>Type</p>
@@ -128,7 +131,7 @@
                       </div>
                       
                       <div class="cards" data-category="cat" onclick="showPreview(this)">
-                        <img loading="lazy" src="/Pawradise2025/assets/imgs/Animal6.png" alt="cat">
+                        <img loading="lazy" src="../assets/imgs/Animal6.png" alt="cat">
                         <div class="header-and-text">
                           <p>Name</p>
                           <p>Type</p>
@@ -137,7 +140,7 @@
                       </div>
                       
                       <div class="cards" data-category="dog" onclick="showPreview(this)">
-                        <img loading="lazy" src="/Pawradise2025/assets/imgs/Animal7.png" alt="dog">
+                        <img loading="lazy" src="../assets/imgs/Animal7.png" alt="dog">
                         <div class="header-and-text">
                           <p>Name</p>
                           <p>Type</p>
@@ -146,7 +149,7 @@
                       </div>
                       
                       <div class="cards" data-category="dog" onclick="showPreview(this)">
-                        <img loading="lazy" src="/Pawradise2025/assets/imgs/Animal8.png" alt="dog">
+                        <img loading="lazy" src="../assets/imgs/Animal8.png" alt="dog">
                         <div class="header-and-text">
                           <p>Name</p>
                           <p>Type</p>
@@ -154,7 +157,7 @@
                         </div>
                       </div>
                       <div class="cards" data-category="cat" onclick="showPreview(this)">
-                        <img loading="lazy" src="/Pawradise2025/assets/imgs/Animal9.png" alt="cat">
+                        <img loading="lazy" src="../assets/imgs/Animal9.png" alt="cat">
                         <div class="header-and-text">
                           <p>Name</p>
                           <p>Type</p>
@@ -163,7 +166,7 @@
                       </div>
                       
                       <div class="cards" data-category="cat" onclick="showPreview(this)">
-                        <img loading="lazy" src="/Pawradise2025/assets/imgs/Animal10.png" alt="dog">
+                        <img loading="lazy" src="../assets/imgs/Animal10.png" alt="dog">
                         <div class="header-and-text">
                           <p>Name</p>
                           <p>Type</p>
@@ -181,7 +184,7 @@
         <div class="container">
             <div class="content">
                 <div class="logo-and-title">
-                    <img loading="lazy" src="/Pawradise2025/assets/imgs/Logo.svg" alt="Logo"/>
+                    <img loading="lazy" src="../assets/imgs/Logo.svg" alt="Logo"/>
                     <p>Pawradise</p>
                 </div>
                 <div class="menu">

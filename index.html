@@ -4,23 +4,157 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+    
+    <!-- Stypes -->
+    <link rel="stylesheet" href="./assets/styles/global.css" />
+    <link rel="stylesheet" href="./assets/styles/home.css">
 
-    <!-- Links -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
-
-    <!-- Load Supabase Config First -->
-    <script type="module" src="/Pawradise2025/assets/js/auth/config.js"></script>
-
-    <!-- Load Auth Scripts -->
-    <script type="module" src="./assets/js/auth/signout.js"></script>
+    <!-- Scripts -->
+    <script defer src="./assets/js/home.js"></script>
   </head>
   <body>
-    <h2>Authentication State</h2>
-    <p id="userStatus">Checking auth status...</p>
-    <button id="signoutBtn" style="display: none">Sign Out</button>
-  </body>
+    <header>
+      <nav>
+        <div class="nav-container">
+          <div class="nav-content">
+            <div class="logo-and-title">
+                <img loading="lazy" src="./assets/imgs/Logo.svg" alt="Logo"/>
+                <p>Pawradise</p>
+            </div>
+            <div class="nav-menu">
+                <ul class="nav-list">
+                  <li><a href="./home.html">Home</a></li>
+                  <li><a href="./pages/auth/signin.html">Adopt</a></li>
+                  <li><a href="./map.html">Map</a></li>
+                  <li><a href="./pages/auth/signup.html">Sign up</a></li>
+                </ul>
+            </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+            <div class="nav-humburger">
+               <img loading="lazy" id="menuToggle" src="./assets/imgs/Menu-icon.svg" alt="Open Menu" />
+            </div>
+          </div>
+
+          <div class="profile">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+        <!-- Hero section -->
+        <section class="top-section">
+            <div class="container">
+              <div class="content">
+                <div class="hero-header-and-text">
+                    <h1>Lorem ipsum odio elit varius amet sollicitudin.</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur.
+                    </p>
+                </div>
+                <a class="hero-button" href="./pages/auth/signin.html">Adopt now!</a>
+              </div>
+            </div>
+        </section>
+
+        <!-- features section -->
+        <section>
+            <div class="container tw-section-reverse">
+                <div class="content">
+                    <div class="img-container">
+                        <img loading="lazy" src="./assets/imgs/Illustration1.jpg" alt="">
+                    </div>
+                </div>
+                <div class="content">
+                  <div class="header-and-text">
+                      <h2>Lorem ipsum</h2>
+                      <p>
+                          Lorem ipsum dolor sit amet consectetur. Ultricies nullam morbi placerat quam tortor. Sit at quisque non ullamcorper vitae nulla nisl. Nisl libero eu ut turpis justo phasellus. Elit ligula quam enim nulla purus. Vulputate quisque in quam cursus sociis risus viverra diam.
+                      </p>
+                  </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- features section -->
+        <section>
+            <div class="container tw-section">
+                <div class="content">
+                    <div class="img-container">
+                        <img loading="lazy" src="./assets/imgs/Illustration1.jpg" alt="">
+                    </div>
+                </div>
+                <div class="content">
+                  <div class="header-and-text">
+                      <h2>Lorem ipsum</h2>
+                      <p>
+                          Lorem ipsum dolor sit amet consectetur. Ultricies nullam morbi placerat quam tortor. Sit at quisque non ullamcorper vitae nulla nisl. Nisl libero eu ut turpis justo phasellus. Elit ligula quam enim nulla purus. Vulputate quisque in quam cursus sociis risus viverra diam.
+                      </p>
+                  </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About section -->
+        <section>
+            <div class="container">
+                <div class="content">
+                    <div class="header-and-text-center">
+                        <h2>Lorem ipsum</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur. Ultricies nullam morbi placerat quam tortor. Sit at quisque non ullamcorper vitae nulla nisl. Nisl libero eu ut turpis justo phasellus. Elit ligula quam enim nulla purus. Vulputate quisque in quam cursus sociis risus viverra diam.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA section -->
+        <section>
+            <div class="container">
+                <div class="inner-container tw-section-reverse">
+                    <div class="content">
+                        <div class="img-container">
+                            <img loading="lazy" src="./assets/imgs/Illustration1.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="content">
+                      <div class="cta-header-and-text">
+                          <h1>Lorem ipsum</h1>
+                          <p>
+                              Lorem ipsum dolor sit amet consectetur. Ultricies nullam morbi placerat quam tortor. Sit at quisque non ullamcorper vitae nulla nisl. Nisl libero eu ut turpis justo phasellus. Elit ligula quam enim nulla purus. Vulputate quisque in quam cursus sociis risus viverra diam.
+                          </p>
+                      </div>
+                      <button class="cta-button">Adopt now!</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="content">
+                <div class="logo-and-title">
+                    <img loading="lazy" src="./assets/imgs/Logo.svg" alt="Logo"/>
+                    <p>Pawradise</p>
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li><a href="./home.html">Home</a></li>
+                        <li><a href="./adopt.html">Adopt</a></li>
+                        <li><a href="./map.html">Map</a></li>
+                        <li><a href="./status.html">Status</a></li>
+                        <li><a href="./profile.html">Profile</a></li>
+                    </ul>
+                </div>
+                </div>
+                <div class="copy-rights">
+                    <p>© 2025 Pawradise. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+  </body>
 </html>

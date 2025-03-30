@@ -9,9 +9,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (!session) {
         // Redirect to sign-in page if not logged in
-        window.location.href = "./pages/auth/signin.html";
+        window.location.href = "http://127.0.0.1:5500/Pawradise2025/index.html";
     } else {
-        userStatus.textContent = `Logged in as ${session.user.email}`;
+        userStatus.textContent = `${session.user.email}`;
         signoutBtn.style.display = "block"; // Show sign-out button
     }
 
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             alert(error.message);
         } else {
             alert("Signed out successfully!");
-            window.location.href = "./pages/auth/signin.html"; // Redirect to sign-in page
+            window.location.href = "http://127.0.0.1:5500/Pawradise2025/index.html"; // Redirect to sign-in page
         }
     });
 });
