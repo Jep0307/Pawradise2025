@@ -1,0 +1,133 @@
+/* Hero section */
+.top-section {
+  padding-top: 128px
+}
+
+.hero-header-and-text {
+  text-align: center;
+}
+
+.hero-header-and-text h1,
+.cta-header-and-text h1 {
+  margin-bottom: 20px;
+  font-size: clamp(2.438rem, 1.927rem + 2.1vw, 3.813rem);
+  font-weight: 700;
+  line-height: clamp(3.438rem, 2.741rem + 2.86vw, 5.313rem);
+}
+
+.hero-header-and-text p {
+  font-size:   clamp(1rem, 0.791rem + 0.86vw, 1.563rem);
+  font-weight: 500;
+  line-height: clamp(1.375rem, 1.073rem + 1.24vw, 2.188rem);
+}
+
+.hero-button {
+  padding: 16px 20px;
+  background-color: #d5ab62;
+  border-radius: 16px;
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  margin-top: 20px;
+  margin-inline: auto;
+  display: block;
+}
+
+.hero-button:hover {
+  background-color: #cd9b44;
+}
+
+/* Features section */
+.img-container {
+  height: max-content;
+}
+
+.header-and-text h2 {
+  margin-top: 28px;
+  margin-bottom: 18px;
+  font-size: clamp(2.438rem, 1.927rem + 2.1vw, 3.813rem);
+  font-weight: 700;
+  line-height: clamp(3.438rem, 2.741rem + 2.86vw, 5.313rem);
+}
+
+.header-and-text p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+/* About section */
+.header-and-text-center {
+  text-align: center;
+  max-width: 822px;
+  margin-inline: auto;
+}
+
+.header-and-text-center h2 {
+  margin-bottom: 18px;
+  font-size: clamp(2.438rem, 1.927rem + 2.1vw, 3.813rem);
+  font-weight: 700;
+    line-height: clamp(3.438rem, 2.741rem + 2.86vw, 5.313rem);
+}
+
+/* CTA section */
+.inner-container {
+  padding: 20px;
+  background-color: #e2e5ef;
+  border-radius: 20px;
+}
+
+.cta-button {
+  padding: 16px 20px;
+  background-color: #d5ab62;
+  border-radius: 16px;
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28ox;
+  margin-top: 20px;
+  cursor: pointer;
+  color: #292929;
+}
+
+.cta-button:hover {
+  background-color: #cd9b44;
+}
+
+@media screen and (min-width: 700px) {
+    .top-section {
+        padding-top: 176px
+      }
+
+  .tw-section,
+  .tw-section-reverse {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+  }
+
+  .tw-section .content,
+  .tw-section-reverse .content {
+    flex: 1;
+  }
+
+  .tw-section-reverse {
+    flex-direction: row-reverse;
+  }
+
+  .inner-container {
+    padding: 40px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+    .tw-section,
+    .tw-section-reverse {
+      column-gap: 40px;
+    }
+
+    .inner-container {
+        padding: 80px;
+      }
+  }

@@ -17,28 +17,45 @@
       <main class="main">
         <section class="sections">
           <div class="containers">
-            
-            <form class="form signup-form" id="signupForm">
+            <form class="form signin-form" id="signupForm">
               <div class="form-container">
-                <h3 class="authform-title">SIGN UP TEST!</h3>
+                <div class="auth-header-and-text">
+                  <h3 class="auth-title">Sign up</h3>
+                  <!-- <p class="auth-text"></p> -->
+                </div>
 
-                <div class="authform-input-group">
-                  <input type="email" id="email" required />
-                  <div class="password-and-icon">
-                    <input type="password" id="password" required />
+                <div class="auth-input-group">
+                  <div class="auth-label-and-input">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" />
+                    <span class="error-message" id="emailError"></span>
+                  </div>
+
+                  <div class="auth-label-and-input">
+                    <label for="password">Password</label>
+                    <div class="password-and-icon">
+                      <input type="password" id="password" />
+                      <img
+                        src="/Pawradise2025/assets/imgs/eye-icon.svg"
+                        alt="Show Password"
+                        class="password-icon"
+                        id="passwordIcon"
+                      />
+                    </div>
+                    <span class="error-message" id="passwordError"></span>
                   </div>
                 </div>
 
-                <div class="authform-button-group">
-                  <button class="authform-button" id="signupBtn" type="submit">Sign up</button>
-                  <span class="authform-link">
-                    Already have an account?
+                <div class="auth-button-group">
+                  <button id="signinBtn" type="submit">Sign up</button>
+                  <br />
+                  <span>
+                    already have an account?
                     <a href="./signin.html">Sign in</a>
                   </span>
                 </div>
               </div>
             </form>
-            
           </div>
         </section>
       </main>
