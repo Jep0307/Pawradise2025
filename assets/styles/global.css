@@ -61,16 +61,6 @@ header {
   z-index: 1000;
 }
 
-.nav-container {
-  padding-inline: 16px;
-}
-
-.nav-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 nav {
   background-color: #e2e5ef;
   padding-block: 16px;
@@ -87,6 +77,16 @@ nav .logo-and-title p {
   line-height: 28px;
   font-weight: 700;
   color: #292929;
+}
+
+.nav-container {
+  padding-inline: 16px;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav-menu {
@@ -236,7 +236,7 @@ footer .copy-rights {
   }
 
   .nav-list {
-    margin-left: 40%;
+    margin-left: 60%;
   }
 
   footer .container .content {
@@ -276,7 +276,7 @@ footer .copy-rights {
   
   .nav-container {
     background-color: rgba(212, 212, 212, 0.5);
-  backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     border-radius: 32px;
     padding-block: 8px;
   }
