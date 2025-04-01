@@ -1,6 +1,6 @@
 /* Hero section */
 .top-section {
-  padding-top: 128px
+  padding-top: 128px;
 }
 
 .hero-header-and-text {
@@ -9,14 +9,14 @@
 
 .hero-header-and-text h1,
 .cta-header-and-text h1 {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   font-size: clamp(2.438rem, 1.927rem + 2.1vw, 3.813rem);
   font-weight: 700;
   line-height: clamp(3.438rem, 2.741rem + 2.86vw, 5.313rem);
 }
 
 .hero-header-and-text p {
-  font-size:   clamp(1rem, 0.791rem + 0.86vw, 1.563rem);
+  font-size: clamp(1rem, 0.791rem + 0.86vw, 1.563rem);
   font-weight: 500;
   line-height: clamp(1.375rem, 1.073rem + 1.24vw, 2.188rem);
 }
@@ -26,7 +26,7 @@
   background-color: #d5ab62;
   border-radius: 16px;
   border: none;
-  margin-top: 20px;
+  margin-top: 16px;
   margin-inline: auto;
   display: block;
   font-size: 20px;
@@ -43,13 +43,25 @@
 }
 
 /* Features section */
+.tw-section,
+.tw-section-reverse {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.tw-section .content,
+.tw-section-reverse .content {
+  flex: 1;
+}
+
 .img-container {
   height: max-content;
 }
 
 .header-and-text h2 {
-  margin-top: 28px;
-  margin-bottom: 18px;
+  margin-top: 16px;
+  margin-bottom: 8px;
   font-size: clamp(2.438rem, 1.927rem + 2.1vw, 3.813rem);
   font-weight: 700;
   line-height: clamp(3.438rem, 2.741rem + 2.86vw, 5.313rem);
@@ -72,7 +84,7 @@
   margin-bottom: 18px;
   font-size: clamp(2.438rem, 1.927rem + 2.1vw, 3.813rem);
   font-weight: 700;
-    line-height: clamp(3.438rem, 2.741rem + 2.86vw, 5.313rem);
+  line-height: clamp(3.438rem, 2.741rem + 2.86vw, 5.313rem);
 }
 
 /* CTA section */
@@ -90,7 +102,7 @@
   font-size: 20px;
   font-weight: 500;
   line-height: 28ox;
-  margin-top: 20px;
+  margin-top: 16px;
   cursor: pointer;
   color: #292929;
 }
@@ -100,13 +112,13 @@
 }
 
 @media screen and (min-width: 700px) {
-    .top-section {
-        padding-top: 176px
-      }
+  .top-section {
+    padding-top: 272px;
+  }
 
   .tw-section,
   .tw-section-reverse {
-    display: flex;
+    flex-direction: row;
     align-items: center;
     column-gap: 20px;
   }
@@ -114,6 +126,15 @@
   .tw-section .content,
   .tw-section-reverse .content {
     flex: 1;
+  }
+
+  .header-and-text h2 {
+    margin-top: 0;
+  }
+
+  .img-container {
+    display: flex;
+    justify-content: center;
   }
 
   .tw-section-reverse {
@@ -126,12 +147,12 @@
 }
 
 @media screen and (min-width: 900px) {
-    .tw-section,
-    .tw-section-reverse {
-      column-gap: 40px;
-    }
-
-    .inner-container {
-        padding: 80px;
-      }
+  .tw-section,
+  .tw-section-reverse {
+    column-gap: 40px;
   }
+
+  .inner-container {
+    padding: 80px;
+  }
+}

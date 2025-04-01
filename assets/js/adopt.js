@@ -1,6 +1,8 @@
 function showPreview(card) {
   const modal = document.getElementById("previewModal");
 
+  closePetApplicationForm();
+
   // Retrieve data from the clicked card
   const image = card.querySelector("img").src;
   const title = card.querySelector(".header-and-text p:first-child").textContent;
@@ -27,17 +29,14 @@ function showPreview(card) {
 }
 
 function closePreview() {
-  const modal = document.getElementById("previewModal");
-  modal.style.display = "none";
+  document.getElementById("previewModal").style.display = "none";
 }
 
 function filterCards(category) {
   const cards = document.querySelectorAll(".cards");
   const buttons = document.querySelectorAll(".categories button");
-  const modal = document.getElementById("previewModal");
-
-   // Close the modal if it's open
-   modal.style.display = "none";
+  closePreview();
+  closePetApplicationForm();
 
   // Highlight the active button
   buttons.forEach((button) => {
@@ -55,4 +54,41 @@ function filterCards(category) {
       card.style.display = "none"; // Hide the card
     }
   });
+}
+
+// Show the application form
+function showApplicationForm() {
+  const modalTitle = document.getElementById("modalTitle").textContent;
+  document.getElementById("petName").value = modalTitle; // Pass the pet name to the form
+  document.getElementById("applicationForm").style.display = "block";
+  document.getElementById("previewModal").style.display = "none"; // Hide the preview modal
+}
+
+// Close the application form
+function closePetApplicationForm() {
+  document.getElementById("applicationForm").style.display ="none";
+}
+
+// Handle form submission
+function submitApplication(event) {
+  event.preventDefault(); // Prevent the default form submission
+
+  const formData = new FormData(document.getElementById("adoptionForm"));
+
+
+
+  //Send the form data to the PHP backend
+  fetch("../assets/php/submitApplication.php", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      alert("Application submitted successfully!");
+      closePetApplicationForm();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("There was an error submitting your application.");
+    });
 }

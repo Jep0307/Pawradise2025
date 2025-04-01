@@ -1,6 +1,7 @@
 {
   "name": "pawradise2025",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "directories": {
     "lib": "lib"
@@ -16,6 +17,6 @@
     "prettier": "^3.5.3"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.49.3"
+    "@supabase/supabase-js": "^2.49.4"
   }
 }

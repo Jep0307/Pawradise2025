@@ -47,137 +47,194 @@
     </header>
 
     <main>
-        <!-- Hero section -->
-        <section class="top-section">
-            <div class="container">
-              <div class="content">
-                <div class="search-container">
-                    <input type="search" placeholder="Search for a pet..." id="searchInput" />
-                    <img loading="lazy" src="../assets/imgs/Search-icon.svg" alt="">
-                </div>
-                <div class="categories">
-                    <button class="active" id="allBtn" onclick="filterCards('all')">All</button>
-                    <button id="CatsBtn" onclick="filterCards('cat')">Cats</button>
-                    <button id="DogsBtn" onclick="filterCards('dog')">Dogs</button>
-                </div>
+      <section class="top-section">
+          <div class="container">
+            <div class="content">
 
-                <!-- Pets catalogs preview -->
-                <div id="previewModal" class="modal" style="display: none;">
-                    <div class="modal-content">
-                        <span class="close" onclick="closePreview()">
-                            <img loading="lazy" src="../assets/imgs/X-icon.svg" alt="" srcset="">
-                        </span>
-                        <div class="modal-body">
-                            <div class="modal-image">
-                                <img loading="lazy" id="modalImage" src="" alt="">
-                            </div>
-                            <div class="modal-details">
-                                <h2 id="modalTitle"></h2>
-                                <p id="modalPetType"></p>
-                                <p id="modalDiscription"></p>
-                                <div class="modal-buttons">
-                                    <button>Adopt</button>
-                                    <button>Close</button>
-                                </div>
-                            </div>
+              <!-- Search -->
+              <div class="search-container">
+                  <input type="search" placeholder="Search for a pet..." id="searchInput" />
+                  <img loading="lazy" src="../assets/imgs/Search-icon.svg" alt="">
+              </div>
+
+              <!-- Categories -->
+              <div class="categories">
+                  <button class="active" id="allBtn" onclick="filterCards('all')">All</button>
+                  <button id="CatsBtn" onclick="filterCards('cat')">Cats</button>
+                  <button id="DogsBtn" onclick="filterCards('dog')">Dogs</button>
+              </div>
+
+              <!-- Pet application (pa) modal -->
+              <div id="applicationForm" class="application-modal" style="display: none;">
+                <div class="modal-content">
+
+                  <!-- Close modal button -->
+                  <span class="close" onclick="closePetApplicationForm()">
+                    <img loading="lazy" src="../assets/imgs/X-icon.svg" alt="Close">
+                  </span>
+
+                  <!-- Pet application form -->
+                  <form class="pa-form" id="adoptionForm" onsubmit="submitApplication(event)">
+                    <div class="pa-form-container">
+                      <!-- Header and text -->
+                      <div class="paf-header-and-text">
+                        <h2>Adoption Application</h2>
+                        <!-- <p></p> -->
+                      </div>
+
+                      <!-- Inputs group -->
+                      <div class="inputs-group">
+                        <div class="label-and-input">
+                          <label for="name">Your Name:</label>
+                          <input type="text" id="name" name="name" required>
                         </div>
+  
+                        <div class="label-and-input">
+                          <label for="email">Your Email:</label>
+                          <input type="email" id="email" name="email" required>
+                        </div>
+  
+                        <div class="label-and-input">
+                          <label for="phone">Phone Number:</label>
+                        <input type="tel" id="phone" name="phone" required>
+                        </div>
+  
+                        <div class="label-and-input">
+                          <label for="message">Why do you want to adopt this pet?</label>
+                          <textarea id="message" name="message" required></textarea>
+                        </div>
+                      </div>
+
+                      <!-- Buttons group -->
+                      <div class="button-and-input">
+                        <input type="hidden" id="petName" name="petName">
+                        <button type="submit">Submit Application</button>
+                      </div>
                     </div>
+                  </form>
                 </div>
+              </div>
 
-                <!-- Pets catalogs -->
-                <div class="cards-container">
-                    <div class="cards" data-category="cat" onclick="showPreview(this)">
-                        <img loading="lazy" src="../assets/imgs/Animal1.png" alt="cat">
-                        <div class="header-and-text">
-                          <p>Name</p>
-                          <p>Type</p>
-                          <p class="description">Name is a playful and friendly cat who loves to cuddle.</p>
-                        </div>
+              <!-- Pets catalogs preview -->
+              <div id="previewModal" class="modal" style="display: none;">
+                  <div class="modal-content">
+                      <!-- Close modal button -->
+                      <span class="close" onclick="closePreview()">
+                          <img loading="lazy" src="../assets/imgs/X-icon.svg" alt="" srcset="">
+                      </span>
+
+                      <!-- Modal body -->
+                      <div class="modal-body">
+                          <div class="modal-image">
+                              <img loading="lazy" id="modalImage" src="" alt="">
+                          </div>
+                          <div class="modal-details">
+                              <h2 id="modalTitle"></h2>
+                              <p id="modalPetType"></p>
+                              <p id="modalDiscription"></p>
+                              <div class="modal-buttons">
+                                  <button>Map</button>
+                                  <button onclick="showApplicationForm()">Adopt</button>
+                              </div>
+                          </div>
                       </div>
-                      
-                      <div class="cards" data-category="dog" onclick="showPreview(this)">
-                        <img loading="lazy" src="../assets/imgs/Animal2.png" alt="dog">
-                        <div class="header-and-text">
-                          <p>Name</p>
-                          <p>Type</p>
-                          <p class="description">Name is an energetic dog who enjoys long walks and playing fetch.</p>
-                        </div>
-                      </div>
-                      
-                      <div class="cards" data-category="cat" onclick="showPreview(this)">
-                        <img loading="lazy" src="../assets/imgs/Animal3.png" alt="cat">
-                        <div class="header-and-text">
-                          <p>Name</p>
-                          <p>Type</p>
-                          <p class="description">Name is a curious cat who loves exploring and climbing.</p>
-                        </div>
-                      </div>
-                      <div class="cards" data-category="dog" onclick="showPreview(this)">
-                        <img loading="lazy" src="../assets/imgs/Animal4.png" alt="dog">
-                        <div class="header-and-text">
-                          <p>Name</p>
-                          <p>Type</p>
-                          <p class="description">Name is a playful and friendly cat who loves to cuddle.</p>
-                        </div>
-                      </div>
-                      
-                      <div class="cards" data-category="dog" onclick="showPreview(this)">
-                        <img loading="lazy" src="../assets/imgs/Animal5.png" alt="dog">
-                        <div class="header-and-text">
-                          <p>Name</p>
-                          <p>Type</p>
-                          <p class="description">Name is an energetic dog who enjoys long walks and playing fetch.</p>
-                        </div>
-                      </div>
-                      
-                      <div class="cards" data-category="cat" onclick="showPreview(this)">
-                        <img loading="lazy" src="../assets/imgs/Animal6.png" alt="cat">
-                        <div class="header-and-text">
-                          <p>Name</p>
-                          <p>Type</p>
-                          <p class="description">Name is a playful and friendly cat who loves to cuddle.</p>
-                        </div>
-                      </div>
-                      
-                      <div class="cards" data-category="dog" onclick="showPreview(this)">
-                        <img loading="lazy" src="../assets/imgs/Animal7.png" alt="dog">
-                        <div class="header-and-text">
-                          <p>Name</p>
-                          <p>Type</p>
-                          <p class="description">Name is an energetic dog who enjoys long walks and playing fetch.</p>
-                        </div>
-                      </div>
-                      
-                      <div class="cards" data-category="dog" onclick="showPreview(this)">
-                        <img loading="lazy" src="../assets/imgs/Animal8.png" alt="dog">
-                        <div class="header-and-text">
-                          <p>Name</p>
-                          <p>Type</p>
-                          <p class="description">Name is a curious cat who loves exploring and climbing.</p>
-                        </div>
-                      </div>
-                      <div class="cards" data-category="cat" onclick="showPreview(this)">
-                        <img loading="lazy" src="../assets/imgs/Animal9.png" alt="cat">
-                        <div class="header-and-text">
-                          <p>Name</p>
-                          <p>Type</p>
-                          <p class="description">Name is a playful and friendly cat who loves to cuddle.</p>
-                        </div>
-                      </div>
-                      
-                      <div class="cards" data-category="cat" onclick="showPreview(this)">
-                        <img loading="lazy" src="../assets/imgs/Animal10.png" alt="dog">
-                        <div class="header-and-text">
-                          <p>Name</p>
-                          <p>Type</p>
-                          <p class="description">Name is an energetic dog who enjoys long walks and playing fetch.</p>
-                        </div>
-                      </div>       
                   </div>
+              </div>
+
+              <!-- Pets catalogs -->
+              <div class="cards-container">
+                <div class="cards" data-category="cat" onclick="showPreview(this)">
+                    <img loading="lazy" src="../assets/imgs/Animal1.png" alt="cat">
+                    <div class="header-and-text">
+                      <p>Name</p>
+                      <p>Type</p>
+                      <p class="description">Name is a playful and friendly cat who loves to cuddle.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="cards" data-category="dog" onclick="showPreview(this)">
+                    <img loading="lazy" src="../assets/imgs/Animal2.png" alt="dog">
+                    <div class="header-and-text">
+                      <p>Name</p>
+                      <p>Type</p>
+                      <p class="description">Name is an energetic dog who enjoys long walks and playing fetch.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="cards" data-category="cat" onclick="showPreview(this)">
+                    <img loading="lazy" src="../assets/imgs/Animal3.png" alt="cat">
+                    <div class="header-and-text">
+                      <p>Name</p>
+                      <p>Type</p>
+                      <p class="description">Name is a curious cat who loves exploring and climbing.</p>
+                    </div>
+                  </div>
+                  <div class="cards" data-category="dog" onclick="showPreview(this)">
+                    <img loading="lazy" src="../assets/imgs/Animal4.png" alt="dog">
+                    <div class="header-and-text">
+                      <p>Name</p>
+                      <p>Type</p>
+                      <p class="description">Name is a playful and friendly cat who loves to cuddle.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="cards" data-category="dog" onclick="showPreview(this)">
+                    <img loading="lazy" src="../assets/imgs/Animal5.png" alt="dog">
+                    <div class="header-and-text">
+                      <p>Name</p>
+                      <p>Type</p>
+                      <p class="description">Name is an energetic dog who enjoys long walks and playing fetch.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="cards" data-category="cat" onclick="showPreview(this)">
+                    <img loading="lazy" src="../assets/imgs/Animal6.png" alt="cat">
+                    <div class="header-and-text">
+                      <p>Name</p>
+                      <p>Type</p>
+                      <p class="description">Name is a playful and friendly cat who loves to cuddle.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="cards" data-category="dog" onclick="showPreview(this)">
+                    <img loading="lazy" src="../assets/imgs/Animal7.png" alt="dog">
+                    <div class="header-and-text">
+                      <p>Name</p>
+                      <p>Type</p>
+                      <p class="description">Name is an energetic dog who enjoys long walks and playing fetch.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="cards" data-category="dog" onclick="showPreview(this)">
+                    <img loading="lazy" src="../assets/imgs/Animal8.png" alt="dog">
+                    <div class="header-and-text">
+                      <p>Name</p>
+                      <p>Type</p>
+                      <p class="description">Name is a curious cat who loves exploring and climbing.</p>
+                    </div>
+                  </div>
+                  <div class="cards" data-category="cat" onclick="showPreview(this)">
+                    <img loading="lazy" src="../assets/imgs/Animal9.png" alt="cat">
+                    <div class="header-and-text">
+                      <p>Name</p>
+                      <p>Type</p>
+                      <p class="description">Name is a playful and friendly cat who loves to cuddle.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="cards" data-category="cat" onclick="showPreview(this)">
+                    <img loading="lazy" src="../assets/imgs/Animal10.png" alt="dog">
+                    <div class="header-and-text">
+                      <p>Name</p>
+                      <p>Type</p>
+                      <p class="description">Name is an energetic dog who enjoys long walks and playing fetch.</p>
+                    </div>
+                  </div>       
                 </div>
               </div>
             </div>
-        </section>
+          </div>
+      </section>
     </main>
 
     <footer>

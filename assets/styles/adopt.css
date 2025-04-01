@@ -60,10 +60,10 @@
 }
 
 .cards-container .cards img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 8px;
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 @media screen and (max-width: 500px) {
@@ -89,7 +89,9 @@
   font-weight: 400;
 }
 
-.modal {
+/* =========== Pets preview modal =========== */
+.modal,
+.application-modal {
   margin-bottom: 20px;
 }
 
@@ -120,9 +122,71 @@
 }
 
 .modal-details p:nth-child(2) {
-    font-size:   clamp(1rem, 0.791rem + 0.86vw, 1.563rem);
-    line-height: clamp(1.375rem, 1.073rem + 1.24vw, 2.188rem);
+  font-size: clamp(1rem, 0.791rem + 0.86vw, 1.563rem);
+  line-height: clamp(1.375rem, 1.073rem + 1.24vw, 2.188rem);
   font-weight: 600;
+}
+
+/* =========== Pet Application (pa) modal =========== */
+.pa-form {
+  max-width: 608px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  width: 100%;
+  padding: 32px 24px;
+  border-radius: 32px;
+  background-color: white;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+  margin-inline: auto;
+}
+
+.pa-form-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+}
+
+.pa-form .inputs-group {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.pa-form .label-and-input {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+}
+
+.pa-form .label-and-input label {
+  font-size: clamp(1rem, 0.907rem + 0.38vw, 1.25rem);
+  line-height: clamp(1.375rem, 1.236rem + 0.57vw, 1.75rem);
+  font-weight: 600;
+  color: #292929;
+}
+
+.pa-form .label-and-input input,
+.pa-form .label-and-input textarea {
+  border: 1px solid #eaeaea;
+  border-radius: 20px;
+  padding: 8px 20px;
+  height: 48px;
+  width: 100%;
+}
+
+.pa-form .button-and-input button {
+  background-color: #4480cd;
+  width: 100%;
+  border-radius: 20px;
+  padding: 16px 20px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  color: #e8eff9;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 8px;
 }
 
 @media screen and (min-width: 700px) {
@@ -132,12 +196,12 @@
     column-gap: 16px;
   }
 
-.modal-body .modal-image img {
+  .modal-body .modal-image img {
     width: 100%;
-    height: 700px;
+    height: 600px;
     object-fit: cover;
     border-radius: 4%;
-}
+  }
 
   .modal-body .modal-image,
   .modal-body .modal-details {
@@ -148,6 +212,11 @@
     display: flex;
     column-gap: 8px;
     align-items: center;
+    margin-top: 16px;
+  }
+
+  .modal-buttons button:nth-child(1) {
+    margin: 0;
   }
 }
 
