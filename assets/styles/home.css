@@ -1,30 +1,65 @@
 /* Hero section */
+.hero-bg {
+  position: relative;
+  background-image: url(../imgs/Hero-img.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+  padding-block: 192px;
+}
+
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+    background-color: rgb(0 0 0 / 80%);
+  z-index: 1;
+}
+
+.hero-bg .container {
+  position: relative;
+  z-index: 2;
+}
+
 .top-section {
-  padding-top: 128px;
+  padding-bottom: 176px;
 }
 
 .hero-header-and-text {
   text-align: center;
+  max-width: 877px;
+  margin-inline: auto;
 }
 
 .hero-header-and-text h1,
 .cta-header-and-text h1 {
   margin-bottom: 16px;
-  font-size: clamp(2.438rem, 1.927rem + 2.1vw, 3.813rem);
+  font-size: clamp(3.063rem, 2.784rem + 1.14vw, 3.813rem);
   font-weight: 700;
-  line-height: clamp(3.438rem, 2.741rem + 2.86vw, 5.313rem);
+  line-height: clamp(4.313rem, 3.941rem + 1.52vw, 5.313rem);
 }
 
-.hero-header-and-text p {
-  font-size: clamp(1rem, 0.791rem + 0.86vw, 1.563rem);
+.hero-header-and-text h1,
+.cta-header-and-text h1 {
+  color: #EAEAEA;
+}
+
+.hero-header-and-text p,
+.cta-header-and-text p {
+  font-size: clamp(1rem, 0.907rem + 0.38vw, 1.25rem);
   font-weight: 500;
-  line-height: clamp(1.375rem, 1.073rem + 1.24vw, 2.188rem);
+  line-height: clamp(1.375rem, 1.236rem + 0.57vw, 1.75rem);
+  color: #E2C693;
 }
 
 .hero-button {
-  padding: 16px 20px;
-  background-color: #d5ab62;
-  border-radius: 16px;
+  padding: 16px 24px;
+  background-color: #CD9B44;
+  border-radius: 12px;
   border: none;
   margin-top: 16px;
   margin-inline: auto;
@@ -36,10 +71,12 @@
   color: #292929;
   text-align: center;
   width: max-content;
+  transition: all 150ms ease-in-out;
 }
 
-.hero-button:hover {
-  background-color: #cd9b44;
+.hero-button:hover,
+.cta-button:hover {
+  background-color: #C18215;
 }
 
 /* Features section */
@@ -56,21 +93,23 @@
 }
 
 .img-container {
-  height: max-content;
+  display: flex;
+  justify-content: center;
 }
 
-.header-and-text h2 {
-  margin-top: 16px;
+.header-and-text h2,
+.header-and-text-center h2 {
   margin-bottom: 8px;
-  font-size: clamp(2.438rem, 1.927rem + 2.1vw, 3.813rem);
+  font-size: clamp(1.938rem, 1.752rem + 0.76vw, 2.438rem);
   font-weight: 700;
-  line-height: clamp(3.438rem, 2.741rem + 2.86vw, 5.313rem);
+  line-height: clamp(2.688rem, 2.409rem + 1.14vw, 3.438rem);
 }
 
-.header-and-text p {
-  font-size: 16px;
+.header-and-text p,
+.header-and-text-center p {
+  font-size: clamp(1rem, 0.907rem + 0.38vw, 1.25rem);
   font-weight: 400;
-  line-height: 22px;
+  line-height: clamp(1.375rem, 1.236rem + 0.57vw, 1.75rem);
 }
 
 /* About section */
@@ -80,42 +119,51 @@
   margin-inline: auto;
 }
 
-.header-and-text-center h2 {
+/* .header-and-text-center h2 {
   margin-bottom: 18px;
   font-size: clamp(2.438rem, 1.927rem + 2.1vw, 3.813rem);
   font-weight: 700;
   line-height: clamp(3.438rem, 2.741rem + 2.86vw, 5.313rem);
-}
+} */
 
 /* CTA section */
 .inner-container {
   padding: 20px;
-  background-color: #e2e5ef;
+  background-color: #513709;
   border-radius: 20px;
 }
 
 .cta-button {
-  padding: 16px 20px;
-  background-color: #d5ab62;
-  border-radius: 16px;
+  padding: 16px 24px;
+  background-color: #CD9B44;
+  border-radius: 12px;
   border: none;
+  margin-top: 16px;
+  display: block;
   font-size: 20px;
   font-weight: 500;
-  line-height: 28ox;
-  margin-top: 16px;
-  cursor: pointer;
+  line-height: 28px;
+  text-decoration: none;
   color: #292929;
+  text-align: center;
+  width: max-content;
+  transition: all 150ms ease-in-out;
 }
 
-.cta-button:hover {
-  background-color: #cd9b44;
+@media screen and (max-width: 700px) {
+  .img-container img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+  }
+
 }
 
 @media screen and (min-width: 700px) {
-  .top-section {
-    padding-top: 272px;
+  .hero-bg {
+    padding-block: 288px;
   }
-
+  
   .tw-section,
   .tw-section-reverse {
     flex-direction: row;
@@ -123,18 +171,8 @@
     column-gap: 20px;
   }
 
-  .tw-section .content,
-  .tw-section-reverse .content {
-    flex: 1;
-  }
-
   .header-and-text h2 {
     margin-top: 0;
-  }
-
-  .img-container {
-    display: flex;
-    justify-content: center;
   }
 
   .tw-section-reverse {
@@ -153,6 +191,11 @@
   }
 
   .inner-container {
-    padding: 80px;
+    padding: 60px;
   }
 }
+
+@media screen and (min-width: 1200px) {
+
+}
+

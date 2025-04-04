@@ -6,31 +6,44 @@ function showPreview(card) {
   // Retrieve data from the clicked card
   const image = card.querySelector("img").src;
   const title = card.querySelector(".header-and-text p:first-child").textContent;
-  const location = card.querySelector(".header-and-text p:nth-child(2)").textContent;
+  const sex = card.querySelector(".header-and-text p:nth-child(2)").textContent;
+  const location = card.querySelector(".header-and-text p:nth-child(3)").textContent;
   const description = card.querySelector(".header-and-text .description").textContent;
 
   // Update modal content
   document.getElementById("modalImage").src = image;
   document.getElementById("modalTitle").textContent = title;
-  document.getElementById("modalPetType").textContent = location;
+  document.getElementById("modalPetSex").textContent = sex;
+  document.getElementById("modalPetLocation").textContent = location;
   document.getElementById("modalDiscription").textContent = description;
 
   // Show the modal
   modal.style.display = "block";
 
-  // Scroll to the modal
-  const offset = 100; // Offset in pixels
-  const modalTop = modal.getBoundingClientRect().top + window.scrollY - offset;
-
-  window.scrollTo({
-    top: modalTop,
-    behavior: "instant", // Smooth scrolling effect
-  });
+  spaceOnTop();
 }
 
 function closePreview() {
   document.getElementById("previewModal").style.display = "none";
 }
+
+
+
+
+function spaceOnTop(){
+  const modal = document.getElementById("previewModal");
+    // Scroll to the modal
+    const offset = 88; // Offset in pixels
+    const modalTop = modal.getBoundingClientRect().top + window.scrollY - offset;
+  
+    window.scrollTo({
+      top: modalTop,
+      behavior: "instant", // Smooth scrolling effect
+    });
+}
+
+
+
 
 function filterCards(category) {
   const cards = document.querySelectorAll(".cards");
@@ -56,12 +69,18 @@ function filterCards(category) {
   });
 }
 
+
+
+
 // Show the application form
 function showApplicationForm() {
   const modalTitle = document.getElementById("modalTitle").textContent;
   document.getElementById("petName").value = modalTitle; // Pass the pet name to the form
-  document.getElementById("applicationForm").style.display = "block";
+  
+  document.getElementById("applicationForm").style.display = "flex";
   document.getElementById("previewModal").style.display = "none"; // Hide the preview modal
+
+  spaceOnTop();
 }
 
 // Close the application form
@@ -69,13 +88,14 @@ function closePetApplicationForm() {
   document.getElementById("applicationForm").style.display ="none";
 }
 
+
+
+
 // Handle form submission
 function submitApplication(event) {
   event.preventDefault(); // Prevent the default form submission
 
   const formData = new FormData(document.getElementById("adoptionForm"));
-
-
 
   //Send the form data to the PHP backend
   fetch("../assets/php/submitApplication.php", {

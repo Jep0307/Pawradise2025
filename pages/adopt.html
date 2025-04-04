@@ -11,8 +11,8 @@
 
     <!-- Modules -->
     <script type="module" src="../assets/js/home.js"></script>
-    <script type="module" src="../assets/js/auth/config.js"></script>
-    <script type="module" src="../assets/js/auth/signout.js"></script>
+    <!-- <script type="module" src="../assets/js/auth/config.js"></script>
+    <script type="module" src="../assets/js/auth/signout.js"></script> -->
 
     <!-- Scripts -->
     <script defer src="../assets/js/adopt.js"></script>
@@ -32,8 +32,8 @@
                   <li><a href="./adopt.html">Adopt</a></li>
                   <li><a href="./map.html">Map</a></li>
                   <li><a href="./status.html">Status</a></li>
-                  <li><a href="#username"id="userStatus">Status</a></li>
-                  <li class="logout-btn" id="signoutBtn">Logout</li>
+                  <!-- <li><a href="#username"id="userStatus">Status</a></li>
+                  <li class="logout-btn" id="signoutBtn">Logout</li> -->
                 </ul>
             </div>
         
@@ -51,46 +51,53 @@
           <div class="container">
             <div class="content">
 
-              <!-- Search -->
-              <div class="search-container">
-                  <input type="search" placeholder="Search for a pet..." id="searchInput" />
-                  <img loading="lazy" src="../assets/imgs/Search-icon.svg" alt="">
-              </div>
-
-              <!-- Categories -->
-              <div class="categories">
-                  <button class="active" id="allBtn" onclick="filterCards('all')">All</button>
-                  <button id="CatsBtn" onclick="filterCards('cat')">Cats</button>
-                  <button id="DogsBtn" onclick="filterCards('dog')">Dogs</button>
+              <!-- Search and category -->
+              <div class="search-and-category-container">
+                <!-- Search -->
+                <div class="search-container">
+                    <input type="text" placeholder="Search for a pet..." id="searchInput" />
+                    <img loading="lazy" src="../assets/imgs/Search-icon.svg" alt="">
+                </div>
+  
+                <!-- Categories -->
+                <div class="categories">
+                    <button class="active" id="allBtn" onclick="filterCards('all')">All</button>
+                    <button id="CatsBtn" onclick="filterCards('cat')">Cats</button>
+                    <button id="DogsBtn" onclick="filterCards('dog')">Dogs</button>
+                </div>
               </div>
 
               <!-- Pet application (pa) modal -->
               <div id="applicationForm" class="application-modal" style="display: none;">
                 <div class="modal-content">
-
-                  <!-- Close modal button -->
-                  <span class="close" onclick="closePetApplicationForm()">
-                    <img loading="lazy" src="../assets/imgs/X-icon.svg" alt="Close">
-                  </span>
+                   <!-- Close modal button -->
+                   <img class="close" onclick="closePetApplicationForm()" loading="lazy" src="../assets/imgs/X-icon.svg" alt="" srcset="">
 
                   <!-- Pet application form -->
                   <form class="pa-form" id="adoptionForm" onsubmit="submitApplication(event)">
                     <div class="pa-form-container">
                       <!-- Header and text -->
                       <div class="paf-header-and-text">
-                        <h2>Adoption Application</h2>
+                        <h2>Adoption Form</h2>
                         <!-- <p></p> -->
                       </div>
 
                       <!-- Inputs group -->
                       <div class="inputs-group">
-                        <div class="label-and-input">
-                          <label for="name">Your Name:</label>
-                          <input type="text" id="name" name="name" required>
+                        <div class="row-input-group">
+                          <div class="label-and-input">
+                            <label for="firstname">Firstname:</label>
+                            <input type="text" id="firstname" name="firstname" required>
+                          </div>
+
+                          <div class="label-and-input">
+                            <label for="lastname">Lastname:</label>
+                            <input type="text" id="lastname" name="lastname" required>
+                          </div>
                         </div>
-  
+
                         <div class="label-and-input">
-                          <label for="email">Your Email:</label>
+                          <label for="email">Email:</label>
                           <input type="email" id="email" name="email" required>
                         </div>
   
@@ -108,7 +115,7 @@
                       <!-- Buttons group -->
                       <div class="button-and-input">
                         <input type="hidden" id="petName" name="petName">
-                        <button type="submit">Submit Application</button>
+                        <button type="submit">Submit</button>
                       </div>
                     </div>
                   </form>
@@ -119,9 +126,7 @@
               <div id="previewModal" class="modal" style="display: none;">
                   <div class="modal-content">
                       <!-- Close modal button -->
-                      <span class="close" onclick="closePreview()">
-                          <img loading="lazy" src="../assets/imgs/X-icon.svg" alt="" srcset="">
-                      </span>
+                      <img class="close" onclick="closePreview()" loading="lazy" src="../assets/imgs/X-icon.svg" alt="" srcset="">
 
                       <!-- Modal body -->
                       <div class="modal-body">
@@ -130,10 +135,11 @@
                           </div>
                           <div class="modal-details">
                               <h2 id="modalTitle"></h2>
-                              <p id="modalPetType"></p>
+                              <p id="modalPetSex"></p>
+                              <p id="modalPetLocation"></p>
                               <p id="modalDiscription"></p>
                               <div class="modal-buttons">
-                                  <button>Map</button>
+                                  <button>Direct me there</button>
                                   <button onclick="showApplicationForm()">Adopt</button>
                               </div>
                           </div>
@@ -147,16 +153,18 @@
                     <img loading="lazy" src="../assets/imgs/Animal1.png" alt="cat">
                     <div class="header-and-text">
                       <p>Name</p>
-                      <p>Type</p>
+                      <p>Sex</p>
+                      <p>Location</p>
                       <p class="description">Name is a playful and friendly cat who loves to cuddle.</p>
                     </div>
                   </div>
-                  
+
                   <div class="cards" data-category="dog" onclick="showPreview(this)">
                     <img loading="lazy" src="../assets/imgs/Animal2.png" alt="dog">
                     <div class="header-and-text">
                       <p>Name</p>
-                      <p>Type</p>
+                      <p>Sex</p>
+                      <p>Location</p>
                       <p class="description">Name is an energetic dog who enjoys long walks and playing fetch.</p>
                     </div>
                   </div>
@@ -165,7 +173,8 @@
                     <img loading="lazy" src="../assets/imgs/Animal3.png" alt="cat">
                     <div class="header-and-text">
                       <p>Name</p>
-                      <p>Type</p>
+                      <p>Sex</p>
+                      <p>Location</p>
                       <p class="description">Name is a curious cat who loves exploring and climbing.</p>
                     </div>
                   </div>
@@ -173,7 +182,8 @@
                     <img loading="lazy" src="../assets/imgs/Animal4.png" alt="dog">
                     <div class="header-and-text">
                       <p>Name</p>
-                      <p>Type</p>
+                      <p>Sex</p>
+                      <p>Location</p>
                       <p class="description">Name is a playful and friendly cat who loves to cuddle.</p>
                     </div>
                   </div>
@@ -182,7 +192,8 @@
                     <img loading="lazy" src="../assets/imgs/Animal5.png" alt="dog">
                     <div class="header-and-text">
                       <p>Name</p>
-                      <p>Type</p>
+                      <p>Sex</p>
+                      <p>Location</p>
                       <p class="description">Name is an energetic dog who enjoys long walks and playing fetch.</p>
                     </div>
                   </div>
@@ -191,7 +202,8 @@
                     <img loading="lazy" src="../assets/imgs/Animal6.png" alt="cat">
                     <div class="header-and-text">
                       <p>Name</p>
-                      <p>Type</p>
+                      <p>Sex</p>
+                      <p>Location</p>
                       <p class="description">Name is a playful and friendly cat who loves to cuddle.</p>
                     </div>
                   </div>
@@ -200,7 +212,8 @@
                     <img loading="lazy" src="../assets/imgs/Animal7.png" alt="dog">
                     <div class="header-and-text">
                       <p>Name</p>
-                      <p>Type</p>
+                      <p>Sex</p>
+                      <p>Location</p>
                       <p class="description">Name is an energetic dog who enjoys long walks and playing fetch.</p>
                     </div>
                   </div>
@@ -209,7 +222,8 @@
                     <img loading="lazy" src="../assets/imgs/Animal8.png" alt="dog">
                     <div class="header-and-text">
                       <p>Name</p>
-                      <p>Type</p>
+                      <p>Sex</p>
+                      <p>Location</p>
                       <p class="description">Name is a curious cat who loves exploring and climbing.</p>
                     </div>
                   </div>
@@ -217,7 +231,8 @@
                     <img loading="lazy" src="../assets/imgs/Animal9.png" alt="cat">
                     <div class="header-and-text">
                       <p>Name</p>
-                      <p>Type</p>
+                      <p>Sex</p>
+                      <p>Location</p>
                       <p class="description">Name is a playful and friendly cat who loves to cuddle.</p>
                     </div>
                   </div>
@@ -226,7 +241,8 @@
                     <img loading="lazy" src="../assets/imgs/Animal10.png" alt="dog">
                     <div class="header-and-text">
                       <p>Name</p>
-                      <p>Type</p>
+                      <p>Sex</p>
+                      <p>Location</p>
                       <p class="description">Name is an energetic dog who enjoys long walks and playing fetch.</p>
                     </div>
                   </div>       

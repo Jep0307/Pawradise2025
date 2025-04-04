@@ -8,7 +8,7 @@
 }
 
 html {
-  background-color: #f3f5fc;
+
 }
 
 body {
@@ -30,8 +30,6 @@ h6 {
 
 img {
   max-width: 100%;
-  max-height: 600px;
-  width: auto;
   height: auto;
 }
 
@@ -41,12 +39,12 @@ img {
 
 section {
   width: 100%;
-  padding-block: 48px;
+  padding-block: 96px;
 }
 
 .top-section {
-    padding-top: 128px
-  }
+  padding-top: 176px;
+}
 
 .container {
   max-width: 1440px;
@@ -59,11 +57,13 @@ header {
   width: 100%;
   position: fixed;
   z-index: 1000;
+  background-color: white;
+  border-bottom: 1px solid #EAEAEA;
 }
 
 nav {
-  background-color: #e2e5ef;
-  padding-block: 16px;
+  display: flex;
+  justify-content: center;
 }
 
 nav .logo-and-title {
@@ -80,7 +80,9 @@ nav .logo-and-title p {
 }
 
 .nav-container {
-  padding-inline: 16px;
+  padding: 16px;
+  max-width: 1440px;
+  width: 100%;
 }
 
 .nav-content {
@@ -120,13 +122,13 @@ nav .logo-and-title p {
 
 .nav-list li {
   list-style: none;
-  border-radius: 16px;
+  border-radius: 12px;
   cursor: pointer;
 }
 
 .nav-list li a {
   padding: 8px 16px;
-  color: #545454;
+  color: #292929;
   width: 100%;
   font-size: 16px;
   line-height: 22px;
@@ -140,14 +142,14 @@ nav .logo-and-title p {
 }
 
 .logout-btn {
-  background-color: #D56262;
   padding: 8px 16px;
   border: none;
-  border-radius: 16px;
+  border-radius: 12px;
   margin-left: auto;
   display: block;
-  color: #F9E8E8;
+  color: #d56262;
   cursor: pointer;
+  font-weight: 500;
 }
 
 .nav-humburger {
@@ -172,7 +174,7 @@ nav .logo-and-title p {
 
 footer {
   padding-block: 48px;
-  background-color: #e2e5ef;
+  border-top: 1px solid #EAEAEA;
 }
 
 footer .logo-and-title {
@@ -180,10 +182,10 @@ footer .logo-and-title {
 }
 
 footer .logo-and-title {
-    display: flex;
-    align-items: center;
-    row-gap: 4px;
-  }
+  display: flex;
+  align-items: center;
+  row-gap: 4px;
+}
 
 footer .logo-and-title p {
   font-size: 20px;
@@ -198,7 +200,7 @@ footer .menu {
 
 footer .menu ul li {
   list-style: none;
-  border-radius: 16px;
+  border-radius: 12px;
 }
 
 footer .menu ul li a {
@@ -211,7 +213,7 @@ footer .menu ul li a {
   text-decoration: none;
   display: block;
   list-style: none;
-  border-radius: 16px;
+  border-radius: 12px;
 }
 
 footer .menu ul li:hover {
@@ -226,13 +228,20 @@ footer .copy-rights {
 }
 
 @media screen and (min-width: 700px) {
+  img {
+    max-width: 100%;
+    max-height: 600px;
+    width: auto;
+    height: auto;
+  }
+
   section,
   footer {
     padding-block: 96px;
   }
 
   .top-section {
-    padding-top: 176px
+    padding-top: 176px;
   }
 
   .nav-list {
@@ -243,10 +252,10 @@ footer .copy-rights {
     display: flex;
     justify-content: space-between;
     align-items: center;
-   }
+  }
 
   footer .menu ul {
-   display: flex;
+    display: flex;
   }
 }
 
@@ -254,33 +263,14 @@ footer .copy-rights {
   .container {
     padding-inline: 32px;
   }
-
-  
 }
 
 @media screen and (min-width: 1200px) {
-  .container {
-    padding-inline: 64px;
-  }
-  
-  .nav {
-    padding-inline: 64px;
-  }
-  
-  nav {
-    background-color: transparent;
-    padding: 0;
-    margin-top: 24px;
-    margin-inline: 32px;
-  }
-  
+  .container,
   .nav-container {
-    background-color: rgba(212, 212, 212, 0.5);
-    backdrop-filter: blur(10px);
-    border-radius: 32px;
-    padding-block: 8px;
+    padding-inline: 64px;
   }
-  
+
   .nav-menu {
     position: initial;
     top: 0;
@@ -291,18 +281,18 @@ footer .copy-rights {
     visibility: visible; /* Hide the menu visually */
     transition: none;
   }
-  
+
   .nav-list {
     background-color: transparent;
     padding: 0;
     height: auto;
     display: flex;
   }
-  
+
   .nav-humburger {
     display: none; /* Hide the humburger icon on larger screens */
   }
-  
+
   .nav-list {
     margin-left: 0;
   }
