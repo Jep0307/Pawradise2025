@@ -113,7 +113,7 @@
 
 .modal,
 .application-modal {
-  margin-block: 96px;
+  margin-block: 48px;
 }
 
 .modal-content .close {
