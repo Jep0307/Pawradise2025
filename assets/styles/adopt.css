@@ -16,7 +16,7 @@
 }
 
 .search-container input {
-  background-color: #EAEAEA;
+  background-color: #eaeaea;
   border-radius: 12px;
   padding: 8px 20px;
   height: 48px;
@@ -40,13 +40,13 @@
   padding: 12px 24px;
   border-radius: 12px;
   background-color: transparent;
-  border: 1px solid #EAEAEA;
+  border: 1px solid #eaeaea;
   cursor: pointer;
   transition: all 150ms ease-in-out;
 }
 
 .categories button:hover {
-  background-color: #EAEAEA;
+  background-color: #eaeaea;
   border: 1px solid #292929;
 }
 
@@ -122,7 +122,7 @@
   margin-left: auto;
   display: block;
   padding: 8px;
-  border: 1px solid #EAEAEA;
+  border: 1px solid #eaeaea;
   border-radius: 12px;
   transition: all 150ms ease-in-out;
 }
@@ -146,20 +146,19 @@
 }
 
 .modal-buttons button:nth-child(1):hover {
-  background-color: #EAEAEA;
+  background-color: #eaeaea;
   border: 1px solid #292929;
 }
 
 .modal-buttons button:nth-child(2) {
-  background-color: #CD9B44;
-  border: 1px solid #CD9B44; 
+  background-color: #cd9b44;
+  border: 1px solid #cd9b44;
   color: #292929;
 }
 
 .modal-buttons button:nth-child(2):hover {
-  background-color: #C18215;
+  background-color: #c18215;
   border: 1px solid #292929;
-
 }
 
 .modal-buttons button {
@@ -168,7 +167,7 @@
   border: none;
   background-color: transparent;
   width: 100%;
-  border: 1px solid #EAEAEA;
+  border: 1px solid #eaeaea;
   font-size: 16px;
   font-weight: 500;
   line-height: 22px;
@@ -217,10 +216,8 @@
   flex-direction: column;
   row-gap: 8px;
   width: 100%;
-  padding: 32px 24px;
   border-radius: 16px;
   background-color: white;
-  border: 1px solid #EAEAEA;
   margin-inline: auto;
 }
 
@@ -322,6 +319,12 @@
 
   .modal-buttons button:nth-child(1) {
     margin: 0;
+  }
+
+  .pa-form {
+    padding: 32px 24px;
+    border-radius: 16px;
+    border: 1px solid #eaeaea;
   }
 }
 
