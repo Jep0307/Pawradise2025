@@ -33,7 +33,7 @@ function closePreview() {
 function spaceOnTop(){
   const modal = document.getElementById("previewModal");
     // Scroll to the modal
-    const offset = 88; // Offset in pixels
+    const offset = 32; // Offset in pixels
     const modalTop = modal.getBoundingClientRect().top + window.scrollY - offset;
   
     window.scrollTo({
