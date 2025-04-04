@@ -201,6 +201,10 @@
   justify-content: center;
 }
 
+.application-modal .modal-content {
+  flex: 1;
+}
+
 /* .application-modal .modal-content {
   width: 100%;
 } */
