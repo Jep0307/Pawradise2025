@@ -8,7 +8,6 @@
 }
 
 html {
-
 }
 
 body {
@@ -28,9 +27,18 @@ h6 {
   color: #292929;
 }
 
-img {
+img:not(.illustrations) {
   max-width: 100%;
   height: auto;
+  object-fit: cover;
+}
+
+.illustrations {
+  max-width: 580px;
+  max-height: 580px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 .main {
@@ -58,7 +66,7 @@ header {
   position: fixed;
   z-index: 1000;
   background-color: white;
-  border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid #eaeaea;
   transition: opacity 150ms ease-in-out;
 }
 
@@ -176,7 +184,7 @@ nav .logo-and-title p {
 
 footer {
   padding-block: 48px;
-  border-top: 1px solid #EAEAEA;
+  border-top: 1px solid #eaeaea;
 }
 
 footer .logo-and-title {
@@ -230,12 +238,12 @@ footer .copy-rights {
 }
 
 @media screen and (min-width: 700px) {
-  img {
+  /* img {
     max-width: 100%;
     max-height: 600px;
     width: auto;
     height: auto;
-  }
+  } */
 
   section,
   footer {
