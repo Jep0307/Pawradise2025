@@ -57,7 +57,7 @@ signinForm.addEventListener("submit", async (event) => {
     } else {
       console.log("User signed in:", data);
       alert("Sign-in successful!");
-      window.location.href = "/Pawradise2025/pages/home.html"; // Redirect to a protected page
+      window.location.href = "/Pawradise2025/pages/adopt.html"; // Redirect to a protected page
     }
   } catch (err) {
     console.error("Unexpected error:", err);

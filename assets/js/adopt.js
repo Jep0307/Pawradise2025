@@ -112,3 +112,51 @@ function submitApplication(event) {
       alert("There was an error submitting your application.");
     });
 }
+
+
+
+const searchInput = document.getElementById('searchInput');
+const petcardsName = document.querySelectorAll('.cards-container .cards .pet-name');
+const noFound = document.getElementById('noResultFound');
+const petCards = document.querySelectorAll('.cards-container .cards');
+
+searchInput.addEventListener('keypress', (event) => {
+  if (event.key === 'Enter') {
+    const searchValue = searchInput.value.toLowerCase();
+    let found = false;
+
+    petcardsName.forEach(item => {
+      const text = item.textContent.toLowerCase();
+      const card = item.closest('.cards'); // Correctly get the card element
+
+      if (text.includes(searchValue)) {
+        card.style.display = 'block'; // Show matching card
+        found = true;
+        closePreview()
+closePetApplicationForm()
+      } else {
+        card.style.display = 'none'; // Hide non-matching card
+      }
+    });
+
+    if (!found) {
+      noFound.textContent = "No results found";
+      closePreview()
+closePetApplicationForm()
+    } else {
+      noFound.textContent = ""; // Clear the message if results are found
+    }
+  }
+});
+
+searchInput.addEventListener('input', () => {
+  const searchValue = searchInput.value.toLowerCase();
+  let found = false;
+
+  if (searchValue === '') {
+    petCards.forEach(card => {
+      card.style.display = 'block'; // Show all cards if search input is empty
+    });
+    noFound.textContent = ""; // Clear the message
+  } 
+});

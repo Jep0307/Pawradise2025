@@ -1,4 +1,8 @@
-/* Hero section */
+/* ========== Hero section ========== */
+.top-section {
+  padding-bottom: 176px;
+}
+
 .hero-bg {
   position: relative;
   background-image: url(../imgs/Hero-img.jpg);
@@ -25,9 +29,6 @@
   z-index: 2;
 }
 
-.top-section {
-  padding-bottom: 176px;
-}
 
 .hero-header-and-text,
 .cta-header-and-text {
@@ -94,9 +95,21 @@
   flex: 1;
 }
 
-.img-container {
-  display: flex;
-  justify-content: center;
+.illustrations {
+  object-fit: cover;
+  aspect-ratio: 1 / 1; /* Keeps it square, scalable */
+}
+
+.blob-1 {
+  border-radius: 61% 39% 29% 71% / 52% 66% 34% 48%;
+}
+
+.blob-2 {
+  border-radius: 42% 58% 63% 37% / 54% 41% 59% 46%;
+}
+
+.blob-3 {
+  border-radius: 75% 25% 61% 39% / 47% 68% 32% 59%;
 }
 
 .header-and-text h2,
@@ -134,11 +147,11 @@
 }
 
 @media screen and (max-width: 700px) {
-  .img-container img {
+  /* .img-container img {
     max-width: 100%;
     width: auto;
     height: auto;
-  }
+  } */
 }
 
 @media screen and (min-width: 700px) {

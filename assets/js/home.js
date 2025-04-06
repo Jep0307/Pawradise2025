@@ -32,10 +32,12 @@ window.addEventListener('scroll', () => {
 
   if(lastScrollY < window.scrollY){
     header.style.opacity = '0';
+    header.style.visibility = 'hidden';
   }
 
   else {
     header.style.opacity = '1';
+    header.style.visibility = 'visible';
   }
 
   if(header && isMenuOpen){
