@@ -30,16 +30,16 @@ function closePreview() {
 
 
 
-function spaceOnTop(){
+function spaceOnTop() {
   const modal = document.getElementById("previewModal");
-    // Scroll to the modal
-    const offset = 32; // Offset in pixels
-    const modalTop = modal.getBoundingClientRect().top + window.scrollY - offset;
-  
-    window.scrollTo({
-      top: modalTop,
-      behavior: "instant", // Smooth scrolling effect
-    });
+  // Scroll to the modal
+  const offset = 32; // Offset in pixels
+  const modalTop = modal.getBoundingClientRect().top + window.scrollY - offset;
+
+  window.scrollTo({
+    top: modalTop,
+    behavior: "instant", // Smooth scrolling effect
+  });
 }
 
 
@@ -76,7 +76,7 @@ function filterCards(category) {
 function showApplicationForm() {
   const modalTitle = document.getElementById("modalTitle").textContent;
   document.getElementById("petName").value = modalTitle; // Pass the pet name to the form
-  
+
   document.getElementById("applicationForm").style.display = "flex";
   document.getElementById("previewModal").style.display = "none"; // Hide the preview modal
 
@@ -85,7 +85,7 @@ function showApplicationForm() {
 
 // Close the application form
 function closePetApplicationForm() {
-  document.getElementById("applicationForm").style.display ="none";
+  document.getElementById("applicationForm").style.display = "none";
 }
 
 
@@ -132,8 +132,9 @@ searchInput.addEventListener('keypress', (event) => {
       if (text.includes(searchValue)) {
         card.style.display = 'block'; // Show matching card
         found = true;
-        closePreview()
-closePetApplicationForm()
+        closePreview();
+        closePetApplicationForm();
+        filterCards('all');
       } else {
         card.style.display = 'none'; // Hide non-matching card
       }
@@ -142,21 +143,21 @@ closePetApplicationForm()
     if (!found) {
       noFound.textContent = "No results found";
       closePreview()
-closePetApplicationForm()
+      closePetApplicationForm()
     } else {
       noFound.textContent = ""; // Clear the message if results are found
     }
   }
 });
 
-searchInput.addEventListener('input', () => {
-  const searchValue = searchInput.value.toLowerCase();
-  let found = false;
+// searchInput.addEventListener('input', () => {
+//   const searchValue = searchInput.value.toLowerCase();
 
-  if (searchValue === '') {
-    petCards.forEach(card => {
-      card.style.display = 'block'; // Show all cards if search input is empty
-    });
-    noFound.textContent = ""; // Clear the message
-  } 
-});
+//   if (searchValue === '') {
+//     petCards.forEach(card => {
+//       filterCards('allBtn');
+//       card.style.display = 'block'; // Show all cards if search input is empty
+//     });
+//     noFound.textContent = ""; // Clear the message
+//   }
+// });
