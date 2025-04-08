@@ -21,28 +21,3 @@ function toggleMenu() {
 
 // Add event listener
 menuToggleIcon.addEventListener("click", toggleMenu);
-
-
-// Show and unshow the header on scroll
-const header = document.querySelector('header');
-let lastScrollY = window.scrollY;
-const isMenuOpen = navMenu.classList.contains("active");
-
-window.addEventListener('scroll', () => {
-
-  if(lastScrollY < window.scrollY){
-    header.style.opacity = '0';
-    header.style.visibility = 'hidden';
-  }
-
-  else {
-    header.style.opacity = '1';
-    header.style.visibility = 'visible';
-  }
-
-  if(header && isMenuOpen){
-    isMenuOpen.classList.remove('active');
-  }
-
-  lastScrollY = window.scrollY;
-});

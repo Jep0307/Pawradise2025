@@ -30,6 +30,22 @@
   row-gap: 24px;
 }
 
+#formMessage {
+  display: none;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+#formMessage.success {
+  display: block;
+  color: #44cd60;
+}
+
+#formMessage.error {
+  display: block;
+  color: #cd4444;
+}
+
 .auth-input-group {
   display: flex;
   flex-direction: column;

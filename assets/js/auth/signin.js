@@ -14,7 +14,7 @@ signinForm.addEventListener("submit", async (event) => {
   // Validate email
   const emailValue = emailInput.value.trim();
   const passwordValue = passwordInput.value.trim();
-  
+
   if (!emailValue) {
     emailError.textContent = "Email is required";
     emailError.style.display = "block";
@@ -51,16 +51,26 @@ signinForm.addEventListener("submit", async (event) => {
       password: passwordValue,
     });
 
+    formMessage.classList.remove("error", "success");
     if (error) {
-      console.error("Sign-in error:", error.message);
-      alert(error.message); // Show error message
+      formMessage.textContent = error.message === "Invalid login credentials"
+        ? "Incorrect email or password. Please try again."
+        : error.message;
+
+      formMessage.classList.add("error");
     } else {
-      console.log("User signed in:", data);
-      alert("Sign-in successful!");
-      window.location.href = "/Pawradise2025/pages/adopt.html"; // Redirect to a protected page
+      formMessage.textContent = "Sign-in successful! Redirecting...";
+      formMessage.classList.add("success");
+
+      setTimeout(() => {
+        window.location.href = "/Pawradise2025/pages/adopt.html";
+      }, 2000);
     }
   } catch (err) {
     console.error("Unexpected error:", err);
+    formMessage.textContent = "An unexpected error occurred. Please try again.";
+    formMessage.style.color = "red";
+    formMessage.style.display = "block";
   }
 });
 

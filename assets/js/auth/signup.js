@@ -5,7 +5,6 @@ const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const emailError = document.getElementById("emailError");
 const passwordError = document.getElementById("passwordError");
-
 signupForm.addEventListener("submit", async (event) => {
   event.preventDefault(); // Prevent form from reloading the page
 
@@ -48,19 +47,34 @@ signupForm.addEventListener("submit", async (event) => {
   }
 
   try {
-    const { error } = await supabase.auth.signUp({ email, password, options: {
-      emailRedirectTo: "http://127.0.0.1:5500/Pawradise2025/pages/auth/signin.html"
-    } });
-
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: "http://127.0.0.1:5500/Pawradise2025/pages/auth/signin.html",
+      },
+    });
+  
+    // Clear previous status
+    formMessage.classList.remove("success", "error");
+  
     if (error) {
-      console.error("Sign-up error:", error.message);
-      alert(error.message); // Display error to user
+      // console.error("Sign-up error:", error.message);
+      formMessage.textContent = error.message;
+      formMessage.classList.add("error");
     } else {
-      alert("Sign-up successful! Check your email for verification.");
-      window.location.href = "./signin.html"; // Redirect to sign-in page
+      formMessage.textContent = "Sign-up successful! Check your email for verification.";
+      formMessage.classList.add("success");
+  
+      setTimeout(() => {
+        window.location.href = "./signin.html";
+      }, 2000);
     }
   } catch (err) {
-    console.error("Unexpected error:", err);
+    // console.error("Unexpected error:", err);
+    formMessage.textContent = "An unexpected error occurred. Please try again.";
+    formMessage.classList.remove("success");
+    formMessage.classList.add("error");
   }
 });
 
@@ -72,7 +86,6 @@ function isValidEmail(email) {
 
 // Password visibility toggle
 const passwordIcon = document.getElementById("passwordIcon");
-
 passwordIcon.addEventListener("click", () => {
   if (passwordInput.type === "password") {
     passwordInput.type = "text";

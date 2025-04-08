@@ -174,16 +174,6 @@
     flex-direction: row-reverse;
   }
 
-  .cta-bg {
-    background-color: transparent;
-  }
-
-  .inner-container {
-    padding: 40px;
-    background-color: #513709;
-    border-radius: 20px;
-  }
-
   .cta-header-and-text {
     text-align: left;
   }
@@ -197,10 +187,6 @@
   .tw-section,
   .tw-section-reverse {
     column-gap: 40px;
-  }
-
-  .inner-container {
-    padding: 60px;
   }
 }
 
