@@ -67,7 +67,6 @@ header {
   z-index: 1000;
   background-color: white;
   border-bottom: 1px solid #eaeaea;
-  transition: opacity 150ms ease-in-out;
 }
 
 nav {
