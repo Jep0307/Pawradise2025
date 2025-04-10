@@ -20,7 +20,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-    background-color: rgb(0 0 0 / 80%);
+  background-color: rgb(0 0 0 / 80%);
   z-index: 1;
 }
 
@@ -97,7 +97,10 @@
 
 .illustrations {
   object-fit: cover;
-  aspect-ratio: 1 / 1; /* Keeps it square, scalable */
+  aspect-ratio: 1 / 1;
+  max-width: 500px;
+  display: block;
+  margin-inline: auto;
 }
 
 .blob-1 {
@@ -158,7 +161,7 @@
   .hero-bg {
     padding-block: 288px;
   }
-  
+
   .tw-section,
   .tw-section-reverse {
     flex-direction: row;
@@ -184,13 +187,11 @@
 }
 
 @media screen and (min-width: 900px) {
+
   .tw-section,
   .tw-section-reverse {
     column-gap: 40px;
   }
 }
 
-@media screen and (min-width: 1200px) {
-
-}
-
+@media screen and (min-width: 1200px) {}

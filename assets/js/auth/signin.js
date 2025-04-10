@@ -63,7 +63,7 @@ signinForm.addEventListener("submit", async (event) => {
       formMessage.classList.add("success");
 
       setTimeout(() => {
-        window.location.href = "/Pawradise2025/pages/adopt.html";
+        window.location.href = "/Pawradise2025/pages/pets.html";
       }, 2000);
     }
   } catch (err) {

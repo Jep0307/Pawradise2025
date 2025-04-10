@@ -8,7 +8,7 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="../assets/styles/global.css" />
-  <link rel="stylesheet" href="../assets/styles/adopt.css" />
+  <link rel="stylesheet" href="../assets/styles/pets.css" />
 </head>
 
 <body>
@@ -23,10 +23,10 @@
           <div class="nav-menu">
             <ul class="nav-list">
               <li><a href="./home.html">Home</a></li>
-              <li><a href="./adopt.html">Adopt</a></li>
+              <li><a href="./pets.html">Pets</a></li>
               <li><a href="./map.html">Map</a></li>
               <li><a href="./status.html">Status</a></li>
-              <li><a href="#username" id="userStatus">Status</a></li>
+              <li><a href="./profile.html" id="userStatus"></a></li>
               <li class="logout-btn" id="signoutBtn">Logout</li>
             </ul>
           </div>
@@ -104,31 +104,68 @@
 
                   <!-- Inputs group -->
                   <div class="inputs-group">
-                    <div class="row-input-group">
-                      <div class="label-and-input">
-                        <label for="firstname">Firstname:</label>
-                        <input type="text" id="firstname" name="firstname" required>
-                      </div>
-
-                      <div class="label-and-input">
-                        <label for="lastname">Lastname:</label>
-                        <input type="text" id="lastname" name="lastname" required>
-                      </div>
+                    <div class="label-and-input">
+                      <label for="fullname">Full name</label>
+                      <input type="text" id="fullname" name="fullname" required>
                     </div>
 
                     <div class="label-and-input">
-                      <label for="email">Email:</label>
+                      <label for="email">Email</label>
                       <input type="email" id="email" name="email" required>
                     </div>
 
                     <div class="label-and-input">
-                      <label for="phone">Phone Number:</label>
-                      <input type="tel" id="phone" name="phone" required>
+                      <label for="contactno">Contact number</label>
+                      <input type="no" id="contactno" name="contactno" required>
                     </div>
 
                     <div class="label-and-input">
-                      <label for="message">Why do you want to adopt this pet?</label>
-                      <textarea id="message" name="message" required></textarea>
+                      <label for="birthdate">Birthdate</label>
+                      <input type="date" id="birthdate" name="birthdate" required>
+                    </div>
+
+                    <div class="label-and-input">
+                      <label for="occupation">Occupation</label>
+                      <input type="text" id="occupation" name="occupation" required>
+                    </div>
+
+                    <div class="label-and-input">
+                      <label for="address">Address</label>
+                      <input type="text" id="address" name="address" required>
+                    </div>
+
+                    <div class="label-and-input">
+                      <label for="validid">Valid id</label>
+                      <input type="file" id="validid" name="validid" required>
+                    </div>
+
+                    <div class="label-and-input">
+                      <label for="housepic">House picture</label>
+                      <input type="file" id="housepic" name="housepic" required>
+                    </div>
+
+                    <div class="label-and-input">
+                      <label for="housepic">House picture</label>
+                      <input type="file" id="housepic" name="housepic" required>
+                    </div>
+
+                    <div class="label-and-input">
+                      <label for="housepic">House picture</label>
+                      <input type="file" id="housepic" name="housepic" required>
+                    </div>
+
+                    <div class="label-and-input">
+                      <label for="">Do you rent?
+                      </label>
+                      <div class="custom-select-container">
+                        <div class="custom-select" id="dropdown">
+                            <span id="selected">Select</span>
+                        </div>
+                        <ul class="custom-options hidden" id="options">
+                            <li data-value="yes">Yes</li>
+                            <li data-value="no">No</li>
+                        </ul>
+                    </div>
                     </div>
                   </div>
 
@@ -280,7 +317,7 @@
 
   <!-- Scripts -->
   <script defer src="../assets/js/home.js"></script>
-  <script defer src="../assets/js/adopt.js"></script>
+  <script defer src="../assets/js/pets.js"></script>
 </body>
 
 </html>

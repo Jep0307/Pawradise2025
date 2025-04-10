@@ -1,8 +1,15 @@
 import { supabase } from "./config.js";
 
 const signupForm = document.getElementById("signupForm");
+const fullnameInput = document.getElementById("fullname");
+const addressInput = document.getElementById("address");
+const contactnoInput = document.getElementById("contactno");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
+
+const fullnameError = document.getElementById("fullnameError");
+const addressError = document.getElementById("addressError");
+const contactnoError = document.getElementById("contactnoError");
 const emailError = document.getElementById("emailError");
 const passwordError = document.getElementById("passwordError");
 signupForm.addEventListener("submit", async (event) => {
@@ -10,8 +17,51 @@ signupForm.addEventListener("submit", async (event) => {
 
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
+  const fullname = document.getElementById("fullname").value;
+  const address = document.getElementById("address").value;
+  const contactno = document.getElementById("contactno").value;
+
 
   let isValid = true;
+
+  // Validate fullname
+  const fullnameValue = fullnameInput.value.trim();
+  if (!fullnameValue) {
+    fullnameError.textContent = "Full name is required";
+    fullnameError.style.display = "block";
+    isValid = false;
+  } else {
+    fullnameError.style.display = "none";
+  }
+
+  // Validate address
+  const addressValue = addressInput.value.trim();
+  if (!addressValue) {
+    addressError.textContent = "Address is required";
+    addressError.style.display = "block";
+    isValid = false;
+  } else if (addressValue.length < 6) {
+    addressError.textContent = "Password must be at least 6 characters.";
+    addressError.style.display = "block";
+    isValid = false;
+  } else {
+    addressError.style.display = "none";
+  }
+
+  // Validate phone number
+  const contactnoValue = contactnoInput.value.trim();
+  if (!contactnoValue) {
+    contactnoError.textContent = "Contact number is required";
+    contactnoError.style.display = "block";
+    isValid = false;
+  } else if (!/^\d{11}$/.test(contactnoValue)) {
+    contactnoError.textContent = "Please enter a valid 11-digit contact number.";
+    contactnoError.style.display = "block";
+    isValid = false;
+  } else {
+    contactnoError.style.display = "none";
+  }
+
 
   // Validate email
   const emailValue = emailInput.value.trim();
@@ -51,13 +101,18 @@ signupForm.addEventListener("submit", async (event) => {
       email,
       password,
       options: {
+        data: {
+          fullname,
+          address,
+          contactno,
+        },
         emailRedirectTo: "http://127.0.0.1:5500/Pawradise2025/pages/auth/signin.html",
       },
     });
-  
+
     // Clear previous status
     formMessage.classList.remove("success", "error");
-  
+
     if (error) {
       // console.error("Sign-up error:", error.message);
       formMessage.textContent = error.message;
@@ -65,7 +120,7 @@ signupForm.addEventListener("submit", async (event) => {
     } else {
       formMessage.textContent = "Sign-up successful! Check your email for verification.";
       formMessage.classList.add("success");
-  
+
       setTimeout(() => {
         window.location.href = "./signin.html";
       }, 2000);

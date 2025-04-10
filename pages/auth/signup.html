@@ -13,15 +13,15 @@
 
 <body>
   <main>
-    <section class="top-section">
+    <section>
       <div class="container">
 
-        <form class="form signin-form" id="signupForm">
+        <form class="form signup-form" id="signupForm">
           <div class="form-container">
             <!-- Header and text -->
             <div class="auth-header-and-text">
               <h3 class="auth-title">Sign up</h3>
-              <!-- <p class="auth-text"></p> -->
+              <p class="auth-text">Create an account to start adopting pets and enjoy the full experience.</p>
             </div>
 
             <p id="formMessage"></p>
@@ -29,7 +29,28 @@
             <!-- Inputs group -->
             <div class="auth-input-group">
               <div class="auth-label-and-input">
-                <label for="email">Email</label>
+                <label for="fullname">
+                  Full name <br>
+                  <i>(Format: Firstname Middlename Lastname)</i>
+                </label>
+                <input type="text" id="fullname" name="fullname" />
+                <span class="error-message" id="fullnameError"></span>
+              </div>
+
+              <div class="auth-label-and-input">
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" />
+                <span class="error-message" id="addressError"></span>
+              </div>
+
+              <div class="auth-label-and-input">
+                <label for="contactno">Contact number</label>
+                <input type="number" id="contactno" name="contactno" />
+                <span class="error-message" id="contactnoError"></span>
+              </div>
+
+              <div class="auth-label-and-input">
+                <label for="email">Email address</label>
                 <input type="email" id="email" name="email" />
                 <span class="error-message" id="emailError"></span>
               </div>

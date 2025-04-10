@@ -23,10 +23,10 @@
           <div class="nav-menu">
             <ul class="nav-list">
               <li><a href="./home.html">Home</a></li>
-              <li><a href="./adopt.html">Adopt</a></li>
+              <li><a href="./pets.html">Pets</a></li>
               <li><a href="./map.html">Map</a></li>
               <li><a href="./status.html">Status</a></li>
-              <li><a href="#username" id="userStatus">Status</a></li>
+              <li><a href="./profile.html" id="userStatus"></a></li>
               <li class="logout-btn" id="signoutBtn">Logout</li>
             </ul>
           </div>
@@ -42,15 +42,75 @@
 
   <main>
     <!-- ========== Hero section ========== -->
+    <div id="warningModal" class="warning-modal">
+      <div class="warning-modal-content">
+          <p>Are you sure you want to save changes?</p>
+          <div class="buttons-group">
+            <button id="confirmSave">Confirm</button>
+            <button id="cancelSave">Cancel</button>
+          </div>
+      </div>
+  </div>
+
     <section class="top-section">
       <div class="container">
         <div class="content">
-          <div class="hero-header-and-text">
-            <h1>Profile</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur.
-            </p>
-          </div>
+          <form class="profile-form" id="profileForm">
+            <div class="profile-form-container">
+
+              <!-- Profile header and text -->
+              <div class="profile-header-and-text">
+                <h2>Profile</h2>
+                <!-- <p></p> -->
+              </div>
+
+              <!-- Profile inputs group -->
+              <div class="inputs-group">
+                <div class="row-input-group">
+                  <div class="label-and-input">
+                    <label for="firstname">First name</label>
+                    <input type="text" name="firstname" id="firstname" disabled>
+                    <span id=""></span>
+                  </div>
+
+                  <div class="label-and-input">
+                    <label for="lastname">Last name</label>
+                    <input type="text" name="lastname" id="lastname" disabled>
+                    <span id=""></span>
+                  </div>
+                </div>
+
+                <div class="label-and-input">
+                  <label for="email">Email</label>
+                  <input type="email" name="email" id="email" disabled>
+                  <span id=""></span>
+                </div>
+
+                <div class="label-and-input">
+                  <label for="password">Password</label>
+                  <input type="password" name="password" id="password" disabled>
+                  <span id=""></span>
+                </div>
+
+                <div class="label-and-input">
+                  <label for="number">Number</label>
+                  <input type="tel" name="number" id="number" disabled>
+                  <span id=""></span>
+                </div>
+
+                <div class="label-and-input">
+                  <label for="location">Location</label>
+                  <input type="text" name="location" id="location" disabled>
+                  <span id=""></span>
+                </div>
+              </div>
+
+              <!-- Profile buttons group -->
+              <div class="buttons-group">
+                <button type="button" id="editBtn">Edit</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </section>
@@ -86,6 +146,8 @@
 
   <!-- Scripts -->
   <script defer src="../assets/js/home.js"></script>
+  <script defer src="../assets/js/profile.js"></script>
+
 </body>
 
 </html>
