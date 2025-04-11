@@ -12,6 +12,8 @@ const addressError = document.getElementById("addressError");
 const contactnoError = document.getElementById("contactnoError");
 const emailError = document.getElementById("emailError");
 const passwordError = document.getElementById("passwordError");
+
+
 signupForm.addEventListener("submit", async (event) => {
   event.preventDefault(); // Prevent form from reloading the page
 
@@ -20,8 +22,6 @@ signupForm.addEventListener("submit", async (event) => {
   const fullname = document.getElementById("fullname").value;
   const address = document.getElementById("address").value;
   const contactno = document.getElementById("contactno").value;
-
-
   let isValid = true;
 
   // Validate fullname

@@ -95,22 +95,38 @@ function closePetApplicationForm() {
 function submitApplication(event) {
   event.preventDefault(); // Prevent the default form submission
 
+  // Show the warning modal
+  const warningModal = document.getElementById("warningModal");
+  warningModal.style.display = "flex";
+
+  // Add event listeners for the "Yes" and "No" buttons in the warning modal
+  const yesButton = warningModal.querySelector(".modal-buttons button:nth-child(2)");
+  const noButton = warningModal.querySelector(".modal-buttons button:nth-child(1)");
+
+  // If "Yes" is clicked, proceed with form submission
+  yesButton.addEventListener("click", () => {
+    warningModal.style.display = "none"; // Hide the warning modal
+    finalizeApplicationSubmission(); // Call a function to finalize the submission
+  });
+
+  // If "No" is clicked, close the warning modal
+  noButton.addEventListener("click", () => {
+    warningModal.style.display = "none"; // Hide the warning modal
+  });
+}
+
+// Finalize the application submission
+function finalizeApplicationSubmission() {
   const formData = new FormData(document.getElementById("adoptionForm"));
 
-  //Send the form data to the PHP backend
-  fetch("../assets/php/submitApplication.php", {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => response.text())
-    .then((data) => {
-      alert("Application submitted successfully!");
-      closePetApplicationForm();
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      alert("There was an error submitting your application.");
-    });
+  // Log each form field and its value (for debugging purposes)
+  // for (const [key, value] of formData.entries()) {
+  //   console.log(`${key}: ${value}`);
+  // }
+
+  // You can add your form submission logic here (e.g., send data to a server)
+  alert("Application submitted successfully!");
+  closePetApplicationForm(); // Close the application form after submission
 }
 
 
@@ -151,28 +167,43 @@ searchInput.addEventListener('keypress', (event) => {
 });
 
 
-function customDropdown() {
-  const dropdown = document.getElementById('dropdown');
-  const options = document.getElementById('options');
-  const selected = document.getElementById('selected');
-  
-  dropdown.addEventListener('click', () => {
+
+// Get all custom select elements
+const customSelects = document.querySelectorAll('.custom-select');
+
+customSelects.forEach(select => {
+  // When the select element is clicked, toggle the options visibility
+  select.addEventListener('click', function() {
+    const options = this.nextElementSibling;
     options.classList.toggle('hidden');
   });
-  
-  options.addEventListener('click', (e) => {
-    if (e.target.tagName === 'LI') {
-      selected.textContent = e.target.textContent;
-      options.classList.add('hidden');
-    }
-  });
-  
-  // Optional: close when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!dropdown.contains(e.target) && !options.contains(e.target)) {
-      options.classList.add('hidden');
-    }
-  });
-}
+});
 
-customDropdown()
+// Get all list items inside the custom options
+const options = document.querySelectorAll('.custom-options li');
+
+options.forEach(option => {
+  option.addEventListener('click', function() {
+    const selected = this.closest('.custom-select-container').querySelector('.selected');
+    selected.textContent = this.textContent;
+    this.closest('.custom-options').classList.add('hidden'); // Hide options after selection
+  });
+});
+
+
+flatpickr("#birthdate", {
+  enableTime: false,
+  dateFormat: "Y-m-d"
+});
+
+flatpickr("#zoomdate", {
+  enableTime: false,
+  dateFormat: "Y-m-d"
+});
+
+flatpickr("#zoomtime", {
+  enableTime: true,
+  noCalendar: true,
+  dateFormat: "H:i",
+});
+

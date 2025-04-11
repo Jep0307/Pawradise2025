@@ -9,6 +9,8 @@
   <!-- Styles -->
   <link rel="stylesheet" href="../assets/styles/global.css" />
   <link rel="stylesheet" href="../assets/styles/pets.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 
 <body>
@@ -104,68 +106,157 @@
 
                   <!-- Inputs group -->
                   <div class="inputs-group">
-                    <div class="label-and-input">
-                      <label for="fullname">Full name</label>
-                      <input type="text" id="fullname" name="fullname" required>
+
+                    <!-- Applicant Info -->
+                    <div class="title-and-inputs-group">
+                      <h3>Applicant Info</h3>
+                      <hr>
+                      <div class="label-and-input">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" name="fullname" required>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="contactno">Contact Number</label>
+                        <input type="tel" id="contactno" name="contactno" required>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="birthdate">Birthdate</label>
+                        <input type="text" id="birthdate" name="birthdate" placeholder="Select your birthdate" required>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="occupation">Occupation</label>
+                        <input type="text" id="occupation" name="occupation" required>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" name="address" required>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="social">Social Media (optional)</label>
+                        <input type="text" id="social" name="social">
+                      </div>
                     </div>
 
-                    <div class="label-and-input">
-                      <label for="email">Email</label>
-                      <input type="email" id="email" name="email" required>
-                    </div>
-
-                    <div class="label-and-input">
-                      <label for="contactno">Contact number</label>
-                      <input type="no" id="contactno" name="contactno" required>
-                    </div>
-
-                    <div class="label-and-input">
-                      <label for="birthdate">Birthdate</label>
-                      <input type="date" id="birthdate" name="birthdate" required>
-                    </div>
-
-                    <div class="label-and-input">
-                      <label for="occupation">Occupation</label>
-                      <input type="text" id="occupation" name="occupation" required>
-                    </div>
-
-                    <div class="label-and-input">
-                      <label for="address">Address</label>
-                      <input type="text" id="address" name="address" required>
-                    </div>
-
-                    <div class="label-and-input">
-                      <label for="validid">Valid id</label>
-                      <input type="file" id="validid" name="validid" required>
-                    </div>
-
-                    <div class="label-and-input">
-                      <label for="housepic">House picture</label>
-                      <input type="file" id="housepic" name="housepic" required>
-                    </div>
-
-                    <div class="label-and-input">
-                      <label for="housepic">House picture</label>
-                      <input type="file" id="housepic" name="housepic" required>
-                    </div>
-
-                    <div class="label-and-input">
-                      <label for="housepic">House picture</label>
-                      <input type="file" id="housepic" name="housepic" required>
-                    </div>
-
-                    <div class="label-and-input">
-                      <label for="">Do you rent?
-                      </label>
-                      <div class="custom-select-container">
-                        <div class="custom-select" id="dropdown">
-                            <span id="selected">Select</span>
-                        </div>
-                        <ul class="custom-options hidden" id="options">
+                    <!-- Living Situation -->
+                    <div class="title-and-inputs-group">
+                      <h3>Living Situation</h3>
+                      <hr>
+                      <div class="label-and-input">
+                        <label>Do you rent?</label>
+                        <div class="custom-select-container">
+                          <div class="custom-select">
+                            <span class="selected">Select</span>
+                          </div>
+                          <ul class="custom-options hidden">
                             <li data-value="yes">Yes</li>
                             <li data-value="no">No</li>
-                        </ul>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
+
+                    <!-- Building Type -->
+                    <div class="title-and-inputs-group">
+                      <h3>Building Type</h3>
+                      <hr>
+                      <div class="label-and-input">
+                        <label>Type of Residence</label>
+                        <div class="custom-select-container">
+                          <div class="custom-select">
+                            <span class="selected">Select</span>
+                          </div>
+                          <ul class="custom-options hidden">
+                            <li data-value="house">House</li>
+                            <li data-value="condo">Condo</li>
+                            <li data-value="apartment">Apartment</li>
+                            <li data-value="other">Other</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Adoption Preferences -->
+                    <div class="title-and-inputs-group">
+                      <h3>Adoption Preferences</h3>
+                      <hr>
+                      <div class="label-and-input">
+                        <label>Type of Pet to Adopt</label>
+                        <div class="custom-select-container">
+                          <div class="custom-select">
+                            <span class="selected">Select</span>
+                          </div>
+                          <ul class="custom-options hidden">
+                            <li data-value="cat">Cat</li>
+                            <li data-value="dog">Dog</li>
+                            <li data-value="both">Both</li>
+                            <li data-value="undecided">Not decided</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Uploads -->
+                    <div class="title-and-inputs-group">
+                      <h3>Valid ID (Required)</h3>
+                      <hr>
+                      <div class="label-and-input">
+                        <label for="validid">Upload Valid ID</label>
+                        <input type="file" id="validid" name="validid" required>
+                      </div>
+                    </div>
+                    
+
+                    <div class="title-and-inputs-group">
+                      <h3>Home Photos (Required)</h3>
+                      <hr>
+                      <div class="label-and-input">
+                        <label for="housepic-front">House Front Photo</label>
+                        <input type="file" id="housepic-front" name="housepic-front" required>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="housepic-living">Living Room Photo</label>
+                        <input type="file" id="housepic-living" name="housepic-living" required>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="housepic-yard">Yard/Window Photo (based on pet)</label>
+                        <input type="file" id="housepic-yard" name="housepic-yard" required>
+                      </div>
+                    </div>
+
+                    <!-- Interview -->
+                    <div class="title-and-inputs-group">
+                      <h3>Interview</h3>
+                      <hr>
+                      <div class="label-and-input">
+                        <label for="zoomdate">Preferred Zoom Interview Date</label>
+                        <input type="text" id="zoomdate" name="zoomdate" placeholder="test" required>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="zoomtime">Preferred Time</label>
+                        <input type="text" id="zoomtime" name="zoomtime" required>
+                      </div>
+                    </div>
+
+                    <!-- Visitation -->
+                    <div class="title-and-inputs-group">
+                      <h3>Visitation</h3>
+                      <hr>
+                      <div class="label-and-input">
+                        <label>Can you visit the shelter?</label>
+                        <div class="custom-select-container">
+                          <div class="custom-select">
+                            <span class="selected">Select</span>
+                          </div>
+                          <ul class="custom-options hidden">
+                            <li data-value="yes">Yes</li>
+                            <li data-value="no">No</li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -178,6 +269,26 @@
               </form>
             </div>
           </div>
+
+          <!-- =========== Warning modal =========== -->
+          <div id="warningModal" class="warning-modal">
+            <div class="modal-content">
+              <!-- Modal body -->
+              <div class="modal-body">
+                <div class="modal-details">
+                  <h2 style="color: #C18215;">Warning!</h2>
+                  <p>Once you submit the application form, you will not be able to make any further changes.
+                    Are you sure you want to proceed?</p>
+
+                  <div class="modal-buttons">
+                    <button>no</button>
+                    <button>yes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
 
           <!-- =========== Pets catalogs =========== -->
           <span id="noResultFound"></span>
