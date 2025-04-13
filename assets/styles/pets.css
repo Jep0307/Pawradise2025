@@ -303,10 +303,6 @@
   overflow: hidden;
 }
 
-span .selected {
-  color: #9d9d9d;
-}
-
 .custom-options li {
   padding: 8px 16px;
   cursor: pointer;
@@ -320,24 +316,10 @@ span .selected {
   display: none;
 }
 
-.pa-form .button-and-input button {
-  background-color: #4480cd;
-  width: max-content;
-  border-radius: 12px;
-  padding: 16px 24px;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 22px;
-  color: #e8eff9;
-  border: none;
-  cursor: pointer;
-  margin-left: auto;
-  display: block;
-  transition: all 150ms ease-in-out;
-}
-
-.pa-form .button-and-input button:hover {
-  background-color: #1560c1;
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
 }
 
 /* =========== Warning modal =========== */
