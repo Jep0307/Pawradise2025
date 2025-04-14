@@ -50,11 +50,11 @@
 
 .categories button:hover {
   background-color: #eaeaea;
-  border: 1px solid #292929;
+  border: 1px solid #545454;
 }
 
 .categories button.active {
-  background-color: #292929;
+  background-color: #545454;
   color: white;
 }
 
@@ -75,7 +75,7 @@
   text-decoration: none;
 }
 
-.cards-container .cards img {
+.cards-container img {
   width: 350px;
   /* height: 350px; */
   object-fit: cover;
@@ -89,11 +89,11 @@
   }
 }
 
-.cards-container .cards .description {
+.cards-container .description {
   display: none;
 }
 
-.cards-container .cards p {
+.cards-container p {
   font-size: clamp(0.813rem, 0.743rem + 0.29vw, 1rem);
   line-height: clamp(1.125rem, 1.032rem + 0.38vw, 1.375rem);
   font-weight: 400;
@@ -107,7 +107,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #292929;
+  color: #545454;
 }
 
 
@@ -136,7 +136,7 @@
 
 .modal-content .close:hover {
   background-color: #eaeaea;
-  border: 1px solid #292929;
+  border: 1px solid #545454;
 }
 
 .modal .modal-body .modal-image,
@@ -148,13 +148,13 @@
 }
 
 .modal-details h2 {
-  font-size: clamp(1.938rem, 1.795rem + 0.71vw, 2.438rem);
-  line-height: clamp(2.688rem, 2.473rem + 1.07vw, 3.438rem);
+  font-size: 25px;
+  line-height: 35px;
   font-weight: 700;
   margin-top: 16px;
 }
 
-.modal .modal-buttons button {
+.modal button {
   padding: 12px 22px;
   border-radius: 12px;
   border: none;
@@ -164,29 +164,29 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 22px;
-  color: #292929;
+  color: #545454;
   transition: all 150ms ease-in-out;
 }
 
-.modal .modal-buttons button:nth-child(1) {
+.modal button:nth-child(1) {
   margin-top: 16px;
   margin-bottom: 8px;
 }
 
-.modal .modal-buttons button:nth-child(1):hover {
+.modal button:nth-child(1):hover {
   background-color: #eaeaea;
-  border: 1px solid #292929;
+  border: 1px solid #545454;
 }
 
-.modal .modal-buttons button:nth-child(2) {
-  background-color: #44cd60;
-  border: 1px solid #44cd60;
-  color: #292929;
+.modal button:nth-child(2) {
+  background-color: #93e2a3;
+  border: 1px solid #93e2a3;
+  color: #095118;
 }
 
-.modal .modal-buttons button:nth-child(2):hover {
-  background-color: #15c138;
-  border: 1px solid #292929;
+.modal button:nth-child(2):hover {
+  background-color: #62d57a;
+  border: 1px solid #095118;
 }
 
 /* =========== Pet application modal =========== */
@@ -259,15 +259,15 @@
   row-gap: 4px;
 }
 
-.pa-form .label-and-input label {
+.pa-form label {
   font-size: 16px;
   line-height: 22px;
   font-weight: 500;
-  color: #292929;
+  color: #545454;
 }
 
-.pa-form .label-and-input input,
-.pa-form .label-and-input textarea,
+.pa-form input,
+.pa-form textarea,
 .pa-form .custom-select {
   border: 1px solid #eaeaea;
   resize: vertical;
@@ -281,11 +281,36 @@
   align-items: center;
 }
 
+.pa-form button {
+  background-color: #93e2a3;
+  border: 1px solid #93e2a3;
+  color: #095118;
+
+  transition: all 150ms ease-in-out;
+  padding: 12px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  outline: none;
+
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+
+  margin-left: auto;
+  display: block;
+}
+
+.pa-form button:hover {
+  background-color: #62d57a;
+  border: 1px solid #095118;
+}
+
 .custom-select-container {
   position: relative;
   width: 100%;
 }
 
+/* The custom selectable input */
 .custom-options {
   position: absolute;
   top: 100%;
@@ -317,9 +342,10 @@
 }
 
 .error-message {
-  color: red;
-  font-size: 0.9rem;
-  margin-top: 5px;
+  color: #cd4444;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 13px;
 }
 
 /* =========== Warning modal =========== */
@@ -358,7 +384,7 @@
   justify-content: center;
 }
 
-.warning-modal .modal-buttons button {
+.warning-modal button {
   padding: 12px 22px;
   border-radius: 12px;
   border: none;
@@ -367,14 +393,24 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 22px;
-  color: #292929;
+  color: #545454;
   transition: all 150ms ease-in-out;
   width: 100%;
 }
 
-.warning-modal .modal-buttons button:nth-child(2) {
-  background-color: #D5AB62;
-  color: white;
+.warning-modal button:nth-child(1):hover {
+  background-color: #eaeaea;
+  border: 1px solid #545454;
+}
+
+.warning-modal button:nth-child(2) {
+  background-color: #e2c693;
+  color: #513709;
+}
+
+.warning-modal button:nth-child(2):hover {
+  background-color: #d5ab62;
+  border: 1px solid #513709;
 }
 
 @media screen and (min-width: 700px) {
@@ -421,17 +457,7 @@
     padding: 32px 24px;
     border-radius: 16px;
     border: 1px solid #eaeaea;
-    /* box-shadow: 0px 4px 16px rgb(241 245 247); */
   }
-
-  .warning-modal .modal-buttons button {
-    width: max-content;
-  }
-
-  .warning-modal .modal-buttons {
-    justify-content: flex-end;
-  }
-  
 }
 
 @media screen and (min-width: 900px) {}

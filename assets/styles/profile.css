@@ -44,7 +44,7 @@
     font-size: clamp(0.813rem, 0.743rem + 0.29vw, 1rem);
     line-height: clamp(1.125rem, 1.032rem + 0.38vw, 1.375rem);
     font-weight: 500;
-    color: #292929;
+    color: #545454;
 }
 
 .profile-form .label-and-input input {
@@ -65,89 +65,101 @@
     column-gap: 8px;
 }
 
-.profile-form .buttons-group button {
-    padding: 16px 24px;
+.profile-form button {
+    padding: 12px 22px;
     border-radius: 12px;
     border: none;
     background-color: transparent;
-    width: max-content;
     border: 1px solid #eaeaea;
     font-size: 16px;
     font-weight: 500;
     line-height: 22px;
-    color: #292929;
+    color: #545454;
     transition: all 150ms ease-in-out;
 }
 
-.profile-form .buttons-group button.hover-edit:hover {
+.profile-form .edit-btn:hover {
     background-color: #eaeaea;
-    border: 1px solid #292929;
+    border: 1px solid #545454;
 }
 
-.profile-form .buttons-group button.hover-save:hover {
-    background-color: #c18215;
-    border: 1px solid #292929;
+.profile-form .save-btn {
+    display: none;
+    background-color: #93e2a3;
+    border: 1px solid #93e2a3;
+    color: #095118;
+}
+
+.profile-form .save-btn:hover {
+    background-color: #62d57a;
+    border: 1px solid #095118;
 }
 
 .warning-modal {
-    display: none;
     position: fixed;
-    top: 0;
-    left: 0;
+    background-color: rgba(41, 41, 41, 0.8);
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
+    height: 100vh;
+    inset: 0;
+    display: none;
     align-items: center;
-    z-index: 1000;
+    justify-content: center;
+    z-index: 9999;
 }
 
 .warning-modal-visible {
     display: flex;
 }
 
-.warning-modal-content {
+.warning-modal .modal-content {
     background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 608px;
+    height: max-content;
+    margin-inline: auto;
+    margin-inline: 16px;
 }
 
-.warning-modal-content p {
-    margin-bottom: 8px;
-    color: #545454;
+.warning-modal .modal-details {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
 }
 
-.warning-modal-content .buttons-group {
+.warning-modal .buttons-group {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     column-gap: 8px;
 }
 
-.warning-modal-content button {
-    padding: 12px 24px;
+.warning-modal button {
+    padding: 12px 22px;
     border-radius: 12px;
     border: none;
+    background-color: transparent;
+    border: 1px solid #eaeaea;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    color: #545454;
+    transition: all 150ms ease-in-out;
 }
 
-
-.warning-modal-content button:nth-child(1) {
-    /* background-color: ; */
+.warning-modal .modal-content button#confirmSave {
+    background-color: #e2c693;
+    color: #513709;
 }
 
-.warning-modal-content button:nth-child(2) {
-    /* background-color: ; */
+.warning-modal .modal-content button#confirmSave:hover {
+    background-color: #d5ab62;
+    border: 1px solid #513709;
 }
 
-.warning-modal-content button#confirmSave {
-    background-color: #cd9b44;
-    color: white;
-}
-
-.warning-modal-content button#cancelSave {
+.warning-modal .modal-content button#cancelSave:hover {
     background-color: #eaeaea;
-    color: #292929;
+    border: 1px solid #545454;
 }
 
 @media screen and (min-width: 700px) {
@@ -160,15 +172,9 @@
     .profile-form .row-input-group {
         flex-direction: row;
         column-gap: 8px;
-    }    
-
-    .profile-form .buttons-group button {
-        width: max-content;
     }
 }
 
-@media screen and (min-width: 900px) {
-}
+@media screen and (min-width: 900px) {}
 
-@media screen and (min-width: 1220px) {
-}
+@media screen and (min-width: 1220px) {}

@@ -68,10 +68,10 @@
   margin-inline: auto;
   display: block;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 28px;
   text-decoration: none;
-  color: #292929;
+  color: #513709;
   text-align: center;
   width: max-content;
   transition: all 150ms ease-in-out;
@@ -149,14 +149,6 @@
   background-color: #513709;
 }
 
-@media screen and (max-width: 700px) {
-  /* .img-container img {
-    max-width: 100%;
-    width: auto;
-    height: auto;
-  } */
-}
-
 @media screen and (min-width: 700px) {
   .hero-bg {
     padding-block: 288px;
@@ -176,14 +168,6 @@
   .tw-section-reverse {
     flex-direction: row-reverse;
   }
-
-  .cta-header-and-text {
-    text-align: left;
-  }
-
-  .cta-button {
-    margin-inline: 0;
-  }
 }
 
 @media screen and (min-width: 900px) {
@@ -193,5 +177,3 @@
     column-gap: 40px;
   }
 }
-
-@media screen and (min-width: 1200px) {}

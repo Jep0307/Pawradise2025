@@ -11,7 +11,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Redirect to sign-in page if not logged in
         window.location.href = "http://127.0.0.1:5500/Pawradise2025/index.html";
     } else {
-        userStatus.textContent = `${session.user.email}`;
+        const emailInput = document.getElementById("email");
+
+        if (emailInput) {
+            emailInput.value = `${session.user.email}`;
+        } 
+
+
+        // userStatus.textContent = `${session.user.email}`;
         signoutBtn.style.display = "block"; // Show sign-out button
     }
 

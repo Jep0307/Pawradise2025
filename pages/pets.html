@@ -28,7 +28,7 @@
               <li><a href="./pets.html">Pets</a></li>
               <li><a href="./map.html">Map</a></li>
               <li><a href="./status.html">Status</a></li>
-              <li><a href="./profile.html" id="userStatus"></a></li>
+              <li><a href="./profile.html">Profile</a></li>
               <li class="logout-btn" id="signoutBtn">Logout</li>
             </ul>
           </div>
@@ -96,52 +96,57 @@
                 alt="" srcset="">
 
               <!-- Pet application form -->
-              <form class="pa-form" id="adoptionForm" onsubmit="submitApplication(event)">
+              <form class="pa-form" id="adoptionForm">
                 <div class="pa-form-container">
-                  <!-- Header and text -->
                   <div class="paf-header-and-text">
                     <h2>Adoption Form</h2>
                     <!-- <p></p> -->
                   </div>
-
-                  <!-- Inputs group -->
+            
                   <div class="inputs-group">
-
+            
                     <!-- Applicant Info -->
                     <div class="title-and-inputs-group">
                       <h3>Applicant Info</h3>
                       <hr>
                       <div class="label-and-input">
                         <label for="fullname">Full Name</label>
-                        <input type="text" id="fullname" name="fullname" required>
+                        <input type="text" id="fullname" name="fullname">
+                        <span class="error-message" id="fullnameError"></span>
                       </div>
                       <div class="label-and-input">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email">
+                        <span class="error-message" id="emailError"></span>
                       </div>
                       <div class="label-and-input">
                         <label for="contactno">Contact Number</label>
-                        <input type="tel" id="contactno" name="contactno" required>
+                        <input type="tel" maxlength="11" pattern="\d*" id="contactno" name="contactno"
+                          oninput="this.value = this.value.replace(/\D/g, '')">
+                        <span class="error-message" id="contactnoError"></span>
                       </div>
                       <div class="label-and-input">
                         <label for="birthdate">Birthdate</label>
-                        <input type="text" id="birthdate" name="birthdate" placeholder="Select your birthdate" required>
+                        <input type="text" id="birthdate" name="birthdate" placeholder="Select your birthdate">
+                        <span class="error-message" id="birthdateError"></span>
                       </div>
                       <div class="label-and-input">
                         <label for="occupation">Occupation</label>
-                        <input type="text" id="occupation" name="occupation" required>
+                        <input type="text" id="occupation" name="occupation">
+                        <span class="error-message" id="occupationError"></span>
                       </div>
                       <div class="label-and-input">
                         <label for="address">Address</label>
-                        <input type="text" id="address" name="address" required>
+                        <input type="text" id="address" name="address">
+                        <span class="error-message" id="addressError"></span>
                       </div>
                       <div class="label-and-input">
                         <label for="social">Social Media (optional)</label>
                         <input type="text" id="social" name="social">
+                        <span class="error-message" id="socialError"></span>
                       </div>
                     </div>
-
-                    <!-- Living Situation -->
+            
                     <div class="title-and-inputs-group">
                       <h3>Living Situation</h3>
                       <hr>
@@ -156,10 +161,10 @@
                             <li data-value="no">No</li>
                           </ul>
                         </div>
+                        <span class="error-message" id="rentError"></span>
                       </div>
                     </div>
-
-                    <!-- Building Type -->
+            
                     <div class="title-and-inputs-group">
                       <h3>Building Type</h3>
                       <hr>
@@ -176,10 +181,10 @@
                             <li data-value="other">Other</li>
                           </ul>
                         </div>
+                        <span class="error-message" id="residenceTypeError"></span>
                       </div>
                     </div>
-
-                    <!-- Adoption Preferences -->
+            
                     <div class="title-and-inputs-group">
                       <h3>Adoption Preferences</h3>
                       <hr>
@@ -196,52 +201,59 @@
                             <li data-value="undecided">Not decided</li>
                           </ul>
                         </div>
+                        <span class="error-message" id="petTypeError"></span>
                       </div>
                     </div>
-
-                    <!-- Uploads -->
+            
+                    <!-- Valid ID Upload -->
                     <div class="title-and-inputs-group">
                       <h3>Valid ID (Required)</h3>
                       <hr>
                       <div class="label-and-input">
                         <label for="validid">Upload Valid ID</label>
-                        <input type="file" id="validid" name="validid" required>
+                        <input type="file" id="validid" name="validid">
+                        <span class="error-message" id="valididError"></span>
                       </div>
                     </div>
-                    
-
+            
+                    <!-- Home Photos Upload -->
                     <div class="title-and-inputs-group">
                       <h3>Home Photos (Required)</h3>
                       <hr>
                       <div class="label-and-input">
-                        <label for="housepic-front">House Front Photo</label>
-                        <input type="file" id="housepic-front" name="housepic-front" required>
+                        <label for="housepicFront">House Front Photo</label>
+                        <input type="file" id="housepicFront" name="housepic-front">
+                        <span class="error-message" id="housepicFrontError"></span>
                       </div>
                       <div class="label-and-input">
-                        <label for="housepic-living">Living Room Photo</label>
-                        <input type="file" id="housepic-living" name="housepic-living" required>
+                        <label for="housepicLiving">Living Room Photo</label>
+                        <input type="file" id="housepicLiving" name="housepic-living">
+                        <span class="error-message" id="housepicLivingError"></span>
                       </div>
                       <div class="label-and-input">
-                        <label for="housepic-yard">Yard/Window Photo (based on pet)</label>
-                        <input type="file" id="housepic-yard" name="housepic-yard" required>
+                        <label for="housepicYard">Yard/Window Photo (based on pet)</label>
+                        <input type="file" id="housepicYard" name="housepic-yard">
+                        <span class="error-message" id="housepicYardError"></span>
                       </div>
                     </div>
-
+            
                     <!-- Interview -->
                     <div class="title-and-inputs-group">
                       <h3>Interview</h3>
                       <hr>
                       <div class="label-and-input">
                         <label for="zoomdate">Preferred Zoom Interview Date</label>
-                        <input type="text" id="zoomdate" name="zoomdate" placeholder="test" required>
+                        <input type="text" id="zoomdate" name="zoomdate">
+                        <span class="error-message" id="zoomdateError"></span>
                       </div>
                       <div class="label-and-input">
                         <label for="zoomtime">Preferred Time</label>
-                        <input type="text" id="zoomtime" name="zoomtime" required>
+                        <input type="text" id="zoomtime" name="zoomtime">
+                        <span class="error-message" id="zoomtimeError"></span>
                       </div>
                     </div>
-
-                    <!-- Visitation -->
+            
+                    <!-- Shelter visitation -->
                     <div class="title-and-inputs-group">
                       <h3>Visitation</h3>
                       <hr>
@@ -256,17 +268,19 @@
                             <li data-value="no">No</li>
                           </ul>
                         </div>
+                        <span class="error-message" id="shelterVisitError"></span>
                       </div>
                     </div>
                   </div>
-
-                  <!-- Buttons group -->
-                  <div class="button-and-input">
+            
+                  <div class="buttons-group">
                     <input type="hidden" id="petName" name="petName">
                     <button type="submit">Submit</button>
                   </div>
                 </div>
               </form>
+
+             
             </div>
           </div>
 
@@ -288,7 +302,6 @@
               </div>
             </div>
           </div>
-
 
           <!-- =========== Pets catalogs =========== -->
           <span id="noResultFound"></span>

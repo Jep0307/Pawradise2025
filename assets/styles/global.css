@@ -221,7 +221,7 @@ footer .menu ul li {
 
 footer .menu ul li a {
   margin: 8px 16px;
-  color: #545454;
+  color: #292929;
   width: 100%;
   font-size: 16px;
   line-height: 22px;
@@ -237,7 +237,7 @@ footer .menu ul li:hover {
 }
 
 footer .copy-rights {
-  color: #545454;
+  color: #292929;
   font-size: 13px;
   line-height: 18px;
   font-weight: 500;

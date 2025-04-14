@@ -26,7 +26,7 @@
               <li><a href="./pets.html">Pets</a></li>
               <li><a href="./map.html">Map</a></li>
               <li><a href="./status.html">Status</a></li>
-              <li><a href="./profile.html" id="userStatus"></a></li>
+              <li><a href="./profile.html">Profile</a></li>
               <li class="logout-btn" id="signoutBtn">Logout</li>
             </ul>
           </div>
@@ -42,14 +42,20 @@
 
   <main>
     <!-- ========== Hero section ========== -->
-    <div id="warningModal" class="warning-modal">
-      <div class="warning-modal-content">
+  <div id="warningModal" class="warning-modal">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="modal-details">
+          <h2 style="color: #C18215;">Confirmation</h2>
           <p>Are you sure you want to save changes?</p>
           <div class="buttons-group">
-            <button id="confirmSave">Confirm</button>
             <button id="cancelSave">Cancel</button>
+            <button id="confirmSave">Confirm</button>
           </div>
+        </div>
       </div>
+    </div>
   </div>
 
     <section class="top-section">
@@ -82,7 +88,7 @@
 
                 <div class="label-and-input">
                   <label for="email">Email</label>
-                  <input type="email" name="email" id="email" disabled>
+                  <input type="email" name="email" id="email" value="" disabled>
                   <span id=""></span>
                 </div>
 
@@ -107,7 +113,8 @@
 
               <!-- Profile buttons group -->
               <div class="buttons-group">
-                <button type="button" id="editBtn">Edit</button>
+                <button type="button" class="edit-btn" id="editBtn">Edit</button>
+                <button type="button" class="save-btn" id="saveBtn">Save</button>
               </div>
             </div>
           </form>
@@ -146,7 +153,7 @@
 
   <!-- Scripts -->
   <script defer src="../assets/js/home.js"></script>
-  <script defer src="../assets/js/profile.js"></script>
+  <script type="module" src="../assets/js/profile.js"></script>
 
 </body>
 

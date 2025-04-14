@@ -63,7 +63,7 @@
   font-size: 16px;
   line-height: 22px;
   font-weight: 500;
-  color: #292929;
+  color: #545454;
 }
 
 .auth-label-and-input label i {
@@ -108,7 +108,7 @@
   font-size: 13px;
   line-height: 18px;
   font-weight: 500;
-  color: #292929;
+  color: #545454;
 }
 
 .auth-button-group {
@@ -136,7 +136,7 @@
   font-size: 13px;
   line-height: 18px;
   text-align: center;
-  color: #292929;
+  color: #545454;
 }
 
 .auth-button-group button:hover {

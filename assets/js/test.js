@@ -39,7 +39,8 @@ function finalizeApplicationSubmission() {
   // }
 
   // You can add your form submission logic here (e.g., send data to a server)
-  alert("Application submitted successfully!");
+  // alert("Application submitted successfully!");
+  console.log("Application submitted successfully!");
   closePetApplicationForm(); // Close the application form after submission
 }
 
@@ -47,7 +48,7 @@ function submitApplication(event) {
   event.preventDefault(); // Prevent the default form submission
 
   // Show the warning modal
-
+  console.log("test");
 }
 
 const warningModal = document.getElementById('warningModal');
@@ -183,7 +184,6 @@ noButton.addEventListener('click', () => {
     
       // Continue with form submission or processing
     }
-    
   });
   
   // Toggle custom select options visibility

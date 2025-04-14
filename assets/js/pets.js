@@ -91,43 +91,145 @@ function closePetApplicationForm() {
 
 
 
-// Handle form submission
-function submitApplication(event) {
-  event.preventDefault(); // Prevent the default form submission
+const form = document.getElementById('adoptionForm');
+const fileInputs = form.querySelectorAll('input[type="file"]');
+const textInputs = form.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]');
 
-  // Show the warning modal
-  const warningModal = document.getElementById("warningModal");
-  warningModal.style.display = "flex";
+// --- Custom Select Handling ---
+const customSelectContainers = document.querySelectorAll('.custom-select-container');
 
-  // Add event listeners for the "Yes" and "No" buttons in the warning modal
-  const yesButton = warningModal.querySelector(".modal-buttons button:nth-child(2)");
-  const noButton = warningModal.querySelector(".modal-buttons button:nth-child(1)");
+customSelectContainers.forEach(container => {
+  const select = container.querySelector('.custom-select');
+  const options = container.querySelector('.custom-options');
+  const selected = select.querySelector('.selected');
 
-  // If "Yes" is clicked, proceed with form submission
-  yesButton.addEventListener("click", () => {
-    warningModal.style.display = "none"; // Hide the warning modal
-    finalizeApplicationSubmission(); // Call a function to finalize the submission
+  select.addEventListener('click', () => {
+    options.classList.toggle('hidden');
   });
 
-  // If "No" is clicked, close the warning modal
-  noButton.addEventListener("click", () => {
-    warningModal.style.display = "none"; // Hide the warning modal
+  options.querySelectorAll('li').forEach(option => {
+    option.addEventListener('click', () => {
+      selected.textContent = option.textContent;
+      selected.dataset.value = option.dataset.value;
+      options.classList.add('hidden');
+
+      const error = container.nextElementSibling;
+      if (error && error.classList.contains('error-message')) {
+        error.textContent = '';
+      }
+    });
   });
+});
+
+// Real-time input validation clearing
+[...textInputs, ...fileInputs].forEach(input => {
+  const errorMessage = document.getElementById(input.id + 'Error');
+  const eventType = input.type === 'file' ? 'change' : 'input';
+  input.addEventListener(eventType, () => {
+    if (input.type === 'file' && input.files.length > 0) {
+      errorMessage.textContent = '';
+    } else if (input.value.trim() !== '') {
+      errorMessage.textContent = '';
+    }
+  });
+});
+
+// Form submit
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  let valid = true;
+
+  // --- Validate text/email/tel inputs ---
+  textInputs.forEach(input => {
+    const value = input.value.trim();
+    const errorMessage = document.getElementById(input.id + 'Error');
+    if (!value && errorMessage) {
+      errorMessage.textContent = 'This field is required.';
+      valid = false;
+    }
+  });
+
+  // --- Validate file inputs ---
+  fileInputs.forEach(input => {
+    const errorMessage = document.getElementById(input.id + 'Error');
+    if (!input.files.length && errorMessage) {
+      errorMessage.textContent = 'This field is required.';
+      valid = false;
+    }
+  });
+
+  // --- Validate custom selects ---
+  customSelectContainers.forEach(container => {
+    const selected = container.querySelector('.selected');
+    const value = selected?.dataset?.value || selected?.textContent?.trim();
+    const errorMessage = container.nextElementSibling;
+
+    if (errorMessage && errorMessage.classList.contains('error-message')) {
+      if (!value || value === 'Select') {
+        errorMessage.textContent = 'Please select an option.';
+        valid = false;
+      } else {
+        errorMessage.textContent = '';
+      }
+    }
+  });
+
+  if (!valid) return;
+
+  showWarningModal();
+});
+
+// Modal logic
+const warningModal = document.getElementById('warningModal');
+const yesButton = warningModal?.querySelector('button:last-of-type');
+const noButton = warningModal?.querySelector('button:first-of-type');
+
+yesButton?.addEventListener('click', () => {
+  hideWarningModal();
+  finalizeApplicationSubmission();
+});
+
+noButton?.addEventListener('click', () => {
+  hideWarningModal();
+});
+
+function showWarningModal() {
+  warningModal.style.display = 'flex';
 }
 
-// Finalize the application submission
+function hideWarningModal() {
+  warningModal.style.display = 'none';
+}
+
 function finalizeApplicationSubmission() {
-  const formData = new FormData(document.getElementById("adoptionForm"));
+  const formData = new FormData(form);
+  
+  const applicantData = {};
+  textInputs.forEach(input => {
+    applicantData[input.name] = input.value.trim();
+  });
 
-  // Log each form field and its value (for debugging purposes)
-  // for (const [key, value] of formData.entries()) {
-  //   console.log(`${key}: ${value}`);
-  // }
+  const fileData = {};
+  fileInputs.forEach(input => {
+    fileData[input.name] = input.files[0]?.name;
+  });
 
-  // You can add your form submission logic here (e.g., send data to a server)
-  alert("Application submitted successfully!");
-  closePetApplicationForm(); // Close the application form after submission
+  const dropdownData = {};
+  customSelectContainers.forEach(container => {
+    const label = container.querySelector('.selected').textContent.trim();
+    const value = container.querySelector('.selected').dataset.value || label;
+    dropdownData[label] = value;
+  });
+
+  console.log('Form submission preview:');
+  console.log({ applicantData, fileData, dropdownData });
+
+  closePetApplicationForm();
 }
+
+
+  
+  
 
 
 
@@ -164,30 +266,6 @@ searchInput.addEventListener('keypress', (event) => {
       noFound.textContent = ""; // Clear the message if results are found
     }
   }
-});
-
-
-
-// Get all custom select elements
-const customSelects = document.querySelectorAll('.custom-select');
-
-customSelects.forEach(select => {
-  // When the select element is clicked, toggle the options visibility
-  select.addEventListener('click', function() {
-    const options = this.nextElementSibling;
-    options.classList.toggle('hidden');
-  });
-});
-
-// Get all list items inside the custom options
-const options = document.querySelectorAll('.custom-options li');
-
-options.forEach(option => {
-  option.addEventListener('click', function() {
-    const selected = this.closest('.custom-select-container').querySelector('.selected');
-    selected.textContent = this.textContent;
-    this.closest('.custom-options').classList.add('hidden'); // Hide options after selection
-  });
 });
 
 
