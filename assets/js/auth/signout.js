@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             emailInput.value = `${session.user.email}`;
         } 
 
-
         // userStatus.textContent = `${session.user.email}`;
         signoutBtn.style.display = "block"; // Show sign-out button
     }

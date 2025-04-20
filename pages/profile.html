@@ -7,6 +7,8 @@
   <title>Profile</title>
 
   <!-- Styles -->
+  <link rel="icon" sizes="48x48" href="../assets/imgs/Logo.svg" type="image/x-icon">
+  <link rel="icon" sizes="48x48" href="../assets/imgs/Logo.svg" type="image/x-icon">
   <link rel="stylesheet" href="../assets/styles/global.css" />
   <link rel="stylesheet" href="../assets/styles/profile.css" />
 </head>
@@ -41,36 +43,20 @@
   </header>
 
   <main>
-    <!-- ========== Hero section ========== -->
-  <div id="warningModal" class="warning-modal">
-    <div class="modal-content">
-      <!-- Modal body -->
-      <div class="modal-body">
-        <div class="modal-details">
-          <h2 style="color: #C18215;">Confirmation</h2>
-          <p>Are you sure you want to save changes?</p>
-          <div class="buttons-group">
-            <button id="cancelSave">Cancel</button>
-            <button id="confirmSave">Confirm</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
+    <!-- ========== Profile section ========== -->
     <section class="top-section">
       <div class="container">
         <div class="content">
           <form class="profile-form" id="profileForm">
             <div class="profile-form-container">
-
-              <!-- Profile header and text -->
+              
+              <!-- Header and text -->
               <div class="profile-header-and-text">
                 <h2>Profile</h2>
-                <!-- <p></p> -->
+                <p>You can edit your profile information here if needed.</p>
               </div>
-
-              <!-- Profile inputs group -->
+              
+              <!-- Inputs group -->
               <div class="inputs-group">
                 <div class="row-input-group">
                   <div class="label-and-input">
@@ -78,7 +64,7 @@
                     <input type="text" name="firstname" id="firstname" disabled>
                     <span id=""></span>
                   </div>
-
+                  
                   <div class="label-and-input">
                     <label for="lastname">Last name</label>
                     <input type="text" name="lastname" id="lastname" disabled>
@@ -91,7 +77,7 @@
                   <input type="email" name="email" id="email" value="" disabled>
                   <span id=""></span>
                 </div>
-
+                
                 <div class="label-and-input">
                   <label for="password">Password</label>
                   <input type="password" name="password" id="password" disabled>
@@ -110,17 +96,52 @@
                   <span id=""></span>
                 </div>
               </div>
-
-              <!-- Profile buttons group -->
+              
+              <!-- Buttons group -->
               <div class="buttons-group">
                 <button type="button" class="edit-btn" id="editBtn">Edit</button>
                 <button type="button" class="save-btn" id="saveBtn">Save</button>
+                <button type="button" class="delete-btn" id="deleteBtn">Delete</button>
               </div>
             </div>
           </form>
         </div>
       </div>
     </section>
+
+    <!-- ========== Warning modal ========== -->
+    <div id="warningModal" class="warning-modal">
+      <div class="modal-content">
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="modal-details">
+            <h2 class="title">Confirmation</h2>
+            <p>Are you sure you want to save changes?</p>
+            <div class="buttons-group">
+              <button id="cancelSave">Cancel</button>
+              <button id="confirmSave">Confirm</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== Danger modal ========== -->
+    <div id="dangerModal" class="danger-modal">
+      <div class="modal-content">
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="modal-details">
+            <h2 class="title">Danger!</h2>
+            <p>Are you sure you want to permanently delete your account? This action cannot be undone. All your data will be permanently removed.</p>
+            <div class="buttons-group">
+              <button id="cancelDeletion">Cancel</button>
+              <button id="confirmDeletion">Delete permanently</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
   <footer>
@@ -154,7 +175,6 @@
   <!-- Scripts -->
   <script defer src="../assets/js/home.js"></script>
   <script type="module" src="../assets/js/profile.js"></script>
-
 </body>
 
 </html>

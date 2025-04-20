@@ -109,16 +109,16 @@ nav .logo-and-title p {
   z-index: 999;
   background-color: rgba(41, 41, 41, 0.8);
   height: 100vh;
-  opacity: 0; /* Start fully transparent */
-  visibility: hidden; /* Hide the menu visually */
+  opacity: 0;
+  visibility: hidden;
   transition:
     opacity 100ms ease,
     visibility 100ms ease;
 }
 
 .nav-menu.active {
-  opacity: 1; /* Fully visible */
-  visibility: visible; /* Make it visible */
+  opacity: 1;
+  visibility: visible;
 }
 
 .nav-list {
@@ -126,7 +126,6 @@ nav .logo-and-title p {
   padding: 16px 16px;
   height: 100%;
   position: relative;
-  /* margin-left: 20%; */
 }
 
 .nav-list li {
@@ -178,14 +177,8 @@ nav .logo-and-title p {
 }
 
 #closeMenu {
-  display: none; /* Hide the close icon by default */
+  display: none;
 }
-
-
-
-
-
-
 
 /* ========== Footer ========== */
 footer {
@@ -222,7 +215,7 @@ footer .menu ul li {
 footer .menu ul li a {
   margin: 8px 16px;
   color: #292929;
-  width: 100%;
+  /* width: 100%; */
   font-size: 16px;
   line-height: 22px;
   font-weight: 500;
@@ -242,12 +235,6 @@ footer .copy-rights {
   line-height: 18px;
   font-weight: 500;
 }
-
-
-
-
-
-
 
 @media screen and (min-width: 700px) {
   section,
@@ -292,8 +279,8 @@ footer .copy-rights {
     width: max-content;
     background-color: transparent;
     height: auto;
-    opacity: 1; /* Start fully transparent */
-    visibility: visible; /* Hide the menu visually */
+    opacity: 1;
+    visibility: visible;
     transition: none;
   }
 
@@ -305,7 +292,7 @@ footer .copy-rights {
   }
 
   .nav-humburger {
-    display: none; /* Hide the humburger icon on larger screens */
+    display: none;
   }
 
   .nav-list {

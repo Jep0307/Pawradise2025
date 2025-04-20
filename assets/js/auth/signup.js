@@ -54,8 +54,8 @@ signupForm.addEventListener("submit", async (event) => {
     contactnoError.textContent = "Contact number is required";
     contactnoError.style.display = "block";
     isValid = false;
-  } else if (!/^\d{11}$/.test(contactnoValue)) {
-    contactnoError.textContent = "Please enter a valid 11-digit contact number.";
+  } else if (!/^09\d{9}$/.test(contactnoValue)) {
+    contactnoError.textContent = "Please enter a valid 11-digit contact number starting with 09.";
     contactnoError.style.display = "block";
     isValid = false;
   } else {
@@ -83,8 +83,12 @@ signupForm.addEventListener("submit", async (event) => {
     passwordError.textContent = "Password is required";
     passwordError.style.display = "block";
     isValid = false;
-  } else if (passwordValue.length < 6) {
-    passwordError.textContent = "Password must be at least 6 characters.";
+  } else if (
+    passwordValue.length < 6 ||
+    !/[A-Z]/.test(passwordValue) ||
+    !/[a-z]/.test(passwordValue)
+  ) {
+    passwordError.textContent = "contain at least 6 characters, at least 1 upper case letter and at least 1 lower case letter.";
     passwordError.style.display = "block";
     isValid = false;
   } else {
@@ -118,7 +122,7 @@ signupForm.addEventListener("submit", async (event) => {
       formMessage.textContent = error.message;
       formMessage.classList.add("error");
     } else {
-      formMessage.textContent = "Sign-up successful! Check your email for verification.";
+      formMessage.textContent = "Account Created successfully! Check your email for verification.";
       formMessage.classList.add("success");
 
       setTimeout(() => {

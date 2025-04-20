@@ -10,239 +10,50 @@
 </head>
 
 <body>
-  <!-- <h2>Submission List</h2>
+  <h2>Submission List</h2>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Full Name</th>
-          <th>Email</th>
-          <th>Message</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Jane Doe</td>
-          <td>jane@example.com</td>
-          <td>Hello, this is Jane!</td>
-          <td><button onclick="printRow(this)">Print</button></td>
-        </tr>
-        <tr>
-          <td>John Smith</td>
-          <td>john@example.com</td>
-          <td>Nice to meet you!</td>
-          <td><button onclick="printRow(this)">Print</button></td>
-        </tr>
-      </tbody>
-    </table> -->
+  <table>
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Message</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Jane Doe</td>
+        <td>jane@example.com</td>
+        <td>Hello, this is Jane!</td>
+        <td><button onclick="printRow(this)">Print</button></td>
+      </tr>
+      <tr>
+        <td>John Smith</td>
+        <td>john@example.com</td>
+        <td>Nice to meet you!</td>
+        <td><button onclick="printRow(this)">Print</button></td>
+      </tr>
+    </tbody>
+  </table>
 
-  <!-- <div id="printArea" class="print-area"></div> -->
+  <div id="printArea" class="print-area"></div>
 
-  <form id="adoptionForm">
-    <div class="pa-form-container">
-      <div class="paf-header-and-text">
-        <h2>Adoption Form</h2>
-        <!-- <p></p> -->
-      </div>
+  <h2>Add a Post</h2>
+  <input type="file" id="imageInput" accept="image/*" />
+  <select id="locationSelect">
+    <option value="">-- Select Location --</option>
+    <option value="U.P. Town Center">U.P Town</option>
+    <option value="Monumento Cir">Circle</option>
+    <option value="Eiffel Tower, Paris">Eiffel Tower</option>
+  </select>
+  
+  <button onclick="addPost()">Post</button>
 
-      <div class="inputs-group">
+  <hr>
 
-        <!-- Applicant Info -->
-        <div class="title-and-inputs-group">
-          <h3>Applicant Info</h3>
-          <hr>
-          <div class="label-and-input">
-            <label for="fullname">Full Name</label>
-            <input type="text" id="fullname" name="fullname">
-            <span class="error-message" id="fullnameError"></span>
-          </div>
-          <div class="label-and-input">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email">
-            <span class="error-message" id="emailError"></span>
-          </div>
-          <div class="label-and-input">
-            <label for="contactno">Contact Number</label>
-            <input type="tel" maxlength="11" pattern="\d*" id="contactno" name="contactno"
-              oninput="this.value = this.value.replace(/\D/g, '')">
-            <span class="error-message" id="contactnoError"></span>
-          </div>
-          <div class="label-and-input">
-            <label for="birthdate">Birthdate</label>
-            <input type="text" id="birthdate" name="birthdate" placeholder="Select your birthdate">
-            <span class="error-message" id="birthdateError"></span>
-          </div>
-          <div class="label-and-input">
-            <label for="occupation">Occupation</label>
-            <input type="text" id="occupation" name="occupation">
-            <span class="error-message" id="occupationError"></span>
-          </div>
-          <div class="label-and-input">
-            <label for="address">Address</label>
-            <input type="text" id="address" name="address">
-            <span class="error-message" id="addressError"></span>
-          </div>
-          <div class="label-and-input">
-            <label for="social">Social Media (optional)</label>
-            <input type="text" id="social" name="social">
-            <span class="error-message" id="socialError"></span>
-          </div>
-        </div>
-
-        <div class="title-and-inputs-group">
-          <h3>Living Situation</h3>
-          <hr>
-          <div class="label-and-input">
-            <label>Do you rent?</label>
-            <div class="custom-select-container">
-              <div class="custom-select">
-                <span class="selected">Select</span>
-                <span class="error-message" id="rentError"></span>
-              </div>
-              <ul class="custom-options hidden">
-                <li data-value="yes">Yes</li>
-                <li data-value="no">No</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="title-and-inputs-group">
-          <h3>Building Type</h3>
-          <hr>
-          <div class="label-and-input">
-            <label>Type of Residence</label>
-            <div class="custom-select-container">
-              <div class="custom-select">
-                <span class="selected">Select</span>
-                <span class="error-message" id="residenceTypeError"></span>
-              </div>
-              <ul class="custom-options hidden">
-                <li data-value="house">House</li>
-                <li data-value="condo">Condo</li>
-                <li data-value="apartment">Apartment</li>
-                <li data-value="other">Other</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="title-and-inputs-group">
-          <h3>Adoption Preferences</h3>
-          <hr>
-          <div class="label-and-input">
-            <label>Type of Pet to Adopt</label>
-            <div class="custom-select-container">
-              <div class="custom-select">
-                <span class="selected">Select</span>
-                <span class="error-message" id="petTypeError"></span>
-              </div>
-              <ul class="custom-options hidden">
-                <li data-value="cat">Cat</li>
-                <li data-value="dog">Dog</li>
-                <li data-value="both">Both</li>
-                <li data-value="undecided">Not decided</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Valid ID Upload -->
-        <div class="title-and-inputs-group">
-          <h3>Valid ID (Required)</h3>
-          <hr>
-          <div class="label-and-input">
-            <label for="validid">Upload Valid ID</label>
-            <input type="file" id="validid" name="validid">
-            <span class="error-message" id="valididError"></span>
-          </div>
-        </div>
-
-        <!-- Home Photos Upload -->
-        <div class="title-and-inputs-group">
-          <h3>Home Photos (Required)</h3>
-          <hr>
-          <div class="label-and-input">
-            <label for="housepicFront">House Front Photo</label>
-            <input type="file" id="housepicFront" name="housepic-front">
-            <span class="error-message" id="housepicFrontError"></span>
-          </div>
-          <div class="label-and-input">
-            <label for="housepicLiving">Living Room Photo</label>
-            <input type="file" id="housepicLiving" name="housepic-living">
-            <span class="error-message" id="housepicLivingError"></span>
-          </div>
-          <div class="label-and-input">
-            <label for="housepicYard">Yard/Window Photo (based on pet)</label>
-            <input type="file" id="housepicYard" name="housepic-yard">
-            <span class="error-message" id="housepicYardError"></span>
-          </div>
-        </div>
-
-        <!-- Interview -->
-        <div class="title-and-inputs-group">
-          <h3>Interview</h3>
-          <hr>
-          <div class="label-and-input">
-            <label for="zoomdate">Preferred Zoom Interview Date</label>
-            <input type="text" id="zoomdate" name="zoomdate">
-            <span class="error-message" id="zoomdateError"></span>
-          </div>
-          <div class="label-and-input">
-            <label for="zoomtime">Preferred Time</label>
-            <input type="text" id="zoomtime" name="zoomtime">
-            <span class="error-message" id="zoomtimeError"></span>
-          </div>
-        </div>
-
-        <!-- Shelter visitation -->
-        <div class="title-and-inputs-group">
-          <h3>Visitation</h3>
-          <hr>
-          <div class="label-and-input">
-            <label>Can you visit the shelter?</label>
-            <div class="custom-select-container">
-              <div class="custom-select">
-                <span class="selected">Select</span>
-                <span class="error-message" id="valididError"></span>
-              </div>
-              <ul class="custom-options hidden">
-                <li data-value="yes">Yes</li>
-                <li data-value="no">No</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="button-and-input">
-        <input type="hidden" id="petName" name="petName">
-        <button type="submit">Submit</button>
-      </div>
-    </div>
-  </form>
-
-
-
-  <!-- =========== Warning modal =========== -->
-  <div id="warningModal" class="warning-modal">
-    <div class="modal-content">
-      <!-- Modal body -->
-      <div class="modal-body">
-        <div class="modal-details">
-          <h2 style="color: #C18215;">Warning!</h2>
-          <p>Once you submit the application form, you will not be able to make any further changes.
-            Are you sure you want to proceed?</p>
-
-          <div class="modal-buttons">
-            <button>no</button>
-            <button>yes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <h2>Posts</h2>
+  <div id="postsContainer"></div>
 
 
 

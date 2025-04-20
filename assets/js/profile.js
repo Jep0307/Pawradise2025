@@ -16,13 +16,12 @@ function editProfile() {
         saveButton.style.display = 'flex';
         editButton.style.display = 'none';
     });
-    
 
     saveButton.addEventListener("click", () => {
         warningModal.classList.add('warning-modal-visible');
     });
 
-     confirmButton.addEventListener('click', () => {
+    confirmButton.addEventListener('click', () => {
         saveProfile();
         warningModal.classList.remove('warning-modal-visible');
     });
@@ -31,37 +30,59 @@ function editProfile() {
         warningModal.classList.remove('warning-modal-visible');
     });
 
-
     async function saveProfile() {
         profileInputs.forEach(input => {
             input.disabled = true;
         });
-    
+
         const password = document.querySelector('input[name="password"]').value;
-        const firstname = document.querySelector('input[name="firstname"]').value;
-        const lastname = document.querySelector('input[name="lastname"]').value;
-        const email = document.querySelector('input[name="email"]').value;
-        const number = document.querySelector('input[name="number"]').value;
-        const location = document.querySelector('input[name="location"]').value;
-    
+
         // Update Supabase password if changed
         if (password) {
             const { error: passwordError } = await supabase.auth.updateUser({
                 password: password
             });
-    
+
             if (passwordError) {
                 console.error('Password update failed:', passwordError.message);
                 return;
             }
         }
-    
-       
-    
-        console.log('Profile and password updated.');
+
+        // console.log('Profile and password updated.');
         editButton.style.display = 'flex';
         saveButton.style.display = 'none';
     }
 }
 
 editProfile();
+
+function deleteAccount() {
+    const deleteButton = document.getElementById('deleteBtn');
+    const dangerModal = document.getElementById('dangerModal');
+    const confirmButton = document.getElementById('confirmDeletion');
+    const cancelButton = document.getElementById('cancelDeletion');
+
+    deleteButton.addEventListener("click", () => {
+        dangerModal.classList.add('danger-modal-visible');
+    });
+
+    confirmButton.addEventListener('click', () => {
+        deleteAccountPermanently();
+        dangerModal.classList.remove('danger-modal-visible');
+    });
+
+    cancelButton.addEventListener('click', () => {
+        dangerModal.classList.remove('danger-modal-visible');
+    });
+
+    function deleteAccountPermanently(){
+        console.log("Account deleted successfully!");
+
+        // Your may add the function here for backend on how this account should be deleted.
+        //...
+        //...
+    }
+}
+
+deleteAccount();

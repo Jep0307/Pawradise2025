@@ -1,34 +1,53 @@
+// Function for filtering cards categories
+function filterCards(category) {
+  const cards = document.querySelectorAll(".cards");
+  const buttons = document.querySelectorAll(".categories button");
+  
+  // Highlight the active button
+  buttons.forEach((button) => {
+    button.classList.remove("active");
+  });
+  document.querySelector(`#${category === 'all' ? 'allBtn' : category === 'cat' ? 'CatsBtn' : 'DogsBtn'}`).classList.add("active");
+  
+  // Show or hide cards based on the category
+  cards.forEach((card) => {
+    const cardCategory = card.getAttribute("data-category");
+    if (category === "all" || cardCategory === category) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+
+  closePreview();
+  closePetApplicationForm();
+}
+
 function showPreview(card) {
   const modal = document.getElementById("previewModal");
-
-  closePetApplicationForm();
-
-  // Retrieve data from the clicked card
   const image = card.querySelector("img").src;
   const title = card.querySelector(".header-and-text p:first-child").textContent;
   const sex = card.querySelector(".header-and-text p:nth-child(2)").textContent;
   const location = card.querySelector(".header-and-text p:nth-child(3)").textContent;
   const description = card.querySelector(".header-and-text .description").textContent;
-
+  
   // Update modal content
   document.getElementById("modalImage").src = image;
   document.getElementById("modalTitle").textContent = title;
   document.getElementById("modalPetSex").textContent = sex;
   document.getElementById("modalPetLocation").textContent = location;
   document.getElementById("modalDiscription").textContent = description;
-
+  
   // Show the modal
   modal.style.display = "block";
-
+  
   spaceOnTop();
+  closePetApplicationForm();
 }
 
 function closePreview() {
   document.getElementById("previewModal").style.display = "none";
 }
-
-
-
 
 function spaceOnTop() {
   const modal = document.getElementById("previewModal");
@@ -42,62 +61,29 @@ function spaceOnTop() {
   });
 }
 
-
-
-
-function filterCards(category) {
-  const cards = document.querySelectorAll(".cards");
-  const buttons = document.querySelectorAll(".categories button");
-  closePreview();
-  closePetApplicationForm();
-
-  // Highlight the active button
-  buttons.forEach((button) => {
-    button.classList.remove("active");
-  });
-  document.querySelector(`#${category === 'all' ? 'allBtn' : category === 'cat' ? 'CatsBtn' : 'DogsBtn'}`).classList.add("active");
-
-  // Show or hide cards based on the category
-  cards.forEach((card) => {
-    const cardCategory = card.getAttribute("data-category");
-
-    if (category === "all" || cardCategory === category) {
-      card.style.display = "block"; // Show the card
-    } else {
-      card.style.display = "none"; // Hide the card
-    }
-  });
-}
-
-
-
-
-// Show the application form
+// Function for display pet application form
 function showApplicationForm() {
   const modalTitle = document.getElementById("modalTitle").textContent;
-  document.getElementById("petName").value = modalTitle; // Pass the pet name to the form
-
+  document.getElementById("petName").value = modalTitle;
   document.getElementById("applicationForm").style.display = "flex";
-  document.getElementById("previewModal").style.display = "none"; // Hide the preview modal
+  document.getElementById("previewModal").style.display = "none";
 
   spaceOnTop();
 }
 
-// Close the application form
+// function to close pet application form
 function closePetApplicationForm() {
   document.getElementById("applicationForm").style.display = "none";
 }
 
-
-
-
+// function for pet application form
+// including the validations
 const form = document.getElementById('adoptionForm');
 const fileInputs = form.querySelectorAll('input[type="file"]');
 const textInputs = form.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]');
 
 // --- Custom Select Handling ---
 const customSelectContainers = document.querySelectorAll('.custom-select-container');
-
 customSelectContainers.forEach(container => {
   const select = container.querySelector('.custom-select');
   const options = container.querySelector('.custom-options');
@@ -179,7 +165,7 @@ form.addEventListener('submit', (e) => {
   showWarningModal();
 });
 
-// Modal logic
+// function for Warning modal
 const warningModal = document.getElementById('warningModal');
 const yesButton = warningModal?.querySelector('button:last-of-type');
 const noButton = warningModal?.querySelector('button:first-of-type');
@@ -193,14 +179,17 @@ noButton?.addEventListener('click', () => {
   hideWarningModal();
 });
 
+// Function to show warning modal
 function showWarningModal() {
   warningModal.style.display = 'flex';
 }
 
+// Function to hide warning modal
 function hideWarningModal() {
   warningModal.style.display = 'none';
 }
 
+// Function for pet application submmission
 function finalizeApplicationSubmission() {
   const formData = new FormData(form);
   
@@ -221,52 +210,50 @@ function finalizeApplicationSubmission() {
     dropdownData[label] = value;
   });
 
-  console.log('Form submission preview:');
-  console.log({ applicantData, fileData, dropdownData });
+  // Use this if you want to ensure na may data na lumalabas or na eedit.
+  // console.log('Form submission preview:');
+  // console.log({ applicantData, fileData, dropdownData });
 
   closePetApplicationForm();
 }
 
-
+function searchInput() {
+  const searchInput = document.getElementById('searchInput');
+  const petcardsName = document.querySelectorAll('.cards-container .cards .pet-name');
+  const noFound = document.getElementById('noResultFound');
+  const petCards = document.querySelectorAll('.cards-container .cards');
   
+  searchInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      const searchValue = searchInput.value.toLowerCase();
+      let found = false;
   
-
-
-
-const searchInput = document.getElementById('searchInput');
-const petcardsName = document.querySelectorAll('.cards-container .cards .pet-name');
-const noFound = document.getElementById('noResultFound');
-const petCards = document.querySelectorAll('.cards-container .cards');
-
-searchInput.addEventListener('keypress', (event) => {
-  if (event.key === 'Enter') {
-    const searchValue = searchInput.value.toLowerCase();
-    let found = false;
-
-    petcardsName.forEach(item => {
-      const text = item.textContent.toLowerCase();
-      const card = item.closest('.cards'); // Correctly get the card element
-
-      if (text.includes(searchValue)) {
-        card.style.display = 'block'; // Show matching card
-        found = true;
-        closePreview();
-        closePetApplicationForm();
-        filterCards('all');
+      petcardsName.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        const card = item.closest('.cards');
+  
+        if (text.includes(searchValue)) {
+          card.style.display = 'block';
+          found = true;
+          closePreview();
+          closePetApplicationForm();
+          filterCards('all');
+        } else {
+          card.style.display = 'none';
+        }
+      });
+  
+      if (!found) {
+        noFound.textContent = "No results found";
+        closePreview()
+        closePetApplicationForm()
       } else {
-        card.style.display = 'none'; // Hide non-matching card
+        noFound.textContent = "";
       }
-    });
-
-    if (!found) {
-      noFound.textContent = "No results found";
-      closePreview()
-      closePetApplicationForm()
-    } else {
-      noFound.textContent = ""; // Clear the message if results are found
     }
-  }
-});
+  });
+}
+searchInput();
 
 
 flatpickr("#birthdate", {

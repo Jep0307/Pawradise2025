@@ -7,6 +7,7 @@
   <title>Sign in</title>
 
   <!-- Styles -->
+  <link rel="icon" sizes="48x48" href="../assets/imgs/Logo.svg" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/styles/global.css" />
   <link rel="stylesheet" href="../../assets/styles/auth.css" />
 </head>
@@ -18,6 +19,7 @@
 
         <form class="form signup-form" id="signupForm">
           <div class="form-container">
+
             <!-- Header and text -->
             <div class="auth-header-and-text">
               <h3 class="auth-title">Sign up</h3>
@@ -45,7 +47,8 @@
 
               <div class="auth-label-and-input">
                 <label for="contactno">Contact number</label>
-                <input type="number" id="contactno" name="contactno" />
+                <input type="tel" maxlength="11" pattern="\d*" id="contactno" name="contactno"
+                  oninput="this.value = this.value.replace(/\D/g, '')">
                 <span class="error-message" id="contactnoError"></span>
               </div>
 

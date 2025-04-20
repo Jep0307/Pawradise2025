@@ -50,66 +50,12 @@
 
 .categories button:hover {
   background-color: #eaeaea;
-  border: 1px solid #545454;
 }
 
 .categories button.active {
-  background-color: #545454;
+  background-color: #292929;
   color: white;
 }
-
-/* =========== Pets catalog =========== */
-.cards-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: 8px;
-  row-gap: 16px;
-  width: 100%;
-}
-
-.cards-container .cards {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.cards-container img {
-  width: 350px;
-  /* height: 350px; */
-  object-fit: cover;
-  border-radius: 8px;
-  aspect-ratio: 1/1;
-}
-
-@media screen and (max-width: 500px) {
-  .cards-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.cards-container .description {
-  display: none;
-}
-
-.cards-container p {
-  font-size: clamp(0.813rem, 0.743rem + 0.29vw, 1rem);
-  line-height: clamp(1.125rem, 1.032rem + 0.38vw, 1.375rem);
-  font-weight: 400;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.cards-container .cards p:nth-child(1) {
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: #545454;
-}
-
 
 /* =========== Pets catalogs modal =========== */
 .modal {
@@ -136,11 +82,14 @@
 
 .modal-content .close:hover {
   background-color: #eaeaea;
-  border: 1px solid #545454;
 }
 
-.modal .modal-body .modal-image,
-.modal .modal-body .modal-details {
+.modal #modalImage {
+  border-radius: 12px;
+}
+
+.modal .modal-image,
+.modal .modal-details {
   display: flex;
   flex-direction: column;
   row-gap: 8px;
@@ -175,18 +124,15 @@
 
 .modal button:nth-child(1):hover {
   background-color: #eaeaea;
-  border: 1px solid #545454;
 }
 
 .modal button:nth-child(2) {
-  background-color: #93e2a3;
-  border: 1px solid #93e2a3;
-  color: #095118;
+  background-color: #CD9B44;
+  color: #513709;
 }
 
 .modal button:nth-child(2):hover {
-  background-color: #62d57a;
-  border: 1px solid #095118;
+  background-color: #C18215;
 }
 
 /* =========== Pet application modal =========== */
@@ -282,9 +228,9 @@
 }
 
 .pa-form button {
-  background-color: #93e2a3;
-  border: 1px solid #93e2a3;
-  color: #095118;
+  background-color: #CD9B44;
+  color: #513709;
+  border: none;
 
   transition: all 150ms ease-in-out;
   padding: 12px 24px;
@@ -301,8 +247,7 @@
 }
 
 .pa-form button:hover {
-  background-color: #62d57a;
-  border: 1px solid #095118;
+  background-color: #C18215;
 }
 
 .custom-select-container {
@@ -322,7 +267,6 @@
   border-radius: 12px;
   font-size: clamp(0.813rem, 0.743rem + 0.29vw, 1rem);
   line-height: clamp(1.125rem, 1.032rem + 0.38vw, 1.375rem);
-
   list-style: none;
   z-index: 100;
   overflow: hidden;
@@ -381,7 +325,7 @@
   display: flex;
   column-gap: 8px;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .warning-modal button {
@@ -395,12 +339,10 @@
   line-height: 22px;
   color: #545454;
   transition: all 150ms ease-in-out;
-  width: 100%;
 }
 
 .warning-modal button:nth-child(1):hover {
   background-color: #eaeaea;
-  border: 1px solid #545454;
 }
 
 .warning-modal button:nth-child(2) {
@@ -410,7 +352,57 @@
 
 .warning-modal button:nth-child(2):hover {
   background-color: #d5ab62;
-  border: 1px solid #513709;
+}
+
+/* =========== Pets catalog =========== */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 8px;
+  row-gap: 16px;
+  width: 100%;
+}
+
+.cards-container .cards {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.cards-container img {
+  width: 350px;
+  object-fit: cover;
+  border-radius: 8px;
+  aspect-ratio: 1/1;
+}
+
+@media screen and (max-width: 500px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.cards-container .description {
+  display: none;
+}
+
+.cards-container p {
+  font-size: clamp(0.813rem, 0.743rem + 0.29vw, 1rem);
+  line-height: clamp(1.125rem, 1.032rem + 0.38vw, 1.375rem);
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cards-container .cards p:nth-child(1) {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #545454;
 }
 
 @media screen and (min-width: 700px) {
@@ -458,8 +450,8 @@
     border-radius: 16px;
     border: 1px solid #eaeaea;
   }
+
+  .cards-container {
+    column-gap: 32px;
+  }
 }
-
-@media screen and (min-width: 900px) {}
-
-@media screen and (min-width: 1220px) {}

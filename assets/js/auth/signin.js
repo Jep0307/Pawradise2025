@@ -82,7 +82,6 @@ function isValidEmail(email) {
 
 // Password visibility toggle
 const passwordIcon = document.getElementById("passwordIcon");
-
 passwordIcon.addEventListener("click", () => {
   if (passwordInput.type === "password") {
     passwordInput.type = "text";

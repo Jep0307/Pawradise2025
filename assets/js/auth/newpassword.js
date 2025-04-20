@@ -14,15 +14,19 @@ document.getElementById("newPasswordForm").addEventListener("submit", async (eve
     formMessage.textContent = "New password is required.";
     formMessage.classList.add("error");
     return;
-  } else if (newPassword.length < 6) {
-    formMessage.textContent = "Password must be at least 6 characters.";
+  } else if (
+    newPassword.length < 6 ||
+    !/[A-Z]/.test(newPassword) ||
+    !/[a-z]/.test(newPassword)
+  ) {
+    formMessage.textContent = "contain at least 6 characters, at least 1 upper case letter and at least 1 lower case letter.";
     formMessage.classList.add("error");
     return;
   }
   
   // Validate confirm password
   if (newPassword !== confirmPassword) {
-    formMessage.textContent = "Passwords do not match. Please try again.";
+    formMessage.textContent = "Passwords does not match.";
     formMessage.classList.add("error");
     return;
   }

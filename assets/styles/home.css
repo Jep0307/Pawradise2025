@@ -45,8 +45,7 @@
   line-height: clamp(4.313rem, 3.941rem + 1.52vw, 5.313rem);
 }
 
-.hero-header-and-text h1,
-.cta-header-and-text h1 {
+.hero-header-and-text h1 {
   color: #EAEAEA;
 }
 
@@ -55,7 +54,15 @@
   font-size: clamp(1rem, 0.907rem + 0.38vw, 1.25rem);
   font-weight: 500;
   line-height: clamp(1.375rem, 1.236rem + 0.57vw, 1.75rem);
+}
+
+.hero-header-and-text p {
   color: #E2C693;
+}
+
+.cta-header-and-text {
+  /* color: #E2C693; */
+  max-width: 608px;
 }
 
 .hero-button,
@@ -82,7 +89,14 @@
   background-color: #C18215;
 }
 
-/* Features section */
+/* ========== About section ========== */
+.header-and-text-center {
+  text-align: center;
+  max-width: 608px;
+  margin-inline: auto;
+}
+
+/* ========== Features section ========== */
 .tw-section,
 .tw-section-reverse {
   display: flex;
@@ -98,7 +112,6 @@
 .illustrations {
   object-fit: cover;
   aspect-ratio: 1 / 1;
-  max-width: 500px;
   display: block;
   margin-inline: auto;
 }
@@ -128,25 +141,6 @@
   font-size: clamp(1rem, 0.907rem + 0.38vw, 1.25rem);
   font-weight: 400;
   line-height: clamp(1.375rem, 1.236rem + 0.57vw, 1.75rem);
-}
-
-/* About section */
-.header-and-text-center {
-  text-align: center;
-  max-width: 822px;
-  margin-inline: auto;
-}
-
-/* .header-and-text-center h2 {
-  margin-bottom: 18px;
-  font-size: clamp(2.438rem, 1.927rem + 2.1vw, 3.813rem);
-  font-weight: 700;
-  line-height: clamp(3.438rem, 2.741rem + 2.86vw, 5.313rem);
-} */
-
-/* CTA section */
-.cta-bg {
-  background-color: #513709;
 }
 
 @media screen and (min-width: 700px) {
