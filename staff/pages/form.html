@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PET FORM</title>
+
+    <link rel="stylesheet" href="../assets/styles/form.css" />
+
+    <script defer src="../assets/js/form.js"></script>
+
+  </head>
+
+  <body>
+    <!-- Pet Form -->
+    <form id="addPetForm" enctype="multipart/form-data">
+      <input type="text" name="name" placeholder="Pet Name" required><br>
+      <select name="sex" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select><br>
+      <input type="text" name="location" placeholder="Location" required><br>
+      <textarea name="description" placeholder="Description" required></textarea><br>
+      <input type="file" name="image" accept="image/*" required><br>
+      <button type="submit">Submit</button>
+    </form>
+
+    <!-- Pet Display -->
+    <div id="adoptList"></div>
+
+    <!-- JS here -->
+  </body>
+</html>

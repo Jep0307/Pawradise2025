@@ -1,0 +1,293 @@
+/* ========== Hero section ========== */
+.top-section {
+  padding-bottom: 176px;
+}
+
+.hero-bg {
+  position: relative;
+  background-image: url(../imgs/Hero-img.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+  padding-block: 192px;
+}
+
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0 / 80%);
+  z-index: 1;
+}
+
+.hero-bg .container {
+  position: relative;
+  z-index: 2;
+}
+
+
+.hero-header-and-text,
+.cta-header-and-text {
+  text-align: center;
+  max-width: 877px;
+  margin-inline: auto;
+}
+
+.hero-header-and-text h1,
+.cta-header-and-text h1 {
+  margin-bottom: 16px;
+  font-size: clamp(3.063rem, 2.784rem + 1.14vw, 3.813rem);
+  font-weight: 600;
+  line-height: clamp(4.313rem, 3.941rem + 1.52vw, 5.313rem);
+}
+
+.hero-header-and-text h1 {
+  color: #EAEAEA;
+}
+
+.hero-header-and-text p,
+.cta-header-and-text p {
+  font-size: clamp(1rem, 0.907rem + 0.38vw, 1.25rem);
+  font-weight: 400;
+  line-height: clamp(1.375rem, 1.236rem + 0.57vw, 1.75rem);
+}
+
+.hero-header-and-text p {
+  color: #E2C693;
+}
+
+.cta-header-and-text {
+  /* color: #E2C693; */
+  max-width: 608px;
+}
+
+.hero-button,
+.cta-button,
+.lm-button,
+.sm-button {
+  background-color: #CD9B44;
+  border-radius: 12px;
+  border: none;
+  margin-top: 16px;
+  text-decoration: none;
+  color: #292929;
+  text-align: center;
+  width: max-content;
+  transition: all 150ms ease-in-out;
+  display: block;
+}
+
+.hero-button,
+.cta-button {
+  padding: 16px 24px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  margin-inline: auto;
+}
+
+.lm-button,
+.sm-button {
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+}
+
+.sm-button {
+  margin-inline: auto;
+}
+
+.lm-button {
+  margin-inline: 0;
+}
+
+.lm-button,
+.sm-button,
+.cta-button {
+  box-shadow: 0px 4px 16px rgb(247 247 247);
+}
+
+.hero-button:hover,
+.cta-button:hover,
+.lm-button:hover,
+.sm-button:hover {
+  background-color: #C18215;
+}
+
+/* ========== Quezon City Animal Care and Adoption Center section ========== */
+/* ========== PAWS Animal Rehabilitation Center (PARC) section ========== */
+.tw-section,
+.tw-section-reverse {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.header-and-text-center {
+  text-align: center;
+  max-width: 608px;
+  margin-inline: auto;
+}
+
+.tw-section .content,
+.tw-section-reverse .content {
+  flex: 1;
+}
+
+.illustrations {
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  display: block;
+  margin-inline: auto;
+}
+
+/* .blob-1 {
+  border-radius: 61% 39% 29% 71% / 52% 66% 34% 48%;
+}
+
+.blob-2 {
+  border-radius: 42% 58% 63% 37% / 54% 41% 59% 46%;
+}
+
+.blob-3 {
+  border-radius: 75% 25% 61% 39% / 47% 68% 32% 59%;
+} */
+
+.header-and-text h2,
+.header-and-text-center h2 {
+  margin-bottom: 8px;
+  font-size: clamp(1.938rem, 1.752rem + 0.76vw, 2.438rem);
+  font-weight: 600;
+  line-height: clamp(2.688rem, 2.409rem + 1.14vw, 3.438rem);
+}
+
+.header-and-text p,
+.header-and-text-center p {
+  font-size: clamp(1rem, 0.907rem + 0.38vw, 1.25rem);
+  font-weight: 400;
+  line-height: clamp(1.375rem, 1.236rem + 0.57vw, 1.75rem);
+}
+
+.cards-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 16px;
+  margin-top: 32px;
+}
+
+.cards-container .cards-row {
+  display: flex;
+  row-gap: 16px;
+  flex-direction: column;
+}
+
+.cards-container .cards-row:nth-child(1) {
+  margin-top: -25%;
+}
+
+.cards-container .cards-row:nth-child(2) {
+  margin-top: 25%;
+}
+
+.cards-container .cards {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.cards-container p:nth-child(1) {
+  font-weight: 600;
+  color: #292929;
+}
+
+.cards-container img {
+  width: 350px;
+  object-fit: cover;
+  border-radius: 8px;
+  aspect-ratio: 1/1;
+}
+
+.cards-container .description,
+.cards-container .sex {
+  display: none;
+}
+
+/* ========== Meet Pets Ready for Adoption section ========== */
+.box-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  max-width: 1034px;
+  margin-inline: auto;
+  margin-top: 32px;
+}
+
+.box-container .box {
+  width: calc(50% - 16px);
+  padding: 24px;
+  border-radius: 8px;
+  background-color: #F8EEFF;
+  height: 163px;
+  box-shadow: 0px 4px 16px rgb(247 247 247);
+}
+
+.box-container h3 {
+  font-size: clamp(1.563rem, 1.423rem + 0.57vw, 1.938rem);
+  line-height: clamp(2.188rem, 2.002rem + 0.76vw, 2.688rem);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+
+@media screen and (min-width: 700px) {
+  .hero-bg {
+    padding-block: 288px;
+  }
+
+  .tw-section,
+  .tw-section-reverse {
+    flex-direction: row;
+    align-items: center;
+    column-gap: 20px;
+  }
+
+  .header-and-text h2 {
+    margin-top: 0;
+  }
+
+  .tw-section-reverse {
+    flex-direction: row-reverse;
+  }
+
+  .cards-container .cards-row:nth-child(1) {
+    margin-top: -13%;
+  }
+
+  .cards-container .cards-row:nth-child(2) {
+    margin-top: 13%;
+  }
+
+  .box-container {
+    flex-direction: row;
+  }
+
+  .box-container .box {
+    flex: 1;
+  }
+}
+
+@media screen and (min-width: 900px) {
+
+  .tw-section,
+  .tw-section-reverse {
+    column-gap: 40px;
+  }
+}

@@ -1,0 +1,91 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f9f9f9;
+  margin: 0;
+  padding: 2rem;
+}
+
+form#addPetForm {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+form#addPetForm input,
+form#addPetForm select,
+form#addPetForm textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+form#addPetForm button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+form#addPetForm button:hover {
+  background: #45a049;
+}
+
+#adoptList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.pet-card {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  text-align: center;
+}
+
+.pet-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.pet-card h3 {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.pet-card p {
+  color: #555;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.pet-card button {
+  margin: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.pet-card button:first-of-type {
+  background-color: #2196F3;
+  color: white;
+}
+
+.pet-card button:last-of-type {
+  background-color: #f44336;
+  color: white;
+}

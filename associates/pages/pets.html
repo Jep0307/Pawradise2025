@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pets</title>
+
+  <!-- Styles -->
+  <link rel="icon" sizes="48x48" href="../assets/imgs/Logo.svg" type="image/x-icon">
+  <link rel="stylesheet" href="../assets/styles/global.css" />
+  <link rel="stylesheet" href="../assets/styles/pets.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="nav-container">
+        <div class="nav-content">
+          <div class="logo-and-title">
+            <img loading="lazy" src="../assets/imgs/Logo.svg" alt="Logo" />
+            <p>Pawradise</p>
+          </div>
+          <div class="nav-menu">
+            <ul class="nav-list">
+              <li><a href="./home.html">Home</a></li>
+              <li><a href="./pets.html">Pets</a></li>
+              <li><a href="./map.html">Map</a></li>
+              <li><a href="./status.html">Status</a></li>
+              <li><a href="./profile.html">Profile</a></li>
+              <li class="logout-btn" id="signoutBtn">Logout</li>
+            </ul>
+          </div>
+
+          <div class="nav-humburger">
+            <img loading="lazy" id="menuToggle" src="../assets/imgs/Menu-icon.svg" alt="Open Menu" />
+          </div>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <div class="container">
+        <div class="content">
+          <!-- =========== Search and category =========== -->
+          <div class="search-and-category-container">
+            <!-- Search -->
+            <div class="search-container">
+              <input type="text" placeholder="Search for a pet..." id="searchInput" />
+              <img loading="lazy" src="../assets/imgs/Search-icon.svg" alt="">
+            </div>
+
+            <!-- Categories -->
+            <div class="categories">
+              <button class="active" id="allBtn" onclick="filterCards('all')">All</button>
+              <button id="CatsBtn" onclick="filterCards('cat')">Cats</button>
+              <button id="DogsBtn" onclick="filterCards('dog')">Dogs</button>
+            </div>
+          </div>
+
+          <!-- =========== Pets catalog modal =========== -->
+          <div id="previewModal" class="modal" style="display: none;">
+            <div class="modal-content">
+
+              <!-- Close modal button -->
+              <img class="close" onclick="closePreview()" loading="lazy" src="../assets/imgs/X-icon.svg" alt=""
+                srcset="">
+
+              <!-- Body -->
+              <div class="modal-body">
+                <div class="modal-image">
+                  <img loading="lazy" id="modalImage" src="" alt="">
+                </div>
+
+                <!-- Details -->
+                <div class="modal-details">
+                  <h2 id="modalTitle"></h2>
+                  <p id="modalPetSex"></p>
+                  <p id="modalPetLocation"></p>
+                  <p id="modalDiscription"></p>
+                  <div class="modal-buttons">
+                    <button>Direct me there</button>
+                    <button onclick="showApplicationForm()">Adopt</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- =========== Pet application modal =========== -->
+          <div id="applicationForm" class="application-modal" style="display: none;">
+            <div class="modal-content">
+
+              <!-- Close modal button -->
+              <img class="close" onclick="closePetApplicationForm()" loading="lazy" src="../assets/imgs/X-icon.svg"
+                alt="" srcset="">
+
+              <!-- Pet application form -->
+              <form class="pa-form" id="adoptionForm">
+                <div class="pa-form-container">
+
+                  <!-- Header and text -->
+                  <div class="paf-header-and-text">
+                    <h2>Adoption Form</h2>
+                    <!-- <p></p> -->
+                  </div>
+
+                  <!-- Inputs group -->
+                  <div class="inputs-group">
+                    <!-- Applicant Info -->
+                    <div class="title-and-inputs-group">
+                      <h3>Applicant Info</h3>
+                      <hr>
+                      <div class="label-and-input">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" name="fullname">
+                        <span class="error-message" id="fullnameError"></span>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+                        <span class="error-message" id="emailError"></span>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="contactno">Contact Number</label>
+                        <input type="tel" maxlength="11" pattern="\d*" id="contactno" name="contactno"
+                          oninput="this.value = this.value.replace(/\D/g, '')">
+                        <span class="error-message" id="contactnoError"></span>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="birthdate">Birthdate</label>
+                        <input type="text" id="birthdate" name="birthdate" placeholder="Select your birthdate">
+                        <span class="error-message" id="birthdateError"></span>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="occupation">Occupation</label>
+                        <input type="text" id="occupation" name="occupation">
+                        <span class="error-message" id="occupationError"></span>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" name="address">
+                        <span class="error-message" id="addressError"></span>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="social">Social Media (optional)</label>
+                        <input type="text" id="social" name="social">
+                        <span class="error-message" id="socialError"></span>
+                      </div>
+                    </div>
+
+                    <div class="title-and-inputs-group">
+                      <h3>Living Situation</h3>
+                      <hr>
+                      <div class="label-and-input">
+                        <label>Do you rent?</label>
+                        <div class="custom-select-container">
+                          <div class="custom-select">
+                            <span class="selected">Select</span>
+                          </div>
+                          <ul class="custom-options hidden">
+                            <li data-value="yes">Yes</li>
+                            <li data-value="no">No</li>
+                          </ul>
+                        </div>
+                        <span class="error-message" id="rentError"></span>
+                      </div>
+                    </div>
+
+                    <div class="title-and-inputs-group">
+                      <h3>Building Type</h3>
+                      <hr>
+                      <div class="label-and-input">
+                        <label>Type of Residence</label>
+                        <div class="custom-select-container">
+                          <div class="custom-select">
+                            <span class="selected">Select</span>
+                          </div>
+                          <ul class="custom-options hidden">
+                            <li data-value="house">House</li>
+                            <li data-value="condo">Condo</li>
+                            <li data-value="apartment">Apartment</li>
+                            <li data-value="other">Other</li>
+                          </ul>
+                        </div>
+                        <span class="error-message" id="residenceTypeError"></span>
+                      </div>
+                    </div>
+
+                    <div class="title-and-inputs-group">
+                      <h3>Adoption Preferences</h3>
+                      <hr>
+                      <div class="label-and-input">
+                        <label>Type of Pet to Adopt</label>
+                        <div class="custom-select-container">
+                          <div class="custom-select">
+                            <span class="selected">Select</span>
+                          </div>
+                          <ul class="custom-options hidden">
+                            <li data-value="cat">Cat</li>
+                            <li data-value="dog">Dog</li>
+                            <li data-value="both">Both</li>
+                            <li data-value="undecided">Not decided</li>
+                          </ul>
+                        </div>
+                        <span class="error-message" id="petTypeError"></span>
+                      </div>
+                    </div>
+
+                    <!-- Valid ID Upload -->
+                    <div class="title-and-inputs-group">
+                      <h3>Valid ID (Required)</h3>
+                      <hr>
+                      <div class="label-and-input">
+                        <label for="validid">Upload Valid ID</label>
+                        <input type="file" id="validid" name="validid">
+                        <span class="error-message" id="valididError"></span>
+                      </div>
+                    </div>
+
+                    <!-- Home Photos Upload -->
+                    <div class="title-and-inputs-group">
+                      <h3>Home Photos (Required)</h3>
+                      <hr>
+                      <div class="label-and-input">
+                        <label for="housepicFront">House Front Photo</label>
+                        <input type="file" id="housepicFront" name="housepic-front">
+                        <span class="error-message" id="housepicFrontError"></span>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="housepicLiving">Living Room Photo</label>
+                        <input type="file" id="housepicLiving" name="housepic-living">
+                        <span class="error-message" id="housepicLivingError"></span>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="housepicYard">Yard/Window Photo (based on pet)</label>
+                        <input type="file" id="housepicYard" name="housepic-yard">
+                        <span class="error-message" id="housepicYardError"></span>
+                      </div>
+                    </div>
+
+                    <!-- Interview -->
+                    <div class="title-and-inputs-group">
+                      <h3>Interview</h3>
+                      <hr>
+                      <div class="label-and-input">
+                        <label for="zoomdate">Preferred Zoom Interview Date</label>
+                        <input type="text" id="zoomdate" name="zoomdate">
+                        <span class="error-message" id="zoomdateError"></span>
+                      </div>
+                      <div class="label-and-input">
+                        <label for="zoomtime">Preferred Time</label>
+                        <input type="text" id="zoomtime" name="zoomtime">
+                        <span class="error-message" id="zoomtimeError"></span>
+                      </div>
+                    </div>
+
+                    <!-- Shelter visitation -->
+                    <div class="title-and-inputs-group">
+                      <h3>Visitation</h3>
+                      <hr>
+                      <div class="label-and-input">
+                        <label>Can you visit the shelter?</label>
+                        <div class="custom-select-container">
+                          <div class="custom-select">
+                            <span class="selected">Select</span>
+                          </div>
+                          <ul class="custom-options hidden">
+                            <li data-value="yes">Yes</li>
+                            <li data-value="no">No</li>
+                          </ul>
+                        </div>
+                        <span class="error-message" id="shelterVisitError"></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Buttons group -->
+                  <div class="buttons-group">
+                    <input type="hidden" id="petName" name="petName">
+                    <button type="submit">Submit</button>
+                  </div>
+                </div>
+              </form>
+
+
+            </div>
+          </div>
+
+          <!-- =========== Warning modal =========== -->
+          <div id="warningModal" class="warning-modal">
+            <div class="modal-content">
+              <!-- Modal body -->
+              <div class="modal-body">
+                <div class="modal-details">
+                  <h2 style="color: #C18215;">Warning!</h2>
+                  <p>Once you submit the application form, you will not be able to make any further changes.
+                    Are you sure you want to proceed?</p>
+
+                  <div class="modal-buttons">
+                    <button>no</button>
+                    <button>yes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- =========== Pets catalogs =========== -->
+          <span id="noResultFound"></span>
+          <div class="cards-container" id="petsContainer">
+
+            <!-- <div class="cards" data-category="cat" onclick="showPreview(this)">
+              <img loading="lazy" src="../assets/imgs/Animal1.png" alt="cat">
+              <div class="header-and-text">
+                <p class="pet-name">Name</p>
+                <p>Sex</p>
+                <p>Location</p>
+                <p class="description">Name is a playful and friendly cat who loves to cuddle.</p>
+              </div>
+            </div>
+
+            <div class="cards" data-category="dog" onclick="showPreview(this)">
+              <img loading="lazy" src="../assets/imgs/Animal2.png" alt="dog">
+              <div class="header-and-text">
+                <p class="pet-name">Name</p>
+                <p>Sex</p>
+                <p>Location</p>
+                <p class="description">Name is an energetic dog who enjoys long walks and playing fetch.</p>
+              </div>
+            </div>
+
+            <div class="cards" data-category="cat" onclick="showPreview(this)">
+              <img loading="lazy" src="../assets/imgs/Animal3.png" alt="cat">
+              <div class="header-and-text">
+                <p class="pet-name">Name</p>
+                <p>Sex</p>
+                <p>Location</p>
+                <p class="description">Name is a curious cat who loves exploring and climbing.</p>
+              </div>
+            </div>
+            <div class="cards" data-category="dog" onclick="showPreview(this)">
+              <img loading="lazy" src="../assets/imgs/Animal4.png" alt="dog">
+              <div class="header-and-text">
+                <p class="pet-name">Name</p>
+                <p>Sex</p>
+                <p>Location</p>
+                <p class="description">Name is a playful and friendly cat who loves to cuddle.</p>
+              </div>
+            </div>
+
+            <div class="cards" data-category="dog" onclick="showPreview(this)">
+              <img loading="lazy" src="../assets/imgs/Animal5.png" alt="dog">
+              <div class="header-and-text">
+                <p class="pet-name">Name</p>
+                <p>Sex</p>
+                <p>Location</p>
+                <p class="description">Name is an energetic dog who enjoys long walks and playing fetch.</p>
+              </div>
+            </div>
+
+            <div class="cards" data-category="cat" onclick="showPreview(this)">
+              <img loading="lazy" src="../assets/imgs/Animal6.png" alt="cat">
+              <div class="header-and-text">
+                <p class="pet-name">puppy</p>
+                <p>Sex</p>
+                <p>Location</p>
+                <p class="description">Name is a playful and friendly cat who loves to cuddle.</p>
+              </div>
+            </div>
+
+            <div class="cards" data-category="dog" onclick="showPreview(this)">
+              <img loading="lazy" src="../assets/imgs/Animal7.png" alt="dog">
+              <div class="header-and-text">
+                <p class="pet-name">Name</p>
+                <p>Sex</p>
+                <p>Location</p>
+                <p class="description">Name is an energetic dog who enjoys long walks and playing fetch.</p>
+              </div>
+            </div>
+
+            <div class="cards" data-category="dog" onclick="showPreview(this)">
+              <img loading="lazy" src="../assets/imgs/Animal8.png" alt="dog">
+              <div class="header-and-text">
+                <p class="pet-name">Name</p>
+                <p>Sex</p>
+                <p>Location</p>
+                <p class="description">Name is a curious cat who loves exploring and climbing.</p>
+              </div>
+            </div>
+            <div class="cards" data-category="cat" onclick="showPreview(this)">
+              <img loading="lazy" src="../assets/imgs/Animal9.png" alt="cat">
+              <div class="header-and-text">
+                <p class="pet-name">snake</p>
+                <p>Sex</p>
+                <p>Location</p>
+                <p class="description">Name is a playful and friendly cat who loves to cuddle.</p>
+              </div>
+            </div>
+
+            <div class="cards" data-category="cat" onclick="showPreview(this)">
+              <img loading="lazy" src="../assets/imgs/Animal10.png" alt="dog">
+              <div class="header-and-text">
+                <p class="pet-name">Name</p>
+                <p>Sex</p>
+                <p>Location</p>
+                <p class="description">Name is an energetic dog who enjoys long walks and playing fetch.</p>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="content">
+        <div class="logo-and-title">
+          <img loading="lazy" src="../assets/imgs/Logo.svg" alt="Logo" />
+          <p>Pawradise</p>
+        </div>
+        <div class="menu">
+          <ul>
+            <li><a href="./home.html">Home</a></li>
+            <li><a href="./adopt.html">Adopt</a></li>
+            <li><a href="./map.html">Map</a></li>
+            <li><a href="./status.html">Status</a></li>
+            <li><a href="./profile.html">Profile</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copy-rights">
+        <p>© 2025 Pawradise. All rights reserved.</p>
+      </div>
+    </div>
+    </div>
+  </footer>
+
+  <!-- Modules -->
+  <script type="module" src="../assets/js/auth/config.js"></script>
+  <script type="module" src="../assets/js/auth/signout.js"></script>
+
+  <!-- Scripts -->
+  <script defer src="../assets/js/home.js"></script>
+  <script defer src="../assets/js/pets.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script defer src="../assets/js/adopt.js"></script>
+</body>
+
+</html>

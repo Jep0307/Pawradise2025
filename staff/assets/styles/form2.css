@@ -1,0 +1,320 @@
+/* GENERAL RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* BODY */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f2f2f2;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+  position: fixed;
+  top: 0;
+  left: 80px;
+  right: 0;
+  height: 60px;
+  background-color: #e6e6e6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  z-index: 900;
+  border-bottom: 1px solid #ccc;
+  width: calc(100% - 80px);
+  transition: left 0.3s ease, width 0.3s ease;
+}
+
+.pet-management {
+  font-size: 18px;
+  font-weight: bold;
+  color: #7AA34B;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #d9d9d9;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  padding-left: 0.5rem;
+  outline: none;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 100vh;
+  background-color: #2C3C2F;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: width 0.3s;
+}
+
+.sidebar:hover {
+  width: 200px;
+}
+
+.sidebar:hover ~ .body {
+  margin-left: 200px; /* match expanded width */
+  width: calc(100% - 200px);
+}
+
+.sidebar:hover ~ .header {
+  left: 200px;
+  width: calc(100% - 200px);
+}
+
+.sidebar:hover .logo-text {
+  display: inline;
+}
+
+.sidebar:hover .nav-text {
+  display: inline;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 1rem;
+  width: 100%;
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+}
+
+.logo-text {
+  color: white;
+  font-weight: bold;
+  display: none;
+}
+
+.sidebar-nav {
+  width: 100%;
+}
+
+.nav-item {
+  color: white;
+  text-decoration: none;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s;
+}
+
+.nav-item:hover {
+  background-color: #3e5643;
+}
+
+.nav-text {
+  display: none;
+}
+
+/* MAIN BODY */
+.body {
+  margin-left: 80px;
+  margin-top: 60px;
+  padding: 2rem;
+  width: calc(100% - 80px);
+  transition: margin-left 0.3s ease;
+}
+
+/* TABLE STYLING */
+.table {
+  background: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 50px 80px 1fr 1fr 1fr 2fr 100px 120px;
+  padding: 1rem;
+  font-weight: bold;
+  background-color: #7AA34B;
+  color: white;
+}
+
+#adoptList .row {
+  font-weight: normal;
+  background-color: #fff;
+  color: black;
+  border-bottom: 1px solid #ccc;
+}
+
+.cols {
+  padding: 0.5rem;
+}
+
+/* Restrict and wrap text for name and description columns */
+
+.row .cols:nth-child(6),
+.row .cols:nth-child(3) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.row .cols.edit {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  padding: 4px 8px;
+}
+
+.pet-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.row .cols button {
+  margin: 2px;
+  padding: 4px 8px;
+  background-color: #7AA34B;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.row .cols:last-child {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  padding: 4px 8px;
+  justify-content: flex-end;
+  min-width: 120px;
+  overflow: hidden;
+}
+
+
+
+
+.row .cols button:hover {
+  background-color: #66853c;
+}
+
+
+/* ADD PET BUTTON */
+#openFormBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #7AA34B;
+  color: white;
+  padding: 0.75rem 1.25rem;
+  margin-top: 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+#openFormBtn:hover {
+  background-color: #66853c;
+}
+
+#petFormModal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.4); /* translucent background */
+  justify-content: center;
+  align-items: center;
+}
+
+#petFormModal .modal-content {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 2px solid #88b04b;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  font-family: 'Poppins', sans-serif;
+}
+
+#petFormModal h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #4a4a4a;
+}
+
+#petFormModal form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#petFormModal input[type="text"],
+#petFormModal textarea,
+#petFormModal select {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  resize: vertical;
+}
+
+#petFormModal button {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#petFormModal .save-btn {
+  background-color: #88b04b;
+  color: white;
+}
+
+#petFormModal .cancel-btn {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+#petFormModal .button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pet Management</title>
+  <link rel="stylesheet" href="../assets/styles/form2.css" />
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <!-- <img class="logo" src="pawradise-logo-30.png" alt="Pawradise logo" /> -->
+      <span class="logo-text">Pawradise</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="divider"></div>
+      <section class="nav-section">
+        <a href="#" class="nav-item">
+          <svg class="nav-icon" width="24" height="24" fill="none"><path d="M12 16L18 24H6L12 16Z" stroke="white" /></svg>
+          <span class="nav-text">Shelter</span>
+        </a>
+        <a href="#" class="nav-item">
+          <svg class="nav-icon" width="24" height="24" fill="none"><circle cx="12" cy="7" r="5" stroke="white"/><path d="M3 22c0-3 4-6 9-6s9 3 9 6" stroke="white"/></svg>
+          <span class="nav-text">Pet Management</span>
+        </a>
+      </section>
+      <div class="divider"></div>
+      <section class="nav-section">
+        <a href="#" class="nav-item">
+          <svg class="nav-icon" width="24" height="24" fill="none"><path d="M12 12C15 12 18 15 18 18H6C6 15 9 12 12 12Z" stroke="white"/><circle cx="12" cy="6" r="4" stroke="white"/></svg>
+          <span class="nav-text">Profile</span>
+        </a>
+        <a href="#" class="nav-item">
+          <svg class="nav-icon" width="24" height="24" fill="none"><path d="M8 24H2.67C2 24 1.33 23.33 1.33 22.67V1.33C1.33 0.67 2 0 2.67 0H8M17.33 18.67L24 12M24 12L17.33 5.33M24 12H8" stroke="white"/></svg>
+          <span class="nav-text">Logout</span>
+        </a>
+      </section>
+    </nav>
+  </aside>
+
+  <header class="header">
+    <div class="pet-management">PET MANAGEMENT</div>
+    <div class="search-container">
+      <div class="search-input-wrapper">
+        <input type="text" class="search-input" placeholder="Search..." />
+        <button id="searchBtn" style="background: none; border: none; cursor: pointer;">
+          <svg class="search-icon" width="15" height="15" ...>...</svg>
+        </button>
+      </div>
+    </div>    
+  </header>
+
+  <main class="body">
+    <section class="filter">
+      <div class="content">
+        <div class="table">
+          <!-- Table Header -->
+          <div class="row">
+            <div class="cols">Id</div>
+            <div class="cols">Image</div>
+            <div class="cols">Name</div>
+            <div class="cols">Type</div>
+            <div class="cols">Shelter</div>
+            <div class="cols">Description</div>
+            <div class="cols">Date</div>
+            <div class="cols">Edit</div>
+          </div>
+
+          <!-- Pet rows will be injected here -->
+          <div id="adoptList"></div>
+
+          <!-- Add Pet Button -->
+          <div class="frame-21" id="openFormBtn" style="cursor: pointer;">
+            <svg class="vector2" width="20" height="20" fill="none" viewBox="0 0 20 20">
+              <path d="M6 10H14M10 6V14M20 10C20 15.52 15.52 20 10 20C4.48 20 0 15.52 0 10C0 4.48 4.48 0 10 0C15.52 0 20 4.48 20 10Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <div class="add-a-pet">Add a pet</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Floating Form Modal -->
+  <div id="petFormModal">
+    <div class="modal-content"> 
+        <h2 id="formTitle">Add a Pet</h2>
+        <form id="addPetForm" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Pet Name" required />
+        <select name="sex" required>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+        <textarea name="description" placeholder="Description" rows="4" required></textarea>
+        <select name="location" required>
+          <option value="Paws">Paws</option>
+          <option value="Quezon City Pound">QC Pound</option>
+        </select>
+        <input type="file" name="image" accept="image/*" id="imageInput" />
+        <div class="button-row">
+          <button type="submit" class="save-btn">Save</button>
+          <button type="button" id="cancelButton" class="cancel-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../assets/js/form.js"></script>
+</body>
+</html>
