@@ -5,6 +5,6 @@ if (isset($_SESSION['admin_email'])) {
   header("Location: tabs/dashboard.php");
   exit();
 } else {
-  header("Location: components/login.php");
+  header("Location: login.php");
   exit();
 }

@@ -1,9 +1,30 @@
+<?php
+include '../components/db_connect.php';
+
+$admin_email = $_SESSION['admin_email'] ?? 'admin@gmail.com';
+
+$sql = "SELECT name, email, admin_img FROM admins WHERE email = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $admin_email);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$admin = $result->fetch_assoc();
+
+$adminName = $admin['name'] ?? 'Admin';
+$adminEmail = $admin['email'] ?? 'admin@gmail.com';
+$adminImage = $admin['admin_img'] ?? null;
+
+$profileImgSrc = $adminImage ? 'data:image/jpeg;base64,' . base64_encode($adminImage) : '../images/profile.png';
+?>
+
 <aside class="sidebar">
     <div class="sidebar-header">
-        <img src="../images/profile.png" alt="logo" />
+        <img src="<?= $_SESSION['admin_img'] ? 'data:image/jpeg;base64,' . base64_encode($_SESSION['admin_img']) : '../images/profile.png' ?>"
+            alt="Admin Image" />
         <div>
-            <h2>Admin System</h2>
-            <p class="admin-email">admin@gmail.com</p>
+            <h2><?= htmlspecialchars($adminName) ?></h2>
+            <p class="admin-email"><?= htmlspecialchars($adminEmail) ?></p>
         </div>
     </div>
     <ul class="sidebar-links">
@@ -27,8 +48,8 @@
                 </span>Staffs</a>
         </li>
         <li>
-            <a href="../tabs/staff-admins-management.php"><span class="material-symbols-outlined"> shield_person
-                </span>Staff-Admins</a>
+            <a href="../tabs/staff-admins-management.php"><span class="material-symbols-outlined"> person_4
+                </span>Staff Admins</a>
         </li>
         <li>
             <a href="../tabs/shelters-management.php"><span class="material-symbols-outlined"> map </span>Shelters</a>

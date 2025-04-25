@@ -1,12 +1,18 @@
 <?php
 include '../components/db_connect.php';
+include '../components/session.php';
 include '../components/popup.php';
 
-$query = "SELECT * FROM users_table"; 
-$result = mysqli_query($conn, $query);
+if (!isset($_SESSION['admin_email'])) {
+    header("Location: ../login.php");
+    exit();
+}
+
+$sql = "SELECT * FROM user_profiles"; 
+$result = $conn->query($sql);
 
 if (!$result) {
-    die("Database query failed: " . mysqli_error($conn));
+    die("Database query failed: " . $conn->error);
 }
 
 if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
@@ -15,6 +21,12 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
     displayPopup("Something went wrong. Please try again.", 'error');
 }
 
+$users_table = [];
+while ($row = $result->fetch_assoc()) {
+    $users_table[] = $row;
+}
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -50,17 +62,17 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                 <div class="header">
                     <h1>User Accounts Management</h1>
                     <p class="subtitle">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Create, edit, and delete user information
                     </p>
                 </div>
                 <div class="top-buttons">
                     <select name="sort" id="" class="sort-input">
-                        <option value="sort" disabled selected>Sort</option>
+                        <option value="" disabled selected>Sort</option>
                         <option value="alphabetical">Alphabetical</option>
                         <option value="newest">Newest</option>
                     </select>
                     <a href="../components/add-user.php" class="add-btn"><span
-                            class="material-symbols-outlined">add</span>Add User</a>
+                            class="material-symbols-outlined">add</span>Add Entry</a>
                 </div>
             </div>
 
@@ -80,32 +92,35 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                         <th>EMAIL</th>
                         <th>PHONE</th>
                         <th>ADDRESS</th>
+                        <th>GENDER</th>
+                        <th>BIRTHDATE</th>
                         <th>CREATED</th>
                         <th></th>
                     </tr>
+
                     <?php
-                    if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        // Convert image blob to base64
-                        $imageData = base64_encode($row['user_img']);
-                        $imageSrc = 'data:image/jpeg;base64,' . $imageData;
+                    if (count($users_table) > 0):
+                        foreach($users_table as $row):
+                        $imageSrc = !empty($row['user_img']) ? 'data:image/jpeg;base64,' . base64_encode($row['user_img']) : './images/default.png';
 
                         echo "<tr>";
-                        echo "<td>{$row['id']}</td>";
+                        echo "<td>".$row['user_id']."</td>";
                         echo "<td><img src='{$imageSrc}' alt='User Image' width='50' /></td>";
-                        echo "<td>{$row['username']}</td>";
-                        echo "<td>{$row['fullname']}</td>";
-                        echo "<td>{$row['bio']}</td>";
-                        echo "<td>{$row['email']}</td>";
-                        echo "<td>{$row['phone']}</td>"; // You can show actual number if desired
-                        echo "<td>{$row['address']}</td>";
-                        echo "<td>{$row['created_at']}</td>";
+                        echo "<td>".$row['username']."</td>";
+                        echo "<td>".$row['fullname']."</td>";
+                        echo "<td>".$row['bio']."</td>";
+                        echo "<td class='text-overflow'>".$row['email']."</td>";
+                        echo "<td>".$row['phone']."</td>";
+                        echo "<td class='text-overflow'>".$row['address']."</td>";
+                        echo "<td>".$row['gender']."</td>";
+                        echo "<td>".$row['birthdate']."</td>";
+                        echo "<td>".$row['created_at']."</td>";
                         echo "<td class='options-btn'>
                                 <span class='material-symbols-outlined'>edit</span>
                                 <div class='pop-up'>
-                                    <a href='../components/edit-user.php?id={$row['id']}'><span class='material-symbols-outlined'>edit</span>Edit</a>
+                                    <a href='../components/edit-user.php?user_id={$row['user_id']}'><span class='material-symbols-outlined'>edit</span>Edit</a>
                                     <form action='../components/delete-user.php' method='POST' onsubmit='return confirm(\"Are you sure you want to delete this user?\");'>
-                                        <input type='hidden' name='user_id' value='{$row['id']}'>
+                                        <input type='hidden' name='user_id' value='{$row['user_id']}'>
                                         <button type='submit' class='delete-btn'>
                                             <span class='material-symbols-outlined'>delete</span>Delete
                                         </button>
@@ -113,15 +128,11 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                                 </div>
                               </td>";
                         echo "</tr>";                        
-            }
-            } else {
-            echo "<tr>
-                <td colspan='10'>No users found.</td>
-            </tr>";
-            }
-
-            $conn->close();
-            ?>
+                    endforeach;
+                    ?>
+                    <?php else: ?>
+                    <p>No available data</p>
+                    <?php endif; ?>
                 </table>
             </div>
         </div>

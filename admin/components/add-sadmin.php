@@ -12,10 +12,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = [];
 
     $fullname = sanitize($_POST['fullname']);
-    $username = sanitize($_POST['username']);
-    $bio = sanitize($_POST['bio']);
     $email = sanitize($_POST['email']);
     $phone = sanitize($_POST['phone']);
+    $shelter = sanitize($_POST['shelter']);
     $address = sanitize($_POST['address']);
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -26,23 +25,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Phone number should be numeric and 7–15 digits.";
     }
 
-    if (empty($fullname) || empty($username) || empty($email) || empty($phone)) {
+    if (empty($fullname) || empty($email) || empty($phone) || empty($shelter) || empty($address)) {
         $errors[] = "Please fill in all required fields.";
     }
 
     if (count($errors) === 0) {
-        $user_img = !empty($_FILES["photo"]["tmp_name"])
+        $sadmin_img = !empty($_FILES["photo"]["tmp_name"])
             ? file_get_contents($_FILES["photo"]["tmp_name"])
             : file_get_contents("../images/default.png");
 
-        $stmt = $conn->prepare("INSERT INTO user_profiles (fullname, username, bio, email, phone, address, user_img) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssss", $fullname, $username, $bio, $email, $phone, $address, $user_img);
-        $stmt->send_long_data(6, $user_img);
+        $stmt = $conn->prepare("INSERT INTO staff_admins (fullname, email, shelter, phone, address, sadmin_img) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $fullname,  $email, $shelter, $phone, $address, $sadmin_img);
+        $stmt->send_long_data(6, $sadmin_img);
 
         if ($stmt->execute()) {
             $newUserId = $stmt->insert_id;
             $admin_id = $_SESSION['admin_id'];
-            log_action($conn, $admin_id, "Added new user", "user", $newUserId, "Username: $username");
+            log_action($conn, $admin_id, "Added new staff", "staff", $newUserId, "Name: $fullname");
             displayPopup("User added successfully.");
         } else {
             displayPopup("Database error: " . $stmt->error, 'error');
@@ -78,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <section class="user-mgmt-section" style="margin-left: 85px">
         <div class="breadcrumbs">
             <div class="left">
-                <p>Admin > <span>ADD USER</span></p>
+                <p>Admin > <span>ADD STAFF ADMIN</span></p>
             </div>
 
             <div class="right">
@@ -86,12 +85,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
 
-        <form class="user-mgmt-container" method="POST" action="add-user.php" enctype="multipart/form-data">
+        <form class="user-mgmt-container" method="POST" action="add-sadmin.php" enctype="multipart/form-data">
             <div class="user-mgmt-top-panel">
                 <div class="header">
-                    <h1>Add User</h1>
+                    <h1>Add Staff Admin</h1>
                     <p class="subtitle">
-                        Add a user. Fill all the required details
+                        Add a staff admin member. Fill all the required details
                     </p>
                 </div>
                 <div class="top-buttons">
@@ -109,13 +108,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
                 <div class="right-panel">
-                    <h3>User Info</h3>
+                    <h3>Staff Info</h3>
                     <div class="input-division">
                         <input type="text" name="fullname" placeholder="Full Name" required />
-                        <input type="text" name="username" placeholder="Username" required />
-                        <input type="text" name="bio" placeholder="Bio" />
                         <input type="email" name="email" placeholder="Email" required />
                         <input type="number" name="phone" placeholder="Phone Number" required />
+                        <input type="text" name="role" placeholder="Role" required />
+                        <input type="text" name="shelter" placeholder="Shelter" required />
                         <input type="text" name="address" placeholder="Address" />
                     </div>
                 </div>

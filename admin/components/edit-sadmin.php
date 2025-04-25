@@ -8,14 +8,23 @@ function sanitize($data) {
     return htmlspecialchars(trim($data));
 }
 
+$sadmin_id = $_GET['sadmin_id'];
+$sql="SELECT * FROM staff_admins WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $sadmin_id);
+$stmt->execute();
+$staff_result = $stmt->get_result();
+$user = $staff_result->fetch_assoc();
+$stmt->close();
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = [];
 
     $fullname = sanitize($_POST['fullname']);
-    $username = sanitize($_POST['username']);
-    $bio = sanitize($_POST['bio']);
     $email = sanitize($_POST['email']);
     $phone = sanitize($_POST['phone']);
+    $shelter = sanitize($_POST['shelter']);
     $address = sanitize($_POST['address']);
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -26,36 +35,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Phone number should be numeric and 7–15 digits.";
     }
 
-    if (empty($fullname) || empty($username) || empty($email) || empty($phone)) {
+    if (empty($fullname) || empty($email) || empty($phone) || empty($shelter) || empty($address)) {
         $errors[] = "Please fill in all required fields.";
     }
 
     if (count($errors) === 0) {
-        $user_img = !empty($_FILES["photo"]["tmp_name"])
-            ? file_get_contents($_FILES["photo"]["tmp_name"])
-            : file_get_contents("../images/default.png");
+        if (!empty($_FILES["photo"]["tmp_name"])) {
+            $sadmin_img = file_get_contents($_FILES["photo"]["tmp_name"]);
+        } else {
+            $sadmin_img = $user['sadmin_img'];
+        }
 
-        $stmt = $conn->prepare("INSERT INTO user_profiles (fullname, username, bio, email, phone, address, user_img) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssss", $fullname, $username, $bio, $email, $phone, $address, $user_img);
-        $stmt->send_long_data(6, $user_img);
-
+        $stmt = $conn->prepare("UPDATE staff_admins SET fullname = ?, email = ?, phone = ?, shelter = ?, address = ?, sadmin_img = ? WHERE id = ?");
+        $stmt->bind_param(
+            "ssssssi",
+            $fullname, $email, $phone,  $shelter, $address, $sadmin_img, $sadmin_id
+        );
         if ($stmt->execute()) {
-            $newUserId = $stmt->insert_id;
             $admin_id = $_SESSION['admin_id'];
-            log_action($conn, $admin_id, "Added new user", "user", $newUserId, "Username: $username");
-            displayPopup("User added successfully.");
+            log_action($conn, $admin_id, "Edited staff profile", "staff", $sadmin_id, "Username: $fullname");
+            displayPopup("User updated successfully.");
         } else {
             displayPopup("Database error: " . $stmt->error, 'error');
         }
 
         $stmt->close();
-        $conn->close();
+
+        $sql = "SELECT * FROM staffs WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $sadmin_id);
+        $stmt->execute();
+        $staff_result = $stmt->get_result();
+        $user = $staff_result->fetch_assoc();
+        $stmt->close();
+
+        $sadmin_id = $_GET['sadmin_id'];
+        $sql="SELECT * FROM staff_admins WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $sadmin_id);
+        $stmt->execute();
+        $staff_result = $stmt->get_result();
+        $user = $staff_result->fetch_assoc();
+        $stmt->close();
+
     } else {
         foreach ($errors as $error) {
             displayPopup("$error", 'error');
         }
     }
 }
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add User</title>
+    <title>Edit User</title>
     <link rel="stylesheet" href="../styles.css" />
     <link rel="stylesheet" href="../general.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
@@ -78,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <section class="user-mgmt-section" style="margin-left: 85px">
         <div class="breadcrumbs">
             <div class="left">
-                <p>Admin > <span>ADD USER</span></p>
+                <p>Admin > <span>Edit User</span></p>
             </div>
 
             <div class="right">
@@ -86,37 +116,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
 
-        <form class="user-mgmt-container" method="POST" action="add-user.php" enctype="multipart/form-data">
+        <form class="user-mgmt-container" method="POST" action="edit-sadmin.php?sadmin_id=<?php echo $sadmin_id; ?>"
+            enctype="multipart/form-data">
             <div class="user-mgmt-top-panel">
                 <div class="header">
-                    <h1>Add User</h1>
+                    <h1>Edit User</h1>
                     <p class="subtitle">
-                        Add a user. Fill all the required details
+                        Update user information and photo.
                     </p>
                 </div>
                 <div class="top-buttons">
                     <button class="add-btn">
-                        <span class="material-symbols-outlined">add</span> Add User</button>
+                        <span class="material-symbols-outlined">edit</span> Save Changes</button>
                 </div>
             </div>
 
             <div class="user-mgmt-bottom-panel">
                 <div class="user-mgmt-left-panel">
-                    <img src="../images/default.png" alt="" class="user-profile-photo" id="preview-image">
+                    <img src="<?php echo empty($user['sadmin_img']) 
+                    ? '../images/default.png' 
+                    : 'data:image/png;base64,' . base64_encode($user['sadmin_img']); ?>" alt=""
+                        class="user-profile-photo" id="preview-image">
+
                     <input type="file" name="photo" accept="image/*" id="photo-input" style="display: none;" />
                     <button type="button" class="add-photo-btn"
-                        onclick="document.getElementById('photo-input').click();">Add Photo</button>
+                        onclick="document.getElementById('photo-input').click();">Change Photo</button>
                 </div>
 
                 <div class="right-panel">
                     <h3>User Info</h3>
                     <div class="input-division">
-                        <input type="text" name="fullname" placeholder="Full Name" required />
-                        <input type="text" name="username" placeholder="Username" required />
-                        <input type="text" name="bio" placeholder="Bio" />
-                        <input type="email" name="email" placeholder="Email" required />
-                        <input type="number" name="phone" placeholder="Phone Number" required />
-                        <input type="text" name="address" placeholder="Address" />
+                        <input type="text" name="fullname" value="<?php echo htmlspecialchars($user['fullname']); ?>"
+                            placeholder="Full Name" required />
+                        <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>"
+                            placeholder="Email" required />
+                        <input type="number" name="phone" value="<?php echo htmlspecialchars($user['phone']); ?>"
+                            placeholder="Phone Number" required />
+                        <input type="text" name="shelter" value="<?php echo htmlspecialchars($user['shelter']); ?>"
+                            placeholder="Shelter" required />
+                        <input type="text" name="address" value="<?php echo htmlspecialchars($user['address']); ?>"
+                            placeholder="Address" />
                     </div>
                 </div>
             </div>

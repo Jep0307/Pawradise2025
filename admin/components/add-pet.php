@@ -1,3 +1,92 @@
+<?php
+include '../components/db_connect.php';
+include '../components/session.php';
+include '../components/popup.php';
+include '../components/logger.php';
+
+if (!isset($_SESSION['admin_email'])) {
+    header("Location: ../login.php");
+    exit();
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['pet-name'])) {
+    $name = $_POST['pet-name'];
+    $species = $_POST['pet-species'];
+    $breed = $_POST['pet-breed'];
+    $age = $_POST['pet-age'];
+    $gender = $_POST['value-radio'];
+    $height = $_POST['pet-height'];
+    $weight = $_POST['pet-weight'];
+    $color = $_POST['pet-color'];
+    $vaccination = $_POST['vaccination-status'];
+    $neutered = $_POST['neutered'];
+    $medical = $_POST['pet-medical-condition'];
+    $status = $_POST['adopt-status'];
+    $shelter = $_POST['pet-shelter'];
+    $intake = $_POST['rescue-date'];
+
+    $sql = "INSERT INTO pets (name, species, breed, age, gender, height, weight, color, vaccination_status, neutered_status, medical_condition, adoption_status, shelter, intake_date) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssisiisssssss", 
+        $name, $species, $breed, $age, $gender, $height, $weight, $color, 
+        $vaccination, $neutered, $medical, $status, $shelter, $intake
+    );
+
+    if ($stmt->execute()) {
+        $newPetId = $stmt->insert_id;
+
+        if (isset($_FILES['pet_images'])) {
+            foreach ($_FILES['pet_images']['tmp_name'] as $index => $tmpName) {
+                if ($_FILES['pet_images']['error'][$index] === UPLOAD_ERR_OK) {
+                    $imageData = file_get_contents($tmpName);
+                    $mimeType = $_FILES['pet_images']['type'][$index];
+
+                    $sql = "INSERT INTO pet_images (pet_id, image_data, mime_type) VALUES (?, ?, ?)";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("iss", $newPetId, $imageData, $mimeType);
+                    $stmt->execute();
+                    $stmt->close();
+                }
+            }
+        }
+
+        $_SESSION['popup_message'] = "Pet added successfully.";
+
+        $admin_id = $_SESSION['admin_id'];
+        log_action($conn, $admin_id, "Added a new pet", "pet", $newPetId, "Pet Name: $name");
+        displayPopup("Pet added successfully.");
+    } else {
+        displayPopup("Database error: " . $stmt->error, 'error');
+    }
+    
+    header("Location: add-pet.php");
+    exit();
+}
+
+$pet_images = [];
+$image_ids = [];
+
+$sql = "SELECT id, image_data, mime_type FROM pet_images WHERE pet_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $pet_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+while ($row = $result->fetch_assoc()) {
+    $pet_images[] = "data:" . $row['mime_type'] . ";base64," . base64_encode($row['image_data']);
+    $image_ids[] = $row['id'];
+}
+
+$stmt->close();
+
+if (isset($_SESSION['popup_message'])) {
+    displayPopup($_SESSION['popup_message']);
+    unset($_SESSION['popup_message']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +104,7 @@
 <body>
     <?php include '../components/sidebar.php' ?>
 
-    <section class="add-pet-section" style="margin-left: 85px">
+    <section class="pet-management-section" style="margin-left: 85px">
         <div class="breadcrumbs">
             <div class="left">
                 <p>Admin > <span>ADD PET</span></p>
@@ -26,23 +115,35 @@
             </div>
         </div>
 
-        <form class="add-pet-container">
-            <div class="add-pet-top-panel">
+        <form class="pet-management-container" method="POST" enctype="multipart/form-data">
+            <div class="pet-management-top-panel">
                 <div class="header">
                     <h1>Add Pet</h1>
                     <p class="subtitle">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Add a pet entry. Fill all the information below
                     </p>
                 </div>
                 <div class="top-buttons">
-                    <button class="add-btn">Add Pet</button>
+                    <button class="add-btn" type="submit">Add Pet</button>
                 </div>
             </div>
 
-            <div class="add-pet-bottom-panel">
-                <div class="add-pet-left-panel">
-                    <div class="photo-gallery" id="photoGallery"></div>
-                    <input type="file" id="photoInput" multiple accept="image/*" style="display: none" />
+            <div class="pet-management-bottom-panel">
+                <div class="pet-management-left-panel">
+                    <div class="photo-gallery" id="photoGallery">
+                        <?php foreach ($pet_images as $index => $image): ?>
+                        <div class="image-container">
+                            <img src="<?php echo $image; ?>" alt="Pet Image" width="100">
+                            <form method="POST" action="edit-pet.php">
+                                <input type="hidden" name="delete_image_id" value="<?php echo $image_ids[$index]; ?>">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <input type="file" id="photoInput" name="pet_images[]" multiple accept="image/*"
+                        style="display: none;" />
                 </div>
 
                 <div class="right-panel">
@@ -56,7 +157,7 @@
                             <option value="Rabbit">Rabbit</option>
                             <option value="Parrot">Parrot</option>
                         </select>
-                        <input type="text" placeholder="Breed" />
+                        <input type="text" name="pet-breed" id="" placeholder="Breed" />
                         <input type="number" name="pet-age" id="" placeholder="Age" />
                         <div class="radio-input">
                             <label>
@@ -79,9 +180,7 @@
                         <select name="vaccination-status" id="vacc-status">
                             <option value="" disabled selected>Vaccination Status</option>
                             <option value="Fully Vaccinated">Fully Vaccinated</option>
-                            <option value="Partially Vaccinated">
-                                Partially Vaccinated
-                            </option>
+                            <option value="Partially Vaccinated">Partially Vaccinated</option>
                             <option value="Not Vaccinated">Not Vaccinated</option>
                         </select>
                         <select name="neutered" id="neutered">
@@ -103,8 +202,9 @@
                         <input type="text" name="pet-shelter" id="" placeholder="Current Shelter" />
                         <div class="date-time">
                             <label for="rescue-date" id="rescueDate">Date of Intake
-
-                                <input type="date" name="rescue-date" id="dateInput" /></label>
+                                <input type="date" name="rescue-date" id="dateInput"
+                                    style="border: none; width: 20px; height: auto;" />
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -116,23 +216,37 @@
     <script>
     const gallery = document.getElementById("photoGallery");
     const input = document.getElementById("photoInput");
-    const petPhotos = [];
+    const petPhotos = <?php echo json_encode($pet_images); ?>;
 
     function renderGallery() {
         gallery.innerHTML = "";
 
         petPhotos.forEach((src) => {
+            const container = document.createElement("div");
+            container.classList.add("image-container");
+
             const img = document.createElement("img");
             img.src = src;
-            gallery.appendChild(img);
+            img.alt = "Pet Image";
+            img.width = 100;
+
+            container.appendChild(img);
+            gallery.appendChild(container);
         });
+
+        // Always add the add-photo button at the end
+        const addBtnContainer = document.createElement("div");
+        addBtnContainer.classList.add("image-container");
 
         const addBtnImg = document.createElement("img");
         addBtnImg.src = "../images/add-photo.png";
         addBtnImg.alt = "Add photo";
         addBtnImg.style.cursor = "pointer";
+        addBtnImg.width = 100;
         addBtnImg.onclick = () => input.click();
-        gallery.appendChild(addBtnImg);
+
+        addBtnContainer.appendChild(addBtnImg);
+        gallery.appendChild(addBtnContainer);
     }
 
     input.addEventListener("change", (e) => {
@@ -148,6 +262,22 @@
     });
 
     renderGallery();
+
+    function closePopup() {
+        const popup = document.querySelector(".popup-overlay");
+        if (popup) {
+            popup.classList.remove("show");
+        }
+    }
+
+    window.addEventListener("load", function() {
+        const popup = document.querySelector(".popup-overlay");
+        if (popup) {
+            setTimeout(() => {
+                closePopup();
+            }, 3000);
+        }
+    });
     </script>
 </body>
 

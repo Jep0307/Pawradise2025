@@ -35,16 +35,15 @@ h3 {
   font-weight: 500;
   background-color: #6a994e;
   color: #fff;
-  border-radius: 10px;
+  border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s ease-in-out;
   text-decoration: none;
 
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
 }
 
 .add-btn:hover {
@@ -82,6 +81,7 @@ h3 {
   border-collapse: collapse;
   border-spacing: 1px;
   overflow-x: auto;
+  margin-bottom: 6rem;
 }
 
 .general-table tr,
@@ -207,7 +207,7 @@ td {
 
 .sidebar .sidebar-header h2 {
   color: #fff;
-  font-size: 1.25rem;
+  font-size: 16px;
   font-weight: 600;
   white-space: nowrap;
   margin-left: 23px;
@@ -463,4 +463,41 @@ td {
 
 .popup-error {
   background-color: #e03131;
+}
+
+/* Input Division */
+.input-division {
+  align-self: flex-start;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1.2rem;
+  width: 100%;
+  margin: 1rem 0 3rem 0;
+}
+
+/* Text Overflow */
+.text-overflow {
+  white-space: nowrap;
+  max-width: 70px;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Sort */
+.sort-input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  padding: 15px 20px;
+  padding-right: 40px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+  cursor: pointer;
 }

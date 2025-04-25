@@ -1,26 +1,119 @@
 <?php
-session_start();
-include 'db_connect.php';
+include '../components/db_connect.php';
+include '../components/session.php';
+include '../components/popup.php';
+include '../components/logger.php';
 
-// Fetch pet data based on the ID parameter in the URL
-$pet_id = $_GET['id'];
+if (!isset($_SESSION['admin_email'])) {
+    header("Location: ../login.php");
+    exit();
+}
+
+$pet_id = $_GET['id'] ?? $_POST['pet_id'] ?? null;
+
+if (!$pet_id) {
+    die("Pet ID not provided.");
+}
+
 $sql = "SELECT * FROM pets WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $pet_id);
+$stmt->execute();
+$pet_result = $stmt->get_result();
+$pet = $pet_result->fetch_assoc();
+$stmt->close();
+
+if (isset($_POST['delete_image_id'])) {
+    $image_id = $_POST['delete_image_id'];
+    $sql = "DELETE FROM pet_images WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $image_id);
+    $stmt->execute();
+    $stmt->close();
+    header("Location: edit_pet.php?id=" . $pet_id); // redirect to refresh images
+    exit();
+}
+
+if (isset($_FILES['pet_images'])) {
+    foreach ($_FILES['pet_images']['tmp_name'] as $index => $tmpName) {
+        if ($_FILES['pet_images']['error'][$index] === UPLOAD_ERR_OK) {
+            $imageData = file_get_contents($tmpName);
+            $mimeType = $_FILES['pet_images']['type'][$index];
+
+            $sql = "INSERT INTO pet_images (pet_id, image_data, mime_type) VALUES (?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("iss", $pet_id, $imageData, $mimeType);
+            $stmt->execute();
+            $stmt->close();
+        }
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['pet-name'])) {
+    $name = $_POST['pet-name'];
+    $species = $_POST['pet-species'];
+    $breed = $_POST['pet-breed'];
+    $age = $_POST['pet-age'];
+    $gender = $_POST['value-radio'];
+    $height = $_POST['pet-height'];
+    $weight = $_POST['pet-weight'];
+    $color = $_POST['pet-color'];
+    $vaccination = $_POST['vaccination-status'];
+    $neutered = $_POST['neutered'];
+    $medical = $_POST['pet-medical-condition'];
+    $status = $_POST['adopt-status'];
+    $shelter = $_POST['pet-shelter'];
+    $intake = $_POST['rescue-date'];
+
+    $_SESSION['popup_message'] = "Pet updated successfully.";
+
+    $sql = "UPDATE pets SET 
+        name = ?, species = ?, breed = ?, age = ?, gender = ?, height = ?, weight = ?, color = ?,
+        vaccination_status = ?, neutered_status = ?, medical_condition = ?, adoption_status = ?,
+        shelter = ?, intake_date = ?
+        WHERE id = ?";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssissdsssssssi",
+        $name, $species, $breed, $age, $gender, $height, $weight, $color,
+        $vaccination, $neutered, $medical, $status, $shelter, $intake, $pet_id
+    );
+    $stmt->execute();
+
+    if ($stmt->execute()) {
+        $newUserId = $stmt->insert_id;
+        $admin_id = $_SESSION['admin_id'];
+        log_action($conn, $admin_id, "Edited a pet information", "pet", $newUserId, "Username: $username");
+        displayPopup("Pet updated successfully.");
+    } else {
+        displayPopup("Database error: " . $stmt->error, 'error');
+    }
+
+    $stmt->close();
+    header("Location: edit-pet.php?id=" . $pet_id);
+    exit();
+}
+
+if (isset($_SESSION['popup_message'])) {
+    displayPopup($_SESSION['popup_message']);
+    unset($_SESSION['popup_message']);
+}
+
+$pet_images = [];
+$image_ids = [];
+
+$sql = "SELECT id, image_data, mime_type FROM pet_images WHERE pet_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $pet_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
-$pet = $result->fetch_assoc();
-$stmt->close();
-
-// If the pet doesn't exist, redirect to an error page (optional)
-if (!$pet) {
-    header("Location: error_page.php"); // or a relevant error page
-    exit();
+while ($row = $result->fetch_assoc()) {
+    $pet_images[] = "data:" . $row['mime_type'] . ";base64," . base64_encode($row['image_data']);
+    $image_ids[] = $row['id'];
 }
 
-// Prepare images (assuming you are storing the images in the database as BLOBs or paths)
-$pet_images = !empty($pet['pet_img']) ? [base64_encode($pet['pet_img'])] : [];
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +132,7 @@ $pet_images = !empty($pet['pet_img']) ? [base64_encode($pet['pet_img'])] : [];
 
 <body>
     <?php include '../components/sidebar.php' ?>
-    <section class="add-pet-section" style="margin-left: 85px">
+    <section class="pet-management-section" style="margin-left: 85px">
         <div class="breadcrumbs">
             <div class="left">
                 <p>Admin > <span>Edit Pet</span></p>
@@ -49,29 +142,36 @@ $pet_images = !empty($pet['pet_img']) ? [base64_encode($pet['pet_img'])] : [];
             </div>
         </div>
 
-        <form class="add-pet-container" method="POST" action="update_pet.php" enctype="multipart/form-data">
+        <form class="pet-management-container" method="POST" action="edit-pet.php" enctype="multipart/form-data">
             <input type="hidden" name="pet_id" value="<?php echo $pet['id']; ?>">
 
-            <div class="add-pet-top-panel">
+            <div class="pet-management-top-panel">
                 <div class="header">
                     <h1>Edit Pet</h1>
                     <p class="subtitle">Update the pet details</p>
                 </div>
                 <div class="top-buttons">
-                    <button class="add-btn" type="submit">Save Changes</button>
+                    <button class="add-btn" type="submit"><span class="material-symbols-outlined">save</span>Save
+                        Changes</button>
                 </div>
             </div>
 
-            <div class="add-pet-bottom-panel">
-                <div class="add-pet-left-panel">
+            <div class="pet-management-bottom-panel">
+                <div class="pet-management-left-panel">
                     <div class="photo-gallery" id="photoGallery">
-                        <?php
-                        foreach ($pet_images as $image) {
-                            echo '<img src="data:image/jpeg;base64,' . $image . '" alt="Pet Image" width="100">';
-                        }
-                        ?>
+                        <?php foreach ($pet_images as $index => $image): ?>
+                        <div class="image-container">
+                            <img src="<?php echo $image; ?>" alt="Pet Image" width="100">
+                            <form method="POST" action="edit-pet.php">
+                                <input type="hidden" name="delete_image_id" value="<?php echo $image_ids[$index]; ?>">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </div>
+                        <?php endforeach; ?>
                     </div>
-                    <input type="file" id="photoInput" multiple accept="image/*" style="display: none" />
+
+                    <input type="file" id="photoInput" name="pet_images[]" multiple accept="image/*"
+                        style="display: none;" />
                 </div>
 
                 <div class="right-panel">
@@ -95,12 +195,12 @@ $pet_images = !empty($pet['pet_img']) ? [base64_encode($pet['pet_img'])] : [];
 
                         <div class="radio-input">
                             <label>
-                                <input value="male" name="value-radio" id="value-1" type="radio"
+                                <input value="Male" name="value-radio" id="value-1" type="radio"
                                     <?php echo ($pet['gender'] == 'Male') ? 'checked' : ''; ?> />
                                 <span>Male</span>
                             </label>
                             <label>
-                                <input value="female" name="value-radio" id="value-2" type="radio"
+                                <input value="Female" name="value-radio" id="value-2" type="radio"
                                     <?php echo ($pet['gender'] == 'Female') ? 'checked' : ''; ?> />
                                 <span>Female</span>
                             </label>
@@ -157,12 +257,6 @@ $pet_images = !empty($pet['pet_img']) ? [base64_encode($pet['pet_img'])] : [];
                         </select>
                         <input type="text" name="pet-shelter" value="<?php echo htmlspecialchars($pet['shelter']); ?>"
                             placeholder="Current Shelter" />
-                        <div class="date-time">
-                            <label for="rescue-date">Date of Intake
-                                <input type="date" name="rescue-date" value="<?php echo $pet['intake_date']; ?>"
-                                    required />
-                            </label>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -179,17 +273,31 @@ $pet_images = !empty($pet['pet_img']) ? [base64_encode($pet['pet_img'])] : [];
         gallery.innerHTML = "";
 
         petPhotos.forEach((src) => {
+            const container = document.createElement("div");
+            container.classList.add("image-container");
+
             const img = document.createElement("img");
-            img.src = "data:image/jpeg;base64," + src;
-            gallery.appendChild(img);
+            img.src = src;
+            img.alt = "Pet Image";
+            img.width = 100;
+
+            container.appendChild(img);
+            gallery.appendChild(container);
         });
+
+        // Always add the add-photo button at the end
+        const addBtnContainer = document.createElement("div");
+        addBtnContainer.classList.add("image-container");
 
         const addBtnImg = document.createElement("img");
         addBtnImg.src = "../images/add-photo.png";
         addBtnImg.alt = "Add photo";
         addBtnImg.style.cursor = "pointer";
+        addBtnImg.width = 100;
         addBtnImg.onclick = () => input.click();
-        gallery.appendChild(addBtnImg);
+
+        addBtnContainer.appendChild(addBtnImg);
+        gallery.appendChild(addBtnContainer);
     }
 
     input.addEventListener("change", (e) => {
@@ -205,7 +313,24 @@ $pet_images = !empty($pet['pet_img']) ? [base64_encode($pet['pet_img'])] : [];
     });
 
     renderGallery();
+
+    function closePopup() {
+        const popup = document.querySelector(".popup-overlay");
+        if (popup) {
+            popup.classList.remove("show");
+        }
+    }
+
+    window.addEventListener("load", function() {
+        const popup = document.querySelector(".popup-overlay");
+        if (popup) {
+            setTimeout(() => {
+                closePopup();
+            }, 3000);
+        }
+    });
     </script>
+
 </body>
 
 </html>

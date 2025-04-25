@@ -1,7 +1,7 @@
 <?php
 include('../components/db_connect.php');
 
-$query = "SELECT * FROM users_table"; 
+$query = "SELECT * FROM shelters"; 
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
@@ -64,13 +64,10 @@ if (!$result) {
                 <table class="general-table">
                     <tr>
                         <th>ID</th>
-                        <th>IMAGE</th>
-                        <th>USERNAME</th>
-                        <th>NAME</th>
-                        <th>BIO</th>
-                        <th>EMAIL</th>
-                        <th>PHONE</th>
+                        <th>LOGO</th>
+                        <th>SHELTER</th>
                         <th>LOCATION</th>
+                        <th>DESCRIPTION</th>
                         <th>CREATED</th>
                         <th></th>
                     </tr>
@@ -78,18 +75,15 @@ if (!$result) {
                     if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         // Convert image blob to base64
-                        $imageData = base64_encode($row['user_img']);
+                        $imageData = base64_encode($row['shelter_img']);
                         $imageSrc = 'data:image/jpeg;base64,' . $imageData;
 
                         echo "<tr>";
                         echo "<td>{$row['id']}</td>";
-                        echo "<td><img src='{$imageSrc}' alt='User Image' width='50' /></td>";
-                        echo "<td>{$row['username']}</td>";
-                        echo "<td>{$row['fullname']}</td>";
-                        echo "<td>{$row['bio']}</td>";
-                        echo "<td>{$row['email']}</td>";
-                        echo "<td>{$row['phone']}</td>"; // You can show actual number if desired
+                        echo "<td><img src='{$imageSrc}' alt='Shelter Logo' width='50' /></td>";
+                        echo "<td>{$row['shelter_name']}</td>";
                         echo "<td>{$row['location']}</td>";
+                        echo "<td>{$row['description']}</td>";
                         echo "<td>{$row['created_at']}</td>";
                         echo "<td class='options-btn'>
                                 <span class='material-symbols-outlined'>edit</span>

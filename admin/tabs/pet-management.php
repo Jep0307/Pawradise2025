@@ -1,19 +1,18 @@
 <?php
-include('../components/db_connect.php');
+include '../components/db_connect.php';
+include '../components/session.php';
 include '../components/popup.php';
-
-session_start();
 
 if (!isset($_SESSION['admin_email'])) {
     header("Location: ../login.php");
     exit();
 }
 
-$query = "SELECT * FROM pets"; 
-$result = mysqli_query($conn, $query);
+$sql = "SELECT * FROM pets"; 
+$result = $conn->query($sql);
 
 if (!$result) {
-    die("Database query failed: " . mysqli_error($conn));
+    die("Error in query: " . $conn->error);
 }
 
 if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
@@ -21,6 +20,13 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 } elseif (isset($_GET['error']) && $_GET['error'] == 1) {
     displayPopup("Something went wrong. Please try again.", 'error');
 }
+
+$pets_table = [];
+while ($row = $result->fetch_assoc()) {
+    $pets_table[] = $row;
+}
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +52,7 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
             </div>
 
             <div class="right">
-                <a href="../logout.php"><span class="material-symbols-outlined"> logout </span>Logout</a>
+                <a href="../components/logout.php"><span class="material-symbols-outlined"> logout </span>Logout</a>
             </div>
         </div>
 
@@ -60,12 +66,13 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                 </div>
                 <div class="top-buttons">
                     <select name="sort" id="" class="sort-input">
-                        <option value="sort" disabled selected>Sort</option>
+                        <option value="sort" disabled selected>Sort
+                        </option>
                         <option value="alphabetical">Alphabetical</option>
                         <option value="newest">Newest</option>
                     </select>
                     <a href="../components/add-pet.php" class="add-btn"><span
-                            class="material-symbols-outlined">add</span>Add Pet</a>
+                            class="material-symbols-outlined">add</span>Add Entry</a>
                 </div>
             </div>
 
@@ -94,11 +101,10 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                     </tr>
 
                     <?php
-                    // Loop through the results and display them in the table
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        // Fetch the image BLOB and convert to Base64
-                        $imageData = base64_encode($row['pet_img']); // Assuming 'image' is the BLOB column
-                        $imageSrc = 'data:image/jpeg;base64,' . $imageData; // You can change the MIME type if necessary
+                    if (count($pets_table) > 0):
+                        foreach($pets_table as $row):
+                        $imageData = base64_encode($row['pet_img']);
+                        $imageSrc = 'data:image/jpeg;base64,' . $imageData;
 
                         echo "<tr>";
                         echo "<td>" . $row['id'] . "</td>";
@@ -117,7 +123,7 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                         echo "<td class='options-btn'>
                                 <span class='material-symbols-outlined'>edit</span>
                                 <div class='pop-up'>
-                                    <a href='../components/edit-user.php?id={$row['id']}'><span class='material-symbols-outlined'>edit</span>Edit</a>
+                                    <a href='../components/edit-pet.php?id={$row['id']}'><span class='material-symbols-outlined'>edit</span>Edit</a>
                                     <form action='../components/delete-pet.php' method='POST' onsubmit='return confirm(\"Are you sure you want to delete this entry?\");'>
                                         <input type='hidden' name='user_id' value='{$row['id']}'>
                                         <button type='submit' class='delete-btn'>
@@ -127,9 +133,11 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
                                 </div>
                               </td>";
                         echo "</tr>";
-                    }
+                        endforeach;
                     ?>
-
+                    <?php else: ?>
+                    <p>No available data</p>
+                    <?php endif; ?>
                 </table>
             </div>
         </div>
@@ -156,6 +164,5 @@ if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
 </html>
 
 <?php
-// Close the database connection
 mysqli_close($conn);
 ?>
