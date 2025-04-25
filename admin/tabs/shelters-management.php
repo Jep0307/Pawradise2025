@@ -1,11 +1,11 @@
 <?php
-include('../components/db_connect.php');
+include '../components/db_connect.php';
+include '../components/session.php';
+include '../components/popup.php';
 
-$query = "SELECT * FROM shelters"; 
-$result = mysqli_query($conn, $query);
-
-if (!$result) {
-    die("Database query failed: " . mysqli_error($conn));
+if (!isset($_SESSION['admin_email'])) {
+    header("Location: ../login.php");
+    exit();
 }
 ?>
 
@@ -15,7 +15,7 @@ if (!$result) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pet Management</title>
+    <title>Shelters Management</title>
     <link rel="stylesheet" href="../styles.css" />
     <link rel="stylesheet" href="../general.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
@@ -29,7 +29,7 @@ if (!$result) {
     <section class="pet-management-section" style="margin-left: 85px">
         <div class="breadcrumbs">
             <div class="left">
-                <p>Admin > <span>USERS MANAGEMENT</span></p>
+                <p>Admin > <span>SHELTERS MANAGEMENT</span></p>
             </div>
 
             <div class="right">
@@ -40,9 +40,9 @@ if (!$result) {
         <div class="management-container">
             <div class="management-top-panel">
                 <div class="header">
-                    <h1>User Accounts Management</h1>
+                    <h1>Shelters Management</h1>
                     <p class="subtitle">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Manage shelters
                     </p>
                 </div>
                 <div class="top-buttons">
@@ -60,50 +60,79 @@ if (!$result) {
                     class="material-symbols-outlined">search</span>
             </div>
 
+            <div id="map"></div>
+
             <div class="management-bottom-panel">
-                <table class="general-table">
-                    <tr>
-                        <th>ID</th>
-                        <th>LOGO</th>
-                        <th>SHELTER</th>
-                        <th>LOCATION</th>
-                        <th>DESCRIPTION</th>
-                        <th>CREATED</th>
-                        <th></th>
-                    </tr>
-                    <?php
-                    if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        // Convert image blob to base64
-                        $imageData = base64_encode($row['shelter_img']);
-                        $imageSrc = 'data:image/jpeg;base64,' . $imageData;
+                <div class="shelter-cards">
+                    <div class="shelter-card">
+                        <h3>QC Shelter</h3>
+                        <p>123 Random Address, Quezon City</p>
+                    </div>
 
-                        echo "<tr>";
-                        echo "<td>{$row['id']}</td>";
-                        echo "<td><img src='{$imageSrc}' alt='Shelter Logo' width='50' /></td>";
-                        echo "<td>{$row['shelter_name']}</td>";
-                        echo "<td>{$row['location']}</td>";
-                        echo "<td>{$row['description']}</td>";
-                        echo "<td>{$row['created_at']}</td>";
-                        echo "<td class='options-btn'>
-                                <span class='material-symbols-outlined'>edit</span>
-                                <div class='pop-up'>
-                                    <a href='edit-user.php?id={$row['id']}'><span class='material-symbols-outlined'>edit</span>Edit</a>
-                                    <a href='delete-user.php?id={$row['id']}'><span class='material-symbols-outlined'>delete</span>Delete</a>
-                                </div>
-                            </td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='10'>No users found.</td></tr>";
-                }
+                    <div class="shelter-card">
+                        <h3>QC Shelter</h3>
+                        <p>123 Random Address, Quezon City</p>
+                    </div>
 
-                $conn->close();
-                ?>
-                </table>
+                </div>
             </div>
         </div>
     </section>
+
+    <script>
+    async function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+            center: {
+                lat: 14.6760,
+                lng: 121.0437
+            },
+            zoom: 13,
+        });
+
+        try {
+            const response = await fetch("../components/get-shelters.php");
+            const shelters = await response.json();
+
+            const markers = [];
+
+            shelters.forEach(shelter => {
+                const position = {
+                    lat: parseFloat(shelter.latitude),
+                    lng: parseFloat(shelter.longitude)
+                };
+
+                const marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: shelter.shelter_name
+                });
+
+                console.log(
+                    `Marker added: ${shelter.shelter_name} at (${shelter.latitude}, ${shelter.longitude})`
+                );
+
+                const infoWindow = new google.maps.InfoWindow({
+                    content: `<strong>${shelter.shelter_name}</strong><br>${shelter.address}`
+                });
+
+                marker.addListener('click', () => {
+                    infoWindow.open(map, marker);
+                });
+
+                markers.push(marker);
+            });
+
+        } catch (error) {
+            console.error("Error fetching shelters:", error);
+        }
+    }
+
+    window.initMap = initMap;
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBX9EY3igYEQtIsdXsxSpbfMosfO00uPiE&callback=initMap"
+        async defer></script>
+
 </body>
 
 </html>

@@ -61,7 +61,7 @@ $conn->close();
                 <div class="header">
                     <h1>Staff Admins Management</h1>
                     <p class="subtitle">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        View, modify, and create Staff-Admins
                     </p>
                 </div>
                 <div class="top-buttons">

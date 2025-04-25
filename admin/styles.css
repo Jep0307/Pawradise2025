@@ -413,3 +413,28 @@
 .user-profile-photo {
   width: 240px;
 }
+
+/* Shelter Cards */
+.shelter-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+#map {
+  height: 500px;
+  width: 100%;
+}
+
+.shelter-card {
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  height: 200px;
+  margin-bottom: 4rem;
+}
+
+.shelter-card h3 {
+  margin-top: 1rem;
+}

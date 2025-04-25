@@ -61,14 +61,15 @@ $conn->close();
                 <div class="header">
                     <h1>Staffs Management</h1>
                     <p class="subtitle">
-                        Manage staff roles,
+                        Manage staff roles, staff modifications, and pending applications
                     </p>
                 </div>
                 <div class="top-buttons">
                     <a href="../components/pending-staffs.html" class="pending-btn"><span
                             class="material-symbols-outlined">schedule</span>Pending</a>
                     <a href="../components/add-staff.php" class="add-btn"><span
-                            class="material-symbols-outlined">add</span>Add Entry</a>
+                            class="material-symbols-outlined">add</span>Add Entry
+                    </a>
 
                 </div>
             </div>
