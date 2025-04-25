@@ -221,43 +221,69 @@ function finalizeApplicationSubmission() {
   closePetApplicationForm();
 }
 
+
+
 function searchInput() {
   const searchInput = document.getElementById('searchInput');
-  const petcardsName = document.querySelectorAll('.cards-container .cards .pet-name');
-  const noFound = document.getElementById('noResultFound');
   const petCards = document.querySelectorAll('.cards-container .cards');
 
-  searchInput.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-      const searchValue = searchInput.value.toLowerCase();
-      let found = false;
+  if (!searchInput) return;
 
-      petcardsName.forEach(item => {
-        const text = item.textContent.toLowerCase();
-        const card = item.closest('.cards');
+  searchInput.addEventListener('input', () => {
+    const keyword = searchInput.value.toLowerCase();
 
-        if (text.includes(searchValue)) {
-          card.style.display = 'block';
-          found = true;
-          closePreview();
-          closePetApplicationForm();
-          filterCards('all');
-        } else {
-          card.style.display = 'none';
-        }
-      });
+    petCards.forEach(petCard => {
+      const name = petCard.name?.toLowerCase() || '';
+      const description = petCard.description?.toLowerCase() || '';
+      const location = petCard.location?.toLowerCase() || '';
 
-      if (!found) {
-        noFound.textContent = "No results found";
-        closePreview()
-        closePetApplicationForm()
-      } else {
-        noFound.textContent = "";
-      }
-    }
+      const isMatch =
+        name.includes(keyword) ||
+        description.includes(keyword) ||
+        location.includes(keyword);
+
+      petCard.style.display = isMatch ? 'flex' : 'none';
+    });
   });
+
+
+
+  // const searchInput = document.getElementById('searchInput');
+  // const petcardsName = document.querySelectorAll('.cards-container .cards .pet-name');
+  // const noFound = document.getElementById('noResultFound');
+  // const petCards = document.querySelectorAll('.cards-container .cards');
+
+  // searchInput.addEventListener('keypress', (event) => {
+  //   if (event.key === 'Enter') {
+  //     const searchValue = searchInput.value.toLowerCase();
+  //     let found = false;
+
+  //     petcardsName.forEach(item => {
+  //       const text = item.textContent.toLowerCase();
+  //       const card = item.closest('.cards');
+
+  //       if (text.includes(searchValue)) {
+  //         card.style.display = 'block';
+  //         found = true;
+  //         closePreview();
+  //         closePetApplicationForm();
+  //         filterCards('all');
+  //       } else {
+  //         card.style.display = 'none';
+  //       }
+  //     });
+
+  //     if (!found) {
+  //       noFound.textContent = "No results found";
+  //       closePreview()
+  //       closePetApplicationForm()
+  //     } else {
+  //       noFound.textContent = "";
+  //     }
+  //   }
+  // });
 }
-searchInput();
+// searchInput();
 
 
 flatpickr("#birthdate", {
@@ -276,11 +302,33 @@ flatpickr("#zoomtime", {
   dateFormat: "H:i",
 });
 
+function filterPetsByTypeAndLocation() {
+  const selectedType = document.querySelector('.pet-selected')?.dataset.value;
+  const selectedLocation = document.querySelector('.loc-selected')?.dataset.value;
+
+  const petCards = document.querySelectorAll('.cards');
+
+  petCards.forEach(card => {
+    const petType = card.getAttribute('data-type');
+    const petLocation = card.getAttribute('data-location');
+
+    // Show card if it matches the selected type and location, otherwise hide it
+    if (
+      (!selectedType || petType === selectedType) &&
+      (!selectedLocation || petLocation === selectedLocation)
+    ) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
 function filterLocandPet() {
   const customSelectContainers = document.querySelectorAll('.cate-select-container');
   customSelectContainers.forEach(container => {
     const select = container.querySelector('.cate-select');
-    const selectIcon = container.querySelector('.cate-select img');  // Select icon within the current container
+    const selectIcon = container.querySelector('.cate-select img');
     const options = container.querySelector('.cate-options');
     const selected = select.querySelector('.loc-selected, .pet-selected');
 
@@ -307,9 +355,37 @@ function filterLocandPet() {
         if (selectIcon) {
           selectIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-down-icon.svg";
         }
+
+        filterPetsByTypeAndLocation();
       });
     });
   });
 }
 
 filterLocandPet();
+
+function filterPetsByTypeAndLocation() {
+  // Get selected type and location values
+  const selectedType = document.querySelector('.pet-selected')?.dataset.value;
+  const selectedLocation = document.querySelector('.loc-selected')?.dataset.value;
+
+  const cards = document.querySelectorAll('.cards');
+  
+  cards.forEach(card => {
+    const petType = card.getAttribute('data-type');
+    const petLocation = card.getAttribute('data-location');
+    
+    // Check if the card matches the filter criteria
+    if (
+      (selectedType && petType !== selectedType) || 
+      (selectedLocation && petLocation !== selectedLocation)
+    ) {
+      card.style.display = 'none';  // Hide the card if it doesn't match
+    } else {
+      card.style.display = 'block';  // Show the card if it matches
+    }
+  });
+}
+
+
+
