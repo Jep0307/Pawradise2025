@@ -9,12 +9,17 @@ document.addEventListener('DOMContentLoaded', () => {
           const petCard = document.createElement('div');
           petCard.classList.add('cards');
           petCard.setAttribute('onclick', 'showPreview(this)');
+          
+          // Add data-type and data-location for filtering
+          petCard.setAttribute('data-type', pet.type);
+          petCard.setAttribute('data-location', pet.location);
+          
           petCard.innerHTML = `
             <img loading="lazy" src="/SIA02/Pawradise2025/staff/assets/uploads/${pet.image}" alt="${pet.name}" />
             <div class="header-and-text">
               <p class="pet-name">${pet.name}</p>
               <p>${pet.sex}</p>
-              <p>${pet.location}</p>
+              <p class="location">${pet.location}</p>
               <p class="description">${pet.description}</p>
             </div>
           `;
