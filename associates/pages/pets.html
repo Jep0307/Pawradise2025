@@ -56,10 +56,34 @@
 
             <!-- Categories -->
             <div class="categories">
+              <div class="cate-select-container">
+                <div class="cate-select">
+                  <span class="loc-selected">Location</span>
+                  <img src="../assets/imgs/chevron-down-icon.svg" alt="">
+                </div>
+                <ul class="cate-options hidden">
+                  <li data-value="parc">PARC</li>
+                  <li data-value="qcacac">QCACAC</li>
+                </ul>
+              </div>
+
+              <div class="cate-select-container">
+                <div class="cate-select">
+                  <span class="pet-selected">Pet</span>
+                  <img src="../assets/imgs/chevron-down-icon.svg" alt="">
+                </div>
+                <ul class="cate-options hidden">
+                  <li data-value="dog">Dog</li>
+                  <li data-value="cat">Cat</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- <div class="categories">
               <button class="active" id="allBtn" onclick="filterCards('all')">All</button>
               <button id="CatsBtn" onclick="filterCards('cat')">Cats</button>
               <button id="DogsBtn" onclick="filterCards('dog')">Dogs</button>
-            </div>
+            </div> -->
           </div>
 
           <!-- =========== Pets catalog modal =========== -->
@@ -79,11 +103,13 @@
                 <!-- Details -->
                 <div class="modal-details">
                   <h2 id="modalTitle"></h2>
-                  <p id="modalPetSex"></p>
-                  <p id="modalPetLocation"></p>
-                  <p id="modalDiscription"></p>
+                  <div class="texts">
+                    <p id="modalPetSex"></p>
+                    <p id="modalDiscription"></p>
+                    <p id="modalPetLocation"></p>
+                  </div>
                   <div class="modal-buttons">
-                    <button>Direct me there</button>
+                    <!-- <button>Direct me there</button> -->
                     <button onclick="showApplicationForm()">Adopt</button>
                   </div>
                 </div>
@@ -114,7 +140,6 @@
                     <!-- Applicant Info -->
                     <div class="title-and-inputs-group">
                       <h3>Applicant Info</h3>
-                      <hr>
                       <div class="label-and-input">
                         <label for="fullname">Full Name</label>
                         <input type="text" id="fullname" name="fullname">
@@ -155,7 +180,6 @@
 
                     <div class="title-and-inputs-group">
                       <h3>Living Situation</h3>
-                      <hr>
                       <div class="label-and-input">
                         <label>Do you rent?</label>
                         <div class="custom-select-container">
@@ -173,7 +197,6 @@
 
                     <div class="title-and-inputs-group">
                       <h3>Building Type</h3>
-                      <hr>
                       <div class="label-and-input">
                         <label>Type of Residence</label>
                         <div class="custom-select-container">
@@ -193,7 +216,6 @@
 
                     <div class="title-and-inputs-group">
                       <h3>Adoption Preferences</h3>
-                      <hr>
                       <div class="label-and-input">
                         <label>Type of Pet to Adopt</label>
                         <div class="custom-select-container">
@@ -214,7 +236,6 @@
                     <!-- Valid ID Upload -->
                     <div class="title-and-inputs-group">
                       <h3>Valid ID (Required)</h3>
-                      <hr>
                       <div class="label-and-input">
                         <label for="validid">Upload Valid ID</label>
                         <input type="file" id="validid" name="validid">
@@ -225,7 +246,6 @@
                     <!-- Home Photos Upload -->
                     <div class="title-and-inputs-group">
                       <h3>Home Photos (Required)</h3>
-                      <hr>
                       <div class="label-and-input">
                         <label for="housepicFront">House Front Photo</label>
                         <input type="file" id="housepicFront" name="housepic-front">
@@ -246,7 +266,6 @@
                     <!-- Interview -->
                     <div class="title-and-inputs-group">
                       <h3>Interview</h3>
-                      <hr>
                       <div class="label-and-input">
                         <label for="zoomdate">Preferred Zoom Interview Date</label>
                         <input type="text" id="zoomdate" name="zoomdate">
@@ -262,7 +281,6 @@
                     <!-- Shelter visitation -->
                     <div class="title-and-inputs-group">
                       <h3>Visitation</h3>
-                      <hr>
                       <div class="label-and-input">
                         <label>Can you visit the shelter?</label>
                         <div class="custom-select-container">

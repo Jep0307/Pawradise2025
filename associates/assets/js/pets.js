@@ -1,27 +1,27 @@
-// Function for filtering cards categories
-function filterCards(category) {
-  const cards = document.querySelectorAll(".cards");
-  const buttons = document.querySelectorAll(".categories button");
-  
-  // Highlight the active button
-  buttons.forEach((button) => {
-    button.classList.remove("active");
-  });
-  document.querySelector(`#${category === 'all' ? 'allBtn' : category === 'cat' ? 'CatsBtn' : 'DogsBtn'}`).classList.add("active");
-  
-  // Show or hide cards based on the category
-  cards.forEach((card) => {
-    const cardCategory = card.getAttribute("data-category");
-    if (category === "all" || cardCategory === category) {
-      card.style.display = "block";
-    } else {
-      card.style.display = "none";
-    }
-  });
+// // Function for filtering cards categories
+// function filterCards(category) {
+//   const cards = document.querySelectorAll(".cards");
+//   const buttons = document.querySelectorAll(".categories button");
 
-  closePreview();
-  closePetApplicationForm();
-}
+//   // Highlight the active button
+//   buttons.forEach((button) => {
+//     button.classList.remove("active");
+//   });
+//   document.querySelector(`#${category === 'all' ? 'allBtn' : category === 'cat' ? 'CatsBtn' : 'DogsBtn'}`).classList.add("active");
+
+//   // Show or hide cards based on the category
+//   cards.forEach((card) => {
+//     const cardCategory = card.getAttribute("data-category");
+//     if (category === "all" || cardCategory === category) {
+//       card.style.display = "block";
+//     } else {
+//       card.style.display = "none";
+//     }
+//   });
+
+//   closePreview();
+//   closePetApplicationForm();
+// }
 
 function showPreview(card) {
   const modal = document.getElementById("previewModal");
@@ -30,20 +30,24 @@ function showPreview(card) {
   const sex = card.querySelector(".header-and-text p:nth-child(2)").textContent;
   const location = card.querySelector(".header-and-text p:nth-child(3)").textContent;
   const description = card.querySelector(".header-and-text .description").textContent;
-  
+
+  // Convert the location to a link
+  const locationLink = `<a href="https://www.google.com/maps/search/?q=${encodeURIComponent(location)}" target="_blank">${location}</a>`;
+
   // Update modal content
   document.getElementById("modalImage").src = image;
   document.getElementById("modalTitle").textContent = title;
   document.getElementById("modalPetSex").textContent = sex;
-  document.getElementById("modalPetLocation").textContent = location;
+  document.getElementById("modalPetLocation").innerHTML = locationLink;  // Use innerHTML to add the link
   document.getElementById("modalDiscription").textContent = description;
-  
+
   // Show the modal
   modal.style.display = "block";
-  
+
   spaceOnTop();
   closePetApplicationForm();
 }
+
 
 function closePreview() {
   document.getElementById("previewModal").style.display = "none";
@@ -165,8 +169,6 @@ form.addEventListener('submit', (e) => {
   showWarningModal();
 });
 
-console.log("hellow")
-
 // function for Warning modal
 const warningModal = document.getElementById('warningModal');
 const yesButton = warningModal?.querySelector('button:last-of-type');
@@ -194,7 +196,7 @@ function hideWarningModal() {
 // Function for pet application submmission
 function finalizeApplicationSubmission() {
   const formData = new FormData(form);
-  
+
   const applicantData = {};
   textInputs.forEach(input => {
     applicantData[input.name] = input.value.trim();
@@ -224,16 +226,16 @@ function searchInput() {
   const petcardsName = document.querySelectorAll('.cards-container .cards .pet-name');
   const noFound = document.getElementById('noResultFound');
   const petCards = document.querySelectorAll('.cards-container .cards');
-  
+
   searchInput.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
       const searchValue = searchInput.value.toLowerCase();
       let found = false;
-  
+
       petcardsName.forEach(item => {
         const text = item.textContent.toLowerCase();
         const card = item.closest('.cards');
-  
+
         if (text.includes(searchValue)) {
           card.style.display = 'block';
           found = true;
@@ -244,7 +246,7 @@ function searchInput() {
           card.style.display = 'none';
         }
       });
-  
+
       if (!found) {
         noFound.textContent = "No results found";
         closePreview()
@@ -274,3 +276,40 @@ flatpickr("#zoomtime", {
   dateFormat: "H:i",
 });
 
+function filterLocandPet() {
+  const customSelectContainers = document.querySelectorAll('.cate-select-container');
+  customSelectContainers.forEach(container => {
+    const select = container.querySelector('.cate-select');
+    const selectIcon = container.querySelector('.cate-select img');  // Select icon within the current container
+    const options = container.querySelector('.cate-options');
+    const selected = select.querySelector('.loc-selected, .pet-selected');
+
+    if (selectIcon) {
+      selectIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-down-icon.svg";
+    }
+
+    select.addEventListener('click', () => {
+      options.classList.toggle('hidden');
+
+      if (options.classList.contains('hidden')) {
+        selectIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-down-icon.svg";
+      } else {
+        selectIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-up-icon.svg";
+      }
+    });
+
+    options.querySelectorAll('li').forEach(option => {
+      option.addEventListener('click', () => {
+        selected.textContent = option.textContent;
+        selected.dataset.value = option.dataset.value;
+        options.classList.add('hidden');
+
+        if (selectIcon) {
+          selectIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-down-icon.svg";
+        }
+      });
+    });
+  });
+}
+
+filterLocandPet();

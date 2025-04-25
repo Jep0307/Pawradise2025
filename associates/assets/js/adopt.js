@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <img loading="lazy" src="/SIA02/Pawradise2025/staff/assets/uploads/${pet.image}" alt="${pet.name}" />
             <div class="header-and-text">
               <p class="pet-name">${pet.name}</p>
-              <p>Sex: ${pet.sex}</p>
-              <p>Location: ${pet.location}</p>
+              <p>${pet.sex}</p>
+              <p>${pet.location}</p>
               <p class="description">${pet.description}</p>
             </div>
           `;

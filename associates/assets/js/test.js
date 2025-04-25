@@ -63,3 +63,15 @@ function printRow(button) {
     const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
     window.open(mapUrl, '_blank');
   }
+
+
+
+  document.getElementById('adoptionForm').addEventListener('submit', function(event) {
+    event.preventDefault();  // Prevent default form submission
+
+    const location = event.target.location.value;  // Get selected location URL
+    const locationText = event.target.location.options[event.target.location.selectedIndex].text;  // Get selected option text
+
+    const postedLocationDiv = document.getElementById('postedLocation');
+    postedLocationDiv.innerHTML = `<a href="http://${location}" target="_blank">${locationText}</a>`;
+});
