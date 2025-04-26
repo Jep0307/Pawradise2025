@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
           
           petCard.innerHTML = `
             <img loading="lazy" src="/SIA02/Pawradise2025/staff/assets/uploads/${pet.image}" alt="${pet.name}" />
-            <div class="header-and-text">
+            <div class="pet-info">
               <p class="pet-name">${pet.name}</p>
               <p>${pet.sex}</p>
               <p class="location">${pet.location}</p>

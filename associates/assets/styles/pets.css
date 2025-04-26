@@ -145,7 +145,7 @@
 
 .modal button {
   background-color: #CD9B44;
-  color: #513709;
+  color: #292929;
 }
 
 .modal button:hover {
@@ -246,7 +246,7 @@
 
 .pa-form button {
   background-color: #CD9B44;
-  color: #513709;
+  color: #292929;
   border: none;
 
   transition: all 150ms ease-in-out;
@@ -368,7 +368,7 @@
 
 .warning-modal button:nth-child(2) {
   background-color: #e2c693;
-  color: #513709;
+  color: #292929;
 }
 
 .warning-modal button:nth-child(2):hover {
@@ -454,7 +454,7 @@
   .modal .modal-details {
     display: flex;
     flex-direction: column;
-    row-gap: 24px;
+    row-gap: 16px;
     flex: 1;
   }
 

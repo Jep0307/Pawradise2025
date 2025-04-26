@@ -5,6 +5,7 @@ $name = $_POST['name'];
 $sex = $_POST['sex'];
 $location = $_POST['location'];
 $description = $_POST['description'];
+$type = $_POST['type'];
 $editingId = $_POST['editingId'] ?? null;
 
 $imageName = '';
@@ -16,8 +17,8 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
 
 // If editingId is set, update the record
 if ($editingId) {
-    $query = "UPDATE pets SET name=?, sex=?, location=?, description=?";
-    $params = [$name, $sex, $location, $description];
+    $query = "UPDATE pets SET name=?, sex=?, location=?, description=?, type=?";
+    $params = [$name, $sex, $location, $description, $type];
 
     if ($imageName) {
         $query .= ", image=?";
@@ -35,8 +36,8 @@ if ($editingId) {
     echo json_encode(['success' => true]);
 } else {
     // Otherwise, insert a new pet
-    $stmt = $conn->prepare("INSERT INTO pets (name, sex, location, description, image) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $name, $sex, $location, $description, $imageName);
+    $stmt = $conn->prepare("INSERT INTO pets (name, sex, location, description, image, type) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $name, $sex, $location, $description, $imageName, $type);
     $stmt->execute();
 
     echo json_encode(['success' => true]);
