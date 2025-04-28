@@ -405,7 +405,8 @@
   }
 }
 
-.cards-container .description {
+.cards-container .description,
+.cards-container .breed {
   display: none;
 }
 

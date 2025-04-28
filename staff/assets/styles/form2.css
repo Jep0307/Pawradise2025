@@ -177,9 +177,9 @@ body {
 
 .row .cols:nth-child(6),
 .row .cols:nth-child(3) {
-  overflow: hidden;
+  /* overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: nowrap; */
 }
 
 .row .cols.edit {

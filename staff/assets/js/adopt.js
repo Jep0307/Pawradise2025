@@ -13,10 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
           // Save pet.type and pet.location in dataset for filtering
           petCard.dataset.type = pet.type;
           petCard.dataset.location = pet.location;
+          petCard.dataset.breed = pet.breed;
 
           petCard.innerHTML = `
             <img src="../assets/uploads/${pet.image}" alt="${pet.name}" style="width:100px;height:100px;" />
             <h3>${pet.name}</h3>
+            <p>${pet.breed}</p>
             <p>${pet.sex}</p>
             <p>${pet.location}</p>
             <p>${pet.description}</p>
@@ -38,18 +40,21 @@ document.addEventListener('DOMContentLoaded', () => {
 function setupCustomFilters() {
   const petSelected = document.querySelector('.pet-selected');
   const locSelected = document.querySelector('.loc-selected');
+  const breedSelected = document.querySelector('.breed-selected');
 
-  if (!petSelected || !locSelected) return;
+  if (!petSelected || !locSelected || !breedSelected) return;
 
   const filterPets = () => {
     const selectedType = petSelected.dataset.value;
     const selectedLocation = locSelected.dataset.value;
+    const selectedBreed = breedSelected.dataset.value;
 
     document.querySelectorAll('.pet-card').forEach(card => {
       const matchType = !selectedType || card.dataset.type === selectedType;
       const matchLoc = !selectedLocation || card.dataset.location === selectedLocation;
+      const matchBreed = !selectedBreed || card.dataset.breed === selectedBreed;
 
-      card.style.display = (matchType && matchLoc) ? '' : 'none';
+      card.style.display = (matchType && matchLoc && matchBreed) ? '' : 'none';
     });
   };
 

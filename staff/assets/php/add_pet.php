@@ -3,9 +3,10 @@ require 'db.php';
 
 $name = $_POST['name'];
 $sex = $_POST['sex'];
+$type = $_POST['type'];
+$breed = $_POST['breed'];
 $location = $_POST['location'];
 $description = $_POST['description'];
-$type = $_POST['type'];
 $editingId = $_POST['editingId'] ?? null;
 
 $imageName = '';
@@ -17,8 +18,8 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
 
 // If editingId is set, update the record
 if ($editingId) {
-    $query = "UPDATE pets SET name=?, sex=?, location=?, description=?, type=?";
-    $params = [$name, $sex, $location, $description, $type];
+    $query = "UPDATE pets SET name=?, sex=?, type=?, breed=?, location=?, description=?";
+    $params = [$name, $sex, $type, $breed, $location, $description];
 
     if ($imageName) {
         $query .= ", image=?";
@@ -36,8 +37,8 @@ if ($editingId) {
     echo json_encode(['success' => true]);
 } else {
     // Otherwise, insert a new pet
-    $stmt = $conn->prepare("INSERT INTO pets (name, sex, location, description, image, type) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $name, $sex, $location, $description, $imageName, $type);
+    $stmt = $conn->prepare("INSERT INTO pets (name, sex, type, breed, location, description, image) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssss", $name, $sex, $type, $breed, $location, $description, $imageName);
     $stmt->execute();
 
     echo json_encode(['success' => true]);

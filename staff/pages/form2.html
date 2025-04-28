@@ -75,6 +75,8 @@
             <div class="cols">Image</div>
             <div class="cols">Name</div>
             <div class="cols">Sex</div>
+            <div class="cols">Type</div>
+            <div class="cols">Breed</div>
             <div class="cols">Shelter</div>
             <div class="cols">Description</div>
             <div class="cols">Date</div>
@@ -103,15 +105,28 @@
     <div class="modal-content">
       <h2 id="formTitle">Add a Pet</h2>
       <form id="addPetForm" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" id="imageInput" />
+
         <input type="text" name="name" placeholder="Pet Name" required />
 
         <select name="type" required>
           <option value="" disabled selected>Select Type</option>
-          <option value="dog">Dog</option>
-          <option value="cat">Cat</option>
+          <option value="Dog">Dog</option>
+          <option value="Cat">Cat</option>
+        </select>
+
+        <select name="breed" required>
+          <option value="" disabled selected>Select Breed</option>
+          <option value="Aspin">Aspin </option>
+          <option value="Shih Tzu">Shih Tzu</option>
+          <option value="Chihuahua">Chihuahua</option>
+          <option value="Poodle">Poodle</option>
+          <option value="Maltese">Maltese</option>
+          <option value="Siberian Husky">Siberian Husky</option>
         </select>
 
         <select name="sex" required>
+          <option value="" disabled selected>Select Sex</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
         </select>
@@ -122,8 +137,6 @@
           <option value="PAWS Animal Rehabilitation Center">Paws</option>
           <option value="Quezon City Animal Care and Adoption center">QC Pound</option>
         </select>
-
-        <input type="file" name="image" accept="image/*" id="imageInput" />
 
         <div class="button-row">
           <button type="submit" class="save-btn">Save</button>

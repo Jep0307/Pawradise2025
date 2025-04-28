@@ -13,11 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
           // Add data-type and data-location for filtering
           petCard.setAttribute('data-type', pet.type);
           petCard.setAttribute('data-location', pet.location);
+          petCard.setAttribute('data-breed', pet.breed);
           
           petCard.innerHTML = `
             <img loading="lazy" src="/SIA02/Pawradise2025/staff/assets/uploads/${pet.image}" alt="${pet.name}" />
             <div class="pet-info">
               <p class="pet-name">${pet.name}</p>
+              <p class="breed">${pet.breed}</p>
               <p>${pet.sex}</p>
               <p class="location">${pet.location}</p>
               <p class="description">${pet.description}</p>

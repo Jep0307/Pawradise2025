@@ -3,7 +3,8 @@ function showPreview(card) {
   const image = card.querySelector("img").src;
   const title = card.querySelector(".pet-info p:first-child").textContent;
   const sex = card.querySelector(".pet-info p:nth-child(2)").textContent;
-  const location = card.querySelector(".pet-info p:nth-child(3)").textContent;
+  const breed = card.querySelector(".pet-info p:nth-child(3)").textContent;
+  const location = card.querySelector(".pet-info p:nth-child(4)").textContent;
   const description = card.querySelector(".pet-info .description").textContent;
 
   // Convert the location to a link
@@ -13,6 +14,7 @@ function showPreview(card) {
   document.getElementById("modalImage").src = image;
   document.getElementById("modalTitle").textContent = title;
   document.getElementById("modalPetSex").textContent = sex;
+  document.getElementById("modalPetBreed").textContent = breed;
   document.getElementById("modalPetLocation").innerHTML = locationLink;  // Use innerHTML to add the link
   document.getElementById("modalDiscription").textContent = description;
 
@@ -280,7 +282,7 @@ function dropdownLocationAndPet() {
     const select = container.querySelector('.cate-select');
     const selectIcon = container.querySelector('.cate-select img');
     const options = container.querySelector('.cate-options');
-    const selected = select.querySelector('.loc-selected, .pet-selected');
+    const selected = select.querySelector('.loc-selected, .pet-selected, .breed-selected');
 
     // When the select is clicked, toggle the dropdown
     select.addEventListener('click', (e) => {
@@ -325,6 +327,7 @@ dropdownLocationAndPet();
 function filterPetsByTypeAndLocation() {
   const selectedType = document.querySelector('.pet-selected')?.dataset.value;
   const selectedLocation = document.querySelector('.loc-selected')?.dataset.value;
+  const selectedBreed = document.querySelector('.breed-selected')?.dataset.value;
   const cards = document.querySelectorAll('.cards');
   const noResultText = document.getElementById('noResultFound');
 
@@ -333,11 +336,13 @@ function filterPetsByTypeAndLocation() {
   cards.forEach(card => {
     const petType = card.dataset.type;
     const petLocation = card.dataset.location;
+    const petBreed = card.dataset.breed;
 
     const matchesType = !selectedType || petType === selectedType;
     const matchesLocation = !selectedLocation || petLocation === selectedLocation;
+    const matchesBreed = !selectedBreed || petBreed === selectedBreed;
 
-    if (matchesType && matchesLocation) {
+    if (matchesType && matchesLocation && matchesBreed) {
       card.style.display = 'block';
       visibleCount++;
     } else {
