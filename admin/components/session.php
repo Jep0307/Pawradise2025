@@ -21,27 +21,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) >
 }
 $_SESSION['LAST_ACTIVITY'] = time();
 
-$session_id = session_id();
 $email = $_SESSION['admin_email'];
-
-$stmt = $conn->prepare("SELECT session_id FROM admin_sessions WHERE admin_email = ?");
-$stmt->bind_param("s", $email);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($row = $result->fetch_assoc()) {
-    if ($row['session_id'] !== $session_id) {
-        session_unset();
-        session_destroy();
-        echo "<script>alert('Session invalid. You may have logged in from another device.'); window.location='../login.php';</script>";
-        exit();
-    }
-} else {
-    session_unset();
-    session_destroy();
-    header("Location: ../login.php");
-    exit();
-}
 
 $admin_stmt = $conn->prepare("SELECT id, name, admin_img FROM admins WHERE email = ?");
 $admin_stmt->bind_param("s", $email);

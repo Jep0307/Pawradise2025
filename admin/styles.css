@@ -226,6 +226,7 @@
   align-items: center;
   gap: 0.8rem;
   width: 320px;
+  justify-content: space-between;
 }
 
 .search-input {
@@ -431,10 +432,19 @@
 .shelter-card {
   box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  height: 200px;
   margin-bottom: 4rem;
+  overflow: hidden;
 }
 
-.shelter-card h3 {
-  margin-top: 1rem;
+.shelter-card img {
+  width: 100%;
+}
+
+.shelter-card .shelter-info {
+ padding: 15px 20px;
+
+}
+
+.shelter-card .shelter-info h3 {
+  margin-bottom: 1rem;
 }
