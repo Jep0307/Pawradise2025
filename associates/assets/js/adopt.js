@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <p class="pet-name">${pet.name}</p>
               <p class="breed">${pet.breed}</p>
               <p>${pet.sex}</p>
+              <p class="age">${pet.age}</p>
               <p class="location">${pet.location}</p>
               <p class="description">${pet.description}</p>
             </div>

@@ -37,6 +37,13 @@ th, td {
   }
 } */
 
+.search-and-category-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
 .custom-select-container {
   position: relative;
   width: 100%;

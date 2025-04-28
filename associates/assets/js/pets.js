@@ -2,9 +2,10 @@ function showPreview(card) {
   const modal = document.getElementById("previewModal");
   const image = card.querySelector("img").src;
   const title = card.querySelector(".pet-info p:first-child").textContent;
-  const sex = card.querySelector(".pet-info p:nth-child(2)").textContent;
-  const breed = card.querySelector(".pet-info p:nth-child(3)").textContent;
-  const location = card.querySelector(".pet-info p:nth-child(4)").textContent;
+  const age = card.querySelector(".pet-info p:nth-child(2)").textContent;
+  const sex = card.querySelector(".pet-info p:nth-child(3)").textContent;
+  const breed = card.querySelector(".pet-info p:nth-child(4)").textContent;
+  const location = card.querySelector(".pet-info p:nth-child(5)").textContent;
   const description = card.querySelector(".pet-info .description").textContent;
 
   // Convert the location to a link
@@ -14,6 +15,7 @@ function showPreview(card) {
   document.getElementById("modalImage").src = image;
   document.getElementById("modalTitle").textContent = title;
   document.getElementById("modalPetSex").textContent = sex;
+  document.getElementById("modalPetAge").textContent = age;
   document.getElementById("modalPetBreed").textContent = breed;
   document.getElementById("modalPetLocation").innerHTML = locationLink;  // Use innerHTML to add the link
   document.getElementById("modalDiscription").textContent = description;
@@ -356,5 +358,23 @@ function filterPetsByTypeAndLocation() {
   closePetApplicationForm();
 }
 
+// Function to toggle the menu
+function toggleCategories() {
+  const filterIcon = document.getElementById('filterIcon');
+  const categories = document.getElementById('categories');
+  const closeCateBtn = document.getElementById('closeCateBtn');
+
+ filterIcon.addEventListener('click', () => {
+  categories.classList.add('active');
+  document.body.style.overflow = 'hidden'; // Prevent scrolling
+ });
+
+ closeCateBtn.addEventListener('click', () => {
+  categories.classList.remove('active');
+  document.body.style.overflow = '';
+ });
+ 
+}
 
 
+toggleCategories();

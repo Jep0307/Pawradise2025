@@ -8,7 +8,7 @@ if ($search !== '') {
     $stmt = $conn->prepare("SELECT * FROM pets WHERE name LIKE ? OR description LIKE ? OR location LIKE ?");
     $stmt->bind_param("ss", $searchWildcard, $searchWildcard);
 } else {
-    $stmt = $conn->prepare("SELECT * FROM pets");
+    $stmt = $conn->prepare("SELECT * FROM pets ORDER BY id DESC");
 }
 
 $stmt->execute();
