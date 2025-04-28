@@ -426,7 +426,7 @@
   color: #545454;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 700px) {
   .search-and-category-container {
     flex-direction: row;
     align-items: center;
@@ -485,9 +485,5 @@
     padding: 32px 24px;
     border-radius: 16px;
     border: 1px solid #eaeaea;
-  }
-
-  .cards-container {
-    column-gap: 32px;
   }
 }

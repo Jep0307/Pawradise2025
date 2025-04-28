@@ -261,38 +261,64 @@ searchInput();
 function dropdownLocationAndPet() {
   const customSelectContainers = document.querySelectorAll('.cate-select-container');
 
+  // Close dropdowns when clicking anywhere outside
+  document.addEventListener('click', (e) => {
+    customSelectContainers.forEach(container => {
+      const options = container.querySelector('.cate-options');
+      const icon = container.querySelector('.cate-select img');
+
+      // Close dropdown if the click is outside the container
+      if (!container.contains(e.target)) {
+        options.classList.add('hidden');
+        if (icon) icon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-down-icon.svg";
+      }
+    });
+  });
+
+  // Loop through each custom select container
   customSelectContainers.forEach(container => {
     const select = container.querySelector('.cate-select');
     const selectIcon = container.querySelector('.cate-select img');
     const options = container.querySelector('.cate-options');
     const selected = select.querySelector('.loc-selected, .pet-selected');
 
-    select.addEventListener('click', () => {
-      options.classList.toggle('hidden');
+    // When the select is clicked, toggle the dropdown
+    select.addEventListener('click', (e) => {
+      e.stopPropagation();
 
-      if (options.classList.contains('hidden')) {
-        selectIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-down-icon.svg";
-      } else {
-        selectIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-up-icon.svg";
-      }
+      // Close all other dropdowns first
+      customSelectContainers.forEach(c => {
+        if (c !== container) {
+          const otherOptions = c.querySelector('.cate-options');
+          const otherIcon = c.querySelector('.cate-select img');
+          otherOptions.classList.add('hidden');
+          if (otherIcon) otherIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-down-icon.svg";
+        }
+      });
+
+      // Toggle this dropdown
+      options.classList.toggle('hidden');
+      selectIcon.src = options.classList.contains('hidden') 
+        ? "/SIA02/Pawradise2025/associates/assets/imgs/chevron-down-icon.svg" 
+        : "/SIA02/Pawradise2025/associates/assets/imgs/chevron-up-icon.svg";
     });
 
+    // Handle option selection
     options.querySelectorAll('li').forEach(option => {
-      option.addEventListener('click', () => {
+      option.addEventListener('click', (e) => {
+        e.stopPropagation();
 
         selected.textContent = option.textContent;
         selected.dataset.value = option.dataset.value;
         options.classList.add('hidden');
-
-        if (selectIcon) {
-          selectIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-down-icon.svg";
-        }
+        selectIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-down-icon.svg";
 
         filterPetsByTypeAndLocation();
       });
     });
   });
 }
+
 
 dropdownLocationAndPet();
 
