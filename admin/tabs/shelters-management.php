@@ -46,27 +46,29 @@ if (!isset($_SESSION['admin_email'])) {
                     </p>
                 </div>
                 <div class="top-buttons">
-                    <select name="sort" id="" class="sort-input">
-                        <option value="sort" disabled selected>Sort</option>
-                        <option value="alphabetical">Alphabetical</option>
-                        <option value="newest">Newest</option>
-                    </select>
-                    <a href="../components/add-pet.html" class="add-btn">Add User</a>
+                    <a href="../components/add-pet.html" class="add-btn"> <span
+                            class="material-symbols-outlined">add</span>Add Shelter</a>
                 </div>
             </div>
 
-            <div class="search-input">
+            <!-- <div class="search-input">
                 <input type="text" name="" placeholder="Search something..." id="" /><span
                     class="material-symbols-outlined">search</span>
-            </div>
+            </div> -->
 
-            <div id="map"></div>
+            <!-- <div id="map"></div> -->
 
             <div class="management-bottom-panel">
                 <div class="shelter-cards">
                     <div class="shelter-card">
-                        <h3>QC Shelter</h3>
-                        <p>123 Random Address, Quezon City</p>
+                        <img src="../images/paws-rehab.jpg" alt="">
+                        <div class="shelter-info">
+                            <h3>PAWS Animal Rehabilitation Center</h3>
+                            <p>123 Random Address, Quezon City</p>
+                            <p>Animals in this shelter: <span>123</span></p>
+                            <p>Staff: <span>4</span></p>
+                            <p>Pending Applications: <span>10</span></p>
+                        </div>
                     </div>
 
                     <div class="shelter-card">
