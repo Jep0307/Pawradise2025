@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
           adoptDisplay.appendChild(petCard);
         });
 
-        setupCustomFilters(); // Hook filters after cards are rendered
+        // setupCustomFilters();
       } else {
         adoptDisplay.innerHTML = '<p>No pets available at the moment.</p>';
       }
@@ -37,31 +37,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-function setupCustomFilters() {
-  const petSelected = document.querySelector('.pet-selected');
-  const locSelected = document.querySelector('.loc-selected');
-  const breedSelected = document.querySelector('.breed-selected');
+// function setupCustomFilters() {
+//   const petSelected = document.querySelector('.pet-selected');
+//   const locSelected = document.querySelector('.loc-selected');
+//   const breedSelected = document.querySelector('.breed-selected');
 
-  if (!petSelected || !locSelected || !breedSelected) return;
+//   if (!petSelected || !locSelected || !breedSelected) return;
 
-  const filterPets = () => {
-    const selectedType = petSelected.dataset.value;
-    const selectedLocation = locSelected.dataset.value;
-    const selectedBreed = breedSelected.dataset.value;
+//   const filterPets = () => {
+//     const selectedType = petSelected.dataset.value;
+//     const selectedLocation = locSelected.dataset.value;
+//     const selectedBreed = breedSelected.dataset.value;
 
-    document.querySelectorAll('.pet-card').forEach(card => {
-      const matchType = !selectedType || card.dataset.type === selectedType;
-      const matchLoc = !selectedLocation || card.dataset.location === selectedLocation;
-      const matchBreed = !selectedBreed || card.dataset.breed === selectedBreed;
+//     document.querySelectorAll('.pet-card').forEach(card => {
+//       const matchType = !selectedType || card.dataset.type === selectedType;
+//       const matchLoc = !selectedLocation || card.dataset.location === selectedLocation;
+//       const matchBreed = !selectedBreed || card.dataset.breed === selectedBreed;
 
-      card.style.display = (matchType && matchLoc && matchBreed) ? '' : 'none';
-    });
-  };
+//       card.style.display = (matchType && matchLoc && matchBreed) ? '' : 'none';
+//     });
+//   };
 
-  // Listen to option selection from both dropdowns
-  document.querySelectorAll('.cate-options li').forEach(option => {
-    option.addEventListener('click', () => {
-      setTimeout(filterPets, 10); // delay to let dataset.value update
-    });
-  });
-}
+//   // Listen to option selection from both dropdowns
+//   document.querySelectorAll('.cate-options li').forEach(option => {
+//     option.addEventListener('click', () => {
+//       setTimeout(filterPets, 10);
+//     });
+//   });
+// }

@@ -586,6 +586,18 @@
     top: 100%;
   }
 
+  .cate-options {
+    width: 200px;
+    /* left: auto;
+    right: 0; */
+  }
+
+  .cate-select-container:nth-child(3) .cate-options {
+    left: auto;
+    right: 0;
+  }
+
+
   .cards-container {
     column-gap: 16px;
   }

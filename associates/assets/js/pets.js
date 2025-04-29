@@ -317,7 +317,7 @@ function dropdownLocationAndPet() {
         options.classList.add('hidden');
         selectIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-down-icon.svg";
 
-        filterPetsByTypeAndLocation();
+        filterPets();
       });
     });
   });
@@ -326,33 +326,26 @@ function dropdownLocationAndPet() {
 
 dropdownLocationAndPet();
 
-function filterPetsByTypeAndLocation() {
-  const selectedType = document.querySelector('.pet-selected')?.dataset.value;
-  const selectedLocation = document.querySelector('.loc-selected')?.dataset.value;
-  const selectedBreed = document.querySelector('.breed-selected')?.dataset.value;
+function filterPets() {
+  const type = document.querySelector('.pet-selected')?.dataset.value;
+  const location = document.querySelector('.loc-selected')?.dataset.value;
+  const breed = document.querySelector('.breed-selected')?.dataset.value;
   const cards = document.querySelectorAll('.cards');
-  const noResultText = document.getElementById('noResultFound');
+  const noResult = document.getElementById('noResultFound');
 
-  let visibleCount = 0;
+  let count = 0;
 
   cards.forEach(card => {
-    const petType = card.dataset.type;
-    const petLocation = card.dataset.location;
-    const petBreed = card.dataset.breed;
+    const matches =
+      (!type || card.dataset.type === type) &&
+      (!location || card.dataset.location === location) &&
+      (!breed || card.dataset.breed === breed);
 
-    const matchesType = !selectedType || petType === selectedType;
-    const matchesLocation = !selectedLocation || petLocation === selectedLocation;
-    const matchesBreed = !selectedBreed || petBreed === selectedBreed;
-
-    if (matchesType && matchesLocation && matchesBreed) {
-      card.style.display = 'block';
-      visibleCount++;
-    } else {
-      card.style.display = 'none';
-    }
+    card.style.display = matches ? 'block' : 'none';
+    if (matches) count++;
   });
 
-  noResultText.textContent = visibleCount === 0 ? 'No result found' : '';
+  noResult.textContent = count === 0 ? 'No result found' : '';
 
   closePreview();
   closePetApplicationForm();

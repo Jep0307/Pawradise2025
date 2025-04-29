@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <p class="description">${pet.description}</p>
             </div>
           `;
-          petContainer.appendChild(petCard);
+          petContainer.insertBefore(petCard, petContainer.firstChild);
         });
       } else {
         petContainer.innerHTML = '<p>No pets available at the moment.</p>';
