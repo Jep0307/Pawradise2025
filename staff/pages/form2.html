@@ -72,6 +72,15 @@
   <main class="body">
     <section class="filter">
       <div class="content">
+        <!-- Add Pet Button -->
+        <div class="frame-21" id="openFormBtn" style="cursor: pointer;">
+          <!-- <svg class="vector2" width="20" height="20" fill="none" viewBox="0 0 20 20">
+            <path
+              d="M6 10H14M10 6V14M20 10C20 15.52 15.52 20 10 20C4.48 20 0 15.52 0 10C0 4.48 4.48 0 10 0C15.52 0 20 4.48 20 10Z"
+              stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg> -->
+          <div class="add-a-pet">Add a pet</div>
+        </div>
         <div class="table">
           <!-- Table Header -->
           <div class="row">
@@ -79,26 +88,22 @@
             <div class="cols">Image</div>
             <div class="cols">Name</div>
             <div class="cols">Sex</div>
+<<<<<<< HEAD
             <div class="cols">Type</div> <!-- Add this in the header row -->
 
+=======
+            <div class="cols">Type</div>
+            <div class="cols">Age</div>
+            <div class="cols">Breed</div>
+>>>>>>> b08cfdec6f54cf066fbc67e892bf38f804574f10
             <div class="cols">Shelter</div>
             <div class="cols">Description</div>
             <div class="cols">Date</div>
-            <div class="cols">Edit</div>
+            <div class="cols">Actions</div>
           </div>
 
           <!-- Pet rows will be injected here -->
           <div id="adoptList"></div>
-
-          <!-- Add Pet Button -->
-          <div class="frame-21" id="openFormBtn" style="cursor: pointer;">
-            <svg class="vector2" width="20" height="20" fill="none" viewBox="0 0 20 20">
-              <path
-                d="M6 10H14M10 6V14M20 10C20 15.52 15.52 20 10 20C4.48 20 0 15.52 0 10C0 4.48 4.48 0 10 0C15.52 0 20 4.48 20 10Z"
-                stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <div class="add-a-pet">Add a pet</div>
-          </div>
         </div>
       </div>
     </section>
@@ -109,15 +114,33 @@
     <div class="modal-content">
       <h2 id="formTitle">Add a Pet</h2>
       <form id="addPetForm" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" id="imageInput" />
+
         <input type="text" name="name" placeholder="Pet Name" required />
 
         <select name="type" required>
           <option value="" disabled selected>Select Type</option>
-          <option value="dog">Dog</option>
-          <option value="cat">Cat</option>
+          <option value="Dog">Dog</option>
+          <option value="Cat">Cat</option>
+        </select>
+        
+        <input type="text" name="age" placeholder="Age" required />
+
+        <select name="breed" required>
+          <option value="" disabled selected>Select Breed</option>
+          <option value="Aspin">Aspin </option>
+          <option value="Shih Tzu">Shih Tzu</option>
+          <option value="Chihuahua">Chihuahua</option>
+          <option value="Poodle">Poodle</option>
+          <option value="American Curl">American Curl</option>
+          <option value="Siamese">Siamese</option>
+          <option value="Bengal">Bengal</option>
+          <option value="Persian">Persian</option>
+          <option value="Stray">Stray</option>
         </select>
 
         <select name="sex" required>
+          <option value="" disabled selected>Select Sex</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
         </select>
@@ -128,8 +151,6 @@
           <option value="PAWS Animal Rehabilitation Center">Paws</option>
           <option value="Quezon City Animal Care and Adoption center">QC Pound</option>
         </select>
-
-        <input type="file" name="image" accept="image/*" id="imageInput" />
 
         <div class="button-row">
           <button type="submit" class="save-btn">Save</button>

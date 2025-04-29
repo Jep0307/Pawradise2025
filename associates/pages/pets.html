@@ -48,44 +48,71 @@
         <div class="content">
           <!-- =========== Search and category =========== -->
           <div class="search-and-category-container">
-            <!-- Search -->
-            <div class="search-container">
-              <input type="text" placeholder="Search for a pet..." id="searchInput" />
-              <img loading="lazy" src="../assets/imgs/Search-icon.svg" alt="">
+
+            <div class="search-and-filter-icon">
+              <!-- Search -->
+              <div class="search-container">
+                <input type="text" placeholder="Search for a pet..." id="searchInput" />
+                <img loading="lazy" src="../assets/imgs/Search-icon.svg" alt="">
+              </div>
+
+              <div class="cate-filter-icon" id="filterIcon">
+                <img src="../assets/imgs/Filter-icon.svg" alt="">
+              </div>
             </div>
 
             <!-- Categories -->
-            <div class="categories">
-              <div class="cate-select-container">
-                <div class="cate-select">
-                  <span class="loc-selected">Locations</span>
-                  <img src="../assets/imgs/chevron-down-icon.svg" alt="">
-                </div>
-                <ul class="cate-options hidden">
-                  <li data-value="">All location</li>
-                  <li data-value="PAWS Animal Rehabilitation Center">PARC</li>
-                  <li data-value="Quezon City Animal Care and Adoption center">QACACAC</li>
-                </ul>
-              </div>
+            <div class="categories" id="categories">
+              <div class="categories-container">
+                <div class="content">
+                  <div class="cate-select-container">
+                    <div class="cate-select">
+                      <span class="loc-selected">Shelter</span>
+                      <img src="../assets/imgs/chevron-down-icon.svg" alt="">
+                    </div>
+                    <ul class="cate-options hidden">
+                      <li data-value="">All</li>
+                      <li data-value="PAWS Animal Rehabilitation Center">PARC</li>
+                      <li data-value="Quezon City Animal Care and Adoption center">QACACAC</li>
+                    </ul>
+                  </div>
 
-              <div class="cate-select-container">
-                <div class="cate-select">
-                  <span class="pet-selected">Pet</span>
-                  <img src="../assets/imgs/chevron-down-icon.svg" alt="">
+                  <div class="cate-select-container">
+                    <div class="cate-select">
+                      <span class="pet-selected">Pet</span>
+                      <img src="../assets/imgs/chevron-down-icon.svg" alt="">
+                    </div>
+                    <ul class="cate-options hidden">
+                      <li data-value="">All</li>
+                      <li data-value="Dog">Dog</li>
+                      <li data-value="Cat">Cat</li>
+                    </ul>
+                  </div>
+
+                  <div class="cate-select-container">
+                    <div class="cate-select">
+                      <span class="breed-selected">Breed</span>
+                      <img src="../assets/imgs/chevron-down-icon.svg" alt="">
+                    </div>
+                    <ul class="cate-options hidden">
+                      <li data-value="">All</li>
+                      <li data-value="Aspin">Aspin</li>
+                      <li data-value="Shih Tzu">Shih Tzu</li>
+                      <li data-value="Chihuahua">Chihuahua</li>
+                      <li data-value="Poodle">Poodle</li>
+                      <li data-value="American Curl">American Curl</li>
+                      <li data-value="Siamese">Siamese</li>
+                      <li data-value="Bengal">Bengal</li>
+                      <li data-value="Persian">Persian</li>
+                    </ul>
+                  </div>
                 </div>
-                <ul class="cate-options hidden">
-                  <li data-value="">All pets</li>
-                  <li data-value="dog">Dog</li>
-                  <li data-value="cat">Cat</li>
-                </ul>
+
+                <div class="content">
+                  <span class="cate-close-btn" id="closeCateBtn">Close</span>
+                </div>
               </div>
             </div>
-
-            <!-- <div class="categories">
-              <button class="active" id="allBtn" onclick="filterCards('all')">All</button>
-              <button id="CatsBtn" onclick="filterCards('cat')">Cats</button>
-              <button id="DogsBtn" onclick="filterCards('dog')">Dogs</button>
-            </div> -->
           </div>
 
           <!-- =========== Pets catalog modal =========== -->
@@ -107,6 +134,8 @@
                   <h2 id="modalTitle"></h2>
                   <div class="texts">
                     <p id="modalPetSex"></p>
+                    <p id="modalPetAge"></p>
+                    <p id="modalPetBreed"></p>
                     <p id="modalDiscription"></p>
                     <p id="modalPetLocation"></p>
                   </div>

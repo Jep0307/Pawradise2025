@@ -3,7 +3,7 @@
 $host = 'localhost';  // Your host (usually localhost)
 $user = 'root';       // Your database username
 $pass = '';           // Your database password (default is an empty string on local setup)
-$dbname = 'admin1';   // Your database name (update this)
+$dbname = 'staff';   // Your database name (update this)
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 

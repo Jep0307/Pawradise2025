@@ -2,8 +2,10 @@ function showPreview(card) {
   const modal = document.getElementById("previewModal");
   const image = card.querySelector("img").src;
   const title = card.querySelector(".pet-info p:first-child").textContent;
-  const sex = card.querySelector(".pet-info p:nth-child(2)").textContent;
-  const location = card.querySelector(".pet-info p:nth-child(3)").textContent;
+  const age = card.querySelector(".pet-info p:nth-child(2)").textContent;
+  const sex = card.querySelector(".pet-info p:nth-child(3)").textContent;
+  const breed = card.querySelector(".pet-info p:nth-child(4)").textContent;
+  const location = card.querySelector(".pet-info p:nth-child(5)").textContent;
   const description = card.querySelector(".pet-info .description").textContent;
 
   // Convert the location to a link
@@ -13,6 +15,8 @@ function showPreview(card) {
   document.getElementById("modalImage").src = image;
   document.getElementById("modalTitle").textContent = title;
   document.getElementById("modalPetSex").textContent = sex;
+  document.getElementById("modalPetAge").textContent = age;
+  document.getElementById("modalPetBreed").textContent = breed;
   document.getElementById("modalPetLocation").innerHTML = locationLink;  // Use innerHTML to add the link
   document.getElementById("modalDiscription").textContent = description;
 
@@ -214,6 +218,8 @@ function searchInput() {
       // Reset dropdowns
       const petSelected = document.querySelector('.pet-selected');
       const locSelected = document.querySelector('.loc-selected');
+      const breedSelected = document.querySelector('.breed-selected');
+
 
       if (petSelected) {
         petSelected.textContent = 'Pet';
@@ -222,6 +228,10 @@ function searchInput() {
       if (locSelected) {
         locSelected.textContent = 'Location';
         locSelected.dataset.value = '';
+      }
+      if (breedSelected) {
+        breedSelected.textContent = 'Breed';
+        breedSelected.dataset.value = '';
       }
 
       cards.forEach(card => {
@@ -261,69 +271,109 @@ searchInput();
 function dropdownLocationAndPet() {
   const customSelectContainers = document.querySelectorAll('.cate-select-container');
 
+  // Close dropdowns when clicking anywhere outside
+  document.addEventListener('click', (e) => {
+    customSelectContainers.forEach(container => {
+      const options = container.querySelector('.cate-options');
+      const icon = container.querySelector('.cate-select img');
+
+      // Close dropdown if the click is outside the container
+      if (!container.contains(e.target)) {
+        options.classList.add('hidden');
+        if (icon) icon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-down-icon.svg";
+      }
+    });
+  });
+
+  // Loop through each custom select container
   customSelectContainers.forEach(container => {
     const select = container.querySelector('.cate-select');
     const selectIcon = container.querySelector('.cate-select img');
     const options = container.querySelector('.cate-options');
-    const selected = select.querySelector('.loc-selected, .pet-selected');
+    const selected = select.querySelector('.loc-selected, .pet-selected, .breed-selected');
 
-    select.addEventListener('click', () => {
+    // When the select is clicked, toggle the dropdown
+    select.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      // Close all other dropdowns first
+      customSelectContainers.forEach(c => {
+        if (c !== container) {
+          const otherOptions = c.querySelector('.cate-options');
+          const otherIcon = c.querySelector('.cate-select img');
+          otherOptions.classList.add('hidden');
+          if (otherIcon) otherIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-down-icon.svg";
+        }
+      });
+
+      // Toggle this dropdown
       options.classList.toggle('hidden');
-
-      if (options.classList.contains('hidden')) {
-        selectIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-down-icon.svg";
-      } else {
-        selectIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-up-icon.svg";
-      }
+      selectIcon.src = options.classList.contains('hidden') 
+        ? "/SIA02/Pawradise2025/associates/assets/imgs/chevron-down-icon.svg" 
+        : "/SIA02/Pawradise2025/associates/assets/imgs/chevron-up-icon.svg";
     });
 
+    // Handle option selection
     options.querySelectorAll('li').forEach(option => {
-      option.addEventListener('click', () => {
+      option.addEventListener('click', (e) => {
+        e.stopPropagation();
 
         selected.textContent = option.textContent;
         selected.dataset.value = option.dataset.value;
         options.classList.add('hidden');
+        selectIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-down-icon.svg";
 
-        if (selectIcon) {
-          selectIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/chevron-down-icon.svg";
-        }
-
-        filterPetsByTypeAndLocation();
+        filterPets();
       });
     });
   });
 }
 
+
 dropdownLocationAndPet();
 
-function filterPetsByTypeAndLocation() {
-  const selectedType = document.querySelector('.pet-selected')?.dataset.value;
-  const selectedLocation = document.querySelector('.loc-selected')?.dataset.value;
+function filterPets() {
+  const type = document.querySelector('.pet-selected')?.dataset.value;
+  const location = document.querySelector('.loc-selected')?.dataset.value;
+  const breed = document.querySelector('.breed-selected')?.dataset.value;
   const cards = document.querySelectorAll('.cards');
-  const noResultText = document.getElementById('noResultFound');
+  const noResult = document.getElementById('noResultFound');
 
-  let visibleCount = 0;
+  let count = 0;
 
   cards.forEach(card => {
-    const petType = card.dataset.type;
-    const petLocation = card.dataset.location;
+    const matches =
+      (!type || card.dataset.type === type) &&
+      (!location || card.dataset.location === location) &&
+      (!breed || card.dataset.breed === breed);
 
-    const matchesType = !selectedType || petType === selectedType;
-    const matchesLocation = !selectedLocation || petLocation === selectedLocation;
-
-    if (matchesType && matchesLocation) {
-      card.style.display = 'block';
-      visibleCount++;
-    } else {
-      card.style.display = 'none';
-    }
+    card.style.display = matches ? 'block' : 'none';
+    if (matches) count++;
   });
 
-  noResultText.textContent = visibleCount === 0 ? 'No result found' : '';
+  noResult.textContent = count === 0 ? 'No result found' : '';
 
   closePreview();
   closePetApplicationForm();
 }
 
+// Function to toggle the menu
+function toggleCategories() {
+  const filterIcon = document.getElementById('filterIcon');
+  const categories = document.getElementById('categories');
+  const closeCateBtn = document.getElementById('closeCateBtn');
+
+ filterIcon.addEventListener('click', () => {
+  categories.classList.add('active');
+  document.body.style.overflow = 'hidden'; // Prevent scrolling
+ });
+
+ closeCateBtn.addEventListener('click', () => {
+  categories.classList.remove('active');
+  document.body.style.overflow = '';
+ });
+ 
+}
 
 
+toggleCategories();

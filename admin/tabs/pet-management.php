@@ -8,7 +8,26 @@ if (!isset($_SESSION['admin_email'])) {
     exit();
 }
 
-$sql = "SELECT * FROM pets"; 
+// Get pets along with their FIRST image
+$sql = "
+    SELECT 
+        p.*, 
+        pi.image_data, 
+        pi.mime_type
+    FROM 
+        pets p
+    LEFT JOIN (
+        SELECT 
+            pet_id, 
+            image_data, 
+            mime_type
+        FROM pet_images
+        WHERE id IN (
+            SELECT MIN(id) FROM pet_images GROUP BY pet_id
+        )
+    ) pi ON p.id = pi.pet_id
+"; 
+
 $result = $conn->query($sql);
 
 if (!$result) {
@@ -28,6 +47,7 @@ while ($row = $result->fetch_assoc()) {
 
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -103,36 +123,40 @@ $conn->close();
                     <?php
                     if (count($pets_table) > 0):
                         foreach($pets_table as $row):
-                        $imageData = base64_encode($row['pet_img']);
-                        $imageSrc = 'data:image/jpeg;base64,' . $imageData;
+                            $imageSrc = '';
+                            if (!empty($row['image_data'])) {
+                                $imageSrc = 'data:' . htmlspecialchars($row['mime_type']) . ';base64,' . base64_encode($row['image_data']);
+                            } else {
+                                $imageSrc = '../assets/default-pet.png'; // path to a default image if no image found
+                            }
 
-                        echo "<tr>";
-                        echo "<td>" . $row['id'] . "</td>";
-                        echo "<td><img src='" . $imageSrc . "' alt='Pet Image' width='50' height='50'></td>";
-                        echo "<td>" . $row['species'] . "</td>";
-                        echo "<td>" . $row['breed'] . "</td>";
-                        echo "<td>" . $row['age'] . "</td>";
-                        echo "<td>" . $row['gender'] . "</td>";
-                        echo "<td>" . $row['color'] . "</td>";
-                        echo "<td>" . $row['vaccination_status'] . "</td>";
-                        echo "<td>" . $row['neutered_status'] . "</td>";
-                        echo "<td>" . $row['medical_condition'] . "</td>";
-                        echo "<td>" . $row['adoption_status'] . "</td>";
-                        echo "<td>" . $row['shelter'] . "</td>";
-                        echo "<td>" . $row['intake_date'] . "</td>";
-                        echo "<td class='options-btn'>
-                                <span class='material-symbols-outlined'>edit</span>
-                                <div class='pop-up'>
-                                    <a href='../components/edit-pet.php?id={$row['id']}'><span class='material-symbols-outlined'>edit</span>Edit</a>
-                                    <form action='../components/delete-pet.php' method='POST' onsubmit='return confirm(\"Are you sure you want to delete this entry?\");'>
-                                        <input type='hidden' name='user_id' value='{$row['id']}'>
-                                        <button type='submit' class='delete-btn'>
-                                            <span class='material-symbols-outlined'>delete</span>Delete
-                                        </button>
-                                    </form>
-                                </div>
-                              </td>";
-                        echo "</tr>";
+                            echo "<tr>";
+                            echo "<td>" . $row['id'] . "</td>";
+                            echo "<td><img src='" . $imageSrc . "' alt='Pet Image' width='50' height='50'></td>";
+                            echo "<td>" . htmlspecialchars($row['species']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['breed']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['age']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['gender']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['color']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['vaccination_status']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['neutered_status']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['medical_condition']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['adoption_status']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['shelter']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['intake_date']) . "</td>";
+                            echo "<td class='options-btn'>
+                                    <span class='material-symbols-outlined'>edit</span>
+                                    <div class='pop-up'>
+                                        <a href='../components/edit-pet.php?id={$row['id']}'><span class='material-symbols-outlined'>edit</span>Edit</a>
+                                        <form action='../components/delete-pet.php' method='POST' onsubmit='return confirm(\"Are you sure you want to delete this entry?\");'>
+                                            <input type='hidden' name='user_id' value='{$row['id']}'>
+                                            <button type='submit' class='delete-btn'>
+                                                <span class='material-symbols-outlined'>delete</span>Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>";
+                            echo "</tr>";
                         endforeach;
                     ?>
                     <?php else: ?>

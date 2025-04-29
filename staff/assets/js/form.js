@@ -12,19 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('searchBtn').addEventListener('click', () => {
     const keyword = searchInput.value.toLowerCase();
     const rows = document.querySelectorAll('#adoptList .row');
-  
+
     rows.forEach(row => {
       const name = row.dataset.name;
       const description = row.dataset.description;
       const location = row.dataset.location;
-      const isMatch = name.includes(keyword) || description.includes(keyword) || location.includes(keyword); 
+      const isMatch = name.includes(keyword) || description.includes(keyword) || location.includes(keyword);
       row.style.display = isMatch ? 'grid' : 'none';
     });
   });
-  
+
 
   // Escape function to prevent XSS
   function escapeHTML(str) {
+    if (!str) return ''; // Return an empty string if the input is null or undefined
     return str.replace(/[&<>"']/g, m => ({
       '&': '&amp;',
       '<': '&lt;',
@@ -33,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "'": '&#39;',
     }[m]));
   }
+
 
   // ✅ Open modal when "Add a pet" is clicked
   openFormBtn.addEventListener('click', () => {
@@ -58,11 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById("openFormBtn").addEventListener("click", () => {
     document.getElementById("petFormModal").style.display = "flex";
   });
-  
+
   document.getElementById("cancelButton").addEventListener("click", () => {
     document.getElementById("petFormModal").style.display = "none";
   });
-  
+
 
   // ✅ Submit form (Add or Edit)
   form.addEventListener('submit', function (e) {
@@ -102,21 +104,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ✅ Load pets from DB and show them
-    function loadPets(search = '') {
-      const url = search ? `../assets/php/get_pets.php?search=${encodeURIComponent(search)}` : '../assets/php/get_pets.php';
-    
-      fetch(url)
-        .then(res => res.json())
-        .then(data => {
-          adoptList.innerHTML = '';
-    
-          if (data.length === 0) {
-            adoptList.innerHTML = '<div style="padding: 1rem;">No pets found.</div>';
-            return;
-          }
-    
-          data.forEach(pet => {
-            adoptList.innerHTML += `
+  function loadPets(search = '') {
+    const url = search ? `../assets/php/get_pets.php?search=${encodeURIComponent(search)}` : '../assets/php/get_pets.php';
+
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        adoptList.innerHTML = '';
+
+        if (data.length === 0) {
+          adoptList.innerHTML = '<div style="padding: 1rem;">No pets found.</div>';
+          return;
+        }
+
+        data.forEach(pet => {
+          adoptList.innerHTML += `
               <div class="row" data-name="${pet.name.toLowerCase()}" 
                 data-description="${pet.description.toLowerCase()}"
                 data-location="${pet.location.toLowerCase()}">
@@ -124,10 +126,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="cols"><img src="../assets/uploads/${escapeHTML(pet.image)}" class="pet-image" /></div>
                 <div class="cols">${escapeHTML(pet.name)}</div>
                 <div class="cols">${escapeHTML(pet.sex)}</div>
-                <div class="cols">${escapeHTML(pet.type || '—')}</div> <!-- ✅ Add this line -->
                 <div class="cols">${escapeHTML(pet.location)}</div>
                 <div class="cols">${escapeHTML(pet.description)}</div>
-                <div class="cols">${pet.date || '—'}</div>
+                <div class="cols">${escapeHTML(pet.created_at)}</div>
                 <div class="cols">
                   <button onclick="editPet(${pet.id})">Edit</button>
                   <button onclick="deletePet(${pet.id})">Delete</button>
@@ -135,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             `;
           });
-          
         })
         .catch(err => {
           console.error('Error loading pets:', err);
@@ -174,6 +174,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         form.name.value = pet.name;
         form.sex.value = pet.sex;
+        form.type.value = pet.type;
+        form.age.value = pet.age;
+        form.breed.value = pet.breed;
         form.location.value = pet.location;
         form.description.value = pet.description;
         form.type.value = pet.type;

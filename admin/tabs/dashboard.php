@@ -20,7 +20,7 @@ while ($row = $result->fetch_assoc()) {
     $activities[] = $row;
 }
 
-$currentMonth = date('Y-m'); // Get current year and month (e.g., "2025-04")
+$currentMonth = date('Y-m');
 
 $queryPetsListed = "SELECT COUNT(*) AS total FROM pets WHERE DATE_FORMAT(created_at, '%Y-%m') = ?";
 $stmt = $conn->prepare($queryPetsListed);
