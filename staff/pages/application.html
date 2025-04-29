@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application Management</title>
+  <link rel="stylesheet" href="../assets/styles/form2.css" />
+</head>
+
+<body>
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <span class="logo-text">Pawradise</span>
+    </div>
+    <nav class="sidebar-nav">
+      <section class="nav-section">
+        <a href="../pages/application.html" class="nav-item">
+          <span class="nav-text">Application</span>
+        </a>
+        <a href="../pages/form2.html" class="nav-item">
+          <span class="nav-text">Pet Management</span>
+        </a>
+      </section>
+      <section class="nav-section">
+        <a href="../pages/staff-profile.html" class="nav-item">
+          <span class="nav-text">Profile</span>
+        </a>
+        <a href="logout.php" class="nav-item">
+          <span class="nav-text">Logout</span>
+        </a>
+      </section>
+    </nav>
+  </aside>
+
+  <header class="header">
+    <div class="application-management">APPLICATION MANAGEMENT</div>
+    <div class="search-container">
+      <input type="text" class="search-input" placeholder="Search..." />
+      <button id="searchBtn" style="background: none; border: none; cursor: pointer;">
+        <svg class="search-icon" width="15" height="15" ...>...</svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="body">
+    <section class="filter">
+      <div class="content">
+        <div class="table">
+          <div class="row">
+            <div class="cols">Id</div>
+            <div class="cols">Name</div>
+            <div class="cols">Email</div>
+            <div class="cols">Date</div>
+            <div class="cols">Status</div>
+            <div class="cols">Edit</div>
+          </div>
+
+          <div id="applicationList"></div>
+
+          <div class="frame-21" id="openFormBtn" style="cursor: pointer;">
+            <div class="add-an-application">Add an Application</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Floating Form Modal -->
+  <div id="applicationFormModal">
+    <div class="modal-content">
+      <h2 id="formTitle">Add an Application</h2>
+      <form id="addApplicationForm" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Applicant Name" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <textarea name="description" placeholder="Description" rows="4" required></textarea>
+        <select name="status" required>
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+
+        <div class="button-row">
+          <button type="submit" class="save-btn">Save</button>
+          <button type="button" id="cancelButton" class="cancel-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../assets/js/form.js"></script>
+</body>
+
+</html>

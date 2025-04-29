@@ -154,12 +154,17 @@ body {
 }
 
 .row {
-  display: grid;
-  grid-template-columns: 50px 80px 1fr 1fr 1fr 2fr 100px 120px;
   padding: 1rem;
   font-weight: bold;
   background-color: #7AA34B;
   color: white;
+}
+
+.table .row {
+  display: grid;
+  grid-template-columns: 5% 10% 10% 10% 10% 20% 15% 10% 10%; /* Adjust as needed */
+  gap: 1px;
+  align-items: center;
 }
 
 #adoptList .row {
@@ -170,6 +175,9 @@ body {
 }
 
 .cols {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   padding: 0.5rem;
 }
 

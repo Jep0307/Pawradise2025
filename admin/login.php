@@ -15,8 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows == 1) {
         $user = $result->fetch_assoc();
 
-        // $session_id = session_id();
-        // $now = date('Y-m-d H:i:s');
+         $session_id = session_id();
+         $now = date('Y-m-d H:i:s');
         // $check = $conn->prepare("SELECT session_id FROM admin_sessions WHERE admin_email = ?");
         // $check->bind_param("s", $email);
         // $check->execute();
@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         header("Location: ./tabs/dashboard.php");
         exit();
+        
     }
 
     $stmt->close();

@@ -5,7 +5,7 @@ $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
 if ($search !== '') {
     $searchWildcard = '%' . $conn->real_escape_string($search) . '%';
-    $stmt = $conn->prepare("SELECT * FROM pets WHERE name LIKE ? OR description LIKE ? OR location LIKE ?");
+    $stmt = $conn->prepare("SELECT * FROM pets WHERE name LIKE ? OR description LIKE ? OR location LIKE ? OR type LIKE ?");
     $stmt->bind_param("ss", $searchWildcard, $searchWildcard);
 } else {
     $stmt = $conn->prepare("SELECT * FROM pets");

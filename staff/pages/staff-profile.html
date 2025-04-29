@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile</title>
+  <link rel="stylesheet" href="../assets/styles/form2.css" />
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <span class="logo-text">Pawradise</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="divider"></div>
+      <section class="nav-section">
+        <a href="../pages/application.html" class="nav-item">
+          <svg class="nav-icon" width="24" height="24" fill="none">
+            <path d="M12 16L18 24H6L12 16Z" stroke="white" />
+          </svg>
+          <span class="nav-text">Application</span>
+        </a>
+        <a href="../pages/form2.html" class="nav-item">
+          <svg class="nav-icon" width="24" height="24" fill="none">
+            <circle cx="12" cy="7" r="5" stroke="white" />
+            <path d="M3 22c0-3 4-6 9-6s9 3 9 6" stroke="white" />
+          </svg>
+          <span class="nav-text">Pet Management</span>
+        </a>
+      </section>
+      <div class="divider"></div>
+      <section class="nav-section">
+        <a href="../pages/staff-profile.html" class="nav-item">
+          <svg class="nav-icon" width="24" height="24" fill="none">
+            <path d="M12 12C15 12 18 15 18 18H6C6 15 9 12 12 12Z" stroke="white" />
+            <circle cx="12" cy="6" r="4" stroke="white" />
+          </svg>
+          <span class="nav-text">Profile</span>
+        </a>
+        <a href="../logout.php" class="nav-item">
+          <svg class="nav-icon" width="24" height="24" fill="none">
+            <path
+              d="M8 24H2.67C2 24 1.33 23.33 1.33 22.67V1.33C1.33 0.67 2 0 2.67 0H8M17.33 18.67L24 12M24 12L17.33 5.33M24 12H8"
+              stroke="white" />
+          </svg>
+          <span class="nav-text">Logout</span>
+        </a>
+      </section>
+    </nav>
+  </aside>
+
+  <header class="header">
+    <div class="pet-management">PROFILE</div>
+  </header>
+
+  <main class="body">
+    <section class="profile-info">
+      <h2>Profile Information</h2>
+      <div class="profile-details">
+        <p><strong>Name:</strong> <span id="profileName">Loading...</span></p>
+        <p><strong>Email:</strong> <span id="profileEmail">Loading...</span></p>
+        <p><strong>Phone:</strong> <span id="profilePhone">Loading...</span></p>
+        <p><strong>Address:</strong> <span id="profileAddress">Loading...</span></p>
+      </div>
+    </section>
+    
+  </main>
+
+  <script src="../assets/js/profile.js"></script>
+
+</body>
+</html>

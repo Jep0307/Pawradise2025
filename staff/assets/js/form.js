@@ -119,11 +119,12 @@ document.addEventListener('DOMContentLoaded', () => {
             adoptList.innerHTML += `
               <div class="row" data-name="${pet.name.toLowerCase()}" 
                 data-description="${pet.description.toLowerCase()}"
-                 data-location="${pet.location.toLowerCase()}">
+                data-location="${pet.location.toLowerCase()}">
                 <div class="cols">${pet.id}</div>
                 <div class="cols"><img src="../assets/uploads/${escapeHTML(pet.image)}" class="pet-image" /></div>
                 <div class="cols">${escapeHTML(pet.name)}</div>
                 <div class="cols">${escapeHTML(pet.sex)}</div>
+                <div class="cols">${escapeHTML(pet.type || '—')}</div> <!-- ✅ Add this line -->
                 <div class="cols">${escapeHTML(pet.location)}</div>
                 <div class="cols">${escapeHTML(pet.description)}</div>
                 <div class="cols">${pet.date || '—'}</div>
@@ -134,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             `;
           });
+          
         })
         .catch(err => {
           console.error('Error loading pets:', err);
@@ -174,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
         form.sex.value = pet.sex;
         form.location.value = pet.location;
         form.description.value = pet.description;
+        form.type.value = pet.type;
         form.dataset.editingId = pet.id;
         imageInput.removeAttribute('required');
         formTitle.textContent = 'Edit Pet';
