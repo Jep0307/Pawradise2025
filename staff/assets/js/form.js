@@ -121,14 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
           adoptList.innerHTML += `
               <div class="row" data-name="${pet.name.toLowerCase()}" 
                 data-description="${pet.description.toLowerCase()}"
-                 data-location="${pet.location.toLowerCase()}">
+                data-location="${pet.location.toLowerCase()}">
                 <div class="cols">${pet.id}</div>
                 <div class="cols"><img src="../assets/uploads/${escapeHTML(pet.image)}" class="pet-image" /></div>
                 <div class="cols">${escapeHTML(pet.name)}</div>
                 <div class="cols">${escapeHTML(pet.sex)}</div>
-                <div class="cols">${escapeHTML(pet.type)}</div>
-                <div class="cols">${escapeHTML(pet.age)}</div>
-                <div class="cols">${escapeHTML(pet.breed)}</div>
                 <div class="cols">${escapeHTML(pet.location)}</div>
                 <div class="cols">${escapeHTML(pet.description)}</div>
                 <div class="cols">${escapeHTML(pet.created_at)}</div>
@@ -138,34 +135,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
               </div>
             `;
+          });
+        })
+        .catch(err => {
+          console.error('Error loading pets:', err);
         });
-      })
-      .catch(err => {
-        console.error('Error loading pets:', err);
-      });
+    }
+  
+  
+    searchInput.addEventListener('input', () => {
+      const keyword = searchInput.value.trim().toLowerCase();
+      const rows = document.querySelectorAll('#adoptList .row');
     
-  }
-
-
-  searchInput.addEventListener('input', () => {
-    const keyword = searchInput.value.trim().toLowerCase();
-    const rows = document.querySelectorAll('#adoptList .row');
-
-    rows.forEach(row => {
-      const name = row.dataset.name;
-      const description = row.dataset.description;
-      const location = row.dataset.location;
-
-      if (name.includes(keyword) || description.includes(keyword) || location.includes(keyword)) {
-        row.style.display = '';
-      } else {
-        row.style.display = 'none';
-      }
+      rows.forEach(row => {
+        const name = row.dataset.name;
+        const description = row.dataset.description;
+        const location = row.dataset.location;
+    
+        if (name.includes(keyword) || description.includes(keyword) || location.includes(keyword)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
     });
-  });
-
-
-
+    
+  
+  
   // ✅ Edit handler
   window.editPet = function (id) {
     fetch(`../assets/php/get_pet.php?id=${id}`)
@@ -183,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         form.breed.value = pet.breed;
         form.location.value = pet.location;
         form.description.value = pet.description;
+        form.type.value = pet.type;
         form.dataset.editingId = pet.id;
         imageInput.removeAttribute('required');
         formTitle.textContent = 'Edit Pet';
