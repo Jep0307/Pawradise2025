@@ -8,12 +8,12 @@ function toggleMenu() {
 
   if (isMenuOpen) {
     navMenu.classList.remove("active"); // Hide the menu
-    menuToggleIcon.src = "/Pawradise2025/associates/assets/imgs/Menu-icon.svg"; // Show hamburger icon
+    menuToggleIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/Menu-icon.svg"; // Show hamburger icon
     menuToggleIcon.alt = "Open Menu";
     document.body.style.overflow = "auto"; // Allow scrolling
   } else {
     navMenu.classList.add("active"); // Show the menu
-    menuToggleIcon.src = "/Pawradise2025/associates/assets/imgs/X-icon.svg"; // Show close icon
+    menuToggleIcon.src = "/SIA02/Pawradise2025/associates/assets/imgs/X-icon.svg"; // Show close icon
     menuToggleIcon.alt = "Close Menu";
     document.body.style.overflow = "hidden"; // Allow scrolling
   }

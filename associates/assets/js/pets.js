@@ -218,6 +218,8 @@ function searchInput() {
       // Reset dropdowns
       const petSelected = document.querySelector('.pet-selected');
       const locSelected = document.querySelector('.loc-selected');
+      const breedSelected = document.querySelector('.breed-selected');
+
 
       if (petSelected) {
         petSelected.textContent = 'Pet';
@@ -226,6 +228,10 @@ function searchInput() {
       if (locSelected) {
         locSelected.textContent = 'Location';
         locSelected.dataset.value = '';
+      }
+      if (breedSelected) {
+        breedSelected.textContent = 'Breed';
+        breedSelected.dataset.value = '';
       }
 
       cards.forEach(card => {
