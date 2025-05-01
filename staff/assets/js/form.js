@@ -126,6 +126,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="cols"><img src="../assets/uploads/${escapeHTML(pet.image)}" class="pet-image" /></div>
                 <div class="cols">${escapeHTML(pet.name)}</div>
                 <div class="cols">${escapeHTML(pet.sex)}</div>
+                <div class="cols">${escapeHTML(pet.type)}</div>
+                <div class="cols">${escapeHTML(pet.age)}</div>
+                <div class="cols">${escapeHTML(pet.breed)}</div>
                 <div class="cols">${escapeHTML(pet.location)}</div>
                 <div class="cols">${escapeHTML(pet.description)}</div>
                 <div class="cols">${escapeHTML(pet.created_at)}</div>

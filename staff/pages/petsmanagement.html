@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Management</title>
+
+    <link rel="stylesheet" href="../assets/styles/global.css">
+    <link rel="stylesheet" href="../assets/styles/petsmanagement.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="content">
+                <h3 class="title">Pet Management</h3>
+            </div>
+
+            <div class="content">
+                <div class="search-container">
+                    <input type="text" class="searchbar search-input" placeholder="Search...">
+                    <img src="../assets/imgs/Search-icon.svg" alt="">
+                </div>
+
+                <button class="add-btn" id="openFormBtn">Add</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="sidebar">
+        <div class="logo-and-text">
+            <img src="../assets/imgs/Logo.svg" alt="">
+            <h3>Pawradise</h3>
+        </div>
+        <hr>
+        <ul>
+            <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="#">Pet Management</a></li>
+            <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="#">Pet Management</a></li>
+            <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="#">Pet Management</a></li>
+        </ul>
+        <hr>
+        <ul>
+            <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="#">Profile</a></li>
+            <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="#">Logout</a></li>
+        </ul>
+
+        <p>© 2025 Pawradise. All rights reserved.</p>
+    </div>
+
+    <main>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Sex</th>
+                        <th>Type</th>
+                        <th>Age</th>
+                        <th>Breed</th>
+                        <th>Shelter</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="adoptList">
+            </table>
+        </div>
+
+        <div class="pet-form-modal" id="petFormModal">
+            <div class="modal-content">
+                <h2 id="formTitle">Add a Pet</h2>
+                <form id="addPetForm" enctype="multipart/form-data">
+                    <input type="file" name="image" accept="image/*" id="imageInput" />
+
+                    <input type="text" name="name" placeholder="Pet Name" required />
+
+                    <select name="type" required>
+                        <option value="" disabled selected>Select Type</option>
+                        <option value="Dog">Dog</option>
+                        <option value="Cat">Cat</option>
+                    </select>
+
+                    <input type="text" name="age" placeholder="Age" required />
+
+                    <select name="breed" required>
+                        <option value="" disabled selected>Select Breed</option>
+                        <option value="Aspin">Aspin </option>
+                        <option value="Shih Tzu">Shih Tzu</option>
+                        <option value="Chihuahua">Chihuahua</option>
+                        <option value="Poodle">Poodle</option>
+                        <option value="American Curl">American Curl</option>
+                        <option value="Siamese">Siamese</option>
+                        <option value="Bengal">Bengal</option>
+                        <option value="Persian">Persian</option>
+                        <option value="Stray">Stray</option>
+                    </select>
+
+                    <select name="sex" required>
+                        <option value="" disabled selected>Select Sex</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+
+                    <textarea name="description" placeholder="Description" rows="4" required></textarea>
+
+                    <select name="location" required>
+                        <option value="" disabled selected>Select Shelter</option>
+                        <option value="PAWS Animal Rehabilitation Center">Paws</option>
+                        <option value="Quezon City Animal Care and Adoption center">QC Pound</option>
+                    </select>
+
+                    <div class="button-row">
+                        <button type="button" id="cancelButton" class="cancel-btn">Cancel</button>
+                        <button type="submit" class="save-btn">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+
+<script src="../assets/js/petsmanagement.js"></script>
+
+</html>

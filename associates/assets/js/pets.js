@@ -76,6 +76,7 @@ customSelectContainers.forEach(container => {
 
   select.addEventListener('click', () => {
     options.classList.toggle('hidden');
+    console.log('Select clicked!');
   });
 
   options.querySelectorAll('li').forEach(option => {
@@ -203,6 +204,17 @@ function finalizeApplicationSubmission() {
   closePetApplicationForm();
 }
 
+function escapeHTML(str) {
+  if (!str) return '';
+  return str.replace(/[&<>"']/g, m => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  }[m]));
+}
+
 function searchInput() {
   const searchInput = document.getElementById('searchInput');
 
@@ -210,7 +222,7 @@ function searchInput() {
     if (e.key === 'Enter') {
       e.preventDefault();
 
-      const query = searchInput.value.trim().toLowerCase();
+      const query = escapeHTML(searchInput.value.trim().toLowerCase());
       const cards = document.querySelectorAll('.cards-container .cards');
       const noResultText = document.getElementById('noResultFound');
       let visibleCount = 0;
@@ -219,7 +231,6 @@ function searchInput() {
       const petSelected = document.querySelector('.pet-selected');
       const locSelected = document.querySelector('.loc-selected');
       const breedSelected = document.querySelector('.breed-selected');
-
 
       if (petSelected) {
         petSelected.textContent = 'Pet';
@@ -250,11 +261,10 @@ function searchInput() {
       });
 
       if (query === '') {
-        // If search is empty, show all cards
         cards.forEach(card => card.style.display = 'block');
         noResultText.textContent = '';
       } else {
-        noResultText.textContent = visibleCount === 0 ? 'No result found' : '';
+        noResultText.textContent = visibleCount === 0 ? 'No result found for: ' + query : '';
       }
 
       closePreview();
@@ -262,6 +272,7 @@ function searchInput() {
     }
   });
 }
+
 
 searchInput();
 
