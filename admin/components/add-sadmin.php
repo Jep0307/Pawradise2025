@@ -11,11 +11,12 @@ function sanitize($data) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = [];
 
-    $fullname = sanitize($_POST['fullname']);
+    $name = sanitize($_POST['fullname']);
     $email = sanitize($_POST['email']);
     $phone = sanitize($_POST['phone']);
-    $shelter = sanitize($_POST['shelter']);
+    $shelter_id = sanitize($_POST['shelter']);
     $address = sanitize($_POST['address']);
+    $role = 'staff-admin';
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Invalid email format.";
@@ -25,24 +26,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Phone number should be numeric and 7–15 digits.";
     }
 
-    if (empty($fullname) || empty($email) || empty($phone) || empty($shelter) || empty($address)) {
+    if (empty($name) || empty($email) || empty($phone) || empty($shelter_id) || empty($address)) {
         $errors[] = "Please fill in all required fields.";
     }
 
     if (count($errors) === 0) {
-        $sadmin_img = !empty($_FILES["photo"]["tmp_name"])
-            ? file_get_contents($_FILES["photo"]["tmp_name"])
-            : file_get_contents("../images/default.png");
-
-        $stmt = $conn->prepare("INSERT INTO staff_admins (fullname, email, shelter, phone, address, sadmin_img) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssss", $fullname,  $email, $shelter, $phone, $address, $sadmin_img);
-        $stmt->send_long_data(6, $sadmin_img);
+        $stmt = $conn->prepare("INSERT INTO staffs (name, email, phone, password, role, shelter_id, address, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+        $password = password_hash('default_password', PASSWORD_BCRYPT);
+        $stmt->bind_param("sssssis", $name, $email, $phone, $password, $role, $shelter_id, $address);
 
         if ($stmt->execute()) {
             $newUserId = $stmt->insert_id;
             $admin_id = $_SESSION['admin_id'];
-            log_action($conn, $admin_id, "Added new staff", "staff", $newUserId, "Name: $fullname");
-            displayPopup("User added successfully.");
+            log_action($conn, $admin_id, "Added new staff-admin", "staffs", $newUserId, "Name: $name");
+            displayPopup("Staff admin added successfully.");
         } else {
             displayPopup("Database error: " . $stmt->error, 'error');
         }
@@ -63,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add User</title>
+    <title>Add Staff Admin</title>
     <link rel="stylesheet" href="../styles.css" />
     <link rel="stylesheet" href="../general.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
@@ -72,9 +69,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <?php include '../components/sidebar.php' ?>
+    <?php include '../components/sidebar.php'; ?>
 
-    <section class="user-mgmt-section" style="margin-left: 85px">
+    <section class="user-mgmt-section" style="margin-left: 85px;">
         <div class="breadcrumbs">
             <div class="left">
                 <p>Admin > <span>ADD STAFF ADMIN</span></p>
@@ -90,22 +87,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="header">
                     <h1>Add Staff Admin</h1>
                     <p class="subtitle">
-                        Add a staff admin member. Fill all the required details
+                        Add a staff admin member. Fill all the required details.
                     </p>
                 </div>
                 <div class="top-buttons">
                     <button class="add-btn">
-                        <span class="material-symbols-outlined">add</span> Add User</button>
+                        <span class="material-symbols-outlined">add</span> Add User
+                    </button>
                 </div>
             </div>
 
             <div class="user-mgmt-bottom-panel">
-                <div class="user-mgmt-left-panel">
+                <!-- <div class="user-mgmt-left-panel">
                     <img src="../images/default.png" alt="" class="user-profile-photo" id="preview-image">
                     <input type="file" name="photo" accept="image/*" id="photo-input" style="display: none;" />
                     <button type="button" class="add-photo-btn"
                         onclick="document.getElementById('photo-input').click();">Add Photo</button>
-                </div>
+                </div> -->
 
                 <div class="right-panel">
                     <h3>Staff Info</h3>
@@ -113,9 +111,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="text" name="fullname" placeholder="Full Name" required />
                         <input type="email" name="email" placeholder="Email" required />
                         <input type="number" name="phone" placeholder="Phone Number" required />
-                        <input type="text" name="role" placeholder="Role" required />
-                        <input type="text" name="shelter" placeholder="Shelter" required />
-                        <input type="text" name="address" placeholder="Address" />
+                        <input type="text" name="shelter" placeholder="Shelter ID" required />
+                        <input type="text" name="address" placeholder="Address" required />
                     </div>
                 </div>
             </div>

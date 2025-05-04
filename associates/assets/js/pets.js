@@ -8,7 +8,6 @@ function showPreview(card) {
   const location = card.querySelector(".pet-info p:nth-child(5)").textContent;
   const description = card.querySelector(".pet-info .description").textContent;
 
-  // Convert the location to a link
   const locationLink = `<a href="https://www.google.com/maps/search/?q=${encodeURIComponent(location)}" target="_blank">${location}</a>`;
 
   // Update modal content

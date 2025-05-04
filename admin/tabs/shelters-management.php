@@ -7,6 +7,32 @@ if (!isset($_SESSION['admin_email'])) {
     header("Location: ../login.php");
     exit();
 }
+
+$sql = "
+    SELECT 
+        s.id,
+        s.shelter_name,
+        s.address,
+        s.description,
+        s.shelter_img,
+        s.created_at,
+        (SELECT COUNT(*) FROM staffs WHERE shelter_id = s.id) AS staff_count,
+        (SELECT COUNT(*) FROM pets WHERE shelter = s.shelter_name) AS pet_count
+    FROM shelters s
+";
+
+$result = $conn->query($sql);
+
+if (!$result) {
+    die("Error in query: " . $conn->error);
+}
+
+$shelters = [];
+while ($row = $result->fetch_assoc()) {
+    $shelters[] = $row;
+}
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +59,7 @@ if (!isset($_SESSION['admin_email'])) {
             </div>
 
             <div class="right">
-                <a href="logout.php"><span class="material-symbols-outlined"> logout </span>Logout</a>
+                <a href="../components/logout.php"><span class="material-symbols-outlined"> logout </span>Logout</a>
             </div>
         </div>
 
@@ -45,95 +71,42 @@ if (!isset($_SESSION['admin_email'])) {
                         Manage shelters
                     </p>
                 </div>
-                <div class="top-buttons">
-                    <a href="../components/add-pet.html" class="add-btn"> <span
-                            class="material-symbols-outlined">add</span>Add Shelter</a>
-                </div>
+                <!-- <div class="top-buttons">
+                    <a href="../components/add-shelter.php" class="add-btn">
+                        <span class="material-symbols-outlined">add</span>Add Shelter
+                    </a>
+                </div> -->
             </div>
-
-            <!-- <div class="search-input">
-                <input type="text" name="" placeholder="Search something..." id="" /><span
-                    class="material-symbols-outlined">search</span>
-            </div> -->
-
-            <!-- <div id="map"></div> -->
 
             <div class="management-bottom-panel">
                 <div class="shelter-cards">
-                    <div class="shelter-card">
-                        <img src="../images/paws-rehab.jpg" alt="">
+                    <?php if (count($shelters) > 0): ?>
+                    <?php foreach ($shelters as $shelter): 
+                            $imageSrc = !empty($shelter['shelter_img']) 
+                                ? 'data:image/jpeg;base64,' . base64_encode($shelter['shelter_img']) 
+                                : '../assets/default-shelter.png';
+                        ?>
+                    <a href="<?php echo "../components/edit-shelter.php?id={$shelter['id']}" ?>" class="shelter-card">
+                        <img src="<?= $imageSrc ?>" alt="Shelter Image">
                         <div class="shelter-info">
-                            <h3>PAWS Animal Rehabilitation Center</h3>
-                            <p>123 Random Address, Quezon City</p>
-                            <p>Animals in this shelter: <span>123</span></p>
-                            <p>Staff: <span>4</span></p>
-                            <p>Pending Applications: <span>10</span></p>
+                            <h3><?= htmlspecialchars($shelter['shelter_name']) ?></h3>
+                            <p class="shelter-description"><?= nl2br(htmlspecialchars($shelter['description'])) ?></p>
+
+                            <p style="font-weight: 700;">Shelter Information</p>
+                            <p><?= htmlspecialchars($shelter['address']) ?></p>
+                            <p>Animals in this shelter: <span><?= $shelter['pet_count'] ?></span></p>
+                            <p>Staff: <span><?= $shelter['staff_count'] ?></span></p>
+                            <p>Created on: <span><?= date('F j, Y', strtotime($shelter['created_at'])) ?></span></p>
                         </div>
-                    </div>
-
-                    <div class="shelter-card">
-                        <h3>QC Shelter</h3>
-                        <p>123 Random Address, Quezon City</p>
-                    </div>
-
+                    </a>
+                    <?php endforeach; ?>
+                    <?php else: ?>
+                    <p>No shelters found.</p>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </section>
-
-    <script>
-    async function initMap() {
-        const map = new google.maps.Map(document.getElementById("map"), {
-            center: {
-                lat: 14.6760,
-                lng: 121.0437
-            },
-            zoom: 13,
-        });
-
-        try {
-            const response = await fetch("../components/get-shelters.php");
-            const shelters = await response.json();
-
-            const markers = [];
-
-            shelters.forEach(shelter => {
-                const position = {
-                    lat: parseFloat(shelter.latitude),
-                    lng: parseFloat(shelter.longitude)
-                };
-
-                const marker = new google.maps.Marker({
-                    position: position,
-                    map: map,
-                    title: shelter.shelter_name
-                });
-
-                console.log(
-                    `Marker added: ${shelter.shelter_name} at (${shelter.latitude}, ${shelter.longitude})`
-                );
-
-                const infoWindow = new google.maps.InfoWindow({
-                    content: `<strong>${shelter.shelter_name}</strong><br>${shelter.address}`
-                });
-
-                marker.addListener('click', () => {
-                    infoWindow.open(map, marker);
-                });
-
-                markers.push(marker);
-            });
-
-        } catch (error) {
-            console.error("Error fetching shelters:", error);
-        }
-    }
-
-    window.initMap = initMap;
-    </script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBX9EY3igYEQtIsdXsxSpbfMosfO00uPiE&callback=initMap"
-        async defer></script>
 
 </body>
 

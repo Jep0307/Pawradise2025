@@ -8,7 +8,7 @@ if (!isset($_SESSION['admin_email'])) {
     exit();
 }
 
-$result = $conn->query("SELECT * FROM staffs");
+$result = $conn->query("SELECT * FROM staffs WHERE role = 'staff'");
 
 if (!$result) {
     die("Database query failed: " . $conn->error);
@@ -84,7 +84,7 @@ $conn->close();
                     <tr>
                         <th>ID</th>
                         <th>IMAGE</th>
-                        <th>FULLNAME</th>
+                        <th>NAME</th>
                         <th>EMAIL</th>
                         <th>PHONE</th>
                         <th>ROLE</th>
@@ -102,11 +102,11 @@ $conn->close();
                         echo "<tr>";
                         echo "<td>".$row['id']."</td>";
                         echo "<td><img src='{$imageSrc}' alt='User Image' width='50' /></td>";
-                        echo "<td>".$row['fullname']."</td>";
+                        echo "<td>".$row['name']."</td>";
                         echo "<td>".$row['email']."</td>";
                         echo "<td>".$row['phone']."</td>";
                         echo "<td>".$row['role']."</td>";
-                        echo "<td>".$row['shelter']."</td>";
+                        echo "<td>".$row['shelter_id']."</td>";
                         echo "<td class='text-overflow'>".$row['address']."</td>";
                         echo "<td>".$row['created_at']."</td>";
                         echo "<td class='options-btn'>
