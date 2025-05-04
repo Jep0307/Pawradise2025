@@ -9,7 +9,7 @@ if (!isset($_SESSION['admin_email'])) {
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sadmin_id'])) {
     $sadmin_id = intval($_POST['sadmin_id']);
-    $stmt = $conn->prepare("DELETE FROM staff_admins WHERE id = ?");
+    $stmt = $conn->prepare("DELETE FROM staffs WHERE id = ?");
     if ($stmt === false) {
         header("Location: " . $_SERVER['REQUEST_URI']);
         exit();

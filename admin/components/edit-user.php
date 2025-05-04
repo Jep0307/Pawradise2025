@@ -8,72 +8,76 @@ function sanitize($data) {
     return htmlspecialchars(trim($data));
 }
 
-$user_id = $_GET['user_id'];
-$sql="SELECT * FROM user_profiles WHERE user_id = ?";
+if (!isset($_GET['id'])) {
+    die("No user ID provided.");
+}
+$id = (int) $_GET['id'];
+
+$sql = "SELECT * FROM users1 WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $user_id);
+$stmt->bind_param("i", $id);
 $stmt->execute();
-$user_result = $stmt->get_result();
-$user = $user_result->fetch_assoc();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
 $stmt->close();
 
+if (!$user) {
+    die("User not found.");
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = [];
 
     $fullname = sanitize($_POST['fullname']);
-    $username = sanitize($_POST['username']);
-    $bio = sanitize($_POST['bio']);
     $email = sanitize($_POST['email']);
-    $phone = sanitize($_POST['phone']);
-    $gender = sanitize($_POST['value-radio']);
-    $birthdate = sanitize($_POST['birthdate']);
+    $contactno = sanitize($_POST['phone']);
     $address = sanitize($_POST['address']);
 
+    // Validation
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Invalid email format.";
     }
 
-    if (!preg_match('/^[0-9]{7,15}$/', $phone)) {
+    if (!preg_match('/^[0-9]{7,15}$/', $contactno)) {
         $errors[] = "Phone number should be numeric and 7–15 digits.";
     }
 
-    if (empty($fullname) || empty($username) || empty($email) || empty($phone) || empty($birthdate) || empty($address)) {
+    if (empty($fullname) || empty($email) || empty($contactno)) {
         $errors[] = "Please fill in all required fields.";
     }
 
     if (count($errors) === 0) {
-        if (!empty($_FILES["photo"]["tmp_name"])) {
-            $user_img = file_get_contents($_FILES["photo"]["tmp_name"]);
-        } else {
-            $user_img = $user['user_img'];
-        }
+        $stmt = $conn->prepare("UPDATE users1 SET fullname = ?, email = ?, contactno = ?, address = ? WHERE id = ?");
+        $stmt->bind_param("ssssi", $fullname, $email, $contactno, $address, $id);
 
-        $stmt = $conn->prepare("UPDATE user_profiles SET fullname = ?, username = ?, bio = ?, email = ?, phone = ?, gender = ?, birthdate = ?, address = ?, user_img = ? WHERE user_id = ?");
-        $stmt->bind_param(
-            "sssssssssi",
-            $fullname, $username, $bio, $email,
-            $phone, $gender, $birthdate,
-            $address, $user_img, $user_id
-        );
         if ($stmt->execute()) {
             $admin_id = $_SESSION['admin_id'];
-            log_action($conn, $admin_id, "Edited user profile", "user", $user_id, "Username: $username");
+            log_action($conn, $admin_id, "Edited user profile", "users", $id, "Username: $fullname");
             displayPopup("User updated successfully.");
         } else {
             displayPopup("Database error: " . $stmt->error, 'error');
         }
 
         $stmt->close();
+
+        $sql = "SELECT * FROM users1 WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        $stmt->close();
     } else {
         foreach ($errors as $error) {
-            displayPopup("$error", 'error');
+            displayPopup($error, 'error');
         }
     }
 }
 
 $conn->close();
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -103,7 +107,7 @@ $conn->close();
             </div>
         </div>
 
-        <form class="user-mgmt-container" method="POST" action="edit-user.php?user_id=<?php echo $user_id; ?>"
+        <form class="user-mgmt-container" method="POST" action="edit-user.php?id=<?php echo $id; ?>"
             enctype="multipart/form-data">
             <div class="user-mgmt-top-panel">
                 <div class="header">
@@ -119,41 +123,22 @@ $conn->close();
             </div>
 
             <div class="user-mgmt-bottom-panel">
-                <div class="user-mgmt-left-panel">
+                <!-- <div class="user-mgmt-left-panel">
                     <img src="data:image/png;base64,<?php echo base64_encode($user['user_img']); ?>" alt=""
                         class="user-profile-photo" id="preview-image">
                     <input type="file" name="photo" accept="image/*" id="photo-input" style="display: none;" />
                     <button type="button" class="add-photo-btn"
                         onclick="document.getElementById('photo-input').click();">Change Photo</button>
-                </div>
+                </div> -->
 
                 <div class="right-panel">
                     <h3>User Info</h3>
                     <div class="input-division">
                         <input type="text" name="fullname" value="<?php echo htmlspecialchars($user['fullname']); ?>"
                             placeholder="Full Name" required />
-                        <input type="text" name="username" value="<?php echo htmlspecialchars($user['username']); ?>"
-                            placeholder="Username" required />
-                        <input type="text" name="bio" value="<?php echo htmlspecialchars($user['bio']); ?>"
-                            placeholder="Bio" />
                         <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>"
                             placeholder="Email" required />
-                        <input type="number" name="phone" value="<?php echo htmlspecialchars($user['phone']); ?>"
-                            placeholder="Phone Number" required />
-                        <div class="radio-input">
-                            <label>
-                                <input value="Male" name="value-radio" id="value-1" type="radio"
-                                    <?php echo ($user['gender'] == 'Male') ? 'checked' : ''; ?> />
-                                <span>Male</span>
-                            </label>
-                            <label>
-                                <input value="Female" name="value-radio" id="value-2" type="radio"
-                                    <?php echo ($user['gender'] == 'Female') ? 'checked' : ''; ?> />
-                                <span>Female</span>
-                            </label>
-                            <span class="selection"></span>
-                        </div>
-                        <input type="text" name="birthdate" value="<?php echo htmlspecialchars($user['birthdate']); ?>"
+                        <input type="number" name="phone" value="<?php echo htmlspecialchars($user['contactno']); ?>"
                             placeholder="Phone Number" required />
                         <input type="text" name="address" value="<?php echo htmlspecialchars($user['address']); ?>"
                             placeholder="Address" />

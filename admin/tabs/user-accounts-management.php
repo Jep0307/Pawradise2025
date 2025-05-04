@@ -8,7 +8,7 @@ if (!isset($_SESSION['admin_email'])) {
     exit();
 }
 
-$sql = "SELECT * FROM user_profiles"; 
+$sql = "SELECT * FROM users1"; 
 $result = $conn->query($sql);
 
 if (!$result) {
@@ -85,15 +85,15 @@ $conn->close();
                 <table class="general-table">
                     <tr>
                         <th>ID</th>
-                        <th>IMAGE</th>
-                        <th>USERNAME</th>
+                        <!-- <th>IMAGE</th> -->
+                        <!-- <th>USERNAME</th> -->
                         <th>NAME</th>
-                        <th>BIO</th>
+                        <!-- <th>BIO</th> -->
                         <th>EMAIL</th>
                         <th>PHONE</th>
                         <th>ADDRESS</th>
-                        <th>GENDER</th>
-                        <th>BIRTHDATE</th>
+                        <!-- <th>GENDER</th> -->
+                        <!-- <th>BIRTHDATE</th> -->
                         <th>CREATED</th>
                         <th></th>
                     </tr>
@@ -104,23 +104,23 @@ $conn->close();
                         $imageSrc = !empty($row['user_img']) ? 'data:image/jpeg;base64,' . base64_encode($row['user_img']) : './images/default.png';
 
                         echo "<tr>";
-                        echo "<td>".$row['user_id']."</td>";
-                        echo "<td><img src='{$imageSrc}' alt='User Image' width='50' /></td>";
-                        echo "<td>".$row['username']."</td>";
+                        echo "<td>".$row['id']."</td>";
+                        // echo "<td><img src='{$imageSrc}' alt='User Image' width='50' /></td>";
+                        // echo "<td>".$row['username']."</td>";
                         echo "<td>".$row['fullname']."</td>";
-                        echo "<td>".$row['bio']."</td>";
+                        // echo "<td>".$row['bio']."</td>";
                         echo "<td class='text-overflow'>".$row['email']."</td>";
-                        echo "<td>".$row['phone']."</td>";
+                        echo "<td>".$row['contactno']."</td>";
                         echo "<td class='text-overflow'>".$row['address']."</td>";
-                        echo "<td>".$row['gender']."</td>";
-                        echo "<td>".$row['birthdate']."</td>";
+                        // echo "<td>".$row['gender']."</td>";
+                        // echo "<td>".$row['birthdate']."</td>";
                         echo "<td>".$row['created_at']."</td>";
                         echo "<td class='options-btn'>
                                 <span class='material-symbols-outlined'>edit</span>
                                 <div class='pop-up'>
-                                    <a href='../components/edit-user.php?user_id={$row['user_id']}'><span class='material-symbols-outlined'>edit</span>Edit</a>
+                                    <a href='../components/edit-user.php?id={$row['id']}'><span class='material-symbols-outlined'>edit</span>Edit</a>
                                     <form action='../components/delete-user.php' method='POST' onsubmit='return confirm(\"Are you sure you want to delete this user?\");'>
-                                        <input type='hidden' name='user_id' value='{$row['user_id']}'>
+                                        <input type='hidden' name='id' value='{$row['id']}'>
                                         <button type='submit' class='delete-btn'>
                                             <span class='material-symbols-outlined'>delete</span>Delete
                                         </button>

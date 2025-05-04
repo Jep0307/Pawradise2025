@@ -68,14 +68,6 @@ $profileImgSrc = $adminImage ? 'data:image/jpeg;base64,' . base64_encode($adminI
         </h4>
 
         <li>
-            <a href="#"><span class="material-symbols-outlined"> settings </span>Settings</a>
-        </li>
-
-        <li>
-            <a href="#"><span class="material-symbols-outlined"> help </span>Help</a>
-        </li>
-
-        <li>
             <a href="../logout.php"><span class="material-symbols-outlined"> logout </span>Logout</a>
         </li>
     </ul>

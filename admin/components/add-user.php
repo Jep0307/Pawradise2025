@@ -12,32 +12,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = [];
 
     $fullname = sanitize($_POST['fullname']);
-    $username = sanitize($_POST['username']);
-    $bio = sanitize($_POST['bio']);
     $email = sanitize($_POST['email']);
-    $phone = sanitize($_POST['phone']);
+    $contactno = sanitize($_POST['contactno']);
     $address = sanitize($_POST['address']);
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Invalid email format.";
     }
 
-    if (!preg_match('/^[0-9]{7,15}$/', $phone)) {
-        $errors[] = "Phone number should be numeric and 7–15 digits.";
+    if (!preg_match('/^[0-9]{7,15}$/', $contactno)) {
+        $errors[] = "Contact number should be numeric and 7–15 digits.";
     }
 
-    if (empty($fullname) || empty($username) || empty($email) || empty($phone)) {
+    if (empty($fullname) || empty($email) || empty($contactno) || empty($address)) {
         $errors[] = "Please fill in all required fields.";
     }
 
     if (count($errors) === 0) {
-        $user_img = !empty($_FILES["photo"]["tmp_name"])
-            ? file_get_contents($_FILES["photo"]["tmp_name"])
-            : file_get_contents("../images/default.png");
-
-        $stmt = $conn->prepare("INSERT INTO user_profiles (fullname, username, bio, email, phone, address, user_img) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssss", $fullname, $username, $bio, $email, $phone, $address, $user_img);
-        $stmt->send_long_data(6, $user_img);
+        $stmt = $conn->prepare("INSERT INTO users1 (fullname,  email, contactno, address) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $fullname, $email, $contactno, $address);
 
         if ($stmt->execute()) {
             $newUserId = $stmt->insert_id;
@@ -101,21 +94,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div class="user-mgmt-bottom-panel">
-                <div class="user-mgmt-left-panel">
+                <!-- <div class="user-mgmt-left-panel">
                     <img src="../images/default.png" alt="" class="user-profile-photo" id="preview-image">
                     <input type="file" name="photo" accept="image/*" id="photo-input" style="display: none;" />
                     <button type="button" class="add-photo-btn"
                         onclick="document.getElementById('photo-input').click();">Add Photo</button>
-                </div>
+                </div> -->
 
                 <div class="right-panel">
                     <h3>User Info</h3>
                     <div class="input-division">
                         <input type="text" name="fullname" placeholder="Full Name" required />
-                        <input type="text" name="username" placeholder="Username" required />
-                        <input type="text" name="bio" placeholder="Bio" />
                         <input type="email" name="email" placeholder="Email" required />
-                        <input type="number" name="phone" placeholder="Phone Number" required />
+                        <input type="number" name="contactno" placeholder="Phone Number" required />
                         <input type="text" name="address" placeholder="Address" />
                     </div>
                 </div>
