@@ -1,4 +1,4 @@
-import { supabase } from "./config.js";
+import { supabase } from "../../../../admin/assets/js/auth/config.js";
 
 const signinForm = document.getElementById("signinForm");
 const emailInput = document.getElementById("email");
@@ -52,6 +52,7 @@ signinForm.addEventListener("submit", async (event) => {
     });
 
     formMessage.classList.remove("error", "success");
+
     if (error) {
       formMessage.textContent = error.message === "Invalid login credentials"
         ? "Incorrect email or password. Please try again."
@@ -62,9 +63,24 @@ signinForm.addEventListener("submit", async (event) => {
       formMessage.textContent = "Sign-in successful! Redirecting...";
       formMessage.classList.add("success");
 
-      setTimeout(() => {
-        window.location.href = "/SIA02/Pawradise2025/associates/pages/pets.html";
-      }, 2000);
+      const response = await fetch("http://localhost/SIA02/Pawradise2025/associates/assets/php/checkuser.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email: emailValue })
+      });
+
+      const result = await response.json();
+
+      if (result.status === "success") {
+  
+          window.location.href = "http://localhost/SIA02/Pawradise2025/associates/pages/home.html";
+        
+      } else {
+        formMessage.textContent = result.message;
+        formMessage.classList.add("error");
+      }
     }
   } catch (err) {
     console.error("Unexpected error:", err);

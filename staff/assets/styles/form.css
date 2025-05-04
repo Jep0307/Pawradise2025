@@ -1,91 +1,347 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
-  background: #f9f9f9;
-  margin: 0;
+  background-color: #f2f2f2;
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 80px;
+  background: #2C3C2F;
+  height: 100vh;
+  position: fixed;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 80px;
+  right: 0;
+  height: 60px;
+  background: #e6e6e6;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  z-index: 900;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+  color: #7AA34B;
+}
+
+.body {
+  margin-left: 80px;
+  margin-top: 60px;
+  padding: 2rem 3rem;
+  width: calc(100% - 80px);
+}
+
+.pet-management {
+  font-size: 18px;
+  font-weight: bold;
+  color: #7AA34B;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #d9d9d9;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  padding-left: 0.5rem;
+  outline: none;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 100vh;
+  background-color: #2C3C2F;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: width 0.3s;
+}
+
+.sidebar:hover {
+  width: 200px;
+}
+
+.sidebar:hover ~ .body {
+  margin-left: 200px; /* match expanded width */
+  width: calc(100% - 200px);
+}
+
+.sidebar:hover ~ .header {
+  left: 200px;
+  width: calc(100% - 200px);
+}
+
+.sidebar:hover .logo-text {
+  display: inline;
+}
+
+.sidebar:hover .nav-text {
+  display: inline;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 1rem;
+  width: 100%;
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+}
+
+.logo-text {
+  color: white;
+  font-weight: bold;
+  display: none;
+}
+
+.sidebar-nav {
+  width: 100%;
+}
+
+.nav-item {
+  color: white;
+  text-decoration: none;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s;
+}
+
+.nav-item:hover {
+  background-color: #3e5643;
+}
+
+.nav-text {
+  display: none;
+}
+
+/* MAIN BODY */
+.body {
+  margin-left: 80px;
+  margin-top: 60px;
   padding: 2rem;
+  width: calc(100% - 80px);
+  transition: margin-left 0.3s ease;
 }
 
-form#addPetForm {
+/* TABLE STYLING */
+.table-scroll-wrapper {
+  overflow-x: auto;
   background: white;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 500px;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
-form#addPetForm input,
-form#addPetForm select,
-form#addPetForm textarea {
+.table {
+  min-width: 1500px;
+  display: table;
   width: 100%;
-  padding: 10px;
-  margin-bottom: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 16px;
+  border-collapse: collapse;
 }
 
-form#addPetForm button {
-  background: #4CAF50;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-form#addPetForm button:hover {
-  background: #45a049;
-}
-
-#adoptList {
+/* Apply grid only on rows */
+.table .row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns:
+    60px      /* ID */
+    150px     /* Full Name */
+    200px     /* Email */
+    130px     /* Contact No */
+    120px     /* Birthdate */
+    130px     /* Occupation */
+    200px     /* Address */
+    100px     /* Social */
+    80px      /* Rent */
+    130px     /* Residence Type */
+    120px     /* Pet Type */
+    130px     /* Zoom Date */
+    100px     /* Zoom Time */
+    130px     /* Shelter Visit */
+    160px;    /* Created At */
+  align-items: center;
 }
 
-.pet-card {
-  background: white;
-  border-radius: 12px;
-  padding: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
-  text-align: center;
+.table .row:first-child {
+  background-color: #7AA34B;
+  color: white;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
-.pet-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
+.table .row:nth-child(even):not(:first-child) {
+  background-color: #f9f9f9;
+}
+
+.cols {
+  padding: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#adoptList .row {
+  font-weight: normal;
+  background-color: #fff;
+  color: black;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Restrict and wrap text for name and description columns */
+.row .cols:nth-child(6),
+.row .cols:nth-child(3) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.row .cols.edit {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  padding: 4px 8px;
+}
+
+.pet-image {
+  width: 50px;
+  height: 50px;
   object-fit: cover;
+  border-radius: 5px;
 }
 
-.pet-card h3 {
-  margin-top: 10px;
-  font-size: 20px;
-}
-
-.pet-card p {
-  color: #555;
-  font-size: 14px;
-  margin: 5px 0;
-}
-
-.pet-card button {
-  margin: 5px;
-  padding: 8px 12px;
+.row .cols button {
+  margin: 2px;
+  padding: 4px 8px;
+  background-color: #7AA34B;
+  color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 14px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-.pet-card button:first-of-type {
-  background-color: #2196F3;
-  color: white;
+.row .cols:last-child {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  padding: 4px 8px;
+  justify-content: flex-end;
+  min-width: 120px;
+  overflow: hidden;
 }
 
-.pet-card button:last-of-type {
-  background-color: #f44336;
+.row .cols button:hover {
+  background-color: #66853c;
+}
+
+/* APPLICATION TABLE */
+#applicationList {
+  min-width: 1500px; /* Ensure horizontal scrolling when content overflows */
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* HEADER STICKY INSIDE SCROLL AREA */
+#applicationList .row:first-child {
+  background-color: #7AA34B;
   color: white;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* WRAPPER TO ENABLE HEADER + BODY TO SCROLL TOGETHER */
+.application-table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+/* [Optional] make sure scroll doesn't hide top of the table */
+.body {
+  overflow-x: hidden; /* prevent nested scrollbars */
+}
+
+/* Ensure consistent alignment */
+#applicationList .row {
+  display: grid;
+  grid-template-columns:
+    60px      /* ID */
+    150px     /* Full Name */
+    200px     /* Email */
+    130px     /* Contact No */
+    120px     /* Birthdate */
+    130px     /* Occupation */
+    200px     /* Address */
+    100px     /* Social */
+    80px      /* Rent */
+    130px     /* Residence Type */
+    120px     /* Pet Type */
+    130px     /* Zoom Date */
+    100px     /* Zoom Time */
+    130px     /* Shelter Visit */
+    160px;    /* Created At */
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+#applicationList .cols {
+  padding: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Just in case buttons are cut off on smaller screens */
+.row .cols:last-child {
+  min-width: 120px;
+  justify-content: flex-end;
+  overflow-x: auto;
+}
+
+/* Optional: smooth scroll experience */
+.application-table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.application-table-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
 }

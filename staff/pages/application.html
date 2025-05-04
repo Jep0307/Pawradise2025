@@ -5,91 +5,77 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Application Management</title>
-  <link rel="stylesheet" href="../assets/styles/form2.css" />
+  <!-- <link rel="stylesheet" href="../assets/styles/form.css" /> -->
+  <link rel="stylesheet" href="../assets/styles/global.css">
 </head>
 
 <body>
 
-  <aside class="sidebar">
-    <div class="sidebar-header">
-      <span class="logo-text">Pawradise</span>
-    </div>
-    <nav class="sidebar-nav">
-      <section class="nav-section">
-        <a href="../pages/application.html" class="nav-item">
-          <span class="nav-text">Application</span>
-        </a>
-        <a href="../pages/form2.html" class="nav-item">
-          <span class="nav-text">Pet Management</span>
-        </a>
-      </section>
-      <section class="nav-section">
-        <a href="../pages/staff-profile.html" class="nav-item">
-          <span class="nav-text">Profile</span>
-        </a>
-        <a href="logout.php" class="nav-item">
-          <span class="nav-text">Logout</span>
-        </a>
-      </section>
-    </nav>
-  </aside>
+  <header>
+    <nav>
+      <div class="content">
+        <h3 class="title">Pet Management</h3>
+      </div>
 
-  <header class="header">
-    <div class="application-management">APPLICATION MANAGEMENT</div>
-    <div class="search-container">
-      <input type="text" class="search-input" placeholder="Search..." />
-      <button id="searchBtn" style="background: none; border: none; cursor: pointer;">
-        <svg class="search-icon" width="15" height="15" ...>...</svg>
-      </button>
-    </div>
+      <div class="content">
+        <div class="search-container">
+          <input type="text" class="searchbar search-input" placeholder="Search...">
+          <img src="../assets/imgs/Search-icon.svg" alt="">
+        </div>
+
+        <button class="add-btn" id="openFormBtn">Add</button>
+      </div>
+    </nav>
   </header>
 
-  <main class="body">
-    <section class="filter">
-      <div class="content">
-        <div class="table">
-          <div class="row">
-            <div class="cols">Id</div>
-            <div class="cols">Name</div>
-            <div class="cols">Email</div>
-            <div class="cols">Date</div>
-            <div class="cols">Status</div>
-            <div class="cols">Edit</div>
-          </div>
-
-          <div id="applicationList"></div>
-
-          <div class="frame-21" id="openFormBtn" style="cursor: pointer;">
-            <div class="add-an-application">Add an Application</div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Floating Form Modal -->
-  <div id="applicationFormModal">
-    <div class="modal-content">
-      <h2 id="formTitle">Add an Application</h2>
-      <form id="addApplicationForm" enctype="multipart/form-data">
-        <input type="text" name="name" placeholder="Applicant Name" required />
-        <input type="email" name="email" placeholder="Email" required />
-        <textarea name="description" placeholder="Description" rows="4" required></textarea>
-        <select name="status" required>
-          <option value="Pending">Pending</option>
-          <option value="Approved">Approved</option>
-          <option value="Rejected">Rejected</option>
-        </select>
-
-        <div class="button-row">
-          <button type="submit" class="save-btn">Save</button>
-          <button type="button" id="cancelButton" class="cancel-btn">Cancel</button>
-        </div>
-      </form>
+  <div class="sidebar">
+    <div class="logo-and-text">
+      <img src="../assets/imgs/Logo.svg" alt="">
+      <h3>Pawradise</h3>
     </div>
+    <hr>
+    <ul>
+      <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="./petsmanagement.html">Pet Management</a></li>
+      <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="./application.html">Pet Management</a></li>
+    </ul>
+    <hr>
+    <ul>
+      <li><a href="#" id="userEmail"></a></a></li>
+      <li id="signoutBtn"><a href="#">Logout</a></li>
+    </ul>
+
+    <p>© 2025 Pawradise. All rights reserved.</p>
   </div>
 
-  <script src="../assets/js/form.js"></script>
+  <!-- Main Content Section -->
+  <main>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Contact No</th>
+            <th>Birthdate</th>
+            <th>Occupation</th>
+            <th>Address</th>
+            <th>Social Media</th>
+            <th>Rents?</th>
+            <th>Residence Type</th>
+            <th>Pet Preference</th>
+            <th>Zoom Date</th>
+            <th>Zoom Time?</th>
+            <th>Shelter Visit</th>
+            <th>Submitted At</th>
+          </tr>
+        </thead>
+        <tbody id="applicationList"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="../assets/js/application.js"></script>
 </body>
 
 </html>

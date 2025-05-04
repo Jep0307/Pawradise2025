@@ -37,20 +37,24 @@ $profileImgSrc = $adminImage ? 'data:image/jpeg;base64,' . base64_encode($adminI
                 <span class="material-symbols-outlined"> dashboard </span>Dashboard</a>
         </li>
         <li>
-            <a href="../tabs/pet-management.php"><span class="material-symbols-outlined"> pets </span>Pets</a>
+            <a href="../tabs/petsmanagement.php"><span class="material-symbols-outlined"> pets </span>Pets</a>
         </li>
         <li>
-            <a href="../tabs/user-accounts-management.php"><span class="material-symbols-outlined"> group
-                </span>Users</a>
+            <a href="../tabs/staff-and-staff-admin-account.php"><span class="material-symbols-outlined"> group
+                </span>Staff and staff-admin</a>
         </li>
         <li>
+            <a href="../tabs/adopters-account.php"><span class="material-symbols-outlined"> group
+                </span>Adopters</a>
+        </li>
+        <!-- <li>
             <a href="../tabs/staff-accounts-management.php"><span class="material-symbols-outlined"> person_apron
                 </span>Staffs</a>
         </li>
         <li>
             <a href="../tabs/staff-admins-management.php"><span class="material-symbols-outlined"> person_4
                 </span>Staff Admins</a>
-        </li>
+        </li> -->
         <li>
             <a href="../tabs/shelters-management.php"><span class="material-symbols-outlined"> map </span>Shelters</a>
         </li>

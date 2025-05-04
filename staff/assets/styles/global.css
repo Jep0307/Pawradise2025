@@ -104,7 +104,7 @@ nav .content:last-child button:hover {
 }
 
 .sidebar:hover {
-    width: 277.03px;
+    width: 400px;
 }
 
 .sidebar ul {
@@ -140,7 +140,7 @@ nav .content:last-child button:hover {
     opacity: 0;
     visibility: hidden;
     white-space: nowrap;
-    transition: opacity 200ms ease, visibility 0.3s ease;
+    /* transition: opacity 200ms ease, visibility 0.3s ease; */
 }
 
 .sidebar:hover ul li a,
@@ -177,17 +177,17 @@ nav .content:last-child button:hover {
 
 main {
     padding: 112px 32px 32px 120px;
-    width: 100%;
+    width: max-content;
 }
 
 .table-wrapper {
     border: 1px solid #BDBDBD;
     border-radius: 8px;
-    width: 100%;
+    width: max-content;
 }
 
 table {
-    width: 100%;
+    width: max-content;
     border-collapse: collapse;
 }
 
@@ -210,6 +210,11 @@ thead th:last-child {
 tbody tr:first-child td:nth-child(8),
 tbody tr:first-child td:nth-child(9) {
     width: 300px;
+}
+
+tbody tr:hover {
+    background-color: #F3F3F5;
+    transition: all 100ms ease-in-out;
 }
 
 th,

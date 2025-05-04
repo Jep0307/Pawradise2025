@@ -1,4 +1,4 @@
-import { supabase } from "./config.js";
+import { supabase } from "../../../../admin/assets/js/auth/config.js";
 
 const signupForm = document.getElementById("signupForm");
 const fullnameInput = document.getElementById("fullname");
@@ -110,25 +110,42 @@ signupForm.addEventListener("submit", async (event) => {
           address,
           contactno,
         },
-        emailRedirectTo: "/SIA02/Pawradise2025/associates/pages/auth/signin.html",
+        emailRedirectTo: "http://localhost/SIA02/Pawradise2025/associates/pages/auth/signin.html",
       },
     });
 
     // Clear previous status
     formMessage.classList.remove("success", "error");
 
+
     if (error) {
       // console.error("Sign-up error:", error.message);
       formMessage.textContent = error.message;
       formMessage.classList.add("error");
-    } else {
-      formMessage.textContent = "Account Created successfully! Check your email for verification.";
-      formMessage.classList.add("success");
+    } 
+    
+    // Supabase signup succeeded, now save to custom DB via PHP
+    const formData = new FormData(signupForm);
+    const response = await fetch("/SIA02/Pawradise2025/associates/assets/php/add-newuser.php", {
+      method: "POST",
+      body: formData,
+    });
 
-      setTimeout(() => {
-        window.location.href = "./signin.html";
-      }, 2000);
+    const result = await response.text();
+
+    if (result.includes("Email already exists")) {
+      formMessage.textContent = "This email is already registered.";
+      formMessage.classList.add("error");
+      return;
     }
+
+    // All good
+    formMessage.textContent = "Account Created successfully! Check your email for verification.";
+    formMessage.classList.add("success");
+
+    setTimeout(() => {
+      window.location.href = "./signin.html";
+    }, 2000);
   } catch (err) {
     // console.error("Unexpected error:", err);
     formMessage.textContent = "An unexpected error occurred. Please try again.";
@@ -146,7 +163,7 @@ function isValidEmail(email) {
 // Password visibility toggle
 const passwordIcon = document.getElementById("passwordIcon");
 passwordIcon.addEventListener("click", () => {
- const isPasswordHidden = passwordInput.type === "password";
+  const isPasswordHidden = passwordInput.type === "password";
 
   passwordInput.type = isPasswordHidden ? "text" : "password";
   passwordIcon.src = isPasswordHidden
