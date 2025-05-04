@@ -136,7 +136,7 @@
 
 .login-container {
   display: flex;
-  gap: 2rem;
+  /* gap: 2rem; */
   max-height: 600px;
   width: 850px;
   box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
@@ -150,6 +150,7 @@
   align-items: center;
   gap: 1rem;
   padding: 2rem;
+  flex: 1 1;
 }
 
 .left-panel input {
@@ -159,6 +160,7 @@
   margin-bottom: 1rem;
   border-radius: 10px;
   font-size: 16px;
+  width: 100%;
 }
 
 .left-panel img {
@@ -171,6 +173,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  width: 100%;
 }
 
 .login-form a {
@@ -203,6 +206,8 @@
 
 .right-panel {
   overflow: hidden;
+  flex: 1 1;
+
 }
 
 .right-panel img {
@@ -460,8 +465,8 @@ color: #333;
 
 
 
-.edit-btn,
-.delete-btn {
+.edit-btn1,
+.delete-btn1 {
     color: #292929;
     padding: 8px 8px;
     display: block;
@@ -473,7 +478,7 @@ color: #333;
     border: none;
 }
 
-.edit-btn {
+.edit-btn1 {
     margin-top: 4px;
     background-color: #1560C1;
 }
@@ -482,12 +487,12 @@ color: #333;
     background-color: #1357B0;
 }
 
-.delete-btn {
+.delete-btn1 {
     margin-top: 4px;
     background-color: #C11515;
 }
 
-.delete-btn:hover {
+.delete-btn1:hover {
     margin-top: 4px;
     background-color: #B01313;
 }

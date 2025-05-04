@@ -1,5 +1,3 @@
-import { supabase } from "../../../admin/assets/js/auth/config.js"; // Adjust the path as necessary
-
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('petFormModal');
     const openFormBtn = document.getElementById('openFormBtn');
@@ -261,21 +259,4 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     loadPets();
-
-async function loadUserEmail() {
-  const { data: { user }, error } = await supabase.auth.getUser();
-
-  if (error) {
-    console.error('Error fetching user:', error.message);
-    return;
-  }
-
-  if (user && user.email) {
-    const emailElement = document.getElementById('userEmail');
-    emailElement.textContent = user.email;
-  }
-}
-
-loadUserEmail()
-
 });

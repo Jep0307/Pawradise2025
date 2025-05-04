@@ -118,7 +118,7 @@ th,
 td {
   border-bottom: 1px solid #ccc;
   padding: 10px;
-  text-align: center;
+  text-align: left;
   transition: 0.1s ease-in-out;
 }
 

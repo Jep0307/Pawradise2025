@@ -2,9 +2,9 @@
 session_start();
 
 if (isset($_SESSION['admin_email'])) {
-  header("Location: tabs/dashboard.php");
+  header("Location: ./tabs/dashboard.php");
   exit();
 } else {
-  header("Location: auth/signin.html");
+  header("Location: login.php");
   exit();
 }

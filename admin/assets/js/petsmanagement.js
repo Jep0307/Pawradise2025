@@ -107,8 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <td>${escapeHTML(pet.description)}</td>
                                 <td>${escapeHTML(pet.created_at)}</td>
                                 <td>
-                                    <button class="edit-btn" onclick="editPet(${pet.id})">Edit</button>
-                                    <button class="delete-btn" onclick="deletePet(${pet.id})">Delete</button>
+                                    <button class="edit-btn1" onclick="editPet(${pet.id})">Edit</button>
+                                    <button class="delete-btn1" onclick="deletePet(${pet.id})">Delete</button>
                                 </td>
                         </tr>
                     `;

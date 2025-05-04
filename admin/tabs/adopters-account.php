@@ -82,6 +82,7 @@ $conn->close();
                                 <th>Address</th>
                                 <th>Contact no.</th>
                                 <th>Email</th>
+                                <th>Password</th>
                                 <th>Date</th>
                             </tr>
                         </thead>

@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function loadUsers(search = '') {
-        const url = search ? `../assets/php/get_staff-and-staff-admin.php?search=${encodeURIComponent(search)}` : '../assets/php/get_staff-and-staff-admin.php';
+        const url = search ? `../components/get_staff-and-staff-admin.php?search=${encodeURIComponent(search)}` : '../components/get_staff-and-staff-admin.php';
 
         fetch(url)
             .then(res => res.json())

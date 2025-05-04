@@ -61,8 +61,8 @@ $conn->close();
                     </select>
                     <button class="add-btn" id="openFormBtn">Add</button>
 
-                    <a href="../components/add-pet.php" class="add-btn"><span
-                            class="material-symbols-outlined">add</span>Add Entry</a>
+                    <!-- <a href="../components/add-pet.php" class="add-btn"><span
+                            class="material-symbols-outlined">add</span>Add Entry</a> -->
                 </div>
             </div>
 

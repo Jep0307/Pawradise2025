@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $session_id = session_id();
         $now = date('Y-m-d H:i:s');
+
         $check = $conn->prepare("SELECT session_id FROM admin_sessions WHERE admin_email = ?");
         $check->bind_param("s", $email);
         $check->execute();
@@ -28,17 +29,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $admin_id = $user['id'];
+        $role = $user['role']; // assuming you have this column
 
         $update = $conn->prepare("REPLACE INTO admin_sessions (admin_id, admin_email, session_id, last_activity) VALUES (?, ?, ?, ?)");
         $update->bind_param("isss", $admin_id, $email, $session_id, $now);
         $update->execute();
 
         $_SESSION['admin_email'] = $email;
+        $_SESSION['admin_role'] = $role;
         $_SESSION['LAST_ACTIVITY'] = time();
 
-        header("Location: ./tabs/dashboard.php");
+        if ($role === 'admin') {
+            header("Location: ./tabs/dashboard.php");
+        } else if ($role === 'staff') {
+            header("Location: ../staff/pages/petsmanagement.php");
+        } else {
+            echo "<script>alert('Unauthorized role.'); window.location='login.php';</script>";
+        }
+
         exit();
-        
+    } else {
+        $loginError = "Invalid email or password.";
     }
 
     $stmt->close();
@@ -46,7 +57,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 if (isset($_SESSION['admin_email'])) {
-    header("Location: ./tabs/dashboard.php");
+    $role = $_SESSION['admin_role'] ?? '';
+    if ($role === 'admin') {
+        header("Location: ./tabs/dashboard.php");
+    } else if ($role === 'staff') {
+        header("Location: ../../../staff/pages/petsmanagement.html");
+    }
     exit();
 }
 ?>
@@ -74,7 +90,7 @@ if (isset($_SESSION['admin_email'])) {
                 <form action="login.php" method="POST" class="login-form">
                     <input type="text" name="email" placeholder="Email" />
                     <input type="password" name="password" placeholder="Password" />
-                    <a href="#" class="forgot-pass">Forgot Password</a>
+                    <!-- <a href="#" class="forgot-pass">Forgot Password</a> -->
                     <button class="submit-btn">Login</button>
                 </form>
             </div>

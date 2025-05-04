@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function loadUsers(search = '') {
-        const url = search ? `../assets/php/get_adopters.php?search=${encodeURIComponent(search)}` : '../assets/php/get_adopters.php';
+        const url = search ? `../components/get_adopters.php?search=${encodeURIComponent(search)}` : '../components/get_adopters.php';
 
         fetch(url)
             .then(res => res.json())
@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>${escapeHTML(users.address)}</td>
                             <td>${escapeHTML(users.contactno)}</td>
                             <td>${escapeHTML(users.email)}</td>
+                            <td>${escapeHTML(users.password)}</td>
                             <td>${escapeHTML(users.created_at)}</td>
                         </tr>
                     `;
