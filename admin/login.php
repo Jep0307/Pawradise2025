@@ -23,10 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check->execute();
         $existing = $check->get_result()->fetch_assoc();
 
-        if ($existing && $existing['session_id'] !== $session_id) {
-            echo "<script>alert('You are already logged in on another device.'); window.location='login.php';</script>";
-            exit();
-        }
+        // if ($existing && $existing['session_id'] !== $session_id) {
+        //     echo "<script>alert('You are already logged in on another device.'); window.location='login.php';</script>";
+        //     exit();
+        // }
 
         $admin_id = $user['id'];
         $role = $user['role']; // assuming you have this column
