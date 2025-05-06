@@ -93,7 +93,7 @@ $conn->close();
             </main>
 </body>
 
-<script src="../assets/js/adopters-account.js"></script>
+<script src="../scripts/adopters-account.js"></script>
 <!-- <script type="module" src="../../admin/scripts/auth/signout.js"></script> -->
 
 </html>

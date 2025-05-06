@@ -43,8 +43,8 @@ $adminEmail = $admin['email'] ?? 'admin@gmail.com';
     <title>Pet Management</title>
 
     <link rel="icon" sizes="48x48" href="../assets/imgs/Logo.svg" type="image/x-icon">
-    <link rel="stylesheet" href="../assets/styles/global.css">
-    <link rel="stylesheet" href="../assets/styles/petsmanagement.css">
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/petsmanagement.css">
 </head>
 
 <body>
@@ -159,6 +159,6 @@ $adminEmail = $admin['email'] ?? 'admin@gmail.com';
     </main>
 </body>
 
-<script type="module" src="../assets/js/petsmanagement.js"></script>
+<script type="module" src="../scripts/petsmanagement.js"></script>
 
 </html>

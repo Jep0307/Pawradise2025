@@ -8,8 +8,8 @@
 
   <!-- Styles -->
   <link rel="icon" sizes="48x48" href="../assets/imgs/Logo.svg" type="image/x-icon">
-  <link rel="stylesheet" href="../assets/styles/global.css" />
-  <link rel="stylesheet" href="../assets/styles/pets.css" />
+  <link rel="stylesheet" href="../styles/global.css" />
+  <link rel="stylesheet" href="../styles/pets.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
@@ -156,7 +156,7 @@
                 alt="" srcset="">
 
               <!-- Pet application form -->
-              <form class="pa-form" id="adoptionForm">
+              <form class="pa-form" id="adoptionForm" enctype="multipart/form-data">
                 <div class="pa-form-container">
 
                   <!-- Header and text -->
@@ -211,56 +211,45 @@
                     <div class="title-and-inputs-group">
                       <h3>Living Situation</h3>
                       <div class="label-and-input">
-                        <label>Do you rent?</label>
-                        <div class="custom-select-container">
-                          <div class="custom-select">
-                            <span class="selected">Select</span>
-                          </div>
-                          <ul class="custom-options hidden">
-                            <li data-value="yes">Yes</li>
-                            <li data-value="no">No</li>
-                          </ul>
-                        </div>
+                        <label for="rent">Do you rent?</label>
+                        <select id="rent" name="rent">
+                          <option value="">Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                        </select>
                         <span class="error-message" id="rentError"></span>
-                      </div>
+                      </div>                      
                     </div>
 
                     <div class="title-and-inputs-group">
                       <h3>Building Type</h3>
                       <div class="label-and-input">
-                        <label>Type of Residence</label>
-                        <div class="custom-select-container">
-                          <div class="custom-select">
-                            <span class="selected">Select</span>
-                          </div>
-                          <ul class="custom-options hidden">
-                            <li data-value="house">House</li>
-                            <li data-value="condo">Condo</li>
-                            <li data-value="apartment">Apartment</li>
-                            <li data-value="other">Other</li>
-                          </ul>
-                        </div>
+                        <label for="residenceType">Type of Residence</label>
+                        <select id="residenceType" name="residenceType">
+                          <option value="">Select</option>
+                          <option value="house">House</option>
+                          <option value="condo">Condo</option>
+                          <option value="apartment">Apartment</option>
+                          <option value="other">Other</option>
+                        </select>
                         <span class="error-message" id="residenceTypeError"></span>
-                      </div>
+                      </div>                      
                     </div>
 
                     <div class="title-and-inputs-group">
                       <h3>Adoption Preferences</h3>
                       <div class="label-and-input">
-                        <label>Type of Pet to Adopt</label>
-                        <div class="custom-select-container">
-                          <div class="custom-select">
-                            <span class="selected">Select</span>
-                          </div>
-                          <ul class="custom-options hidden">
-                            <li data-value="cat">Cat</li>
-                            <li data-value="dog">Dog</li>
-                            <li data-value="both">Both</li>
-                            <li data-value="undecided">Not decided</li>
-                          </ul>
-                        </div>
+                        <label for="petType">Type of Pet to Adopt</label>
+                        <select id="petType" name="petType">
+                          <option value="">Select</option>
+                          <option value="cat">Cat</option>
+                          <option value="dog">Dog</option>
+                          <option value="both">Both</option>
+                          <option value="undecided">Not decided</option>
+                        </select>
                         <span class="error-message" id="petTypeError"></span>
                       </div>
+                      
                     </div>
 
                     <!-- Valid ID Upload -->
@@ -312,16 +301,12 @@
                     <div class="title-and-inputs-group">
                       <h3>Visitation</h3>
                       <div class="label-and-input">
-                        <label>Can you visit the shelter?</label>
-                        <div class="custom-select-container">
-                          <div class="custom-select">
-                            <span class="selected">Select</span>
-                          </div>
-                          <ul class="custom-options hidden">
-                            <li data-value="yes">Yes</li>
-                            <li data-value="no">No</li>
-                          </ul>
-                        </div>
+                        <label for="shelterVisit">Can you visit the shelter?</label>
+                        <select id="shelterVisit" name="shelterVisit">
+                          <option value="">Select</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                        </select>
                         <span class="error-message" id="shelterVisitError"></span>
                       </div>
                     </div>
@@ -392,14 +377,14 @@
   </footer>
 
   <!-- Modules -->
-  <script type="module" src="../../admin/assets/js/auth/config.js"></script>
-  <script type="module" src="../assets/js/auth/signout.js"></script>
+  <script type="module" src="../../admin/scripts/auth/config.js"></script>
+  <script type="module" src="../scripts/auth/signout.js"></script>
 
   <!-- Scripts -->
-  <script defer src="../assets/js/home.js"></script>
-  <script defer src="../assets/js/pets.js"></script>
+  <script defer src="../scripts/home.js"></script>
+  <script defer src="../scripts/pets.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script defer src="../assets/js/adopt.js"></script>
+  <script defer src="../scripts/adopt.js"></script>
 </body>
 
 </html>

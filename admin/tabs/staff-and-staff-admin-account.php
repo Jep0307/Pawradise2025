@@ -91,7 +91,7 @@ $conn->close();
             </main>
 </body>
 
-<script src="../assets/js/staff-and-staff-admin-account.js"></script>
+<script src="../scripts/staff-and-staff-admin-account.js"></script>
 <!-- <script type="module" src="../../admin/scripts/auth/signout.js"></script> -->
 
 </html>

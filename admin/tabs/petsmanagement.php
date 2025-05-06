@@ -59,7 +59,7 @@ $conn->close();
                         <option value="alphabetical">Alphabetical</option>
                         <option value="newest">Newest</option>
                     </select>
-                    <button class="add-btn" id="openFormBtn">Add</button>
+                    <button class="add-btn1" id="openFormBtn">Add</button>
 
                     <!-- <a href="../components/add-pet.php" class="add-btn"><span
                             class="material-symbols-outlined">add</span>Add Entry</a> -->
@@ -147,8 +147,7 @@ $conn->close();
             </main>
 </body>
 
-<script src="../assets/js/petsmanagement.js"></script>
-<!-- <script type="module" src="../../admin/scripts/auth/signout.js"></script> -->
+<script type="module" src="../scripts/petsmanagement.js"></script>
 
 </html>
 <?php
