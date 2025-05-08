@@ -1,5 +1,5 @@
 <?php
-include '../components/db_connect.php';
+include '../../config/db.php';
 
 $admin_email = $_SESSION['admin_email'] ?? 'admin@gmail.com';
 
@@ -46,6 +46,10 @@ $profileImgSrc = $adminImage ? 'data:image/jpeg;base64,' . base64_encode($adminI
         <li>
             <a href="../tabs/adopters-account.php"><span class="material-symbols-outlined"> group
                 </span>Adopters</a>
+        </li>
+        <li>
+            <a href="../tabs/application.php"><span class="material-symbols-outlined"> group
+                </span>Applications</a>
         </li>
         <!-- <li>
             <a href="../tabs/staff-accounts-management.php"><span class="material-symbols-outlined"> person_apron

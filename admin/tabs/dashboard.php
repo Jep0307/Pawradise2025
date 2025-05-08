@@ -30,7 +30,7 @@ $resultPetsListed = $stmt->get_result();
 $petsListed = $resultPetsListed->fetch_assoc()['total'];
 $stmt->close();
 
-$queryAdoptionCompleted = "SELECT COUNT(*) AS total FROM pets WHERE DATE_FORMAT(created_at, '%Y-%m') = ? AND adoption_status = 'completed'";
+$queryAdoptionCompleted = "SELECT COUNT(*) AS total FROM pets WHERE DATE_FORMAT(created_at, '%Y-%m') = ?";
 $stmt = $conn->prepare($queryAdoptionCompleted);
 $stmt->bind_param("s", $currentMonth);
 $stmt->execute();

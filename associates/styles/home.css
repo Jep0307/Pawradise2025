@@ -5,7 +5,7 @@
 
 .hero-bg {
   position: relative;
-  background-image: url(../imgs/Hero-img.jpg);
+  background-image: url(../assets/imgs/Hero-img.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -37,8 +37,7 @@
   margin-inline: auto;
 }
 
-.hero-header-and-text h1,
-.cta-header-and-text h1 {
+.hero-header-and-text h1 {
   margin-bottom: 16px;
   font-size: clamp(3.063rem, 2.784rem + 1.14vw, 3.813rem);
   font-weight: 600;
@@ -159,7 +158,8 @@
 } */
 
 .header-and-text h2,
-.header-and-text-center h2 {
+.header-and-text-center h2,
+.cta-header-and-text h2 {
   margin-bottom: 8px;
   font-size: clamp(1.938rem, 1.752rem + 0.76vw, 2.438rem);
   font-weight: 600;

@@ -1,5 +1,5 @@
 <?php
-include '../components/db_connect.php';
+include '../../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fullname = $_POST['fullname'] ?? '';

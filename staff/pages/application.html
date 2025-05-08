@@ -7,6 +7,7 @@
   <title>Application Management</title>
   <!-- <link rel="stylesheet" href="../assets/styles/form.css" /> -->
   <link rel="stylesheet" href="../styles/global.css">
+
 </head>
 
 <body>
@@ -36,7 +37,7 @@
     <hr>
     <ul>
       <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="./petsmanagement.php">Pet Management</a></li>
-      <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="./application.html">Pet Management</a></li>
+      <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="./application.html">Applications Management</a></li>
     </ul>
     <hr>
     <ul>
@@ -68,10 +69,32 @@
             <th>Zoom Time?</th>
             <th>Shelter Visit</th>
             <th>Submitted At</th>
+            <th>Status</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody id="applicationList"></tbody>
       </table>
+
+      <div class="form-modal" id="FormModal">
+        <div class="modal-content">
+            <h2>Update Status</h2>
+            <form id="updateASForm" enctype="multipart/form-data">
+                <select name="status" required>
+                    <option value="" disabled selected>Select Status</option>
+                    <option value="Pending">Pending </option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Completed">Completed</option>
+                </select>
+
+                <div class="button-row">
+                  <button type="button" id="cancelButton" class="cancel-btn">Cancel</button>
+                  <button type="submit" class="save-btn">Save</button>
+              </div>
+            </form>
+        </div>
+    </div>
     </div>
   </main>
 

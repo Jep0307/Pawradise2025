@@ -66,6 +66,8 @@ const form = document.getElementById('adoptionForm');
 
 
 // Form submit
+let confirmHandler; // store globally so we can remove it if needed
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   let valid = true;
@@ -107,23 +109,23 @@ form.addEventListener('submit', (e) => {
   });
 
   if (valid) {
-    showWarningModal(finalizeApplicationSubmission); // pass function as argument
+    showWarningModal(finalizeApplicationSubmission);
   }
 });
 
-
-// Show/Hide Warning Modal
 function showWarningModal(onConfirm) {
   const modal = document.getElementById('warningModal');
-  modal.style.display = 'block';
-
   const confirmBtn = modal.querySelector('button:last-of-type');
   const cancelBtn = modal.querySelector('button:first-of-type');
 
-  const confirmHandler = () => {
+  // Clear old handler if exists
+  if (confirmHandler) {
+    confirmBtn.removeEventListener('click', confirmHandler);
+  }
+
+  confirmHandler = () => {
     modal.style.display = 'none';
     onConfirm();
-    confirmBtn.removeEventListener('click', confirmHandler); // cleanup
   };
 
   confirmBtn.addEventListener('click', confirmHandler);
@@ -131,29 +133,30 @@ function showWarningModal(onConfirm) {
   cancelBtn.onclick = () => {
     modal.style.display = 'none';
   };
+
+  modal.style.display = 'flex';
 }
 
-// Finalize Application Submission
 function finalizeApplicationSubmission() {
   const formData = new FormData(form);
-
   const submitBtn = form.querySelector('button[type="submit"]');
   submitBtn.disabled = true;
 
-  fetch('../php/add-applications.php', {
+  fetch('../php/add_applications.php', {
     method: 'POST',
     body: formData
   })
   .then(res => res.text())
   .then(response => {
     console.log(response);
-    form.reset();
-    closePetApplicationForm();
+    alert('Application submitted successfully!');
   })
   .catch((err) => {
     console.error('Something went wrong:', err);
+    submitBtn.disabled = false;
   });
 }
+
 
 
 // HTML Escape

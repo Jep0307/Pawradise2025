@@ -1,5 +1,5 @@
 <?php
-include '../components/db_connect.php';
+include '../../config/db.php';
 session_start();
 
 if (!isset($_SESSION['admin_email'])) {

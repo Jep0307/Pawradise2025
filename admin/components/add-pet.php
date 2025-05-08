@@ -1,5 +1,5 @@
 <?php
-include '../components/db_connect.php';
+include '../../config/db.php';
 include '../components/session.php';
 include '../components/popup.php';
 include '../components/logger.php';
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['pet-name'])) {
     $shelter = $_POST['pet-shelter'];
     $intake = $_POST['rescue-date'];
 
-    $sql = "INSERT INTO pets (name, species, breed, age, gender, height, weight, color, vaccination_status, neutered_status, medical_condition, adoption_status, shelter, intake_date) 
+    $sql = "INSERT INTO pets1 (name, species, breed, age, gender, height, weight, color, vaccination_status, neutered_status, medical_condition, adoption_status, shelter, intake_date) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);

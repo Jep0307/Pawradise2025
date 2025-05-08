@@ -308,7 +308,7 @@
 }
 
 .pa-form select {
-  appearance: none; /* Remove default arrow */
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
 

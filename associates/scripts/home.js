@@ -21,3 +21,6 @@ function toggleMenu() {
 
 // Add event listener
 menuToggleIcon.addEventListener("click", toggleMenu);
+
+const userEmail = localStorage.getItem("userEmail");
+// console.log("Loaded userEmail from localStorage:", userEmail);

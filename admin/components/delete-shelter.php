@@ -1,5 +1,5 @@
 <?php
-include '../components/db_connect.php';
+include '../../config/db.php';
 include '../components/logger.php';
 include '../components/session.php';
 

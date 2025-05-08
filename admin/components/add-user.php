@@ -1,5 +1,5 @@
 <?php
-include '../components/db_connect.php';
+include '../../config/db.php';
 include '../components/logger.php';
 include '../components/session.php';
 include '../components/popup.php';
@@ -132,12 +132,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     });
 
-    document.getElementById('photo-input').addEventListener('change', function(event) {
-        const [file] = event.target.files;
-        if (file) {
-            document.getElementById('preview-image').src = URL.createObjectURL(file);
-        }
-    });
+    // document.getElementById('photo-input').addEventListener('change', function(event) {
+    //     const [file] = event.target.files;
+    //     if (file) {
+    //         document.getElementById('preview-image').src = URL.createObjectURL(file);
+    //     }
+    // });
     </script>
 </body>
 

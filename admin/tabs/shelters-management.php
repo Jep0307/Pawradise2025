@@ -1,5 +1,5 @@
 <?php
-include '../components/db_connect.php';
+include '../../config/db.php'; // Include the database connection
 include '../components/session.php';
 include '../components/popup.php';
 
@@ -17,7 +17,7 @@ $sql = "
         s.shelter_img,
         s.created_at,
         (SELECT COUNT(*) FROM staffs WHERE shelter_id = s.id) AS staff_count,
-        (SELECT COUNT(*) FROM pets WHERE shelter = s.shelter_name) AS pet_count
+        (SELECT COUNT(*) FROM pets1 WHERE shelter = s.shelter_name) AS pet_count
     FROM shelters s
 ";
 
@@ -86,7 +86,7 @@ $conn->close();
                                 ? 'data:image/jpeg;base64,' . base64_encode($shelter['shelter_img']) 
                                 : '../assets/default-shelter.png';
                         ?>
-                    <a href="<?php echo "../components/edit-shelter.php?id={$shelter['id']}" ?>" class="shelter-card">
+                    <a href="<?php echo "../../mgmt_components/shelters/edit_shelter.php?id={$shelter['id']}" ?>" class="shelter-card">
                         <img src="<?= $imageSrc ?>" alt="Shelter Image">
                         <div class="shelter-info">
                             <h3><?= htmlspecialchars($shelter['shelter_name']) ?></h3>

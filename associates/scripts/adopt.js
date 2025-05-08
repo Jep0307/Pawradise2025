@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const petContainer = document.getElementById('petsContainer');
 
-  fetch('/SIA02/Pawradise2025/staff/php/get_pet.php')
+  fetch('../../shared_components/pets/get_pet.php')
     .then(res => res.json())
     .then(data => {
       if (Array.isArray(data)) {
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
           petCard.setAttribute('data-breed', pet.breed);
           
           petCard.innerHTML = `
-            <img loading="lazy" src="/SIA02/Pawradise2025/staff/assets/uploads/${pet.image}" alt="${pet.name}" />
+            <img loading="lazy" src="../../uploads/${pet.image}" alt="${pet.name}" />
             <div class="pet-info">
               <p class="pet-name">${pet.name}</p>
               <p class="breed">${pet.breed}</p>

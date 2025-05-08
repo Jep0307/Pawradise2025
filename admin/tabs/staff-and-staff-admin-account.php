@@ -1,5 +1,5 @@
 <?php
-include '../components/db_connect.php';
+include '../../config/db.php'; // Include the database connection
 include '../components/session.php';
 include '../components/popup.php';
 
@@ -33,40 +33,38 @@ $conn->close();
 
 <body>
     <?php include '../components/sidebar.php' ?>
-    <section class="pet-management-section" style="margin-left: 85px">
+
+    <section class="users-management-section" style="margin-left: 85px">
         <div class="breadcrumbs">
             <div class="left">
-                <p>Admin > <span>PET MANAGEMENT</span></p>
+                <p>Admin > <span>USERS MANAGEMENT</span></p>
             </div>
 
             <div class="right">
-                <a href="../components/logout.php"><span class="material-symbols-outlined"> logout </span>Logout</a>
+                <a href="logout.php"><span class="material-symbols-outlined"> logout </span>Logout</a>
             </div>
         </div>
 
         <div class="management-container">
             <div class="management-top-panel">
                 <div class="header">
-                    <h1>Staff and staff-admin account</h1>
-                    <!-- <p class="subtitle">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    </p> -->
+                    <h1>User Accounts Management</h1>
+                    <p class="subtitle">
+                        Create, edit, and delete user information
+                    </p>
                 </div>
-                <!-- <div class="top-buttons">
+                <div class="top-buttons">
                     <select name="sort" id="" class="sort-input">
-                        <option value="sort" disabled selected>Sort
-                        </option>
+                        <option value="" disabled selected>Sort</option>
                         <option value="alphabetical">Alphabetical</option>
                         <option value="newest">Newest</option>
                     </select>
-                    <button class="add-btn" id="openFormBtn">Add</button>
-
-                    <a href="../components/add-pet.php" class="add-btn"><span
+                    <a href="../components/add-user.php" class="add-btn"><span
                             class="material-symbols-outlined">add</span>Add Entry</a>
-                </div> -->
+                </div>
             </div>
 
-            <div class="search-input">
+            <div class="search-container">
                 <input type="text" name="" placeholder="Search something..." id="" /><span
                     class="material-symbols-outlined">search</span>
             </div>

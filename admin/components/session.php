@@ -4,7 +4,7 @@
 // ini_set('session.cookie_samesite', 'Strict');
 session_start();
 
-include 'db_connect.php';
+include '../../config/db.php';
 
 define('SESSION_TIMEOUT', 1800);
 

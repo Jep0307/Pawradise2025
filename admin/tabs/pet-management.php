@@ -96,7 +96,7 @@ $conn->close();
                 </div>
             </div>
 
-            <div class="search-input">
+            <div class="search-container">
                 <input type="text" name="" placeholder="Search something..." id="" /><span
                     class="material-symbols-outlined">search</span>
             </div>

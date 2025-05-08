@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('petFormModal');
+    const modal = document.getElementById('FormModal');
     const openFormBtn = document.getElementById('openFormBtn');
     const cancelBtn = document.getElementById('cancelButton');
     const formTitle = document.getElementById('formTitle');
@@ -51,63 +51,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
     search();
 
-    function dropdownSelection() {
-        const containers = document.querySelectorAll('.custom-select-container1');
+    // function dropdownSelection() {
+    //     const containers = document.querySelectorAll('.custom-select-container1');
 
-        // Close all dropdowns by default
-        containers.forEach(container => {
-            container.querySelector('.custom-options1').classList.add('hidden1');
-        });
+    //     // Close all dropdowns by default
+    //     containers.forEach(container => {
+    //         container.querySelector('.custom-options1').classList.add('hidden1');
+    //     });
 
-        document.addEventListener('click', (e) => {
-            containers.forEach(container => {
-                const options = container.querySelector('.custom-options1');
-                const arrowIcon = container.querySelector('.custom-select1 img');
-                if (!container.contains(e.target)) {
-                    options.classList.add('hidden1');
-                    arrowIcon.src = '../assets/imgs/chevron-down-icon.svg';
-                }
-            });
-        });
+    //     document.addEventListener('click', (e) => {
+    //         containers.forEach(container => {
+    //             const options = container.querySelector('.custom-options1');
+    //             const arrowIcon = container.querySelector('.custom-select1 img');
+    //             if (!container.contains(e.target)) {
+    //                 options.classList.add('hidden1');
+    //                 arrowIcon.src = '../assets/imgs/chevron-down-icon.svg';
+    //             }
+    //         });
+    //     });
 
-        containers.forEach(container => {
-            const select = container.querySelector('.custom-select1');
-            const options = container.querySelector('.custom-options1');
-            const selected = select.querySelector('.selected1');
-            const arrowIcon = select.querySelector('img');
+    //     containers.forEach(container => {
+    //         const select = container.querySelector('.custom-select1');
+    //         const options = container.querySelector('.custom-options1');
+    //         const selected = select.querySelector('.selected1');
+    //         const arrowIcon = select.querySelector('img');
 
-            select.addEventListener('click', (e) => {
-                e.stopPropagation();
+    //         select.addEventListener('click', (e) => {
+    //             e.stopPropagation();
 
-                // Close all other dropdowns
-                containers.forEach(other => {
-                    if (other !== container) {
-                        other.querySelector('.custom-options1').classList.add('hidden1');
-                        other.querySelector('.custom-select1 img').src = '../assets/imgs/chevron-down-icon.svg';
-                    }
-                });
+    //             // Close all other dropdowns
+    //             containers.forEach(other => {
+    //                 if (other !== container) {
+    //                     other.querySelector('.custom-options1').classList.add('hidden1');
+    //                     other.querySelector('.custom-select1 img').src = '../assets/imgs/chevron-down-icon.svg';
+    //                 }
+    //             });
 
-                // Toggle current dropdown
-                const isHidden = options.classList.toggle('hidden1');
-                arrowIcon.src = isHidden
-                    ? '../assets/imgs/chevron-down-icon.svg'
-                    : '../assets/imgs/chevron-up-icon.svg';
-            });
+    //             // Toggle current dropdown
+    //             const isHidden = options.classList.toggle('hidden1');
+    //             arrowIcon.src = isHidden
+    //                 ? '../assets/imgs/chevron-down-icon.svg'
+    //                 : '../assets/imgs/chevron-up-icon.svg';
+    //         });
 
-            options.querySelectorAll('li').forEach(option => {
-                option.addEventListener('click', () => {
-                    selected.textContent = option.textContent;
-                    selected.dataset.value = option.dataset.value;
-                    options.classList.add('hidden1');
-                    arrowIcon.src = '../assets/imgs/chevron-down-icon.svg';
-                });
-            });
-        });
-    }
+    //         options.querySelectorAll('li').forEach(option => {
+    //             option.addEventListener('click', () => {
+    //                 selected.textContent = option.textContent;
+    //                 selected.dataset.value = option.dataset.value;
+    //                 options.classList.add('hidden1');
+    //                 arrowIcon.src = '../assets/imgs/chevron-down-icon.svg';
+    //             });
+    //         });
+    //     });
+    // }
 
 
 
-    dropdownSelection();
+    // dropdownSelection();
 
     function escapeHTML(str) {
         if (!str) return '';
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
           formData.append('editingId', editingId);
         }
     
-        fetch('../php/add_pet.php', {
+        fetch('../../shared_components/pets/add_pet.php', {
           method: 'POST',
           body: formData
         })
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
     function loadPets(search = '') {
-        const url = search ? `../php/get_pets.php?search=${encodeURIComponent(search)}` : '../php/get_pets.php';
+        const url = search ? `../../shared_components/pets/get_pets.php?search=${encodeURIComponent(search)}` : '../../shared_components/pets/get_pets.php';
 
         fetch(url)
             .then(res => res.json())
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             data-breed="${pet.breed.toLowerCase()}"
                             data-sex="${pet.sex.toLowerCase()}">
                                 <td>${pet.id}</td>
-                                <td><img src="../../staff/assets/uploads/${escapeHTML(pet.image)}" class="pet-image" /></td>
+                                <td><img src="../../uploads/${escapeHTML(pet.image)}" class="pet-image" /></td>
                                 <td>${escapeHTML(pet.name)}</td>
                                 <td>${escapeHTML(pet.sex)}</td>
                                 <td>${escapeHTML(pet.type)}</td>
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.editPet = function (id) {
-        fetch(`../php/get_pet.php?id=${id}`)
+        fetch(`../../shared_components/pets/get_pet.php?id=${id}`)
           .then(res => res.json())
           .then(pet => {
             if (!pet.id) {
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.deletePet = function (id) {
         if (confirm("Are you sure you want to delete this pet?")) {
-            fetch(`../php/delete_pet.php?id=${id}`)
+            fetch(`../../shared_components/pets/delete_pet.php?id=${id}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {

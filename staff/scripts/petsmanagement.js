@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('petFormModal');
+    const modal = document.getElementById('FormModal');
     const openFormBtn = document.getElementById('openFormBtn');
     const cancelBtn = document.getElementById('cancelButton');
     const formTitle = document.getElementById('formTitle');
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
           formData.append('editingId', editingId);
         }
     
-        fetch('../php/add_pet.php', {
+        fetch('../../shared_components/pets/add_pet.php', {
           method: 'POST',
           body: formData
         })
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
     function loadPets(search = '') {
-        const url = search ? `../php/get_pets.php?search=${encodeURIComponent(search)}` : '../php/get_pets.php';
+        const url = search ? `../../shared_components/pets/get_pets.php?search=${encodeURIComponent(search)}` : '../../shared_components/pets/get_pets.php';
 
         fetch(url)
             .then(res => res.json())
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             data-breed="${pet.breed.toLowerCase()}"
                             data-sex="${pet.sex.toLowerCase()}">
                                 <td>${pet.id}</td>
-                                <td><img src="../assets/uploads/${escapeHTML(pet.image)}" class="pet-image" /></td>
+                                <td><img src="../../uploads/${escapeHTML(pet.image)}" class="pet-image" /></td>
                                 <td>${escapeHTML(pet.name)}</td>
                                 <td>${escapeHTML(pet.sex)}</td>
                                 <td>${escapeHTML(pet.type)}</td>
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.editPet = function (id) {
-        fetch(`../php/get_pet.php?id=${id}`)
+        fetch(`../../shared_components/pets/get_pet.php?id=${id}`)
           .then(res => res.json())
           .then(pet => {
             if (!pet.id) {
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.deletePet = function (id) {
         if (confirm("Are you sure you want to delete this pet?")) {
-            fetch(`../php/delete_pet.php?id=${id}`)
+            fetch(`../../shared_components/pets/delete_pet.php?id=${id}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {

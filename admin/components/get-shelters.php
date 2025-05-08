@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-include 'db_connect.php';
+include '../../config/db.php';
 
 $sql = "SELECT * FROM shelters";
 $result = $conn->query($sql);

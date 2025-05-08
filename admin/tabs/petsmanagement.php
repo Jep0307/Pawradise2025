@@ -1,5 +1,5 @@
 <?php
-include '../components/db_connect.php';
+include '../../config/db.php'; // Include the database connection
 include '../components/session.php';
 include '../components/popup.php';
 
@@ -36,7 +36,7 @@ $conn->close();
     <section class="pet-management-section" style="margin-left: 85px">
         <div class="breadcrumbs">
             <div class="left">
-                <p>Admin > <span>PET MANAGEMENT</span></p>
+                <p>Admin><span>PET MANAGEMENT</span></p>
             </div>
 
             <div class="right">
@@ -59,15 +59,15 @@ $conn->close();
                         <option value="alphabetical">Alphabetical</option>
                         <option value="newest">Newest</option>
                     </select>
-                    <button class="add-btn1" id="openFormBtn">Add</button>
+                    <button class="add-btn" id="openFormBtn">Add</button>
 
                     <!-- <a href="../components/add-pet.php" class="add-btn"><span
                             class="material-symbols-outlined">add</span>Add Entry</a> -->
                 </div>
             </div>
 
-            <div class="search-input">
-                <input type="text" name="" placeholder="Search something..." id="" /><span
+            <div class="search-container">
+                <input class="search-input" type="text" name="" placeholder="Search something..." id="" /><span
                     class="material-symbols-outlined">search</span>
             </div>
 
@@ -94,7 +94,7 @@ $conn->close();
                     </table>
                 </div>
 
-                <div class="pet-form-modal" id="petFormModal">
+                <div class="form-modal" id="FormModal">
                     <div class="modal-content">
                         <h2 id="formTitle">Add a Pet</h2>
                         <form id="addPetForm" enctype="multipart/form-data">

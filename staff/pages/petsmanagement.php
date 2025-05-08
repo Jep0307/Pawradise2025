@@ -12,7 +12,7 @@ if (!isset($_SESSION['admin_email'])) {
 $admin_email = $_SESSION['admin_email'];
 
 // Include the database connection file
-include '../../admin/components/db_connect.php';
+include '../../config/db.php';
 
 // Query to fetch admin details based on the email stored in the session
 $sql = "SELECT name, email FROM admins WHERE email = ?";
@@ -73,7 +73,7 @@ $adminEmail = $admin['email'] ?? 'admin@gmail.com';
         <hr>
         <ul>
             <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="./petsmanagement.php">Pet Management</a></li>
-            <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="./application.html">Application Forms</a></li>
+            <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="./application.html">Application Management</a></li>
         </ul>
         <hr>
         <ul>
@@ -106,7 +106,7 @@ $adminEmail = $admin['email'] ?? 'admin@gmail.com';
             </table>
         </div>
 
-        <div class="pet-form-modal" id="petFormModal">
+        <div class="form-modal" id="FormModal">
             <div class="modal-content">
                 <h2 id="formTitle">Add a Pet</h2>
                 <form id="addPetForm" enctype="multipart/form-data">

@@ -1,5 +1,5 @@
 <?php
-include '../components/db_connect.php';
+include '../../config/db.php';
 header('Content-Type: application/json');
 
 $result = $conn->query("SELECT id, email, password, created_at, role FROM users");

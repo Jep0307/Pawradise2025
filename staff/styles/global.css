@@ -207,10 +207,10 @@ thead th:last-child {
     border-top-right-radius: 8px;
 }
 
-tbody tr:first-child td:nth-child(8),
+/* tbody tr:first-child td:nth-child(8),
 tbody tr:first-child td:nth-child(9) {
     width: 300px;
-}
+} */
 
 tbody tr:hover {
     background-color: #F3F3F5;
@@ -270,7 +270,7 @@ td {
     height: auto;
 }
 
-.pet-form-modal {
+.form-modal {
     display: none;
     position: fixed;
     z-index: 1000;
@@ -285,7 +285,7 @@ td {
     align-items: center;
 }
 
-.pet-form-modal .modal-content {
+.form-modal .modal-content {
     background-color: #fff;
     padding: 24px;
     border-radius: 12px;
@@ -296,7 +296,7 @@ td {
     font-family: 'Poppins', sans-serif;
 }
 
-.pet-form-modal h2 {
+.form-modal h2 {
     margin-bottom: 1rem;
     font-size: 1.5rem;
     color: #4a4a4a;
@@ -304,15 +304,15 @@ td {
 
 
 
-.pet-form-modal form {
+.form-modal form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.pet-form-modal input[type="text"],
-.pet-form-modal textarea,
-.pet-form-modal select {
+.form-modal input[type="text"],
+.form-modal textarea,
+.form-modal select {
     width: 100%;
     padding: 8px 12px;
     border: 1px solid #eaeaea;
@@ -324,7 +324,7 @@ td {
     appearance: none;          /* Standard */
 }
 
-.pet-form-modal button {
+.form-modal button {
     padding: 12px 16px;
     border: none;
     border-radius: 8px;
@@ -333,28 +333,28 @@ td {
     transition: background-color 0.3s ease;
 }
 
-.pet-form-modal .save-btn {
+.form-modal .save-btn {
     background-color: #15C138;
     color: white;
 }
 
-.pet-form-modal .save-btn:hover {
+.form-modal .save-btn:hover {
     background-color: #13B033;
     color: white;
 }
 
-.pet-form-modal .cancel-btn {
+.form-modal .cancel-btn {
     background-color: white;
     border: 1px solid #BDBDBD;
     color: #333;
 }
 
-.pet-form-modal .cancel-btn:hover {
+.form-modal .cancel-btn:hover {
     background-color: #EAEAEA;
     color: #333;
 }
 
-.pet-form-modal .button-row {
+.form-modal .button-row {
     display: flex;
     justify-content: flex-end;
     gap: 8px;

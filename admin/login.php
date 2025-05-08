@@ -1,5 +1,5 @@
 <?php
-include "./components/db_connect.php";
+include "../config/db.php"; // Include the database connection
 ob_start();
 session_start();
 

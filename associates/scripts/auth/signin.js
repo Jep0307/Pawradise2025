@@ -5,16 +5,16 @@ const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const emailError = document.getElementById("emailError");
 const passwordError = document.getElementById("passwordError");
+const formMessage = document.getElementById("formMessage");
 
 signinForm.addEventListener("submit", async (event) => {
-  event.preventDefault(); // Prevent page reload
+  event.preventDefault();
 
   let isValid = true;
-
-  // Validate email
   const emailValue = emailInput.value.trim();
   const passwordValue = passwordInput.value.trim();
 
+  // Email validation
   if (!emailValue) {
     emailError.textContent = "Email is required";
     emailError.style.display = "block";
@@ -27,7 +27,7 @@ signinForm.addEventListener("submit", async (event) => {
     emailError.style.display = "none";
   }
 
-  // Validate password
+  // Password validation
   if (!passwordValue) {
     passwordError.textContent = "Password is required";
     passwordError.style.display = "block";
@@ -40,57 +40,52 @@ signinForm.addEventListener("submit", async (event) => {
     passwordError.style.display = "none";
   }
 
-  // If validation fails, stop the process
-  if (!isValid) {
-    return;
-  }
+  if (!isValid) return;
 
   try {
-    const { error, data } = await supabase.auth.signInWithPassword({
+    // Step 1: Check email in DB
+    const response = await fetch("http://localhost/SIA02/Pawradise2025/associates/php/checkuser.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: emailValue })
+    });
+
+    const result = await response.json();
+
+    if (result.status !== "success") {
+      formMessage.textContent = result.message;
+      formMessage.className = "error";
+      return;
+    }
+
+    // Step 2: Try Supabase login
+    const { error } = await supabase.auth.signInWithPassword({
       email: emailValue,
-      password: passwordValue,
+      password: passwordValue
     });
 
     formMessage.classList.remove("error", "success");
 
     if (error) {
-      formMessage.textContent = error.message === "Invalid login credentials"
-        ? "Incorrect email or password. Please try again."
-        : error.message;
-
+      formMessage.textContent =
+        error.message === "Invalid login credentials"
+          ? "Incorrect email or password. Please try again."
+          : error.message;
       formMessage.classList.add("error");
     } else {
       formMessage.textContent = "Sign-in successful! Redirecting...";
       formMessage.classList.add("success");
-
-      const response = await fetch("http://localhost/SIA02/Pawradise2025/associates/php/checkuser.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email: emailValue })
-      });
-
-      const result = await response.json();
-
-      if (result.status === "success") {
-  
-          window.location.href = "http://localhost/SIA02/Pawradise2025/associates/pages/home.html";
-        
-      } else {
-        formMessage.textContent = result.message;
-        formMessage.classList.add("error");
-      }
+      localStorage.setItem("userEmail", emailValue);
+      window.location.href = "http://localhost/SIA02/Pawradise2025/associates/pages/home.html";
     }
   } catch (err) {
     console.error("Unexpected error:", err);
     formMessage.textContent = "An unexpected error occurred. Please try again.";
-    formMessage.style.color = "red";
-    formMessage.style.display = "block";
+    formMessage.className = "error";
   }
 });
 
-// Helper function to validate email format
+// Email format validator
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
@@ -99,11 +94,10 @@ function isValidEmail(email) {
 // Password visibility toggle
 const passwordIcon = document.getElementById("passwordIcon");
 passwordIcon.addEventListener("click", () => {
-  const isPasswordHidden = passwordInput.type === "password";
-
-  passwordInput.type = isPasswordHidden ? "text" : "password";
-  passwordIcon.src = isPasswordHidden
-    ? "../../assets/imgs/eye-closed-icon.svg "     // Eye open for visible password
-    : "../../assets/imgs/eye-icon.svg"; // Eye closed for hidden password
-  passwordIcon.alt = isPasswordHidden ? "Show Password" : "Hide Password";
+  const isHidden = passwordInput.type === "password";
+  passwordInput.type = isHidden ? "text" : "password";
+  passwordIcon.src = isHidden
+    ? "../../assets/imgs/eye-closed-icon.svg"
+    : "../../assets/imgs/eye-icon.svg";
+  passwordIcon.alt = isHidden ? "Show Password" : "Hide Password";
 });

@@ -1,5 +1,5 @@
 <?php
-include '../../admin/components/db_connect.php';
+include '../../config/db.php'; // Include the database connection
 session_start();
 
 header('Content-Type: application/json');

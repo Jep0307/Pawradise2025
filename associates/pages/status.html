@@ -55,58 +55,23 @@
             <p>You may check the status of your applications here.</p>
           </div>
 
-
-          <div class="status-box">
-            <div class="details">
-              <div role="button" class="view-btn">
-                <p>View</p>
-              </div>
-              <p class="date">00/00/0000</p>
-              <div class="status">
-                <p>Status</p>
-              </div>
-              <img class="close" src="../assets/imgs/X-icon.svg" alt="">
-            </div>
-          </div>
-          <div class="status-box">
-            <div class="details">
-              <div role="button" class="view-btn">
-                <p>View</p>
-              </div>
-              <p class="date">00/00/0000</p>
-              <div class="status">
-                <p>Status</p>
-              </div>
-              <img class="close" src="../assets/imgs/X-icon.svg" alt="">
-            </div>
-          </div>
-          <div class="status-box">
-            <div class="details">
-              <div role="button" class="view-btn">
-                <p>View</p>
-              </div>
-              <p class="date">00/00/0000</p>
-              <div class="status">
-                <p>Status</p>
-              </div>
-              <img class="close" src="../assets/imgs/X-icon.svg" alt="">
-            </div>
-          </div>
-          <div class="status-box">
-            <div class="details">
-              <div role="button" class="view-btn">
-                <p>View</p>
-              </div>
-              <p class="date">00/00/0000</p>
-              <div class="status">
-                <p>Status</p>
-              </div>
-              <img class="close" src="../assets/imgs/X-icon.svg" alt="">
-            </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Date/Time</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="applicationList"></tbody>
+            </table>
           </div>
         </div>
-      </div>
     </section>
+
+
+
   </main>
 
   <footer>
@@ -139,6 +104,7 @@
 
   <!-- Scripts -->
   <script defer src="../scripts/home.js"></script>
+  <script defer src="../scripts/status.js"></script>
 </body>
 
 </html>
