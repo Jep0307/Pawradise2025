@@ -296,3 +296,11 @@ footer .copy-rights {
     margin-left: 0;
   }
 }
+
+@media screen and (max-width: 1200px) {
+  .nav-list {
+    display: block;
+    margin-left: 70%;
+    /* flex-direction: column; */
+  }
+}

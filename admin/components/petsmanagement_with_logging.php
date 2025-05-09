@@ -1,8 +1,8 @@
 <?php
 include '../../config/db.php';
 include '../components/session.php';
-include '../components/popup.php';
 include '../components/logger.php';
+include '../components/popup.php';
 
 if (!isset($_SESSION['admin_email'])) {
     header("Location: ../login.php");
@@ -49,6 +49,7 @@ $conn->close();
                     <h1>Pet Management</h1>
                     <p class="subtitle">
                         You can add new pets and even update it or delete it.
+        log_action($conn, $_SESSION['admin_id'], 'Updated pet information', 'Pet', $pet_id);
                     </p>
                 </div>
                 <div class="top-buttons">
