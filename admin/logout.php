@@ -1,6 +1,6 @@
 <?php
 session_start();
-include './components/db_connect.php';
+include '../config/db.php';
 
 if (isset($_SESSION['admin_email'])) {
     $email = $_SESSION['admin_email'];

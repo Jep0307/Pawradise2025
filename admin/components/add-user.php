@@ -4,38 +4,50 @@ include '../components/logger.php';
 include '../components/session.php';
 include '../components/popup.php';
 
-function sanitize($data) {
-    return htmlspecialchars(trim($data));
+function sanitize($data)
+{
+    return trim($data); // htmlspecialchars removed — not needed for DB input
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = [];
 
-    $fullname = sanitize($_POST['fullname']);
-    $email = sanitize($_POST['email']);
-    $contactno = sanitize($_POST['contactno']);
-    $address = sanitize($_POST['address']);
+    $email = sanitize($_POST['email'] ?? '');
+    $password = sanitize($_POST['password'] ?? '');
+    $role = sanitize($_POST['role'] ?? '');
+    $shelter = sanitize($_POST['shelter'] ?? '');
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Invalid email format.";
     }
 
-    if (!preg_match('/^[0-9]{7,15}$/', $contactno)) {
-        $errors[] = "Contact number should be numeric and 7–15 digits.";
-    }
-
-    if (empty($fullname) || empty($email) || empty($contactno) || empty($address)) {
+    if (empty($email) || empty($password) || empty($role) || empty($shelter)) {
         $errors[] = "Please fill in all required fields.";
     }
 
     if (count($errors) === 0) {
-        $stmt = $conn->prepare("INSERT INTO users1 (fullname,  email, contactno, address) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $fullname, $email, $contactno, $address);
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        // Check if email already exists
+        $checkStmt = $conn->prepare("SELECT id FROM admins WHERE email = ?");
+        $checkStmt->bind_param("s", $email);
+        $checkStmt->execute();
+        $checkStmt->store_result();
+
+        if ($checkStmt->num_rows > 0) {
+            $errors[] = "This email is already registered.";
+        }
+
+        $checkStmt->close();
+
+
+        $stmt = $conn->prepare("INSERT INTO users (email, password, role, shelter) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $email, $hashedPassword, $role, $shelter);
 
         if ($stmt->execute()) {
             $newUserId = $stmt->insert_id;
             $admin_id = $_SESSION['admin_id'];
-            log_action($conn, $admin_id, "Added new user", "user", $newUserId, "Username: $username");
+            log_action($conn, $admin_id, "Added new user", "user", $newUserId, "Email: $email");
             displayPopup("User added successfully.");
         } else {
             displayPopup("Database error: " . $stmt->error, 'error');
@@ -45,11 +57,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->close();
     } else {
         foreach ($errors as $error) {
-            displayPopup("$error", 'error');
+            displayPopup($error, 'error');
         }
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -88,8 +101,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </p>
                 </div>
                 <div class="top-buttons">
-                    <button class="add-btn">
-                        <span class="material-symbols-outlined">add</span> Add User</button>
+                    <button type="submit" class="add-btn">
+                        <span class="material-symbols-outlined">add</span> Add User
+                    </button>
                 </div>
             </div>
 
@@ -104,10 +118,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="right-panel">
                     <h3>User Info</h3>
                     <div class="input-division">
-                        <input type="text" name="fullname" placeholder="Full Name" required />
+                        <!-- <input type="text" name="fullname" placeholder="Full Name" required /> -->
                         <input type="email" name="email" placeholder="Email" required />
-                        <input type="number" name="contactno" placeholder="Phone Number" required />
-                        <input type="text" name="address" placeholder="Address" />
+                        <input type="password" name="password" placeholder="Password" required />
+                        <input type="text" name="role" placeholder="Role" required />
+                        <input type="text" name="shelter" placeholder="Shelter" required />
                     </div>
                 </div>
             </div>
@@ -116,28 +131,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <script src="../script.js"></script>
     <script>
-    function closePopup() {
-        const popup = document.querySelector(".popup-overlay");
-        if (popup) {
-            popup.classList.remove("show");
+        function closePopup() {
+            const popup = document.querySelector(".popup-overlay");
+            if (popup) {
+                popup.classList.remove("show");
+            }
         }
-    }
 
-    window.addEventListener("load", function() {
-        const popup = document.querySelector(".popup-overlay");
-        if (popup) {
-            setTimeout(() => {
-                closePopup();
-            }, 3000);
-        }
-    });
+        window.addEventListener("load", function() {
+            const popup = document.querySelector(".popup-overlay");
+            if (popup) {
+                setTimeout(() => {
+                    closePopup();
+                }, 3000);
+            }
+        });
 
-    // document.getElementById('photo-input').addEventListener('change', function(event) {
-    //     const [file] = event.target.files;
-    //     if (file) {
-    //         document.getElementById('preview-image').src = URL.createObjectURL(file);
-    //     }
-    // });
+        // document.getElementById('photo-input').addEventListener('change', function(event) {
+        //     const [file] = event.target.files;
+        //     if (file) {
+        //         document.getElementById('preview-image').src = URL.createObjectURL(file);
+        //     }
+        // });
     </script>
 </body>
 

@@ -126,7 +126,7 @@ signupForm.addEventListener("submit", async (event) => {
     
     // Supabase signup succeeded, now save to custom DB via PHP
     const formData = new FormData(signupForm);
-    const response = await fetch("../../../mgmt_components/users/add_adopters.php", {
+    const response = await fetch("../../php/add_adopters.php", {
       method: "POST",
       body: formData,
     });

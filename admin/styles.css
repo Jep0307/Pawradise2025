@@ -286,35 +286,37 @@
   cursor: pointer;
 }
 
-.pet-management-bottom-panel {
+.management-bottom-panel {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  overflow-x: auto;
 }
 
-.pet-management-bottom-panel .pet-management-left-panel {
+.management-bottom-panel .management-left-panel {
   padding-right: 1rem;
 }
 
-.pet-management-bottom-panel .pet-management-left-panel .photo-gallery {
+.management-bottom-panel .management-left-panel .photo-gallery {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 
-.pet-management-bottom-panel .pet-management-left-panel .photo-gallery img {
+.management-bottom-panel .management-left-panel .photo-gallery img {
   width: 150px;
   height: 150px;
   object-fit: cover;
 }
 
-.pet-management-bottom-panel .right-panel {
+.management-bottom-panel .right-panel {
   align-self: flex-start;
   flex-grow: 1;
 }
 
-.pet-management-bottom-panel .right-panel input[type="text"],
-.pet-management-bottom-panel .right-panel input[type="number"],
-.pet-management-bottom-panel .right-panel select {
+.management-bottom-panel .right-panel input[type="text"],
+.management-bottom-panel .right-panel input[type="number"],
+.management-bottom-panel .right-panel select {
   padding: 10px 15px;
   background-color: #eee;
   border: none;
