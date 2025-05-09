@@ -43,8 +43,12 @@ signinForm.addEventListener("submit", async (event) => {
   if (!isValid) return;
 
   try {
-    // Step 1: Check email in DB
-    const response = await fetch("http://localhost/SIA02/Pawradise2025/associates/php/checkuser.php", {
+    const host = window.location.hostname;
+    const protocol = window.location.protocol;
+    const baseURL = `${protocol}//${host}`;
+
+    // Step 1: Check email in DB (dynamic hostname)
+    const response = await fetch(`${baseURL}/SIA02/Pawradise2025/associates/php/checkuser.php`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: emailValue })
@@ -76,7 +80,9 @@ signinForm.addEventListener("submit", async (event) => {
       formMessage.textContent = "Sign-in successful! Redirecting...";
       formMessage.classList.add("success");
       localStorage.setItem("userEmail", emailValue);
-      window.location.href = "http://localhost/SIA02/Pawradise2025/associates/pages/home.html";
+
+      // Redirect using dynamic host
+      window.location.href = `${baseURL}/SIA02/Pawradise2025/associates/pages/home.html`;
     }
   } catch (err) {
     console.error("Unexpected error:", err);

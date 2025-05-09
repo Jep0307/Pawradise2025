@@ -48,17 +48,17 @@ $conn->close();
         <div class="management-container">
             <div class="management-top-panel">
                 <div class="header">
-                    <h1>User Accounts Management</h1>
+                    <h1>Admin and Staff Accounts Management</h1>
                     <p class="subtitle">
-                        Create, edit, and delete user information
+                        You can add new admin and staff.
                     </p>
                 </div>
                 <div class="top-buttons">
-                    <select name="sort" id="" class="sort-input">
+                    <!-- <select name="sort" id="" class="sort-input">
                         <option value="" disabled selected>Sort</option>
                         <option value="alphabetical">Alphabetical</option>
                         <option value="newest">Newest</option>
-                    </select>
+                    </select> -->
                     <a href="../components/add-user.php" class="add-btn"><span
                             class="material-symbols-outlined">add</span>Add Entry</a>
                 </div>
@@ -77,6 +77,7 @@ $conn->close();
                             <tr>
                                 <th>ID</th>
                                 <th>Email</th>
+                                <th>Name</th>
                                 <th>Password</th>
                                 <th>Date</th>
                                 <th>Role</th>

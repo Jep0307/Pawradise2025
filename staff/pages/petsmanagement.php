@@ -73,7 +73,7 @@ $adminEmail = $admin['email'] ?? 'admin@gmail.com';
         <hr>
         <ul>
             <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="./petsmanagement.php">Pet Management</a></li>
-            <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="./application.html">Application Management</a></li>
+            <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""><a href="./application.php">Application Management</a></li>
         </ul>
         <hr>
         <ul>

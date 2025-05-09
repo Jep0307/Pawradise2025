@@ -49,16 +49,16 @@ $conn->close();
                 <div class="header">
                     <h1>Pet Management</h1>
                     <p class="subtitle">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        You can add new pets and even update it or delete it.
                     </p>
                 </div>
                 <div class="top-buttons">
-                    <select name="sort" id="" class="sort-input">
+                    <!-- <select name="sort" id="" class="sort-input">
                         <option value="sort" disabled selected>Sort
                         </option>
                         <option value="alphabetical">Alphabetical</option>
                         <option value="newest">Newest</option>
-                    </select>
+                    </select> -->
                     <button class="add-btn" id="openFormBtn">Add</button>
 
                     <!-- <a href="../components/add-pet.php" class="add-btn"><span

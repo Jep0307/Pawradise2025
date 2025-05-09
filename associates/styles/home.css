@@ -228,6 +228,7 @@
   max-width: 1034px;
   margin-inline: auto;
   margin-top: 32px;
+  justify-content: center;
 }
 
 .box-container .box {

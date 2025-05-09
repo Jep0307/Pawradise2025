@@ -7,7 +7,7 @@ document.getElementById("resetPasswordForm").addEventListener("submit", async (e
 
   try {
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: "http://127.0.0.1:5500/Pawradise2025/associates/pages/auth/newpassword.html",
+      redirectTo: "http://localhost/SIA02/Pawradise2025/associates/pages/auth/newpassword.html",
     });
   
     formMessage.classList.remove("success", "error");

@@ -132,6 +132,7 @@ nav .content:last-child button:hover {
     color: #292929;
     font-size: clamp(0.813rem, 0.743rem + 0.29vw, 1rem);
     line-height: clamp(1.125rem, 1.032rem + 0.38vw, 1.375rem);
+    width: 100%;
 }
 
 .sidebar ul li a,
@@ -177,17 +178,19 @@ nav .content:last-child button:hover {
 
 main {
     padding: 112px 32px 32px 120px;
-    width: max-content;
+    /* width: max-content; */
 }
 
 .table-wrapper {
     border: 1px solid #BDBDBD;
     border-radius: 8px;
-    width: max-content;
+    overflow-x: scroll;
+    width: 100%;
 }
 
 table {
-    width: max-content;
+    width: 100%;
+    overflow-x: scroll;
     border-collapse: collapse;
 }
 

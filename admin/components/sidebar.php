@@ -41,7 +41,7 @@ $profileImgSrc = $adminImage ? 'data:image/jpeg;base64,' . base64_encode($adminI
         </li>
         <li>
             <a href="../tabs/staff-and-staff-admin-account.php"><span class="material-symbols-outlined"> group
-                </span>Staff and staff-admin</a>
+                </span>Admin and Staff</a>
         </li>
         <li>
             <a href="../tabs/adopters-account.php"><span class="material-symbols-outlined"> group

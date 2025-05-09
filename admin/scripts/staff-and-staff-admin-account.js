@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <tr>
                             <td>${users.id}</td>
                             <td>${escapeHTML(users.email)}</td>
+                            <td>${escapeHTML(users.name)}</td>
                             <td>${escapeHTML(users.password)}</td>
                             <td>${escapeHTML(users.created_at)}</td>
                             <td>${escapeHTML(users.role)}</td>

@@ -2,7 +2,7 @@
 include '../../config/db.php';
 header('Content-Type: application/json');
 
-$result = $conn->query("SELECT id, email, password, created_at, role FROM users");
+$result = $conn->query("SELECT id, email, name, password, created_at, role FROM admins");
 
 $users = [];
 
