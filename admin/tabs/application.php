@@ -20,7 +20,7 @@
   <section class="pet-management-section" style="margin-left: 85px">
     <div class="breadcrumbs">
       <div class="left">
-        <p>Admin > <span>PET MANAGEMENT</span></p>
+        <p>Admin > <span>APPLICATION MANAGEMENT</span></p>
       </div>
 
       <div class="right">
@@ -31,18 +31,18 @@
     <div class="management-container">
       <div class="management-top-panel">
         <div class="header">
-          <h1>Pet Management</h1>
+          <h1>Application Management</h1>
           <p class="subtitle">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            You can update the application status of adopters.
           </p>
         </div>
         <div class="top-buttons">
-          <select name="sort" id="" class="sort-input">
+          <!-- <select name="sort" id="" class="sort-input">
             <option value="sort" disabled selected>Sort
             </option>
             <option value="alphabetical">Alphabetical</option>
             <option value="newest">Newest</option>
-          </select>
+          </select> -->
           <!-- <button class="add-btn" id="openFormBtn">Add</button> -->
 
           <!-- <a href="../components/add-pet.php" class="add-btn"><span

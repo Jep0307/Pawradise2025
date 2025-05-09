@@ -276,8 +276,8 @@
 
 /* ========== Meet Pets Ready for Adoption section ========== */
 .box-container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   max-width: 1034px;
   margin-inline: auto;
@@ -286,6 +286,7 @@
 
 .box-container .box {
   width: calc(50% - 16px);
+  padding: 24px;
   border-radius: 8px;
   background-color: #386641;
   height: 163px;    
@@ -409,11 +410,11 @@
   }
 
   .box-container {
-    flex-direction: row;
+    grid-template-columns: repeat(3, 1fr);
   }
-
+  
   .box-container .box {
-    flex: 1;
+    padding: 24px;
   }
 
   .sm-button {

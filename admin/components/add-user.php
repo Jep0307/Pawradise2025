@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = [];
 
     $email = sanitize($_POST['email'] ?? '');
+    $name = sanitize($_POST['name'] ?? '');
     $password = sanitize($_POST['password'] ?? '');
     $role = sanitize($_POST['role'] ?? '');
     $shelter = sanitize($_POST['shelter'] ?? '');
@@ -21,12 +22,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Invalid email format.";
     }
 
-    if (empty($email) || empty($password) || empty($role) || empty($shelter)) {
+    if (empty($email) || empty($name) || empty($password) || empty($role) || empty($shelter)) {
         $errors[] = "Please fill in all required fields.";
     }
 
     if (count($errors) === 0) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        // Remove password hashing for plain text password storage
+        $plainPassword = $password;
 
         // Check if email already exists
         $checkStmt = $conn->prepare("SELECT id FROM admins WHERE email = ?");
@@ -40,9 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $checkStmt->close();
 
-
-        $stmt = $conn->prepare("INSERT INTO users (email, password, role, shelter) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $email, $hashedPassword, $role, $shelter);
+        $stmt = $conn->prepare("INSERT INTO admins (email, name, password, role, shelter) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $email, $name, $plainPassword, $role, $shelter);
 
         if ($stmt->execute()) {
             $newUserId = $stmt->insert_id;
@@ -62,7 +63,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -120,6 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="input-division">
                         <!-- <input type="text" name="fullname" placeholder="Full Name" required /> -->
                         <input type="email" name="email" placeholder="Email" required />
+                        <input type="text" name="name" placeholder="Name" required />
                         <input type="password" name="password" placeholder="Password" required />
                         <input type="text" name="role" placeholder="Role" required />
                         <input type="text" name="shelter" placeholder="Shelter" required />

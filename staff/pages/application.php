@@ -1,3 +1,39 @@
+<?php
+session_start(); // Make sure the session is started
+
+// Check if the admin is logged in by checking the session email
+if (!isset($_SESSION['admin_email'])) {
+    // Redirect to login page if no session email is found (admin not logged in)
+    header('Location: ../../../../admin/login.php');
+    exit;
+}
+
+// Get the admin's email from session (this is the one used to login)
+$admin_email = $_SESSION['admin_email'];
+
+// Include the database connection file
+include '../../config/db.php';
+
+// Query to fetch admin details based on the email stored in the session
+$sql = "SELECT name, email FROM admins WHERE email = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $admin_email); // Bind the session email to the query
+$stmt->execute();
+$result = $stmt->get_result();
+
+// If no admin found for the given email (in case of an error)
+if ($result->num_rows === 0) {
+    echo "Admin not found.";
+    exit;
+}
+
+$admin = $result->fetch_assoc();
+
+// Extract admin details
+$adminName = $admin['name'] ?? 'Admin';
+$adminEmail = $admin['email'] ?? 'admin@gmail.com';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,11 +73,11 @@
     <hr>
     <ul>
       <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="./petsmanagement.php">Pet Management</a></li>
-      <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="./application.html">Applications Management</a></li>
+      <li><img src="../assets/imgs/Paw-print-icon.svg" alt=""> <a href="./application.php">Applications Management</a></li>
     </ul>
     <hr>
     <ul>
-      <li><a href="#" id="userEmail"></a></a></li>
+      <li><a href="#"><?= htmlspecialchars($adminEmail) ?></a></li>
       <li id="signoutBtn"><a href="#">Logout</a></li>
     </ul>
 

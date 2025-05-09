@@ -48,9 +48,9 @@ $conn->close();
         <div class="management-container">
             <div class="management-top-panel">
                 <div class="header">
-                    <h1>User Accounts Management</h1>
+                    <h1>Admin and Staff Accounts Management</h1>
                     <p class="subtitle">
-                        Create, edit, and delete user information
+                        You can add new admin and staff.
                     </p>
                 </div>
                 <div class="top-buttons">
@@ -77,6 +77,7 @@ $conn->close();
                             <tr>
                                 <th>ID</th>
                                 <th>Email</th>
+                                <th>Name</th>
                                 <th>Password</th>
                                 <th>Date</th>
                                 <th>Role</th>
