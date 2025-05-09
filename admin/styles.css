@@ -133,7 +133,7 @@
 .login-container {
   display: flex;
   /* gap: 2rem; */
-  max-height: 600px;
+  max-height: 565px;
   width: 850px;
   box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -146,7 +146,6 @@
   align-items: center;
   gap: 1rem;
   padding: 2rem;
-  flex: 1 1;
 }
 
 .left-panel input {
@@ -207,6 +206,7 @@
 }
 
 .right-panel img {
+  width: 100%;
   height: 100%;
 }
 

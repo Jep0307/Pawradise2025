@@ -86,12 +86,7 @@ $conn->close();
                                 ? 'data:image/jpeg;base64,' . base64_encode($shelter['shelter_img']) 
                                 : '../assets/default-shelter.png';
                         ?>
-<<<<<<< HEAD
-                    <a href="<?php echo "../../mgmt_components/shelters/edit_shelter.php?id={$shelter['id']}" ?>"
-                        class="shelter-card">
-=======
                     <a href="<?php echo "../components/edit-shelter.php?id={$shelter['id']}" ?>" class="shelter-card">
->>>>>>> f677240d941d6f130ebaf4dd2dff63e4096a8c8b
                         <img src="<?= $imageSrc ?>" alt="Shelter Image">
                         <div class="shelter-info">
                             <h3><?= htmlspecialchars($shelter['shelter_name']) ?></h3>

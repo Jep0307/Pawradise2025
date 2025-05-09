@@ -57,12 +57,8 @@ $conn->close();
                         <option value="alphabetical">Alphabetical</option>
                         <option value="newest">Newest</option>
                     </select> -->
-<<<<<<< HEAD
-                    <button class="add-btn" id="openFormBtn"><span
-                            class="material-symbols-outlined">add</span>Add</button>
-=======
-                    <button class="add-btn" id="openFormBtn">Add</button>
->>>>>>> f677240d941d6f130ebaf4dd2dff63e4096a8c8b
+                    <button class="add-btn" id="openFormBtn"><span class="material-symbols-outlined">add</span>Add
+                        Pets</button>
 
                     <!-- <a href="../components/add-pet.php" class="add-btn"><span
                             class="material-symbols-outlined">add</span>Add Entry</a> -->

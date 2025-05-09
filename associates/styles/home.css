@@ -276,16 +276,14 @@
 
 /* ========== Meet Pets Ready for Adoption section ========== */
 .box-container {
+  margin-top: 4rem;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  max-width: 1034px;
-  margin-inline: auto;
-  margin-top: 32px;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0 8rem;
+  gap: 2rem;
 }
 
 .box-container .box {
-  width: calc(50% - 16px);
   padding: 24px;
   border-radius: 8px;
   background-color: #386641;

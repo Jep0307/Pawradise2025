@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($updateStmt->execute()) {
         log_action($conn, $_SESSION['admin_id'], 'Updated shelter information', 'Shelter', $shelter_id);
 
-        header("Location: shelters-management.php?update=success");
+        header("Location: ../tabs/shelters-management.php");
         exit();
     } else {
         echo "Error updating shelter: " . $conn->error;
