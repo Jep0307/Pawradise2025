@@ -54,11 +54,11 @@ $conn->close();
                     </p>
                 </div>
                 <div class="top-buttons">
-                    <select name="sort" id="" class="sort-input">
+                    <!-- <select name="sort" id="" class="sort-input">
                         <option value="" disabled selected>Sort</option>
                         <option value="alphabetical">Alphabetical</option>
                         <option value="newest">Newest</option>
-                    </select>
+                    </select> -->
                     <a href="../components/add-user.php" class="add-btn"><span
                             class="material-symbols-outlined">add</span>Add Entry</a>
                 </div>

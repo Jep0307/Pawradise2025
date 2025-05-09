@@ -41,7 +41,7 @@ $profileImgSrc = $adminImage ? 'data:image/jpeg;base64,' . base64_encode($adminI
         </li>
         <li>
             <a href="../tabs/staff-and-staff-admin-account.php"><span class="material-symbols-outlined"> group
-                </span>Staff and staff-admin</a>
+                </span>Staff and Staff-Admin</a>
         </li>
         <li>
             <a href="../tabs/adopters-account.php"><span class="material-symbols-outlined"> group
@@ -70,14 +70,6 @@ $profileImgSrc = $adminImage ? 'data:image/jpeg;base64,' . base64_encode($adminI
             <span>Others</span>
             <div class="menu-separator"></div>
         </h4>
-
-        <li>
-            <a href="#"><span class="material-symbols-outlined"> settings </span>Settings</a>
-        </li>
-
-        <li>
-            <a href="#"><span class="material-symbols-outlined"> help </span>Help</a>
-        </li>
 
         <li>
             <a href="../logout.php"><span class="material-symbols-outlined"> logout </span>Logout</a>

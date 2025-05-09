@@ -3,14 +3,26 @@
   padding-bottom: 176px;
 }
 
+.hero-bg-1 {
+  background-image: url(../assets/imgs/Hero-img.jpg);
+}
+
+.hero-bg-2 {
+  background-image: url(../assets/imgs/Hero-img-2.png);
+}
+
+.hero-bg-3 {
+  background-image: url(../assets/imgs/Hero-img-3.png);
+}
+
 .hero-bg {
   position: relative;
-  background-image: url(../assets/imgs/Hero-img.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   overflow: hidden;
   padding-block: 192px;
+  height: 834.5px;
 }
 
 .hero-bg::before {
@@ -19,7 +31,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 834.5px;
   background-color: rgb(0 0 0 / 80%);
   z-index: 1;
 }
@@ -29,9 +41,46 @@
   z-index: 2;
 }
 
+.swiper-container-rel {
+  position: relative;
+  height: 100%;
 
-.hero-header-and-text,
-.cta-header-and-text {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-bg .container {
+  position: relative;
+  z-index: 2;
+}
+
+
+.hero-header-and-text {
   text-align: center;
   max-width: 877px;
   margin-inline: auto;
@@ -56,7 +105,7 @@
 }
 
 .hero-header-and-text p {
-  color: #E2C693;
+  color: #E9F1E4;
 }
 
 .cta-header-and-text {
@@ -68,12 +117,12 @@
 .cta-button,
 .lm-button,
 .sm-button {
-  background-color: #CD9B44;
-  border-radius: 12px;
+  background-color: #6a994e;
+  border-radius: 4px;
   border: none;
   margin-top: 16px;
   text-decoration: none;
-  color: #292929;
+  color: #fff;
   text-align: center;
   width: max-content;
   transition: all 150ms ease-in-out;
@@ -106,8 +155,7 @@
 }
 
 .lm-button,
-.sm-button,
-.cta-button {
+.sm-button {
   box-shadow: 0px 4px 16px rgb(247 247 247);
 }
 
@@ -115,7 +163,7 @@
 .cta-button:hover,
 .lm-button:hover,
 .sm-button:hover {
-  background-color: #C18215;
+  background-color: #54793e;
 }
 
 /* ========== Quezon City Animal Care and Adoption Center section ========== */
@@ -136,6 +184,12 @@
 .tw-section .content,
 .tw-section-reverse .content {
   flex: 1;
+}
+
+.tw-section .content img,
+.tw-section-reverse .content img {
+  width: 100%;
+  border-radius: 20px;
 }
 
 .illustrations {
@@ -232,20 +286,90 @@
 
 .box-container .box {
   width: calc(50% - 16px);
-  padding: 24px;
   border-radius: 8px;
-  background-color: #F8EEFF;
+  background-color: #386641;
   height: 163px;    
-  box-shadow: 0px 4px 16px rgb(250 250 250);
 }
 
 .box-container h3 {
   font-size: clamp(1.563rem, 1.423rem + 0.57vw, 1.938rem);
   line-height: clamp(2.188rem, 2.002rem + 0.76vw, 2.688rem);
   font-weight: 600;
-  margin-bottom: 16px;
+  color: #fff;
 }
 
+.box-container p {
+  color: #eee;
+}
+
+.box-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.box-flex:hover {
+  transform: translateY(-10px);
+}
+
+.box-flex span {
+  font-size: 72px;
+  color: #fff;
+}
+
+.adopting-section {
+  background-color: #E9F1E4;
+  padding: 6rem 0;
+}
+
+.home-shelters {
+  margin-bottom: 32px;
+}
+
+/* CTA */
+.cta-section {
+  padding: 6rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.cta-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3d405b;
+  max-width: fit-content;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.cta-container .cta-img {
+  height: 280px;
+}
+
+.cta-container .cta-img img {
+  height: 100%;
+}
+
+.cta-header-and-text {
+  padding: 2rem;
+  margin-left: 10px;
+}
+
+.cta-header-and-text h1,
+.cta-header-and-text p {
+  color: #fff;
+}
+
+.cta-header-and-text .cta-button {
+  text-align: left;
+  margin-inline: unset;
+}
 
 @media screen and (min-width: 700px) {
   .hero-bg {

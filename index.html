@@ -9,6 +9,9 @@
     <!-- Stypes -->
     <link rel="stylesheet" href="../Pawradise2025/associates/styles/global.css" />
     <link rel="stylesheet" href="../Pawradise2025/associates/styles/home.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body>
@@ -44,60 +47,101 @@
 
     <main>
         <!-- ========== Hero section ========== -->
-        <section class="top-section hero-bg">
-            <div class="container">
-                <div class="content">
-                    <div class="hero-header-and-text">
-                        <h1>Find Your New Best Friend</h1>
-                        <p>
-                            We partner with local shelters to help you connect with pets who need a loving home. Let’s find your perfect match—if you’re a first-timer, create an account now and start your journey.
-                        </p>
+        <!-- <section class="top-carousel-section"> -->
+            <div class="swiper-container-rel">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="hero-bg hero-bg-1">
+                                <div class="container">
+                                    <div class="content">
+                                        <div class="hero-header-and-text">
+                                            <h1>Find Your New Best Friend</h1>
+                                            <p>
+                                                We partner with local shelters to help you connect with pets who need a loving home. Let’s find your perfect match—if you’re a first-timer, create an account now and start your journey.
+                                            </p>
+                                        </div>
+                                        <a class="hero-button" href="./pages/auth/signup.html">Get Started</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="hero-bg hero-bg-2">
+                                <div class="container">
+                                    <div class="content">
+                                        <div class="hero-header-and-text">
+                                            <h1>Give Them a Second Chance</h1>
+                                            <p>
+                                                Every shelter pet has a story. Help them write a new one with a home full of love and care. Partnering with local shelters to help every pet find a loving family where they truly belong.
+                                            </p>
+                                        </div>
+                                        <a class="hero-button" href="./pages/auth/signup.html">Get Started</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="hero-bg hero-bg-3">
+                                <div class="container">
+                                    <div class="content">
+                                        <div class="hero-header-and-text">
+                                            <h1>Shelters That Save Lives</h1>
+                                            <p>
+                                                We work with Quezon City Animal Care and Adoption Center and PAWS Animal Rehabilitation Center to connect pets with loving families across Quezon City—making every adoption a step toward a better life.
+                                            </p>
+                                        </div>
+                                        <a class="hero-button" href="./pages/auth/signup.html">Get Started</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <a class="hero-button" href="../Pawradise2025/associates/pages/auth/signup.html">Get Started</a>
-                </div>
-                <div class="content">
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
-        </section>
+        <!-- </section> -->
 
         <!-- ========== Quezon City Animal Care and Adoption Center section ========== -->
         <section>
-            <div class="container tw-section-reverse">
-                <div class="content">
-                    <div>
-                        <img class="illustrations" loading="lazy" src="../Pawradise2025/associates/assets/imgs/PAWS Animal Rehabilitation Center (PARC).png" alt="">
+            <div class="home-shelters">
+                <div class="container tw-section-reverse">
+                    <div class="content">
+                        <div>
+                            <img class="illustrations" loading="lazy" src="../Pawradise2025/associates/assets/imgs/PAWS Animal Rehabilitation Center (PARC).png" alt="">
+                        </div>
                     </div>
-                </div>
-                <div class="content">
-                    <div class="header-and-text">
-                        <h2>PAWS Animal Rehabilitation Center (PARC)</h2>
-                        <p>
-                            PARC partners with us to make adoption easy and safe. They care for pets while they wait for
-                            someone like you to bring them home.
-                        </p>
+                    <div class="content">
+                        <div class="header-and-text">
+                            <h2>PAWS Animal Rehabilitation Center (PARC)</h2>
+                            <p>
+                                PARC partners with us to make adoption easy and safe. They care for pets while they wait for
+                                someone like you to bring them home.
+                            </p>
+                        </div>
+                        <a class="lm-button" href="https://paws.org.ph/">Visit the site</a>
                     </div>
-                    <a class="lm-button" href="https://paws.org.ph/">Visit the site</a>
                 </div>
             </div>
-        </section>
 
-        <!-- ========== Quezon City Animal Care and Adoption Center section ========== -->
-        <section>
-            <div class="container tw-section">
-                <div class="content">
-                    <div>
-                        <img class="illustrations" loading="lazy" src="../Pawradise2025/associates/assets/imgs/Quezon City Animal Care and Adoption Center.png" alt="">
+            <div class="home-shelters">
+                <div class="container tw-section">
+                    <div class="content">
+                        <div>
+                            <img class="illustrations" loading="lazy" src="../Pawradise2025/associates/assets/imgs/Quezon City Animal Care and Adoption Center.jpeg" alt="">
+                        </div>
                     </div>
-                </div>
-                <div class="content">
-                    <div class="header-and-text">
-                        <h2>Quezon City Animal Care and Adoption Center</h2>
-                        <p>
-                            We work with the city to help pets get adopted into loving homes. Visit us to meet friendly
-                            cats and dogs waiting to be part of your family.
-                        </p>
+                    <div class="content">
+                        <div class="header-and-text">
+                            <h2>Quezon City Animal Care and Adoption Center</h2>
+                            <p>
+                                We work with the city to help pets get adopted into loving homes. Visit us to meet friendly
+                                cats and dogs waiting to be part of your family.
+                            </p>
+                        </div>
+                        <a class="lm-button" href="quezoncity.gov.ph/departments/city-veterinary-department">Visit the site</a>
                     </div>
-                    <a class="lm-button" href="quezoncity.gov.ph/departments/city-veterinary-department">Visit the site</a>
                 </div>
             </div>
         </section>
@@ -168,7 +212,7 @@
         </section> -->
 
         <!-- ========== Meet Pets Ready for Adoption section ========== -->
-        <section>
+        <section class="adopting-section">
             <div class="container">
                 <div class="content">
                     <div class="header-and-text-center">
@@ -180,24 +224,36 @@
                 </div>
                 <div class="content">
                     <div class="box-container">
-                        <div class="box">
-                            <h3>Step 1</h3>
-                            <p>Browse pets.</p>
+                        <div class="box box-flex">
+                            <span class="material-symbols-outlined">search</span>
+                            <div>
+                                <h3>Step 1</h3>
+                                <p>Browse pets</p>
+                            </div>
                         </div>
 
-                        <div class="box">
-                            <h3>Step 2</h3>
-                            <p>Select preferred pet</p>
+                        <div class="box box-flex">
+                            <span class="material-symbols-outlined">pets</span>
+                            <div>
+                                <h3>Step 2</h3>
+                                <p>Select a pet</p>
+                            </div>
                         </div>
 
-                        <div class="box">
-                            <h3>Step 3</h3>
-                            <p>Click adopt.</p>
+                        <div class="box box-flex">
+                            <span class="material-symbols-outlined">touch_app</span>
+                            <div>
+                                <h3>Step 3</h3>
+                                <p>Click adopt</p>
+                            </div>
                         </div>
 
-                        <div class="box">
-                            <h3>Step 4</h3>
-                            <p>Fill out the form and submit.</p>
+                        <div class="box box-flex">
+                            <span class="material-symbols-outlined">stylus_note</span>
+                            <div>
+                                <h3>Step 4</h3>
+                                <p>Fill out a form</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -205,15 +261,14 @@
         </section>
 
         <!-- ========== CTA section ========== -->
-        <section class="cta-bg">
-            <div class="container tw-section-reverse">
-                <div class="content">
-                    <div class="cta-header-and-text">
-                        <h1>Ready to Find New Pet?</h1>
-                        <p>
-                           Start browsing and meet pets looking for a home.
-                        </p>
-                    </div>
+        <section class="cta-section">
+            <div class="cta-container">
+                <div class="cta-img">
+                    <img src="../Pawradise2025/associates/assets/imgs/cta-img.jpg" alt="">
+                </div>
+                <div class="cta-header-and-text">
+                    <h1>Ready to Find New Pet?</h1>
+                    <p> Start browsing and meet pets looking for a home. </p>
                     <a class="cta-button" href="../Pawradise2025/associates/pages/auth/signup.html">Get Started</a>
                 </div>
             </div>
@@ -245,6 +300,7 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script defer src="../Pawradise2025/associates/scripts/home.js"></script>
 </body>
 

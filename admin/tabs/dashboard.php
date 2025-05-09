@@ -22,7 +22,7 @@ while ($row = $result->fetch_assoc()) {
 
 $currentMonth = date('Y-m');
 
-$queryPetsListed = "SELECT COUNT(*) AS total FROM pets WHERE DATE_FORMAT(created_at, '%Y-%m') = ?";
+$queryPetsListed = "SELECT COUNT(*) AS total FROM pets WHERE id = ?";
 $stmt = $conn->prepare($queryPetsListed);
 $stmt->bind_param("s", $currentMonth);
 $stmt->execute();
@@ -38,7 +38,7 @@ $resultAdoptionCompleted = $stmt->get_result();
 $adoptionCompleted = $resultAdoptionCompleted->fetch_assoc()['total'];
 $stmt->close();
 
-$queryRegisteredUsers = "SELECT COUNT(*) AS total FROM users WHERE DATE_FORMAT(created_at, '%Y-%m') = ?";
+$queryRegisteredUsers = "SELECT COUNT(*) AS total FROM users1 WHERE DATE_FORMAT(created_at, '%Y-%m') = ?";
 $stmt = $conn->prepare($queryRegisteredUsers);
 $stmt->bind_param("s", $currentMonth);
 $stmt->execute();
@@ -148,8 +148,6 @@ $conn->close();
                         <p>Registered Users</p>
                         <p class="month">Current month</p>
                     </div>
-
-                    <button class="view-more-btn">View More</button>
                 </div>
             </div>
         </div>

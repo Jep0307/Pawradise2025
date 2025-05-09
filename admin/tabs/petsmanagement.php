@@ -8,8 +8,6 @@ if (!isset($_SESSION['admin_email'])) {
     exit();
 }
 
-
-
 $conn->close();
 ?>
 
@@ -53,13 +51,14 @@ $conn->close();
                     </p>
                 </div>
                 <div class="top-buttons">
-                    <select name="sort" id="" class="sort-input">
+                    <!-- <select name="sort" id="" class="sort-input">
                         <option value="sort" disabled selected>Sort
                         </option>
                         <option value="alphabetical">Alphabetical</option>
                         <option value="newest">Newest</option>
-                    </select>
-                    <button class="add-btn" id="openFormBtn">Add</button>
+                    </select> -->
+                    <button class="add-btn" id="openFormBtn"><span
+                            class="material-symbols-outlined">add</span>Add</button>
 
                     <!-- <a href="../components/add-pet.php" class="add-btn"><span
                             class="material-symbols-outlined">add</span>Add Entry</a> -->

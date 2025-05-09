@@ -67,10 +67,6 @@
   gap: 0.6rem;
 }
 
-.dashboard-adoption-data {
-  flex: 1 0 0;
-}
-
 .dashboard-cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
