@@ -22,9 +22,8 @@ while ($row = $result->fetch_assoc()) {
 
 $currentMonth = date('Y-m');
 
-$queryPetsListed = "SELECT COUNT(*) AS total FROM pets WHERE id = ?";
+$queryPetsListed = "SELECT COUNT(*) AS total FROM pets";
 $stmt = $conn->prepare($queryPetsListed);
-$stmt->bind_param("s", $currentMonth);
 $stmt->execute();
 $resultPetsListed = $stmt->get_result();
 $petsListed = $resultPetsListed->fetch_assoc()['total'];
@@ -119,7 +118,7 @@ $conn->close();
                             <p class="number"><?php echo $petsListed; ?></p>
                         </div>
                         <p>Pets Listed</p>
-                        <p class="month">Current month</p>
+                        <p class="month">All times</p>
                     </div>
 
                     <div class="card">

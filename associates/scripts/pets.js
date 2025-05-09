@@ -157,8 +157,6 @@ function finalizeApplicationSubmission() {
   });
 }
 
-
-
 // HTML Escape
 function escapeHTML(str) {
   if (!str) return '';
